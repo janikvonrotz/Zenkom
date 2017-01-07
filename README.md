@@ -2,7 +2,7 @@
 
 Zentrale Kommunikationsplattform der vernetzten Fahrzeugsysteme.
 
-![](logo.svg)
+![](logo.png)
 
 ## Proof of Concept
 
