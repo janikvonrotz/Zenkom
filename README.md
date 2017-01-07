@@ -1,8 +1,6 @@
-# Zenkom
+![Zenkom](logo.png)
 
 Zentrale Kommunikationsplattform der vernetzten Fahrzeugsysteme.
-
-![](logo.png)
 
 ## Proof of Concept
 
