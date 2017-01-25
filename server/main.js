@@ -1,5 +1,9 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
+import { Tasks } from '/imports/collections'
+import { seeds } from './index'
+
+seeds()
 
 Meteor.startup(() => {
-  // code to run on server at startup
+
 });
