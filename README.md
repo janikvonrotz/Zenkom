@@ -6,14 +6,9 @@ Zentrale Kommunikationsplattform der vernetzten Fahrzeugsysteme.
 
 Das Proof of Concept von Zenkom dient als Machbarkeitsstudie und soll Wegweisend bei der Auswahl des Entwicklungsframework sein.
 
-## Packages
+Ziel: Material UI Applikation mit Login und Post verwaltung. Auf dem Client sollte Redux verwendet werden.
 
-* babel-runtime
-* meteor-node-stubs
-* react
-* react-dom
-
-## Meteor folder structure
+## Meteor project structure
 
 ### folder structure
 
@@ -22,25 +17,38 @@ Das Proof of Concept von Zenkom dient als Machbarkeitsstudie und soll Wegweisend
 * Css files can be placed anywhere.
 * Only a subfolder depth of three is allowed.
 
-### Coding style
+### Coding style and naming
 
 * Component file names are PascalCase.
 * Folder and module names are lower case.
-* Everything else must be according to the [Meteor code style guide]( https://guide.meteor.com/code-style.html).
+* Publications and methods named plural.
+
+`PostList` -> `posts.list`
+`Post` -> `posts.item`
+
+Everything else must be according to the [Meteor code style guide]( https://guide.meteor.com/code-style.html).
 
 ### client
 
-* `main.js` Imports all components and initializes the app.
-* `main.html` Simply contains the render target for the react-dom mount and static header tags.
+* `main.js` Client startup.
+* `main.html` Contains the render target for the react-dom mount and static header tags.
 * `MainLayout.js` Is the main template of the app.
 * `[Modules]` Self contained app module that represents an entity.
-  * `[Entity].js` Single entity React component.
-  * `[Entity]List.js` List React component.
+
+Components in modules:
+
+* `[Entity].js` Single entity React component.
+* `[Entity]List.js` List React component.
 
 ### imports
 
-* `collections`
+* `collections` Mongo collections and schemas.
+* `helpers` Helper functions for client and server.
 
 ### server
 
-* `main.js` Imports all server modules.
+* `main.js` Server startup.
+* `seeds.js` Contains database seed datasets.
+* `accounts.js` User account configurations.
+* `publications` Meteor publications.
+* `methods` Meteor methods.

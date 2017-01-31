@@ -1,3 +1,4 @@
-import Tasks from './Tasks'
+import Posts from './Posts'
+import Tags from './Tags'
 
-export { Tasks }
+export { Tags, Posts }

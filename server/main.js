@@ -1,9 +1,8 @@
 import { Meteor } from 'meteor/meteor'
-import { Tasks } from '/imports/collections'
-import { seeds } from './index'
+import { seeds, accounts, methods, publications } from './index'
 
 seeds()
+methods()
+publications()
 
-Meteor.startup(() => {
-
-});
+Meteor.startup(() => {});
