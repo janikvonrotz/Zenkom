@@ -1,25 +1,32 @@
 import React from 'react'
 import { Meteor } from 'meteor/meteor'
 import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 import { Router, Route, browserHistory } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { App, NotFound, MainLayout } from './index'
 import { PostList, Post } from './posts'
 import { posts } from './actions'
+import zenkomApp from './reducers'
 
+let store = createStore(zenkomApp)
 injectTapEventPlugin();
 
 Meteor.startup(() => {
   render(
-    <Router history={browserHistory}>
-      <Route component={MainLayout}>
-        <Route path="/" component={App} />
-        <Route path="/posts" component={PostList} />
-        <Route path="/post/:id/edit" component={Post} />
-        <Route path="/post/insert" component={Post} />
-        <Route path="*" component={NotFound} />
-      </Route>
-  </Router>, document.getElementById('render-target'));
+    <Provider store={store}>
+      <Router history={browserHistory}>
+        <Route component={MainLayout}>
+          <Route path="/" component={App} />
+          <Route path="/posts" component={PostList} />
+          <Route path="/post/:id/edit" component={Post} />
+          <Route path="/post/insert" component={Post} />
+          <Route path="*" component={NotFound} />
+        </Route>
+      </Router>
+    </Provider>,
+    document.getElementById('render-target'));
 });
 
 // <Route path="/posts" onEnter={requireAuthentication} component={PostList} />

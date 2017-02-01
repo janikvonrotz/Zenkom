@@ -1,17 +1,20 @@
 import React from 'react';
-import { createContainer } from 'meteor/react-meteor-data'
-import { Posts } from '/imports/collections'
 import { List, ListItem, Card, CardText, CardTitle,
   CircularProgress, IconMenu, MenuItem, IconButton } from 'material-ui'
 import { NavigationMoreVert } from 'material-ui/svg-icons';
 import { grey400 } from 'material-ui/styles/colors'
 import { Link } from 'react-router'
-import { posts } from '../actions'
+import { setHeaderTitle } from '../actions'
 
 class PostList extends React.Component {
 
   remove(id, event){
-    posts.remove(id)
+    // posts.remove(id)
+  }
+
+  componentWillReceiveProps(){
+    let { dispatch } = this.props
+    dispatch(setHeaderTitle('Posts'))
   }
 
   render() {
@@ -51,10 +54,4 @@ class PostList extends React.Component {
   }
 }
 
-export default createContainer(() => {
-  let subscription = Meteor.subscribe('posts.list')
-  return {
-    posts: Posts.find({}, { sort: { createdAt: -1 } }).fetch(),
-    loading: !subscription.ready(),
-  }
-}, PostList)
+export default PostList

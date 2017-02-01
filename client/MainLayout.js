@@ -3,6 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { AppBar, Card, Drawer, MenuItem, IconMenu, IconButton} from 'material-ui'
 import { Link } from 'react-router'
 import { MoreVertIcon } from 'material-ui/svg-icons'
+import { connect } from 'react-redux'
 
 class MainLayout extends React.Component {
 
@@ -16,12 +17,13 @@ class MainLayout extends React.Component {
   }
 
   render() {
+    let { title } = this.props
 
     return (
       <MuiThemeProvider>
         <div>
           <AppBar
-          title="Zenkom"
+          title={ title }
           onTouchTap={this.toggleDrawer.bind(this)} />
 
           <Drawer
@@ -48,7 +50,12 @@ class MainLayout extends React.Component {
   }
 }
 
-export default MainLayout
+const mapStateToProps = state => {
+  return { title: state.headerTitle };
+};
+
+
+export default connect(mapStateToProps)(MainLayout)
 
 // <li><Link to={`/login`}>Login</Link></li>
 // <li><Link onClick={this.logout.bind(this)}>Logout</Link></li>
