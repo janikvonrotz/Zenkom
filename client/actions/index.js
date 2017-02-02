@@ -1,12 +1,4 @@
-// import posts from './posts'
-//
-// export { posts }
+import { setHeaderTitle, dismissMessage } from './core'
+import { updatePost, removePost } from './posts'
 
-// create action to set a state
-export const setHeaderTitle = (title) => {
-  // return the action state and parameter
-  return {
-    type: 'SET_HEADER_TITLE',
-    title
-  }
-}
+export { setHeaderTitle, updatePost, removePost, dismissMessage }

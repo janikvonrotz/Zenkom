@@ -1,7 +1,5 @@
 
-// set default value for state
-const headerTitle = (state = 'Zenkom', action) => {
-  // depending on action type set the state
+export default headerTitle = (state = 'Zenkom', action) => {
   switch (action.type) {
     case 'SET_HEADER_TITLE':
       return action.title
@@ -9,5 +7,3 @@ const headerTitle = (state = 'Zenkom', action) => {
       return state
   }
 }
-
-export default headerTitle

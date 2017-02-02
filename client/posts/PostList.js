@@ -4,12 +4,13 @@ import { List, ListItem, Card, CardText, CardTitle,
 import { NavigationMoreVert } from 'material-ui/svg-icons';
 import { grey400 } from 'material-ui/styles/colors'
 import { Link } from 'react-router'
-import { setHeaderTitle } from '../actions'
+import { setHeaderTitle, updatePost } from '../actions'
 
 class PostList extends React.Component {
 
   remove(id, event){
-    // posts.remove(id)
+    let { dispatch } = this.props
+    dispatch(updatePost(id))
   }
 
   componentWillReceiveProps(){

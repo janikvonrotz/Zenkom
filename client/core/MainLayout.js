@@ -4,6 +4,7 @@ import { AppBar, Card, Drawer, MenuItem, IconMenu, IconButton} from 'material-ui
 import { Link } from 'react-router'
 import { MoreVertIcon } from 'material-ui/svg-icons'
 import { connect } from 'react-redux'
+import { Notification } from './index'
 
 class MainLayout extends React.Component {
 
@@ -22,6 +23,7 @@ class MainLayout extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
+          <Notification />
           <AppBar
           title={ title }
           onTouchTap={this.toggleDrawer.bind(this)} />
@@ -51,9 +53,10 @@ class MainLayout extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { title: state.headerTitle };
-};
-
+  return {
+    title: state.headerTitle,
+  }
+}
 
 export default connect(mapStateToProps)(MainLayout)
 

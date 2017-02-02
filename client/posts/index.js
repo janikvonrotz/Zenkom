@@ -1,4 +1,4 @@
 import PostList from './PostListContainer'
-import Post from './Post'
+import Post from './PostContainer'
 
 export { PostList, Post }

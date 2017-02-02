@@ -1,20 +1,23 @@
 import React from 'react';
-import { createContainer } from 'meteor/react-meteor-data'
-import { Posts } from '/imports/collections'
 import { Card, CardText, CardTitle, CircularProgress, TextField,RaisedButton } from 'material-ui'
 import { Link } from 'react-router'
-import { posts } from '../actions'
+import { setHeaderTitle, updatePost } from '../actions'
 
 class Post extends React.Component {
 
   mutate(event) {
     event.preventDefault()
 
-    let { post } = this.props
+    let { post, dispatch } = this.props
     let { title } = this.refs
     post.title = title.getValue()
 
-    posts.update(post)
+    updatePost(post, dispatch)
+  }
+
+  componentWillReceiveProps(){
+    let { dispatch } = this.props
+    dispatch(setHeaderTitle('Post'))
   }
 
   render() {
@@ -39,10 +42,4 @@ class Post extends React.Component {
   }
 }
 
-export default createContainer(({ params }) => {
-  let subscription = Meteor.subscribe('posts.item', params.id)
-  return {
-    post: Posts.findOne(params.id),
-    loading: !subscription.ready(),
-  }
-}, Post)
+export default Post
