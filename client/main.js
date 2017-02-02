@@ -7,7 +7,8 @@ import { Router, Route, browserHistory } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { App, NotFound, MainLayout } from './core'
 import { PostList, Post } from './posts'
-import { posts } from './actions'
+import { Login } from './users'
+import { setUser } from './actions'
 import zenkomApp from './reducers'
 
 let store = createStore(zenkomApp)
@@ -22,12 +23,19 @@ Meteor.startup(() => {
           <Route path="/posts" component={PostList} />
           <Route path="/post/:id/edit" component={Post} />
           <Route path="/post/insert" component={Post} />
+          <Route path="/login" component={Login} />
           <Route path="*" component={NotFound} />
         </Route>
       </Router>
     </Provider>,
-    document.getElementById('render-target'));
-});
+    document.getElementById('render-target'))
+})
+
+Meteor.autorun(() => {
+  if (Meteor.user()) {
+    store.dispatch(setUser(Meteor.user()));
+  }
+})
 
 // <Route path="/posts" onEnter={requireAuthentication} component={PostList} />
 // <Route path="/login" component={Login} />

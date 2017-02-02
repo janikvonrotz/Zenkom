@@ -1,8 +1,18 @@
 import React from 'react'
 import { Card, CardText, CardTitle } from 'material-ui'
 import { setHeaderTitle } from '../actions'
+import { connect } from 'react-redux'
 
 class App extends React.Component {
+
+  componentDidMount(){
+    let { dispatch } = this.props
+    dispatch(setHeaderTitle('Zenkom'))
+  }
+  componentWillReceiveProps(){
+    let { dispatch } = this.props
+    dispatch(setHeaderTitle('Zenkom'))
+  }
 
   render() {
     return <Card>
@@ -14,4 +24,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default connect()(App)

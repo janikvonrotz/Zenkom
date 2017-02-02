@@ -10,8 +10,8 @@ export default notification = (state = {}, action) => {
         type: "success",
         message: action.message
       }
-      case 'DISMISS_MESSAGE':
-        return {}
+    case 'DISMISS_MESSAGE':
+      return {}
     default:
       return state
   }
