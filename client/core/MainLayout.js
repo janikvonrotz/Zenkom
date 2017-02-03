@@ -36,10 +36,13 @@ class MainLayout extends React.Component {
             iconButtonElement={ <IconButton><NavigationMoreVert /></IconButton> }
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}} >
-                <MenuItem primaryText="Help" />
-                <MenuItem
-                onTouchTap={ this.logout.bind(this) }
-                primaryText="Sign out" />
+              <MenuItem
+              containerElement={ <Link to="/profile" /> }
+              primaryText="Profile" />
+
+              <MenuItem
+              onTouchTap={ this.logout.bind(this) }
+              primaryText="Sign out" />
             </IconMenu> : <FlatButton
             containerElement={ <Link to="/login" /> }
             label="Login" />
@@ -76,5 +79,4 @@ const mapStateToProps = state => {
     user: state.user
   }
 }
-
 export default connect(mapStateToProps)(MainLayout)

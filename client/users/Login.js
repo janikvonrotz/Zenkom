@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { TextField, RaisedButton, Card, CardText } from 'material-ui'
 import { Link } from 'react-router'
-import { login, setHeaderTitle, loginUser } from '../actions'
+import { setHeaderTitle, loginUser } from '../actions'
 
 class Login extends React.Component {
 
@@ -41,7 +41,7 @@ class Login extends React.Component {
             floatingLabelText="Password" />
             <br />
 
-            <p><Link to="/recover_password">Forgot Password?</Link></p>
+            <p><Link to="/recover-password">Forgot Password?</Link></p>
 
             <RaisedButton
             label="Login"

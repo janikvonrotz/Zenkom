@@ -7,24 +7,31 @@ import { Router, Route, browserHistory } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { App, NotFound, MainLayout } from './core'
 import { PostList, Post } from './posts'
-import { Login } from './users'
+import { Login, Register, EmailVerification, RecoverPassword,
+  Profile } from './users'
 import { setUser } from './actions'
 import zenkomApp from './reducers'
 
 let store = createStore(zenkomApp)
-injectTapEventPlugin();
+injectTapEventPlugin()
 
 Meteor.startup(() => {
   render(
-    <Provider store={store}>
-      <Router history={browserHistory}>
-        <Route component={MainLayout}>
-          <Route path="/" component={App} />
-          <Route path="/posts" component={PostList} />
-          <Route path="/post/:id/edit" component={Post} />
-          <Route path="/post/insert" component={Post} />
-          <Route path="/login" component={Login} />
-          <Route path="*" component={NotFound} />
+    <Provider store={ store }>
+      <Router history={ browserHistory }>
+        <Route component={ MainLayout }>
+          <Route path="/" component={ App } />
+          <Route path="/posts" component={ PostList } />
+          <Route path="/post/:id/edit" component={ Post } />
+          <Route path="/post/insert" component={ Post } />
+          <Route path="/login" component={ Login } />
+          <Route path="/register" component={ Register } />
+          <Route path="/profile" component={ Profile } />
+          <Route path="/email-verification" component={ EmailVerification } />
+          <Route path="/email-verification/:token" component={ EmailVerification } />
+          <Route path="/recover-password" component={ RecoverPassword } />
+          <Route path="/recover-password/:token" component={ RecoverPassword } />
+          <Route path="*" component={ NotFound } />
         </Route>
       </Router>
     </Provider>,
@@ -33,7 +40,7 @@ Meteor.startup(() => {
 
 Meteor.autorun(() => {
   if (Meteor.user()) {
-    store.dispatch(setUser(Meteor.user()));
+    store.dispatch(setUser(Meteor.user()))
   }
 })
 
@@ -42,7 +49,3 @@ Meteor.autorun(() => {
 // <Route path="/register" component={Register} />
 // <Route path="/profile" onEnter={requireAuthentication} component={Profile} />
 // <Route path="/change-password" component={ChangePassword} />
-// <Route path="/email-verification" component={EmailVerification} />
-// <Route path="/email-verification/:token" component={EmailVerification} />
-// <Route path="/recover-password" component={RecoverPassword} />
-// <Route path="/recover-password/:token" component={RecoverPassword} />
