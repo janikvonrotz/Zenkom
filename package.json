@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.22.0",
+    "ldapjs": "^1.0.1",
     "material-ui": "^0.16.7",
     "meteor-node-stubs": "~0.2.0",
     "notie": "^3.9.5",

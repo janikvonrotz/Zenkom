@@ -44,6 +44,18 @@ Meteor.autorun(() => {
   }
 })
 
+Meteor.loginUserWithLDAP = function (email, password, callback) {
+  let loginRequest = {
+    email: email,
+    pass: password,
+    ldap: true
+  }
+  Accounts.callLoginMethod({
+    methodArguments: [loginRequest],
+    userCallback: callback
+  })
+}
+
 // <Route path="/posts" onEnter={requireAuthentication} component={PostList} />
 // <Route path="/login" component={Login} />
 // <Route path="/register" component={Register} />

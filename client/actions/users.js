@@ -30,6 +30,28 @@ export const loginUser = (email, password, dispatch) => {
   })
 }
 
+// username = email
+export const loginUserWithLDAP = (email, password, dispatch) => {
+  Meteor.loginUserWithLDAP(email, password, (error, result) => {
+    if (!error) {
+      dispatch({
+        type: 'SHOW_SUCCESS_MESSAGE',
+        message: 'Successfully logged in.',
+      })
+      dispatch({
+        type: 'SET_USER',
+        user: Meteor.user(),
+      })
+      browserHistory.push('/')
+    } else {
+      dispatch({
+        type: 'SHOW_ERROR_MESSAGE',
+        error,
+      })
+    }
+  })
+}
+
 export const logoutUser = (dispatch) => {
   Meteor.logout((error, result) => {
     if (!error) {
