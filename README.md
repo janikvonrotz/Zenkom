@@ -8,6 +8,9 @@ Das Proof of Concept von Zenkom dient als Machbarkeitsstudie und soll Wegweisend
 
 Ziel: Material UI Applikation mit Login und Post verwaltung. Auf dem Client sollte Redux verwendet werden.
 
+* Test ldap auth
+* Create fully functional posts management
+
 ## Meteor project structure
 
 ### folder structure

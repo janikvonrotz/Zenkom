@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { TextField, RaisedButton, Card, CardText } from 'material-ui'
-import { setHeaderTitle, updateProfile, changePassword } from '../actions'
+import { setHeaderTitle, updateProfile } from '../actions'
 
 class Profile extends React.Component {
 
@@ -16,12 +16,12 @@ class Profile extends React.Component {
     updateProfile(profile, dispatch)
   }
 
-  change(event) {
-    event.preventDefault()
-    let { dispatch } = this.props
-    let { oldPassword, newPassword, repeatPassword } = this.refs
-    changePassword(oldPassword.getValue(), newPassword.getValue(), repeatPassword.getValue(), dispatch)
-  }
+  // change(event) {
+  //   event.preventDefault()
+  //   let { dispatch } = this.props
+  //   let { oldPassword, newPassword, repeatPassword } = this.refs
+  //   changePassword(oldPassword.getValue(), newPassword.getValue(), repeatPassword.getValue(), dispatch)
+  // }
 
   componentDidMount(){
     let { dispatch } = this.props
@@ -54,45 +54,6 @@ class Profile extends React.Component {
           floatingLabelText="Lastname" />
           <br />
 
-          <TextField
-          defaultValue={ user.username }
-          type="text"
-          ref="username"
-          required="true"
-          disabled={ true }
-          floatingLabelText="Username" />
-          <br />
-
-          <TextField
-          defaultValue={ user.emails[0].address }
-          type="email"
-          ref="email"
-          required="true"
-          disabled={ true }
-          floatingLabelText="Email" />
-          <br />
-
-          <TextField
-          type="password"
-          ref="oldPassword"
-          required="true"
-          floatingLabelText="Old Password" />
-          <br />
-
-          <TextField
-          type="password"
-          ref="newPassword"
-          required="true"
-          floatingLabelText="New Password" />
-          <br />
-
-          <TextField
-          type="password"
-          ref="repeatPassword"
-          required="true"
-          floatingLabelText="Repeat Password" />
-          <br />
-
           <RaisedButton
           label="Save"
           primary={ true }
@@ -110,3 +71,40 @@ const mapStateToProps = state => {
   }
 }
 export default connect(mapStateToProps)(Profile)
+
+// <TextField
+// defaultValue={ user.username }
+// type="text"
+// ref="username"
+// required="true"
+// floatingLabelText="Username" />
+// <br />
+//
+// <TextField
+// defaultValue={ user.emails[0].address }
+// type="email"
+// ref="email"
+// required="true"
+// floatingLabelText="Email" />
+// <br />
+//
+// <TextField
+// type="password"
+// ref="oldPassword"
+// required="true"
+// floatingLabelText="Old Password" />
+// <br />
+//
+// <TextField
+// type="password"
+// ref="newPassword"
+// required="true"
+// floatingLabelText="New Password" />
+// <br />
+//
+// <TextField
+// type="password"
+// ref="repeatPassword"
+// required="true"
+// floatingLabelText="Repeat Password" />
+// <br />

@@ -117,7 +117,7 @@ export const recoverPassword = (email, dispatch) => {
 
 export const resetPassword = (password, repeatPassword, token, dispatch) => {
   if (password != repeatPassword) {
-    let error = new Meteor.Error(`Passwords don't mach.`, 'invalid password')
+    let error = new Meteor.Error('invalid password', `Passwords don't mach.`)
     dispatch({
       type: 'SHOW_ERROR_MESSAGE',
       error,
@@ -138,4 +138,20 @@ export const resetPassword = (password, repeatPassword, token, dispatch) => {
       }
     })
   }
+}
+
+export const updateProfile = (profile, dispatch) => {
+  Meteor.call('users.update_profile', profile, (error, result) => {
+    if (!error) {
+      dispatch({
+        type: 'SHOW_SUCCESS_MESSAGE',
+        message: 'Profile has been saved.',
+      })
+    } else {
+      dispatch({
+        type: 'SHOW_ERROR_MESSAGE',
+        error,
+      })
+    }
+  })
 }
