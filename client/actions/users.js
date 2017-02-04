@@ -32,7 +32,28 @@ export const loginUser = (email, password, dispatch) => {
 
 // username = email
 export const loginUserWithLDAP = (email, password, dispatch) => {
-  Meteor.loginUserWithLDAP(email, password, (error, result) => {
+
+  let loginUserAsAdmin = (password, callback) => {
+    var loginRequest = {admin: true, pass: password}
+    Accounts.callLoginMethod({
+      methodArguments: [loginRequest],
+      userCallback: callback
+    })
+  }
+
+  let loginUserWithLDAP = (email, password, callback) => {
+    var loginRequest = {
+      ldap: true,
+      email: email,
+      pass: password,
+    }
+    Accounts.callLoginMethod({
+      methodArguments: [loginRequest],
+      userCallback: callback
+    })
+  }
+
+  loginUserWithLDAP(email, password, (error, result) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',
