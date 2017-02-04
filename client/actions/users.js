@@ -30,16 +30,7 @@ export const loginUser = (email, password, dispatch) => {
   })
 }
 
-// username = email
 export const loginUserWithLDAP = (email, password, dispatch) => {
-
-  let loginUserAsAdmin = (password, callback) => {
-    var loginRequest = {admin: true, pass: password}
-    Accounts.callLoginMethod({
-      methodArguments: [loginRequest],
-      userCallback: callback
-    })
-  }
 
   let loginUserWithLDAP = (email, password, callback) => {
     var loginRequest = {

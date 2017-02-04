@@ -11,6 +11,8 @@ Ziel: Material UI Applikation mit Login und Post verwaltung. Auf dem Client soll
 * Test ldap auth
 * Create fully functional posts management
 
+http://notjoshmiller.com/using-ldaps-in-meteor/
+
 ## Meteor project structure
 
 ### folder structure
