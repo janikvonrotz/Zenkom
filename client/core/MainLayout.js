@@ -5,7 +5,7 @@ import { AppBar, Card, Drawer, MenuItem, IconMenu, IconButton,
 import { Link } from 'react-router'
 import { NavigationMoreVert } from 'material-ui/svg-icons'
 import { connect } from 'react-redux'
-import { Notification } from './index'
+import { Notification, FlexboxGrid } from './index'
 import { logoutUser } from '../actions'
 import Helmet from 'react-helmet'
 
@@ -29,7 +29,7 @@ class MainLayout extends React.Component {
     let { title, user } = this.props
     return (
       <MuiThemeProvider>
-        <div>
+        <FlexboxGrid>
           <Helmet
             title={ title }
             meta={[{"name": "viewport", "content": "width=device-width, initial-scale=1"}]}
@@ -41,6 +41,7 @@ class MainLayout extends React.Component {
             iconButtonElement={ <IconButton><NavigationMoreVert /></IconButton> }
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
             anchorOrigin={{horizontal: 'right', vertical: 'top'}} >
+
               <MenuItem
               containerElement={ <Link to="/profile" /> }
               primaryText="Profile" />
@@ -48,6 +49,7 @@ class MainLayout extends React.Component {
               <MenuItem
               onTouchTap={ this.logout.bind(this) }
               primaryText="Sign out" />
+
             </IconMenu> : <FlatButton
             containerElement={ <Link to="/login" /> }
             label="Login" />
@@ -63,16 +65,16 @@ class MainLayout extends React.Component {
             <MenuItem
             primaryText="App"
             onTouchTap={ this.toggleDrawer.bind(this) }
-            containerElement={ <Link to="/"/> }  />
+            containerElement={ <Link to="/"/> } />
 
             <MenuItem
             primaryText="Posts"
             onTouchTap={ this.toggleDrawer.bind(this) }
-            containerElement={ <Link to="/posts" /> }  />
+            containerElement={ <Link to="/posts" /> } />
 
           </Drawer>
           { this.props.children }
-        </div>
+        </FlexboxGrid>
       </MuiThemeProvider>
     )
   }

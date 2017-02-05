@@ -1,11 +1,10 @@
 import React from 'react';
-import { List, ListItem, Card, CardText, CardTitle,
-  CircularProgress, IconMenu, MenuItem, IconButton,
-  FloatingActionButton, TextField } from 'material-ui'
-import { NavigationMoreVert, ContentAdd } from 'material-ui/svg-icons';
+import { List, ListItem, CircularProgress, IconMenu, MenuItem,
+  IconButton } from 'material-ui'
+import { NavigationMoreVert } from 'material-ui/svg-icons';
 import { grey400 } from 'material-ui/styles/colors'
 import { Link } from 'react-router'
-import { setHeaderTitle, removePost, insertPost, setPostFilter } from '../actions'
+import { setHeaderTitle, removePost, setPostFilter } from '../actions'
 
 class PostList extends React.Component {
 
@@ -13,7 +12,6 @@ class PostList extends React.Component {
     let { dispatch } = this.props
     removePost(id, dispatch)
   }
-
 
   updateFilter(event){
     let { dispatch } = this.props

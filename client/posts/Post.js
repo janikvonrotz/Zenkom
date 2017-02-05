@@ -17,9 +17,9 @@ class Post extends React.Component {
     post._id ? updatePost(post, dispatch) : insertPost(post, dispatch)
   }
 
-  componentWillReceiveProps(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Post'))
+  componentWillReceiveProps(nextProps){
+    let { dispatch, post } = nextProps
+    dispatch(setHeaderTitle(post ? post.title : "Untitled"))
   }
 
   render() {
@@ -32,18 +32,19 @@ class Post extends React.Component {
     }
 
     return loading ? <CircularProgress /> : <Card>
-      <CardTitle title={ post.title || "Untitled"} />
       <CardText>
         <form onSubmit={ this.mutate.bind(this) }>
           <TextField
           defaultValue={ post.title }
           ref="title"
+          required="true"
           floatingLabelText="Title" />
           <br />
 
           <TextField
           defaultValue={ post.content }
           ref="content"
+          required="true"
           multiLine={ true }
           floatingLabelText="Content" />
           <br />
