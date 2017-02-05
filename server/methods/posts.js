@@ -6,6 +6,7 @@ let posts = () => {
   Meteor.methods({
     'posts.insert'(object) {
       // validate
+      object.createdAt = new Date()
       return Posts.insert(object)
     },
 

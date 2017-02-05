@@ -7,6 +7,7 @@ import { NavigationMoreVert } from 'material-ui/svg-icons'
 import { connect } from 'react-redux'
 import { Notification } from './index'
 import { logoutUser } from '../actions'
+import Helmet from 'react-helmet'
 
 class MainLayout extends React.Component {
 
@@ -29,6 +30,10 @@ class MainLayout extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
+          <Helmet
+            title={ title }
+            meta={[{"name": "viewport", "content": "width=device-width, initial-scale=1"}]}
+          />
           <Notification />
           <AppBar
           title={ title }

@@ -1,4 +1,5 @@
 import PostList from './PostListContainer'
 import Post from './PostContainer'
+import PostSearch from './PostSearch'
 
-export { PostList, Post }
+export { PostSearch, PostList, Post }

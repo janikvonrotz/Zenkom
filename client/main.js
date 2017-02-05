@@ -6,7 +6,7 @@ import { createStore } from 'redux'
 import { Router, Route, browserHistory } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { App, NotFound, MainLayout } from './core'
-import { PostList, Post } from './posts'
+import { PostSearch, Post } from './posts'
 import { Login, Register, EmailVerification, RecoverPassword,
   Profile } from './users'
 import { setUser } from './actions'
@@ -21,9 +21,9 @@ Meteor.startup(() => {
       <Router history={ browserHistory }>
         <Route component={ MainLayout }>
           <Route path="/" component={ App } />
-          <Route path="/posts" component={ PostList } />
+          <Route path="/posts" component={ PostSearch } />
           <Route path="/post/:id/edit" component={ Post } />
-          <Route path="/post/insert" component={ Post } />
+          <Route path="/post/new" component={ Post } />
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
           <Route path="/profile" component={ Profile } />

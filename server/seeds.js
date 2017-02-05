@@ -6,9 +6,12 @@ let seeds = () => {
 
   if(Posts.find({}).count() === 0){
     let posts = [
-      { title: 'A hundred reasons why Meteor is great!', createdAt: new Date(), },
-      { title: 'Why you should learn GraphQL with Apollo.', createdAt: new Date(), },
-      { title: 'React has a promising future.', createdAt: new Date(), },
+      { title: 'A hundred reasons why Meteor is great!',
+      content: `Lorem Ipsum\ndolor sit et amen`, createdAt: new Date(), },
+      { title: 'Why you should learn GraphQL with Apollo.',
+      content: `Lorem Ipsum\ndolor sit et amen`, createdAt: new Date(), },
+      { title: 'React has a promising future.',
+      content: `Lorem Ipsum\ndolor sit et amen`, createdAt: new Date(), },
     ]
 
     console.log(`Seed database with posts.`)
