@@ -72,6 +72,11 @@ class MainLayout extends React.Component {
             onTouchTap={ this.toggleDrawer.bind(this) }
             containerElement={ <Link to="/posts" /> } />
 
+            <MenuItem
+            primaryText="Routers"
+            onTouchTap={ this.toggleDrawer.bind(this) }
+            containerElement={ <Link to="/routers" /> } />
+
           </Drawer>
           { this.props.children }
         </FlexboxGrid>

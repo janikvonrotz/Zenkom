@@ -1,3 +1,4 @@
 import Posts from './Posts'
+import Routers from './Routers'
 
-export { Posts }
+export { Posts, Routers }

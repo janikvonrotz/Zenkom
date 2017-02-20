@@ -2,16 +2,9 @@
 
 Zentrale Kommunikationsplattform der vernetzten Fahrzeugsysteme.
 
-## Proof of Concept
+# sources
 
-Das Proof of Concept von Zenkom dient als Machbarkeitsstudie und soll Wegweisend bei der Auswahl des Entwicklungsframework sein.
-
-Ziel: Material UI Applikation mit Login und Post verwaltung. Auf dem Client sollte Redux verwendet werden.
-
-* Test ldap auth
-* Create fully functional posts management
-
-http://notjoshmiller.com/using-ldaps-in-meteor/
+http://codepen.io/zavoloklom/pen/IGkDz
 
 ## Meteor project structure
 

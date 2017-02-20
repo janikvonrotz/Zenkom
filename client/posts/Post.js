@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import { Card, CardText, CardTitle, CircularProgress,
-  TextField,RaisedButton } from 'material-ui'
+  TextField, RaisedButton } from 'material-ui'
 import { Link } from 'react-router'
 import { setHeaderTitle, updatePost, insertPost } from '../actions'
 
@@ -19,7 +19,7 @@ class Post extends React.Component {
 
   componentWillReceiveProps(nextProps){
     let { dispatch, post } = nextProps
-    dispatch(setHeaderTitle(post ? post.title : "Untitled"))
+    dispatch(setHeaderTitle(post ? post.title : 'Untitled'))
   }
 
   render() {
