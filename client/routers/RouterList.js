@@ -17,7 +17,7 @@ class RouterList extends React.Component {
 
     return loading ? <CircularProgress /> : <Card>
       <CardText>
-        <Table>
+        <Table className="data-table">
           <TableHeader
             displaySelectAll={ false }
             adjustForCheckbox={ false }>

@@ -5,11 +5,13 @@ import { Routers } from '/imports/collections';
 let routers = () => {
   Meteor.methods({
     'routers.insert'(object) {
-      object.createdAt = new Date()
+      object.updated_at = new Date()
+      object.created_at = new Date()
       return Routers.insert(object)
     },
 
     'routers.update'(object) {
+      object.updated_at = new Date()
       let { _id } = object
       delete object._id
       Routers.update( _id, { $set: object } )

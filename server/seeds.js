@@ -51,6 +51,7 @@ let seeds = () => {
         transport_company: 'vbl',
         installed_at: new Date(2009,2,26),
         created_at: new Date(),
+        updated_at: new Date(),
       },
     ]
 

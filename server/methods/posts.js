@@ -5,11 +5,13 @@ import { Posts } from '/imports/collections';
 let posts = () => {
   Meteor.methods({
     'posts.insert'(object) {
-      object.createdAt = new Date()
+      object.updated_at = new Date()
+      object.created_at = new Date()
       return Posts.insert(object)
     },
 
     'posts.update'(object) {
+      object.updated_at = new Date()
       let { _id } = object
       delete object._id
       Posts.update( _id, { $set: object } )
