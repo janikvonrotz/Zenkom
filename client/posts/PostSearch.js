@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardText, CardTitle, FloatingActionButton,
+import { Card, CardText, FloatingActionButton,
   TextField } from 'material-ui'
 import { ContentAdd } from 'material-ui/svg-icons'
 import { PostList } from './index'
@@ -8,11 +8,11 @@ import { insertPost, setPostFilter } from '../actions'
 
 class PostSearch extends React.Component {
 
-  insert(event){
+  insert(){
     insertPost()
   }
 
-  updateFilter(event){
+  updateFilter(){
     let { dispatch } = this.props
     let { filter } = this.refs
     dispatch(setPostFilter(filter.getValue()))

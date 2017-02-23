@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
 let users = () => {
@@ -8,7 +8,7 @@ let users = () => {
     },
 
     'users.update_profile'(profile) {
-      Meteor.users.update( { _id: Meteor.userId() }, { $set: { profile: profile }} )
+      Meteor.users.update( { _id: Meteor.userId() }, { $set: { profile: profile } } )
     },
   })
 }

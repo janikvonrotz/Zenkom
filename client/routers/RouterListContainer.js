@@ -2,9 +2,9 @@ import RouterList from './RouterList'
 import { connect } from 'react-redux'
 import { createContainer } from 'meteor/react-meteor-data'
 import { Routers } from '/imports/collections'
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     filter: state.postFilter,
   }

@@ -1,18 +1,16 @@
 import React from 'react'
-import { Card, CardText, CardTitle, FloatingActionButton,
-  TextField } from 'material-ui'
-import { ContentAdd } from 'material-ui/svg-icons'
+import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { RouterList } from './index'
 import { connect } from 'react-redux'
 import { insertRouter, setRouterFilter } from '../actions'
 
 class RouterSearch extends React.Component {
 
-  insert(event){
-    insertPost()
+  insert(){
+    insertRouter()
   }
 
-  updateFilter(event){
+  updateFilter(){
     let { dispatch } = this.props
     let { filter } = this.refs
     dispatch(setRouterFilter(filter.getValue()))
@@ -21,17 +19,21 @@ class RouterSearch extends React.Component {
   render() {
     return <Card>
       <CardText>
-        <FloatingActionButton
-        mini={ true }
-        onTouchTap={this.insert.bind(this)}>
-          <ContentAdd />
-        </FloatingActionButton>
-        <br />
 
         <TextField
+        style={{ float: 'right' }}
         floatingLabelText="Search"
         ref="filter"
         onChange={this.updateFilter.bind(this)} />
+
+        <br /><br />
+
+        <RaisedButton
+        onTouchTap={ this.insert.bind(this) }
+        label="Add Router"
+        primary={true} />
+
+        <br /><br />
 
         <RouterList />
 

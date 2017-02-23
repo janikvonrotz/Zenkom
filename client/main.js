@@ -9,7 +9,7 @@ import { App, NotFound, MainLayout } from './core'
 import { PostSearch, Post } from './posts'
 import { Login, Register, EmailVerification, RecoverPassword,
   Profile } from './users'
-import { RouterList, Router as RouterComponent } from './routers'
+import { RouterSearch, Router as RouterComponent } from './routers'
 import { setUser } from './actions'
 import zenkomApp from './reducers'
 
@@ -25,7 +25,7 @@ Meteor.startup(() => {
           <Route path="/posts" component={ PostSearch } />
           <Route path="/post/:id/edit" component={ Post } />
           <Route path="/post/new" component={ Post } />
-          <Route path="/routers" component={ RouterList } />
+          <Route path="/routers" component={ RouterSearch } />
           <Route path="/router/:id/edit" component={ RouterComponent } />
           <Route path="/router/new" component={ RouterComponent } />
           <Route path="/login" component={ Login } />

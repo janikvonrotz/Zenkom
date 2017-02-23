@@ -1,5 +1,5 @@
 
-export default headerTitle = (state = 'Zenkom', action) => {
+export default (state = 'Zenkom', action) => {
   switch (action.type) {
     case 'SET_HEADER_TITLE':
       return action.title

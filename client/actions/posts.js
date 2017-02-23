@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 import { browserHistory } from 'react-router'
 
 export const insertPost = (params, dispatch) => {
@@ -23,7 +23,7 @@ export const insertPost = (params, dispatch) => {
 }
 
 export const updatePost = (params, dispatch) => {
-  Meteor.call('posts.update', params, (error, result) => {
+  Meteor.call('posts.update', params, (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',
@@ -40,7 +40,7 @@ export const updatePost = (params, dispatch) => {
 }
 
 export const removePost = (params, dispatch) => {
-  Meteor.call('posts.remove', params, (error, result) => {
+  Meteor.call('posts.remove', params, (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',

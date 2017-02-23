@@ -5,15 +5,15 @@ let Posts = new Mongo.Collection('posts')
 let schema = new SimpleSchema({
   title: {
     type: String,
-    label: "Title",
+    label: 'Title',
   },
   content: {
     type: String,
-    label: "Content",
+    label: 'Content',
   },
   createdAt: {
     type: Date,
-    label: "Created at",
+    label: 'Created at',
   },
 })
 Posts.attachSchema(schema)

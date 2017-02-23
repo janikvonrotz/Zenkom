@@ -1,7 +1,6 @@
 import React from 'react'
-import { Card, CardText, CardTitle, CircularProgress,
+import { Card, CardText, CircularProgress,
   TextField, RaisedButton, SelectField, MenuItem } from 'material-ui'
-import { Link } from 'react-router'
 import { setHeaderTitle, updateRouter, insertRouter } from '../actions'
 
 class Router extends React.Component {
@@ -27,17 +26,25 @@ class Router extends React.Component {
   }
 
   updateSelectField(event, index, value){
-    this.setState({typeValue: value})
+    this.setState({ typeValue: value })
   }
 
   componentWillReceiveProps(nextProps){
     let { dispatch, router } = nextProps
-    this.setState({typeValue: router.type})
+    this.setState({ typeValue: router && router.type ? router.type : null })
     dispatch(setHeaderTitle(router ? 'Router' : 'Untitled'))
   }
 
   render() {
     let { router, loading } = this.props
+
+    if (!router) {
+      router = {
+        vehicle_id: '',
+        dfi_name: '',
+        router_version: '',
+      }
+    }
 
     return loading ? <CircularProgress /> : <Card>
       <CardText>
@@ -66,8 +73,9 @@ class Router extends React.Component {
 
           <SelectField
           floatingLabelText="Typ"
-          value={this.state.typeValue}
-          onChange={this.updateSelectField.bind(this)}>
+          value={ this.state.typeValue }
+          required={ true }
+          onChange={ this.updateSelectField.bind(this) }>
            <MenuItem value={ 'NB2541' } primaryText="NB2541" />
            <MenuItem value={ 'NB2542' } primaryText="NB2542" />
           </SelectField>

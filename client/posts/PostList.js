@@ -1,19 +1,19 @@
-import React from 'react';
+import React from 'react'
 import { List, ListItem, CircularProgress, IconMenu, MenuItem,
   IconButton } from 'material-ui'
-import { NavigationMoreVert } from 'material-ui/svg-icons';
+import { NavigationMoreVert } from 'material-ui/svg-icons'
 import { grey400 } from 'material-ui/styles/colors'
 import { Link } from 'react-router'
 import { setHeaderTitle, removePost, setPostFilter } from '../actions'
 
 class PostList extends React.Component {
 
-  remove(id, event){
+  remove(id){
     let { dispatch } = this.props
     removePost(id, dispatch)
   }
 
-  updateFilter(event){
+  updateFilter(){
     let { dispatch } = this.props
     let { filter } = this.refs
     dispatch(setPostFilter(filter.getValue()))

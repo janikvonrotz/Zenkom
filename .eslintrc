@@ -1,0 +1,108 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "meteor": true,
+    "es6": true,
+  },
+  "plugins": ["react"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true,
+    },
+  },
+  "rules": {
+
+    //
+    // Best Practices
+    //
+    // These are rules designed to prevent you from making mistakes.
+    //
+    "semi": ["error", "never"], // Disallow semicolons
+    "object-curly-spacing": ["error", "always"], // Force spacing between curly braces
+    "array-bracket-spacing": ["error", "always"], // Force spacing between array brackets
+    "quotes": ["error", "single"], // Force single quotes
+    "brace-style": ["error"], // Spacing for common braces
+
+    //
+    //Possible Errors
+    //
+    // The following rules point out areas where you might have made mistakes.
+    //
+    "comma-dangle": 0, // disallow or enforce trailing commas
+    "no-cond-assign": "error", // disallow assignment in conditional expressions
+    "no-console": ["error", { allow: ["warn", "error", "info"] }], // disallow use of console (off by default in the node environment)
+    "no-constant-condition": "error", // disallow use of constant expressions in conditions
+    "no-control-regex": "error", // disallow control characters in regular expressions
+    "no-debugger": "error", // disallow use of debugger
+    "no-dupe-args": "error", // disallow duplicate arguments in functions
+    "no-dupe-keys": "error", // disallow duplicate keys when creating object literals
+    "no-duplicate-case": "error", // disallow a duplicate case label.
+    "no-empty": "error", // disallow empty statements
+    "no-empty-character-class": "error", // disallow the use of empty character classes in regular expressions
+    "no-ex-assign": "error", // disallow assigning to the exception in a catch block
+    "no-extra-boolean-cast": "error", // disallow double-negation boolean casts in a boolean context
+    "no-extra-parens": 0, // disallow unnecessary parentheses (off by default)
+    "no-extra-semi": "error", // disallow unnecessary semicolons
+    "no-func-assign": "error", // disallow overwriting functions written as function declarations
+    "no-inner-declarations": "error", // disallow function or variable declarations in nested blocks
+    "no-invalid-regexp": "error", // disallow invalid regular expression strings in the RegExp constructor
+    "no-irregular-whitespace": "error", // disallow irregular whitespace outside of strings and comments
+    "no-negated-in-lhs": "error", // disallow negation of the left operand of an in expression
+    "no-obj-calls": "error", // disallow the use of object properties of the global object (Math and JSON) as functions
+    "no-regex-spaces": "error", // disallow multiple spaces in a regular expression literal
+    "no-sparse-arrays": "error", // disallow sparse arrays
+    "no-unreachable": "error", // disallow unreachable statements after a return, throw, continue, or break statement
+    "use-isnan": "error", // disallow comparisons with the value NaN
+    "valid-jsdoc": "error", // Ensure JSDoc comments are valid (off by default)
+    "valid-typeof": "error", // Ensure that the results of typeof are compared against a valid string
+
+    //
+    // Variables
+    //
+    // These rules have to do with variable declarations.
+    //
+    "no-catch-shadow": "error", // disallow the catch clause parameter name being the same as a variable in the outer scope (off by default in the node environment)
+    "no-delete-var": "error", // disallow deletion of variables
+    "no-label-var": "error", // disallow labels that share a name with a variable
+    "no-shadow": "error", // disallow declaration of variables already declared in the outer scope
+    "no-shadow-restricted-names": "error", // disallow shadowing of names such as arguments
+    "no-undef": "error", // disallow use of undeclared variables unless mentioned in a /*global */ block
+    "no-undef-init": "error", // disallow use of undefined when initializing variables
+    // "no-undefined": "error", // disallow use of undefined variable (off by default)
+    "no-unused-vars": "error", // disallow declaration of variables that are not used in the code
+    "no-use-before-define": "error", // disallow use of variables before they are defined
+
+    //
+    // ECMAScript 6
+    //
+    // These rules are only relevant to ES6 environments and are off by default.
+    //
+    "arrow-parens": ["error", "always"], // Force use of arrow functions
+    "no-var": "error", // require let or const instead of var (off by default)
+    "generator-star-spacing": ["error", "before"], // enforce the spacing around the * in generator functions (off by default)
+
+    //
+    // eslint-plugin-react
+    //
+    // React specific linting rules for ESLint
+    //
+    "react/display-name": 0, // Prevent missing displayName in a React component definition
+    // "react/jsx-quotes": ["error", "double", "avoid-escape"], // Enforce quote style for JSX attributes
+    "react/jsx-no-undef": "error", // Disallow undeclared variables in JSX
+    "react/jsx-sort-props": 0, // Enforce props alphabetical sorting
+    "react/jsx-uses-react": "error", // Prevent React to be incorrectly marked as unused
+    "react/jsx-uses-vars": "error", // Prevent variables used in JSX to be incorrectly marked as unused
+    "react/no-did-mount-set-state": "error", // Prevent usage of setState in componentDidMount
+    "react/no-did-update-set-state": "error", // Prevent usage of setState in componentDidUpdate
+    "react/no-multi-comp": 0, // Prevent multiple component definition per file
+    "react/no-unknown-property": "error", // Prevent usage of unknown DOM property
+    "react/prop-types": 0, // Prevent missing props validation in a React component definition
+    "react/react-in-jsx-scope": "error", // Prevent missing React when using JSX
+    "react/self-closing-comp": "error", // Prevent extra closing tags for components without children
+    "react/wrap-multilines": 0, // Prevent missing parentheses around multilines JSX
+  },
+
+}

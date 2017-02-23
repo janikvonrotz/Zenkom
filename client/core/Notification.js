@@ -1,19 +1,19 @@
-import notie from 'notie';
-import 'notie/dist/notie.css';
+import notie from 'notie'
+import 'notie/dist/notie.css'
 import React from 'react'
 import { connect } from 'react-redux'
 import { dismissMessage } from '../actions'
 
 const Alert = {
   error: (message) => {
-    notie.alert(3, message, 2.5);
+    notie.alert(3, message, 2.5)
   },
   success: (message) => {
-    notie.alert(1, message, 2.5);
+    notie.alert(1, message, 2.5)
   }
 }
 
-const Notification = ({ dispatch, notification, title }) => {
+const Notification = ({ dispatch, notification }) => {
 
   if (notification.type) {
     Alert[notification.type](notification.message)
@@ -23,11 +23,11 @@ const Notification = ({ dispatch, notification, title }) => {
   }
 
   return (
-    <div></div>
+    <div />
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     notification: state.notification,
     title: state.headerTitle

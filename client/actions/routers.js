@@ -1,4 +1,4 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 import { browserHistory } from 'react-router'
 
 export const insertRouter = (params, dispatch) => {
@@ -23,7 +23,7 @@ export const insertRouter = (params, dispatch) => {
 }
 
 export const updateRouter = (params, dispatch) => {
-  Meteor.call('routers.update', params, (error, result) => {
+  Meteor.call('routers.update', params, (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',
@@ -40,7 +40,7 @@ export const updateRouter = (params, dispatch) => {
 }
 
 export const removeRouter = (params, dispatch) => {
-  Meteor.call('routers.remove', params, (error, result) => {
+  Meteor.call('routers.remove', params, (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',

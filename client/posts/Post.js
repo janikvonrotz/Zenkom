@@ -1,7 +1,6 @@
 import React from 'react'
-import { Card, CardText, CardTitle, CircularProgress,
+import { Card, CardText, CircularProgress,
   TextField, RaisedButton } from 'material-ui'
-import { Link } from 'react-router'
 import { setHeaderTitle, updatePost, insertPost } from '../actions'
 
 class Post extends React.Component {
@@ -26,8 +25,8 @@ class Post extends React.Component {
     let { post, loading } = this.props
     if (!post) {
       post = {
-        title: "",
-        content: ""
+        title: '',
+        content: ''
       }
     }
 

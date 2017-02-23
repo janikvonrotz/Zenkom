@@ -1,6 +1,6 @@
-import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
-import { Routers } from '/imports/collections';
+import { Meteor } from 'meteor/meteor'
+import { check } from 'meteor/check'
+import { Routers } from '/imports/collections'
 
 let routers = () => {
   Meteor.methods({

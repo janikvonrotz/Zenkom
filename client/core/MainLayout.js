@@ -1,6 +1,6 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { AppBar, Card, Drawer, MenuItem, IconMenu, IconButton,
+import { AppBar, Drawer, MenuItem, IconMenu, IconButton,
   FlatButton } from 'material-ui'
 import { Link } from 'react-router'
 import { NavigationMoreVert } from 'material-ui/svg-icons'
@@ -20,7 +20,7 @@ class MainLayout extends React.Component {
     this.setState({ drawerOpen: !this.state.drawerOpen })
   }
 
-  logout(event){
+  logout(){
     let { dispatch } = this.props
     logoutUser(dispatch)
   }
@@ -32,15 +32,15 @@ class MainLayout extends React.Component {
         <FlexboxGrid>
           <Helmet
             title={ title }
-            meta={[{"name": "viewport", "content": "width=device-width, initial-scale=1"}]}
+            meta={ [ { 'name': 'viewport', 'content': 'width=device-width, initial-scale=1' } ] }
           />
           <Notification />
           <AppBar
           title={ title }
           iconElementRight={ user ? <IconMenu
             iconButtonElement={ <IconButton><NavigationMoreVert /></IconButton> }
-            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-            anchorOrigin={{horizontal: 'right', vertical: 'top'}} >
+            targetOrigin={ { horizontal: 'right', vertical: 'top' } }
+            anchorOrigin={ { horizontal: 'right', vertical: 'top' } } >
 
               <MenuItem
               containerElement={ <Link to="/profile" /> }
@@ -85,7 +85,7 @@ class MainLayout extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     title: state.headerTitle,
     user: state.user

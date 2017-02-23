@@ -1,13 +1,13 @@
-export default notification = (state = {}, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case 'SHOW_ERROR_MESSAGE':
       return {
-        type: "error",
+        type: 'error',
         message: action.error.message
       }
     case 'SHOW_SUCCESS_MESSAGE':
       return {
-        type: "success",
+        type: 'success',
         message: action.message
       }
     case 'DISMISS_MESSAGE':

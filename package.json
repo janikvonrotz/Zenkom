@@ -2,6 +2,7 @@
   "name": "zenkom",
   "private": true,
   "scripts": {
+    "lint": "eslint .",
     "dev": "meteor",
     "start": "meteor run"
   },
@@ -22,5 +23,9 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "simpl-schema": "^0.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-plugin-react": "^6.10.0"
   }
 }

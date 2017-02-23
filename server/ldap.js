@@ -3,96 +3,101 @@ import assert from 'assert'
 import { Accounts } from 'meteor/accounts-base'
 import Future from 'fibers/future'
 
-var ldapAuth = {
-  url: 'ldap://ldap.forumsys.com',
-  searchOu: 'dc=example,dc=com',
-  searchQuery: (email) => {
-    return {
-      filter: `(mail=${email})`,
-      scope: 'sub'
+let ldapJs = () => {
+
+  let ldapAuth = {
+    url: 'ldap://ldap.forumsys.com',
+    searchOu: 'dc=example,dc=com',
+    searchQuery: (email) => {
+      return {
+        filter: `(mail=${email})`,
+        scope: 'sub'
+      }
     }
   }
-}
 
-ldapAuth.checkAccount = (options) => {
-  options = options || {}
+  ldapAuth.checkAccount = (options) => {
+    options = options || {}
 
-  ldapAuth.client = ldap.createClient({
-    url: ldapAuth.url
-  })
-
-  let dn = []
-  var future = new Future()
-
-  ldapAuth.client.search(ldapAuth.searchOu, ldapAuth.searchQuery(options.email), (error, result) => {
-    assert.ifError(error)
-
-    result.on('searchEntry', (entry) => {
-      dn.push(entry.objectName)
-      return ldapAuth.profile = {
-        firstname: entry.object.cn,
-        lastname: entry.object.sn
-      }
+    ldapAuth.client = ldap.createClient({
+      url: ldapAuth.url
     })
 
-    result.on('error', function(error){
-      throw new Meteor.Error(500, "LDAP server error")
-    })
+    let dn = []
+    let future = new Future()
 
-    return result.on('end', function(){
+    ldapAuth.client.search(ldapAuth.searchOu, ldapAuth.searchQuery(options.email), (error, result) => {
+      assert.ifError(error)
 
-      if (dn.length === 0) {
-        future['return'](false)
-        return false
-      }
+      result.on('searchEntry', (entry) => {
+        dn.push(entry.objectName)
+        return ldapAuth.profile = {
+          firstname: entry.object.cn,
+          lastname: entry.object.sn
+        }
+      })
 
-      return ldapAuth.client.bind(dn[0], options.pass, (error) => {
+      result.on('error', () => {
+        throw new Meteor.Error(500, 'LDAP server error')
+      })
 
-        if (error) {
+      return result.on('end', () => {
+
+        if (dn.length === 0) {
           future['return'](false)
           return false
         }
 
-        return ldapAuth.client.unbind((error) => {
-          assert.ifError(error)
-          return future['return'](!error)
+        return ldapAuth.client.bind(dn[0], options.pass, (bindError) => {
+
+          if (bindError) {
+            future['return'](false)
+            return false
+          }
+
+          return ldapAuth.client.unbind((unbindError) => {
+            assert.ifError(unbindError)
+            return future['return'](!unbindError)
+          })
         })
       })
     })
+    return future.wait()
+  }
+
+  Accounts.registerLoginHandler('ldap', (loginRequest) => {
+
+    if (!loginRequest.ldap) {
+      return undefined
+    }
+
+    if (ldapAuth.checkAccount(loginRequest)) {
+      let userId = null
+      let user = Meteor.users.findOne({ 'emails.address' : loginRequest.email })
+      if (!user) {
+        userId = Accounts.createUser({
+          email: loginRequest.email,
+          password: loginRequest.pass,
+          profile: ldapAuth.profile,
+          roles: [ 'user' ],
+        })
+        Meteor.users.update(userId, { $set: { 'emails.0.verified': true } })
+      } else {
+        userId = user._id
+      }
+
+      let stampedToken = Accounts._generateStampedLoginToken()
+      let hashStampedToken = Accounts._hashStampedToken(stampedToken)
+      Meteor.users.update(userId,
+        { $push: { 'services.resume.loginTokens': hashStampedToken } }
+      )
+
+      return {
+        userId: userId,
+        token: stampedToken.token
+      }
+    }
   })
-  return future.wait()
 }
 
-Accounts.registerLoginHandler('ldap', (loginRequest) => {
-
-  if (!loginRequest.ldap) {
-    return undefined
-  }
-
-  if (ldapAuth.checkAccount(loginRequest)) {
-    var userId = null
-    var user = Meteor.users.findOne({ "emails.address" : loginRequest.email })
-    if (!user) {
-      userId = Accounts.createUser({
-        email: loginRequest.email,
-        password: loginRequest.pass,
-        profile: ldapAuth.profile,
-        roles: ['user'],
-      })
-      Meteor.users.update(userId, { $set: { 'emails.0.verified': true } })
-    } else {
-      userId = user._id
-    }
-
-    let stampedToken = Accounts._generateStampedLoginToken()
-    let hashStampedToken = Accounts._hashStampedToken(stampedToken)
-    Meteor.users.update(userId,
-      { $push: { 'services.resume.loginTokens': hashStampedToken } }
-    )
-
-    return {
-      userId: userId,
-      token: stampedToken.token
-    }
-  }
-})
+export default ldapJs

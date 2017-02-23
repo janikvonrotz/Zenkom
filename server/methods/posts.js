@@ -1,6 +1,6 @@
-import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
-import { Posts } from '/imports/collections';
+import { Meteor } from 'meteor/meteor'
+import { check } from 'meteor/check'
+import { Posts } from '/imports/collections'
 
 let posts = () => {
   Meteor.methods({

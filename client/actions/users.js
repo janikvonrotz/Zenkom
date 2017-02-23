@@ -10,7 +10,7 @@ export const setUser = (user) => {
 }
 
 export const loginUser = (email, password, dispatch) => {
-  Meteor.loginWithPassword(email, password, (error, result) => {
+  Meteor.loginWithPassword(email, password, (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',
@@ -32,40 +32,36 @@ export const loginUser = (email, password, dispatch) => {
 
 export const loginUserWithLDAP = (email, password, dispatch) => {
 
-  let loginUserWithLDAP = (email, password, callback) => {
-    var loginRequest = {
-      ldap: true,
-      email: email,
-      pass: password,
-    }
-    Accounts.callLoginMethod({
-      methodArguments: [loginRequest],
-      userCallback: callback
-    })
+  let loginRequest = {
+    ldap: true,
+    email: email,
+    pass: password,
   }
-
-  loginUserWithLDAP(email, password, (error, result) => {
-    if (!error) {
-      dispatch({
-        type: 'SHOW_SUCCESS_MESSAGE',
-        message: 'Successfully logged in.',
-      })
-      dispatch({
-        type: 'SET_USER',
-        user: Meteor.user(),
-      })
-      browserHistory.push('/')
-    } else {
-      dispatch({
-        type: 'SHOW_ERROR_MESSAGE',
-        error,
-      })
+  Accounts.callLoginMethod({
+    methodArguments: [ loginRequest ],
+    userCallback: (error) => {
+      if (!error) {
+        dispatch({
+          type: 'SHOW_SUCCESS_MESSAGE',
+          message: 'Successfully logged in.',
+        })
+        dispatch({
+          type: 'SET_USER',
+          user: Meteor.user(),
+        })
+        browserHistory.push('/')
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
     }
   })
 }
 
 export const logoutUser = (dispatch) => {
-  Meteor.logout((error, result) => {
+  Meteor.logout((error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',
@@ -86,7 +82,7 @@ export const logoutUser = (dispatch) => {
 }
 
 export const registerUser = (user, dispatch) => {
-  Accounts.createUser(user, (error, result) => {
+  Accounts.createUser(user, (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',
@@ -107,7 +103,7 @@ export const registerUser = (user, dispatch) => {
 }
 
 export const verifyEmail = (token, dispatch) => {
-  Accounts.verifyEmail(token, (error, result) => {
+  Accounts.verifyEmail(token, (error) => {
     if (error) {
       dispatch({
         type: 'SHOW_ERROR_MESSAGE',
@@ -118,7 +114,7 @@ export const verifyEmail = (token, dispatch) => {
 }
 
 export const sendEmailVerification = (dispatch) => {
-  Meteor.call('users.send_email_verification', (error, result) => {
+  Meteor.call('users.send_email_verification', (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',
@@ -134,7 +130,7 @@ export const sendEmailVerification = (dispatch) => {
 }
 
 export const recoverPassword = (email, dispatch) => {
-  Accounts.forgotPassword( { email: email }, (error, response) => {
+  Accounts.forgotPassword( { email: email }, (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',
@@ -151,13 +147,13 @@ export const recoverPassword = (email, dispatch) => {
 
 export const resetPassword = (password, repeatPassword, token, dispatch) => {
   if (password != repeatPassword) {
-    let error = new Meteor.Error('invalid password', `Passwords don't mach.`)
+    let error = new Meteor.Error('invalid password', 'Passwords don\'t mach.')
     dispatch({
       type: 'SHOW_ERROR_MESSAGE',
       error,
     })
   } else {
-    Accounts.resetPassword(token, password, (error, response) => {
+    Accounts.resetPassword(token, password, (error) => {
       if (!error) {
         dispatch({
           type: 'SHOW_SUCCESS_MESSAGE',
@@ -175,7 +171,7 @@ export const resetPassword = (password, repeatPassword, token, dispatch) => {
 }
 
 export const updateProfile = (profile, dispatch) => {
-  Meteor.call('users.update_profile', profile, (error, result) => {
+  Meteor.call('users.update_profile', profile, (error) => {
     if (!error) {
       dispatch({
         type: 'SHOW_SUCCESS_MESSAGE',

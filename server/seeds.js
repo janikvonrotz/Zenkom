@@ -1,5 +1,5 @@
 import { Accounts } from 'meteor/accounts-base'
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'
 import { Posts, Routers } from '/imports/collections'
 
 let seeds = () => {
@@ -8,22 +8,22 @@ let seeds = () => {
     let posts = [
       {
         title: 'A hundred reasons why Meteor is great!',
-        content: `Lorem Ipsum\ndolor sit et amen`,
+        content: 'Lorem Ipsum\ndolor sit et amen',
         createdAt: new Date(),
       },
       {
         title: 'Why you should learn GraphQL with Apollo.',
-        content: `Lorem Ipsum\ndolor sit et amen`,
+        content: 'Lorem Ipsum\ndolor sit et amen',
         createdAt: new Date(),
       },
       {
         title: 'React has a promising future.',
-        content: `Lorem Ipsum\ndolor sit et amen`,
+        content: 'Lorem Ipsum\ndolor sit et amen',
         createdAt: new Date(),
       },
     ]
 
-    console.log(`Seed database with posts.`)
+    console.info('Seed database with posts.')
 
     posts.map((post) => {
       Posts.insert(post)
@@ -55,14 +55,14 @@ let seeds = () => {
       },
     ]
 
-    console.log(`Seed database with routers.`)
+    console.info('Seed database with routers.')
 
     routers.map((router) => {
       Routers.insert(router)
     })
   }
 
-  if (Meteor.users.find().count() === 0 ) {
+  if (Meteor.users.find().count() === 0) {
 
     let users = [
       {
@@ -70,15 +70,15 @@ let seeds = () => {
         password: 'password',
         firstname: 'Admin',
         lastname: 'McAdmin',
-        roles: ['admin'],
+        roles: [ 'admin' ],
       },
-    ];
+    ]
 
     users.map((user) => {
 
-      console.log(`Seed database with user ${user.email}.`)
+      console.info(`Seed database with user ${user.email}.`)
 
-      var userId = Accounts.createUser({
+      let userId = Accounts.createUser({
         email: user.email,
         password: user.password,
         profile: {
