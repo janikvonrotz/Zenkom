@@ -17,12 +17,14 @@ class RouterSearch extends React.Component {
   }
 
   render() {
+    let { i18n } = this.props
+
     return <Card>
       <CardText>
 
         <TextField
         style={{ float: 'right' }}
-        floatingLabelText="Search"
+        floatingLabelText={ i18n.button.search }
         ref="filter"
         onChange={this.updateFilter.bind(this)} />
 
@@ -30,7 +32,7 @@ class RouterSearch extends React.Component {
 
         <RaisedButton
         onTouchTap={ this.insert.bind(this) }
-        label="Add Router"
+        label={ i18n.button.add_router }
         primary={true} />
 
         <br /><br />
@@ -42,4 +44,9 @@ class RouterSearch extends React.Component {
   }
 }
 
-export default connect()(RouterSearch)
+const mapStateToProps = (state) => {
+  return {
+    i18n: state.i18n,
+  }
+}
+export default connect(mapStateToProps)(RouterSearch)

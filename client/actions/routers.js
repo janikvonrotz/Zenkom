@@ -22,7 +22,8 @@ export const insertRouter = (params, dispatch) => {
   }
 }
 
-export const updateRouter = (params, dispatch) => {
+export const updateRouter = (params, dispatch, getState) => {
+  console.info(getState())
   Meteor.call('routers.update', params, (error) => {
     if (!error) {
       dispatch({

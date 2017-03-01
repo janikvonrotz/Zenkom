@@ -7,6 +7,7 @@ import { Meteor } from 'meteor/meteor'
 const mapStateToProps = (state) => {
   return {
     filter: state.postFilter,
+    i18n: state.i18n,
   }
 }
 export default connect(mapStateToProps)(createContainer(({ filter }) => {

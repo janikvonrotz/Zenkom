@@ -38,6 +38,8 @@ let seeds = () => {
         router_version: '3.5.10.100',
         type: 'NB2541',
         serial_number: '00112b0008ec',
+        spos_id: '60002',
+        status: 'In Betrieb',
         ip_router: '172.17.3',
         ip_cashbox: '',
         sim1: 89410112332700898478,

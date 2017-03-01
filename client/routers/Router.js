@@ -8,7 +8,8 @@ class Router extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      typeValue: 1,
+      type: 1,
+      status: ''
     }
   }
 
@@ -16,33 +17,52 @@ class Router extends React.Component {
     event.preventDefault()
 
     let { router = {}, dispatch } = this.props
-    let { vehicle_id, dfi_name, router_version } = this.refs
+    let { type, status } = this.state
+    let { vehicle_id, dfi_name, router_version, serial_number, spos_id,
+      ip_router, ip_cashbox } = this.refs
     router.vehicle_id = vehicle_id.getValue()
     router.dfi_name = dfi_name.getValue()
     router.router_version = router_version.getValue()
-    router.type = this.state.typeValue
+    router.type = type
+    router.serial_number = serial_number.getValue()
+    router.spos_id = spos_id.getValue()
+    router.status = status
+    router.ip_router = ip_router.getValue()
+    router.ip_cashbox = ip_cashbox.getValue()
 
     router._id ? updateRouter(router, dispatch) : insertRouter(router, dispatch)
   }
 
-  updateSelectField(event, index, value){
-    this.setState({ typeValue: value })
+  updateSelectField(field, event, index, value){
+    let state = {}
+    state[field] = value
+    this.setState(state)
   }
 
   componentWillReceiveProps(nextProps){
-    let { dispatch, router } = nextProps
-    this.setState({ typeValue: router && router.type ? router.type : null })
+    let { dispatch, router, router: { type, status } } = nextProps
+    this.setState({
+      type: type,
+      status: status,
+    })
     dispatch(setHeaderTitle(router ? 'Router' : 'Untitled'))
   }
 
   render() {
-    let { router, loading } = this.props
+    let { router, loading, i18n } = this.props
+    let { type, status } = this.state
 
     if (!router) {
       router = {
         vehicle_id: '',
         dfi_name: '',
         router_version: '',
+        type: '',
+        serial_number: '',
+        spos_id: '',
+        status: '',
+        ip_router: '',
+        ip_cashbox: '',
       }
     }
 
@@ -54,36 +74,75 @@ class Router extends React.Component {
           defaultValue={ router.vehicle_id }
           type="text"
           ref="vehicle_id"
-          floatingLabelText="Fahrzeugnummer" />
+          floatingLabelText={ i18n.label.vehicle_id } />
           <br />
 
           <TextField
           defaultValue={ router.dfi_name }
-          type="number"
+          type="text"
           ref="dfi_name"
-          floatingLabelText="DFI Bezeichnung" />
+          floatingLabelText={ i18n.label.dfi_name }  />
           <br />
 
           <TextField
           defaultValue={ router.router_version }
           type="text"
           ref="router_version"
-          floatingLabelText="Version" />
+          floatingLabelText={ i18n.label.router_version }  />
           <br />
 
           <SelectField
-          floatingLabelText="Typ"
-          value={ this.state.typeValue }
+          floatingLabelText={ i18n.label.type }
+          value={ type }
           required={ true }
-          onChange={ this.updateSelectField.bind(this) }>
+          onChange={ this.updateSelectField.bind(this, 'type') }>
            <MenuItem value={ 'NB2541' } primaryText="NB2541" />
            <MenuItem value={ 'NB2542' } primaryText="NB2542" />
           </SelectField>
           <br />
 
+          <TextField
+          defaultValue={ router.serial_number }
+          type="text"
+          ref="serial_number"
+          floatingLabelText={ i18n.label.serial_number }  />
+          <br />
+
+          <TextField
+          defaultValue={ router.spos_id }
+          type="text"
+          ref="spos_id"
+          floatingLabelText={ i18n.label.spos_id }  />
+          <br />
+
+          <SelectField
+          floatingLabelText={ i18n.label.status }
+          value={ status }
+          required={ true }
+          onChange={ this.updateSelectField.bind(this, 'status') }>
+           <MenuItem value={ 'In Betrieb' } primaryText="In Betrieb" />
+           <MenuItem value={ 'Defekt' } primaryText="Defekt" />
+          </SelectField>
+          <br />
+
+          <TextField
+          defaultValue={ router.ip_router }
+          type="text"
+          ref="ip_router"
+          floatingLabelText={ i18n.label.ip_router }  />
+          <br />
+
+          <TextField
+          defaultValue={ router.ip_cashbox }
+          type="text"
+          ref="ip_cashbox"
+          floatingLabelText={ i18n.label.ip_cashbox }  />
+          <br />
+          <br />
+
           <RaisedButton
-          label="Save"
           type="submit"
+          label={ i18n.button.save }
           primary={ true } />
         </form>
       </CardText>

@@ -26,6 +26,15 @@ let schema = new SimpleSchema({
     type: String,
     label: 'Seriennummer',
   },
+  spos_id: {
+    type: String,
+    label: 'SPOS Nummer',
+    optional: true,
+  },
+  status: {
+    type: String,
+    label: 'Status',
+  },
   ip_router: {
     type: String,
     label: 'IP Router',
