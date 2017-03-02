@@ -6,12 +6,12 @@ import { connect } from 'react-redux'
 class App extends React.Component {
 
   componentDidMount(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Zenkom'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.dashboard))
   }
   componentWillReceiveProps(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Zenkom'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.dashboard))
   }
 
   render() {
@@ -24,4 +24,9 @@ class App extends React.Component {
   }
 }
 
-export default connect()(App)
+const mapStateToProps = (state) => {
+  return {
+    i18n: state.i18n,
+  }
+}
+export default connect(mapStateToProps)(App)

@@ -13,7 +13,7 @@ class Profile extends React.Component {
       firstname: firstname.getValue(),
       lastname: lastname.getValue(),
     }
-    updateProfile(profile, dispatch)
+    dispatch(updateProfile(profile))
   }
 
   // change(event) {
@@ -24,16 +24,17 @@ class Profile extends React.Component {
   // }
 
   componentDidMount(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Profile'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.profile))
   }
   componentWillReceiveProps(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Profile'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.profile))
   }
 
   render() {
-    let { user } = this.props
+    let { user, i18n } = this.props
+
     return <Card>
       { user ? <CardText>
         <form onSubmit={this.update.bind(this)}>
@@ -43,7 +44,7 @@ class Profile extends React.Component {
           type="text"
           ref="firstname"
           required="true"
-          floatingLabelText="Firstname" />
+          floatingLabelText={ i18n.label.firstname } />
           <br />
 
           <TextField
@@ -51,11 +52,11 @@ class Profile extends React.Component {
           type="text"
           ref="lastname"
           required="true"
-          floatingLabelText="Lastname" />
+          floatingLabelText={ i18n.label.lastname } />
           <br />
 
           <RaisedButton
-          label="Save"
+          label={ i18n.button.update }
           primary={ true }
           type="submit" />
 
@@ -67,7 +68,8 @@ class Profile extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    i18n: state.i18n,
   }
 }
 export default connect(mapStateToProps)(Profile)

@@ -9,41 +9,13 @@ export const setUser = (user) => {
   }
 }
 
-export const loginUser = (email, password, dispatch) => {
-  Meteor.loginWithPassword(email, password, (error) => {
-    if (!error) {
-      dispatch({
-        type: 'SHOW_SUCCESS_MESSAGE',
-        message: 'Successfully logged in.',
-      })
-      dispatch({
-        type: 'SET_USER',
-        user: Meteor.user(),
-      })
-      browserHistory.push('/')
-    } else {
-      dispatch({
-        type: 'SHOW_ERROR_MESSAGE',
-        error,
-      })
-    }
-  })
-}
-
-export const loginUserWithLDAP = (email, password, dispatch) => {
-
-  let loginRequest = {
-    ldap: true,
-    email: email,
-    pass: password,
-  }
-  Accounts.callLoginMethod({
-    methodArguments: [ loginRequest ],
-    userCallback: (error) => {
+export const loginUser = (email, password) => {
+  return (dispatch, getState) => {
+    Meteor.loginWithPassword(email, password, (error) => {
       if (!error) {
         dispatch({
           type: 'SHOW_SUCCESS_MESSAGE',
-          message: 'Successfully logged in.',
+          message: getState().i18n.message.login_success,
         })
         dispatch({
           type: 'SET_USER',
@@ -56,110 +28,54 @@ export const loginUserWithLDAP = (email, password, dispatch) => {
           error,
         })
       }
-    }
-  })
-}
-
-export const logoutUser = (dispatch) => {
-  Meteor.logout((error) => {
-    if (!error) {
-      dispatch({
-        type: 'SHOW_SUCCESS_MESSAGE',
-        message: 'Successfully logged out.',
-      })
-      dispatch({
-        type: 'SET_USER',
-        user: null
-      })
-      browserHistory.push('/login')
-    } else {
-      dispatch({
-        type: 'SHOW_ERROR_MESSAGE',
-        error,
-      })
-    }
-  })
-}
-
-export const registerUser = (user, dispatch) => {
-  Accounts.createUser(user, (error) => {
-    if (!error) {
-      dispatch({
-        type: 'SHOW_SUCCESS_MESSAGE',
-        message: 'Please verify your email.',
-      })
-      dispatch({
-        type: 'SET_USER',
-        user: Meteor.user(),
-      })
-      browserHistory.push('/email-verification')
-    } else {
-      dispatch({
-        type: 'SHOW_ERROR_MESSAGE',
-        error,
-      })
-    }
-  })
-}
-
-export const verifyEmail = (token, dispatch) => {
-  Accounts.verifyEmail(token, (error) => {
-    if (error) {
-      dispatch({
-        type: 'SHOW_ERROR_MESSAGE',
-        error,
-      })
-    }
-  })
-}
-
-export const sendEmailVerification = (dispatch) => {
-  Meteor.call('users.send_email_verification', (error) => {
-    if (!error) {
-      dispatch({
-        type: 'SHOW_SUCCESS_MESSAGE',
-        message: 'Verification email has been sent.',
-      })
-    } else {
-      dispatch({
-        type: 'SHOW_ERROR_MESSAGE',
-        error,
-      })
-    }
-  })
-}
-
-export const recoverPassword = (email, dispatch) => {
-  Accounts.forgotPassword( { email: email }, (error) => {
-    if (!error) {
-      dispatch({
-        type: 'SHOW_SUCCESS_MESSAGE',
-        message: 'Password reset email has been sent. Please check your mail account.',
-      })
-    } else {
-      dispatch({
-        type: 'SHOW_ERROR_MESSAGE',
-        error,
-      })
-    }
-  })
-}
-
-export const resetPassword = (password, repeatPassword, token, dispatch) => {
-  if (password != repeatPassword) {
-    let error = new Meteor.Error('invalid password', 'Passwords don\'t mach.')
-    dispatch({
-      type: 'SHOW_ERROR_MESSAGE',
-      error,
     })
-  } else {
-    Accounts.resetPassword(token, password, (error) => {
+  }
+}
+
+export const loginUserWithLDAP = (email, password) => {
+  return (dispatch, getState) => {
+    let loginRequest = {
+      ldap: true,
+      email: email,
+      pass: password,
+    }
+    Accounts.callLoginMethod({
+      methodArguments: [ loginRequest ],
+      userCallback: (error) => {
+        if (!error) {
+          dispatch({
+            type: 'SHOW_SUCCESS_MESSAGE',
+            message: getState().i18n.message.login_success,
+          })
+          dispatch({
+            type: 'SET_USER',
+            user: Meteor.user(),
+          })
+          browserHistory.push('/')
+        } else {
+          dispatch({
+            type: 'SHOW_ERROR_MESSAGE',
+            error,
+          })
+        }
+      }
+    })
+  }
+}
+
+export const logoutUser = () => {
+  return (dispatch, getState) => {
+    Meteor.logout((error) => {
       if (!error) {
         dispatch({
           type: 'SHOW_SUCCESS_MESSAGE',
-          message: 'New password has been saved.',
+          message: getState().i18n.message.logout_success,
         })
-        browserHistory.push('/')
+        dispatch({
+          type: 'SET_USER',
+          user: null
+        })
+        browserHistory.push('/login')
       } else {
         dispatch({
           type: 'SHOW_ERROR_MESSAGE',
@@ -170,18 +86,120 @@ export const resetPassword = (password, repeatPassword, token, dispatch) => {
   }
 }
 
-export const updateProfile = (profile, dispatch) => {
-  Meteor.call('users.update_profile', profile, (error) => {
-    if (!error) {
-      dispatch({
-        type: 'SHOW_SUCCESS_MESSAGE',
-        message: 'Profile has been saved.',
-      })
-    } else {
+export const registerUser = (user) => {
+  return (dispatch, getState) => {
+    Accounts.createUser(user, (error) => {
+      if (!error) {
+        dispatch({
+          type: 'SHOW_SUCCESS_MESSAGE',
+          message: getState().i18n.message.verifiy_email,
+        })
+        dispatch({
+          type: 'SET_USER',
+          user: Meteor.user(),
+        })
+        browserHistory.push('/email-verification')
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
+}
+
+export const verifyEmail = (token) => {
+  return (dispatch) => {
+    Accounts.verifyEmail(token, (error) => {
+      if (error) {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
+}
+
+export const sendEmailVerification = () => {
+  return (dispatch, getState) => {
+    Meteor.call('users.send_email_verification', (error) => {
+      if (!error) {
+        dispatch({
+          type: 'SHOW_SUCCESS_MESSAGE',
+          message: getState().i18n.message.verification_email_sent,
+        })
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
+}
+
+export const recoverPassword = (email) => {
+  return (dispatch, getState) => {
+    Accounts.forgotPassword( { email: email }, (error) => {
+      if (!error) {
+        dispatch({
+          type: 'SHOW_SUCCESS_MESSAGE',
+          message: getState().i18n.message.password_reset_link_sent,
+        })
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
+}
+
+export const resetPassword = (password, repeatPassword, token) => {
+  return (dispatch, getState) => {
+    if (password != repeatPassword) {
+      let error = new Meteor.Error(getState().i18n.error.password_invalid,
+        getState().i18n.message.passwords_not_match)
       dispatch({
         type: 'SHOW_ERROR_MESSAGE',
         error,
       })
+    } else {
+      Accounts.resetPassword(token, password, (error) => {
+        if (!error) {
+          dispatch({
+            type: 'SHOW_SUCCESS_MESSAGE',
+            message: getState().i18n.message.new_password_saved,
+          })
+          browserHistory.push('/')
+        } else {
+          dispatch({
+            type: 'SHOW_ERROR_MESSAGE',
+            error,
+          })
+        }
+      })
     }
-  })
+  }
+}
+
+export const updateProfile = (profile) => {
+  return (dispatch, getState) => {
+    Meteor.call('users.update_profile', profile, (error) => {
+      if (!error) {
+        dispatch({
+          type: 'SHOW_SUCCESS_MESSAGE',
+          message: getState().i18n.message.profile_saved,
+        })
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
 }

@@ -22,21 +22,21 @@ class MainLayout extends React.Component {
 
   logout(){
     let { dispatch } = this.props
-    logoutUser(dispatch)
+    dispatch(logoutUser())
   }
 
   render() {
-    let { title, user } = this.props
+    let { title, user, i18n } = this.props
     return (
       <MuiThemeProvider>
         <FlexboxGrid>
           <Helmet
-            title={ title }
+            title={ `Zenkom - ${title}` }
             meta={ [ { 'name': 'viewport', 'content': 'width=device-width, initial-scale=1' } ] }
           />
           <Notification />
           <AppBar
-          title={ title }
+          title={ `Zenkom - ${title}` }
           iconElementRight={ user ? <IconMenu
             iconButtonElement={ <IconButton><NavigationMoreVert /></IconButton> }
             targetOrigin={ { horizontal: 'right', vertical: 'top' } }
@@ -44,15 +44,15 @@ class MainLayout extends React.Component {
 
               <MenuItem
               containerElement={ <Link to="/profile" /> }
-              primaryText="Profile" />
+              primaryText={ i18n.button.profile } />
 
               <MenuItem
               onTouchTap={ this.logout.bind(this) }
-              primaryText="Sign out" />
+              primaryText={ i18n.button.logout } />
 
             </IconMenu> : <FlatButton
             containerElement={ <Link to="/login" /> }
-            label="Login" />
+            label={ i18n.button.login } />
           }
           onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) } />
 
@@ -63,17 +63,17 @@ class MainLayout extends React.Component {
           width={ 200 }>
 
             <MenuItem
-            primaryText="App"
+            primaryText={ i18n.button.dashboard }
             onTouchTap={ this.toggleDrawer.bind(this) }
             containerElement={ <Link to="/"/> } />
 
             <MenuItem
-            primaryText="Posts"
+            primaryText="Post"
             onTouchTap={ this.toggleDrawer.bind(this) }
             containerElement={ <Link to="/posts" /> } />
 
             <MenuItem
-            primaryText="Routers"
+            primaryText={ i18n.vocabulary.routers }
             onTouchTap={ this.toggleDrawer.bind(this) }
             containerElement={ <Link to="/routers" /> } />
 
@@ -88,7 +88,8 @@ class MainLayout extends React.Component {
 const mapStateToProps = (state) => {
   return {
     title: state.headerTitle,
-    user: state.user
+    user: state.user,
+    i18n: state.i18n,
   }
 }
 export default connect(mapStateToProps)(MainLayout)

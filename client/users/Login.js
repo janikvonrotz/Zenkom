@@ -12,21 +12,21 @@ class Login extends React.Component {
     let { email, password } = this.refs
     let { location: { query: { ldap } } } = this.props
 
-    ldap ? loginUserWithLDAP(email.getValue(), password.getValue(), dispatch) :
-    loginUser(email.getValue(), password.getValue(), dispatch)
+    ldap ? dispatch(loginUserWithLDAP(email.getValue(), password.getValue())) :
+    dispatch(loginUser(email.getValue(), password.getValue()))
   }
 
   componentDidMount(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Login'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.login))
   }
   componentWillReceiveProps(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Login'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.login))
   }
 
   render() {
-    let { location: { query: { ldap } } } = this.props
+    let { i18n, location: { query: { ldap } } } = this.props
     return <Card>
       <CardText>
         <form onSubmit={ this.login.bind(this) }>
@@ -35,31 +35,36 @@ class Login extends React.Component {
           type="email"
           ref="email"
           required="true"
-          floatingLabelText="Email" />
+          floatingLabelText={ i18n.label.email } />
           <br />
 
           <TextField
           type="password"
           ref="password"
           required="true"
-          floatingLabelText="Password" />
+          floatingLabelText={ i18n.label.password } />
           <br />
 
-          <p><Link to="/recover-password">Forgot Password?</Link></p>
+          <p><Link to="/recover-password">{ i18n.question.forgot_password }</Link></p>
 
           <RaisedButton
-          label="Login"
+          label={ i18n.button.login }
           primary={ true }
-          type="submit"/>
+          type="submit" />
         </form>
 
-        <p>Dont have an account? <Link to="/register">Register</Link>.</p>
+        <p>{ i18n.question.not_have_account } <Link to="/register">{ i18n.button.register }</Link></p>
         { ldap ?
-          <p>Login without LDAP? <Link to="/login">Login</Link>.</p> :
-          <p>Login with LDAP? <Link to="/login?ldap=true">Login with Ldap</Link>.</p> }
+          <p><Link to="/login">{ i18n.hint.login_without_ldap }</Link></p> :
+          <p><Link to="/login?ldap=true">{ i18n.hint.login_with_ldap } </Link></p> }
       </CardText>
     </Card>
   }
 }
 
-export default connect()(Login)
+const mapStateToProps = (state) => {
+  return {
+    i18n: state.i18n,
+  }
+}
+export default connect(mapStateToProps)(Login)

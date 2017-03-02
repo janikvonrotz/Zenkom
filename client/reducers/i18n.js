@@ -8,6 +8,15 @@ let phrases = {
       add_router: 'Router hinzufügen',
       search: 'Suche',
       cancel: 'Abrechen',
+      login: 'Login',
+      profile: 'Profil',
+      logout: 'Logout',
+      register: 'Registrieren',
+      reset_password: 'Passwort zurücksetzen',
+      recover_password: 'Password zurücksetzen',
+      dashboard: 'Übersicht',
+      verificate_email: 'Email verifizieren',
+      resend_email_verification: 'Verifikations Email erneut senden'
     },
     label: {
       id: 'ID',
@@ -33,14 +42,48 @@ let phrases = {
       created_at: 'Erstelldatum',
       updated_at: 'Änderungsdatum',
       history: 'Verlauf',
+      password: 'Passwort',
+      username: 'Benutzername',
+      email: 'Email',
+      firstname: 'Vorname',
+      lastname: 'Nachname',
+      repeat_password: 'Passwort wiederholen',
     },
     question: {
       confirm_delete_router: 'Möchten Sie diesen Router wirklich löschen?',
+      forgot_password: 'Passwort vergessen?',
+      not_have_account: 'Sie haben noch keinen Account?',
+      have_account: 'Sie haben bereits einen Account?'
+    },
+    hint: {
+      login_with_ldap: 'Login mit LDAP?',
+      login_without_ldap: 'Login ohne LDAP?',
+      send_password_reset_link: 'Link für die Passwort Rücksetzung schicken.',
+      set_new_password: 'Bestimmen Sie ihr neues Passwort.',
+      check_verification_email: 'Überprüfen Sie ihren Email Account nach der Verifikations Email.',
+      email_is_verified: 'Ihre Email wurde verifiziert.',
+      email_is_not_verified: 'Ihre Email konnte nicht verifiziert werden.',
     },
     vocabulary: {
       router: 'Router',
+      routers: 'Routers',
+    },
+    message: {
+      router_added: 'Router wurde hinzugefügt.',
+      router_updated: 'Router wurde gespeichert.',
+      router_removed: 'Router wurde entfernt.',
+      login_success: 'Erfolgreich eingeloggt.',
+      profile_saved: 'Profil wurde gespeichert.',
+      new_password_saved: 'Neues Passwort wurde gespeichert.',
+      password_reset_link_sent: 'Passwort Rücksetzungslink wurde verschickt. Bitte überprüfen Sie ihren Email Account.',
+      verification_email_sent: 'Das Verifikations Email wurde verschickt.',
+      verifiy_email: 'Bitte verifizieren Sie ihre Email.',
+      logout_success: 'Erfolgreich ausgeloggt.',
+      passwords_not_match: 'Die Passwörter stimmen nicht überein.',
+    },
+    error: {
+      password_invalid: 'Ungültiges Passwort',
     }
-
   },
   en: {
     button: {

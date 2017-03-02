@@ -2,13 +2,13 @@ import { Meteor } from 'meteor/meteor'
 import { browserHistory } from 'react-router'
 
 export const insertRouter = (params) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     if(params){
       Meteor.call('routers.insert', params, (error, result) => {
         if (!error) {
           dispatch({
             type: 'SHOW_SUCCESS_MESSAGE',
-            message: 'Router has been added.',
+            message: getState().i18n.message.router_added,
           })
           browserHistory.push(`/router/${result}/edit`)
         } else {
@@ -25,12 +25,12 @@ export const insertRouter = (params) => {
 }
 
 export const updateRouter = (params) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     Meteor.call('routers.update', params, (error) => {
       if (!error) {
         dispatch({
           type: 'SHOW_SUCCESS_MESSAGE',
-          message: 'Router has been updated.',
+          message: getState().i18n.message.router_updated,
         })
         browserHistory.push('/routers')
       } else {
@@ -44,12 +44,12 @@ export const updateRouter = (params) => {
 }
 
 export const removeRouter = (params) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     Meteor.call('routers.remove', params, (error) => {
       if (!error) {
         dispatch({
           type: 'SHOW_SUCCESS_MESSAGE',
-          message: 'Router has been removed.',
+          message: getState().i18n.message.router_removed,
         })
         browserHistory.push('/routers')
       } else {

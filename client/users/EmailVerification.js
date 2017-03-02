@@ -7,43 +7,43 @@ class EmailVerification extends React.Component {
 
   send(){
     let { dispatch } = this.props
-    sendEmailVerification(dispatch)
+    dispatch(sendEmailVerification())
   }
 
   componentDidMount(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Email Verification'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.verificate_email))
     let { token } = this.props.params
-    token ? verifyEmail(token, dispatch) : null
+    token ? dispatch(verifyEmail(token)) : null
   }
   componentWillReceiveProps(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Email Verification'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.verificate_email))
   }
 
   render() {
-    let { user } = this.props
+    let { user, i18n } = this.props
     let emailVerified = user ? user.emails[0].verified : false
     let { token } = this.props.params
 
     return <Card>
       { !emailVerified && !token ? <CardText>
-        <p>Please check your email account for a verification email.</p>
+        <p>{ i18n.hint.check_verification_email }</p>
         <RaisedButton
-        label="Resend Verification Email"
+        label={ i18n.button.resend_email_verification }
         primary={ true }
         onTouchTap={ this.send.bind(this) } />
       </CardText> : null }
 
       { emailVerified ? <CardText>
-        <p>Your email has been verified.</p>
+        <p>{ i18n.hint.email_is_verified }</p>
       </CardText> : null }
 
       { !emailVerified && token ? <CardText>
-        <p>Email could not be verified.</p>
+        <p>{ i18n.hint.email_is_not_verified }</p>
         <RaisedButton
         primary={ true }
-        label="Resend Verification Email"
+        label={ i18n.button.resend_email_verification }
         onTouchTap={ this.send.bind(this) } />
       </CardText> : null }
     </Card>
@@ -52,7 +52,8 @@ class EmailVerification extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    i18n: state.i18n,
   }
 }
 export default connect(mapStateToProps)(EmailVerification)

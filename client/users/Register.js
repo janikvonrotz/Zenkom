@@ -20,19 +20,21 @@ class Register extends React.Component {
         lastname: lastname.getValue()
       },
     }
-    registerUser(user, dispatch)
+    dispatch(registerUser(user))
   }
 
   componentDidMount(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Register'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.register))
   }
   componentWillReceiveProps(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Register'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.button.register))
   }
 
   render() {
+    let { i18n } = this.props
+
     return (
       <Card>
         <CardText>
@@ -42,48 +44,53 @@ class Register extends React.Component {
             type="firstname"
             ref="firstname"
             required="true"
-            floatingLabelText="Firstname" />
+            floatingLabelText={ i18n.label.firstname } />
             <br />
 
             <TextField
             type="lastname"
             ref="lastname"
             required="true"
-            floatingLabelText="Lastname" />
+            floatingLabelText={ i18n.label.lastname } />
             <br />
 
             <TextField
             type="username"
             ref="username"
             required="true"
-            floatingLabelText="Username" />
+            floatingLabelText={ i18n.label.username } />
             <br />
 
             <TextField
             type="email"
             ref="email"
             required="true"
-            floatingLabelText="Email" />
+            floatingLabelText={ i18n.label.email } />
             <br />
 
             <TextField
             type="password"
             ref="password"
             required="true"
-            floatingLabelText="Password" />
+            floatingLabelText={ i18n.label.password } />
             <br />
 
             <RaisedButton
-            label="Register"
+            label={ i18n.button.register }
             primary={ true }
             type="submit" />
 
           </form>
-          <p>Already have an account? <Link to="/login">Login</Link>.</p>
+          <p>{ i18n.question.have_account } <Link to="/login">{ i18n.button.login }</Link>.</p>
         </CardText>
       </Card>
     )
   }
 }
 
-export default connect()(Register)
+const mapStateToProps = (state) => {
+  return {
+    i18n: state.i18n,
+  }
+}
+export default connect(mapStateToProps)(Register)
