@@ -2,11 +2,12 @@
 let phrases = {
   de: {
     button: {
-      delete: 'Löschen',
-      save: 'Speichern',
+      remove: 'Löschen',
+      update: 'Speichern',
       commit: 'Neue Version',
       add_router: 'Router hinzufügen',
-      search: 'Suche'
+      search: 'Suche',
+      cancel: 'Abrechen',
     },
     label: {
       id: 'ID',
@@ -32,12 +33,19 @@ let phrases = {
       created_at: 'Erstelldatum',
       updated_at: 'Änderungsdatum',
       history: 'Verlauf',
+    },
+    question: {
+      confirm_delete_router: 'Möchten Sie diesen Router wirklich löschen?',
+    },
+    vocabulary: {
+      router: 'Router',
     }
+
   },
   en: {
     button: {
-      delete: 'Delete',
-      save: 'Save',
+      remove: 'Delete',
+      update: 'Save',
       commit: 'Commit',
       add_router: 'Add Router'
     }

@@ -7,7 +7,8 @@ import { insertRouter, setRouterFilter } from '../actions'
 class RouterSearch extends React.Component {
 
   insert(){
-    insertRouter()
+    let { dispatch } = this.props
+    dispatch(insertRouter())
   }
 
   updateFilter(){

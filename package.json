@@ -1,0 +1,32 @@
+{
+  "name": "zenkom",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "dev": "meteor",
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.22.0",
+    "fibers": "^1.0.15",
+    "flexboxgrid": "^6.3.1",
+    "ldapjs": "^1.0.1",
+    "material-ui": "^0.16.7",
+    "meteor-node-stubs": "~0.2.0",
+    "notie": "^3.9.5",
+    "react": "^15.4.2",
+    "react-addons-pure-render-mixin": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-helmet": "^4.0.0",
+    "react-redux": "^5.0.2",
+    "react-router": "^3.0.2",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "simpl-schema": "^0.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-plugin-react": "^6.10.0"
+  }
+}
