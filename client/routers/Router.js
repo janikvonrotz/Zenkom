@@ -1,15 +1,17 @@
 import React from 'react'
-import { Card, CardText, CircularProgress,
+import { Card, CardText, CircularProgress, FlatButton, Dialog,
   TextField, RaisedButton, SelectField, MenuItem } from 'material-ui'
-import { setHeaderTitle, updateRouter, insertRouter } from '../actions'
+import { setHeaderTitle, updateRouter, insertRouter, removeRouter } from '../actions'
 
 class Router extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
-      type: 1,
-      status: ''
+      type: '',
+      status: '',
+      profile:'',
+      openRemoveDialog: false,
     }
   }
 
@@ -19,7 +21,8 @@ class Router extends React.Component {
     let { router = {}, dispatch } = this.props
     let { type, status } = this.state
     let { vehicle_id, dfi_name, router_version, serial_number, spos_id,
-      ip_router, ip_cashbox } = this.refs
+      ip_router, ip_cashbox, sim1, sim2, sim_itt, phone1, phone2,
+      phone_itt } = this.refs
     router.vehicle_id = vehicle_id.getValue()
     router.dfi_name = dfi_name.getValue()
     router.router_version = router_version.getValue()
@@ -29,8 +32,19 @@ class Router extends React.Component {
     router.status = status
     router.ip_router = ip_router.getValue()
     router.ip_cashbox = ip_cashbox.getValue()
+    router.sim1 = sim1.getValue()
+    router.sim2 = sim2.getValue()
+    router.sim_itt = sim_itt.getValue()
+    router.phone1 = phone1.getValue()
+    router.phone2 = phone2.getValue()    
+    router.phone_itt = phone_itt.getValue()
 
-    router._id ? updateRouter(router, dispatch) : insertRouter(router, dispatch)
+    router._id ? dispatch(updateRouter(router)) : dispatch(insertRouter(router))
+  }
+
+  remove(){
+    let { router, dispatch } = this.props
+    dispatch(removeRouter(router._id))
   }
 
   updateSelectField(field, event, index, value){
@@ -39,13 +53,20 @@ class Router extends React.Component {
     this.setState(state)
   }
 
+  toggleDialog(field){
+    let state = {}
+    state[field] = !this.state[field]
+    this.setState(state)
+  }
+
   componentWillReceiveProps(nextProps){
-    let { dispatch, router, router: { type, status } } = nextProps
+    let { dispatch, router } = nextProps
     this.setState({
-      type: type,
-      status: status,
+      type: router ? router.type : '',
+      status: router ? router.status : '',
+      profile: router ? router.profile : '',
     })
-    dispatch(setHeaderTitle(router ? 'Router' : 'Untitled'))
+    dispatch(setHeaderTitle(router ? `Router ${ router.vehicle_id || router.dfi_name }` : 'Untitled'))
   }
 
   render() {
@@ -65,6 +86,18 @@ class Router extends React.Component {
         ip_cashbox: '',
       }
     }
+
+    const actions = [
+      <FlatButton
+      label={ i18n.button.cancel }
+      primary={ true }
+      onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
+      />,
+      <FlatButton
+      onTouchTap={ this.remove.bind(this) }
+      label={ i18n.button.remove }
+      secondary={ true } />,
+    ]
 
     return loading ? <CircularProgress /> : <Card>
       <CardText>
@@ -105,6 +138,7 @@ class Router extends React.Component {
           defaultValue={ router.serial_number }
           type="text"
           ref="serial_number"
+          required={ true }
           floatingLabelText={ i18n.label.serial_number }  />
           <br />
 
@@ -138,12 +172,69 @@ class Router extends React.Component {
           ref="ip_cashbox"
           floatingLabelText={ i18n.label.ip_cashbox }  />
           <br />
+
+          <TextField
+          defaultValue={ router.sim1 }
+          type="text"
+          ref="sim1"
+          floatingLabelText={ i18n.label.sim1 }  />
           <br />
 
+          <TextField
+          defaultValue={ router.sim2 }
+          type="text"
+          ref="sim2"
+          floatingLabelText={ i18n.label.sim2 }  />
+          <br />
+
+          <TextField
+          defaultValue={ router.sim_itt }
+          type="text"
+          ref="sim_itt"
+          required={ true }
+          floatingLabelText={ i18n.label.sim_itt }  />
+          <br />
+
+          <TextField
+          defaultValue={ router.phone1 }
+          type="text"
+          ref="phone1"
+          floatingLabelText={ i18n.label.phone1 }  />
+          <br />
+
+          <TextField
+          defaultValue={ router.phone2 }
+          type="text"
+          ref="phone2"
+          floatingLabelText={ i18n.label.phone2 }  />
+          <br />
+
+          <TextField
+          defaultValue={ router.phone_itt }
+          type="text"
+          ref="phone_itt"
+          floatingLabelText={ i18n.label.phone_itt }  />
+          <br />
+
+          <br />
           <RaisedButton
           type="submit"
-          label={ i18n.button.save }
+          label={ i18n.button.update }
           primary={ true } />
+
+          <RaisedButton
+          onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
+          label={ i18n.button.remove }
+          secondary={ true } />
+
+          <Dialog
+          title={ `${i18n.vocabulary.router} ${ router.vehicle_id || router.dfi_name } ${i18n.button.remove}` }
+          actions={ actions }
+          modal={ true }
+          open={ this.state.openRemoveDialog }>
+            { i18n.question.confirm_delete_router }
+          </Dialog>
+
         </form>
       </CardText>
     </Card>
