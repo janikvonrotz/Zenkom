@@ -2,7 +2,9 @@
 
 Zentrale Kommunikationsplattform der vernetzten Fahrzeugsysteme.
 
-# sources
+issues: https://gitlab.com/janikvonrotz/Zenkom/issues
+
+# Resources
 
 http://codepen.io/zavoloklom/pen/IGkDz
 
