@@ -1,18 +1,19 @@
 import React from 'react'
 import 'flexboxgrid/css/flexboxgrid.min.css'
+import { Row, Col, BoxRow } from '../flexboxgrid'
 
 let FlexboxGrid = (props) => {
-    return <div className="row">
-      <div className="col-xs-0 col-sm-2 col-md-2 col-lg-1">
-        <div className="box-row"/>
-      </div>
-      <div className="col-xs-12 col-sm-8 col-md-8 col-lg-10">
-        <div className="box-row">{ props.children }</div>
-      </div>
-      <div className="col-xs-0 col-sm-2 col-md-2 col-lg-1">
-        <div className="box-row" />
-      </div>
-    </div>
+    return <Row>
+      <Col xs="0" sm="2" md="2" lg="1">
+        <BoxRow />
+      </Col>
+      <Col xs="12" sm="8" md="8" lg="10">
+        <BoxRow>{ props.children }</BoxRow>
+      </Col>
+      <Col xs="0" sm="2" md="2" lg="1">
+        <BoxRow />
+      </Col>
+    </Row>
 }
 
 export default FlexboxGrid
