@@ -1,6 +1,7 @@
 import React from 'react'
-import { CircularProgress, Table, TableBody, TableHeader,
-  TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui'
+import { CircularProgress } from 'material-ui'
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow,
+  TableRowColumn, TableFooter } from '../datatable'
 import { Link } from 'react-router'
 import { setHeaderTitle } from '../actions'
 
@@ -13,21 +14,24 @@ class RouterList extends React.Component {
 
   render() {
     let { routers, loading, i18n } = this.props
+    let headers = [
+      i18n.label.id,
+      i18n.label.vehicle_id,
+      i18n.label.dfi_name,
+      i18n.label.router_version,
+      i18n.label.type,
+      i18n.label.serial_number,
+    ]
 
-    return loading ? <CircularProgress /> : <Table style={{ width: '1000px' }}>
-      <TableHeader
-        displaySelectAll={ false }
-        adjustForCheckbox={ false }>
+    return loading ? <CircularProgress /> : <Table>
+      <TableHeader>
         <TableRow>
-          <TableHeaderColumn>{ i18n.label.id }</TableHeaderColumn>
-          <TableHeaderColumn>{ i18n.label.vehicle_id }</TableHeaderColumn>
-          <TableHeaderColumn>{ i18n.label.dfi_name }</TableHeaderColumn>
-          <TableHeaderColumn>{ i18n.label.router_version }</TableHeaderColumn>
-          <TableHeaderColumn>{ i18n.label.type }</TableHeaderColumn>
-          <TableHeaderColumn>{ i18n.label.serial_number }</TableHeaderColumn>
+          { headers.map((header) => {
+            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
+          }) }
         </TableRow>
       </TableHeader>
-      <TableBody displayRowCheckbox={ false }>
+      <TableBody>
         { routers.map((router) => {
           return <TableRow key={ router._id }>
             <TableRowColumn>{ router._id }</TableRowColumn>
@@ -47,6 +51,13 @@ class RouterList extends React.Component {
           </TableRow>
         }) }
       </TableBody>
+      <TableFooter>
+        <TableRow>
+          { headers.map((header) => {
+            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
+          }) }
+        </TableRow>
+      </TableFooter>
     </Table>
   }
 }

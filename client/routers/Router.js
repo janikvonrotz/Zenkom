@@ -77,7 +77,7 @@ class Router extends React.Component {
       status: router ? router.status : '',
       profile: router ? router.profile : '',
       transport_company: router ? router.transport_company : '',
-      installed_at: router ? router.installed_at : {},
+      installed_at: router ? router.installed_at : null,
     })
     dispatch(setHeaderTitle(router ? `Router ${ router.vehicle_id || router.dfi_name }` : 'Untitled'))
   }
@@ -106,7 +106,7 @@ class Router extends React.Component {
         profile: '',
         notes: '',
         transport_company: '',
-        installed_at: {},
+        installed_at: null,
       }
     }
 

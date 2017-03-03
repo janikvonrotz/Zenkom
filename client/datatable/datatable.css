@@ -1,0 +1,61 @@
+.data-table {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0px;
+  table-layout: fixed;
+  font-family: Roboto, sans-serif;
+
+  display: block;
+  overflow-x: auto;
+}
+
+.data-table-head {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.data-table-head-col {
+  font-weight: normal;
+  font-size: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
+  height: 4em;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgb(158, 158, 158);
+  position: relative;
+  background-color: inherit;
+}
+
+.data-table-body {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.data-table-row {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+.data-table-row-col {
+  padding-left: 2em;
+  padding-right: 2em;
+  height: 4em;
+  text-align: left;
+  font-size: 1.1em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: inherit;
+}
+
+.data-table-foot {
+  display: table-footer-group;
+  vertical-align: middle;
+  border-color: inherit;
+}

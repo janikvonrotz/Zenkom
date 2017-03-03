@@ -11,7 +11,6 @@ const mapStateToProps = (state) => {
   }
 }
 export default connect(mapStateToProps)(createContainer(({ filter }) => {
-  console.log(filter)
   let subscription = Meteor.subscribe('routers.list', filter)
   return {
     routers: Routers.find({}, { sort: { created_at: -1 } }).fetch(),
