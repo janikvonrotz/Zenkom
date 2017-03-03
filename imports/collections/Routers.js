@@ -95,7 +95,11 @@ let schema = new SimpleSchema({
   },
   created_at: {
     type: Date,
-    label: 'Einbaudatum',
+    label: 'Erstelldatum',
+  },
+  updated_at: {
+    type: Date,
+    label: 'Änderungsdatum',
   },
   history: {
     type: Array,

@@ -6,11 +6,12 @@ import { Meteor } from 'meteor/meteor'
 
 const mapStateToProps = (state) => {
   return {
-    filter: state.postFilter,
+    filter: state.routerFilter,
     i18n: state.i18n,
   }
 }
 export default connect(mapStateToProps)(createContainer(({ filter }) => {
+  console.log(filter)
   let subscription = Meteor.subscribe('routers.list', filter)
   return {
     routers: Routers.find({}, { sort: { created_at: -1 } }).fetch(),

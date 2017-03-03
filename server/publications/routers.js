@@ -14,8 +14,8 @@ let routers = () => {
       } else {
         return Routers.find({ $or: [
           { _id: { $regex: filter } },
-          { title: { $regex: filter } },
-          { content: { $regex: filter } },
+          { vehicle_id: { $regex: filter } },
+          { dfi_name: { $regex: filter } },
         ] })
       }
     }

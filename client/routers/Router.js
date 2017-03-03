@@ -1,7 +1,8 @@
 import React from 'react'
-import { Card, CardText, CircularProgress, FlatButton, Dialog,
+import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
   TextField, RaisedButton, SelectField, MenuItem } from 'material-ui'
-import { setHeaderTitle, updateRouter, insertRouter, removeRouter } from '../actions'
+import { setHeaderTitle, updateRouter, insertRouter,
+  removeRouter } from '../actions'
 
 class Router extends React.Component {
 
@@ -11,6 +12,8 @@ class Router extends React.Component {
       type: '',
       status: '',
       profile:'',
+      transport_company: '',
+      installed_at: '',
       openRemoveDialog: false,
     }
   }
@@ -19,10 +22,10 @@ class Router extends React.Component {
     event.preventDefault()
 
     let { router = {}, dispatch } = this.props
-    let { type, status } = this.state
+    let { type, status, profile, transport_company, installed_at } = this.state
     let { vehicle_id, dfi_name, router_version, serial_number, spos_id,
       ip_router, ip_cashbox, sim1, sim2, sim_itt, phone1, phone2,
-      phone_itt } = this.refs
+      phone_itt, notes } = this.refs
     router.vehicle_id = vehicle_id.getValue()
     router.dfi_name = dfi_name.getValue()
     router.router_version = router_version.getValue()
@@ -36,8 +39,12 @@ class Router extends React.Component {
     router.sim2 = sim2.getValue()
     router.sim_itt = sim_itt.getValue()
     router.phone1 = phone1.getValue()
-    router.phone2 = phone2.getValue()    
+    router.phone2 = phone2.getValue()
     router.phone_itt = phone_itt.getValue()
+    router.profile = profile
+    router.notes = notes.getValue()
+    router.transport_company = transport_company
+    router.installed_at = installed_at
 
     router._id ? dispatch(updateRouter(router)) : dispatch(insertRouter(router))
   }
@@ -49,7 +56,11 @@ class Router extends React.Component {
 
   updateSelectField(field, event, index, value){
     let state = {}
-    state[field] = value
+    if(index instanceof Date) {
+        state[field] = index
+    } else {
+        state[field] = value
+    }
     this.setState(state)
   }
 
@@ -65,13 +76,15 @@ class Router extends React.Component {
       type: router ? router.type : '',
       status: router ? router.status : '',
       profile: router ? router.profile : '',
+      transport_company: router ? router.transport_company : '',
+      installed_at: router ? router.installed_at : {},
     })
     dispatch(setHeaderTitle(router ? `Router ${ router.vehicle_id || router.dfi_name }` : 'Untitled'))
   }
 
   render() {
     let { router, loading, i18n } = this.props
-    let { type, status } = this.state
+    let { type, status, profile, transport_company, installed_at } = this.state
 
     if (!router) {
       router = {
@@ -84,6 +97,16 @@ class Router extends React.Component {
         status: '',
         ip_router: '',
         ip_cashbox: '',
+        sim1: '',
+        sim2: '',
+        sim_itt: '',
+        phone1: '',
+        phone2: '',
+        phone_itt: '',
+        profile: '',
+        notes: '',
+        transport_company: '',
+        installed_at: {},
       }
     }
 
@@ -215,6 +238,45 @@ class Router extends React.Component {
           ref="phone_itt"
           floatingLabelText={ i18n.label.phone_itt }  />
           <br />
+
+          <SelectField
+          floatingLabelText={ i18n.label.profile }
+          value={ profile }
+          required={ true }
+          onChange={ this.updateSelectField.bind(this, 'profile') }>
+           <MenuItem value={ '2GB' } primaryText="2GB" />
+           <MenuItem value={ '1GB' } primaryText="1GB" />
+          </SelectField>
+          <br />
+
+          <TextField
+          defaultValue={ router.notes }
+          type="text"
+          multiLine={ true }
+          ref="notes"
+          floatingLabelText={ i18n.label.notes }  />
+          <br />
+
+          <SelectField
+          floatingLabelText={ i18n.label.transport_company }
+          value={ transport_company }
+          required={ true }
+          onChange={ this.updateSelectField.bind(this, 'transport_company') }>
+           <MenuItem value={ 'vbl' } primaryText="vbl" />
+           <MenuItem value={ 'Rottal Auto AG' } primaryText="Rottal Auto AG" />
+          </SelectField>
+          <br />
+
+          <br />
+          <DatePicker
+          value={ installed_at }
+          floatingLabelText={ i18n.label.installed_at }
+          onChange={ this.updateSelectField.bind(this, 'installed_at') }
+          hintText={ i18n.label.installed_at } />
+          <br />
+
+          <p>{ `${ i18n.label.updated_at }: ${ router.updated_at }` }</p>
+          <p>{ `${ i18n.label.created_at }: ${ router.created_at }` }</p>
 
           <br />
           <RaisedButton

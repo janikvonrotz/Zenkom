@@ -13,7 +13,6 @@ class RouterList extends React.Component {
 
   render() {
     let { routers, loading, i18n } = this.props
-    console.info(routers)
 
     return loading ? <CircularProgress /> : <Table style={{ width: '1000px' }}>
       <TableHeader
