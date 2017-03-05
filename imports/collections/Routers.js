@@ -101,6 +101,10 @@ let schema = new SimpleSchema({
     type: Date,
     label: 'Änderungsdatum',
   },
+  archived: {
+    type: Boolean,
+    label: 'Archiviert',
+  },
   history: {
     type: Array,
     label: 'Versionsverlauf',

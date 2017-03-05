@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Routers } from '/imports/collections'
 
-let routers = () => {
+export default () => {
   Meteor.publish('routers.list', (filter) => {
     if (filter === '') {
       return Routers.find({})
@@ -25,5 +25,3 @@ let routers = () => {
     return Routers.find({ _id: id })
   })
 }
-
-export default routers

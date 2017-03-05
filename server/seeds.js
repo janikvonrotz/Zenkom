@@ -1,6 +1,6 @@
 import { Accounts } from 'meteor/accounts-base'
 import { Meteor } from 'meteor/meteor'
-import { Posts, Routers } from '/imports/collections'
+import { Posts, Routers, Notifications } from '/imports/collections'
 
 let seeds = () => {
 
@@ -54,6 +54,7 @@ let seeds = () => {
         installed_at: new Date(2009,2,26),
         created_at: new Date(),
         updated_at: new Date(),
+        archiviert: false,
       },
     ]
 
@@ -61,6 +62,24 @@ let seeds = () => {
 
     routers.map((router) => {
       Routers.insert(router)
+    })
+  }
+
+  if(Notifications.find({}).count() === 0){
+    let notifications = [
+      {
+        subject: 'Router 64 wurde aktualisiert',
+        content: 'Heinz Keller hat bei Router 64 folgende Änderungen gemacht: ...',
+        type: 'router_updated',
+        receivers: [ 'all' ],
+        created_at: new Date(),
+      },
+    ]
+
+    console.info('Seed database with notifications.')
+
+    notifications.map((notification) => {
+      Notifications.insert(notification)
     })
   }
 

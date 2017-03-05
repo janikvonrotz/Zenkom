@@ -1,27 +1,27 @@
 import { Meteor } from 'meteor/meteor'
-import { Posts } from '/imports/collections'
+import { Notifications } from '/imports/collections'
 
 export default () => {
-  Meteor.publish('posts.list', (filter) => {
+  Meteor.publish('notifications.list', (filter) => {
     if (filter === '') {
-      return Posts.find({})
+      return Notifications.find({})
     } else {
       let filterCase = filter.split(':')
       if (filterCase[1]) {
         let selector = {}
         selector[filterCase[0]] = { $regex: filterCase[1] }
-        return Posts.find(selector)
+        return Notifications.find(selector)
       } else {
-        return Posts.find( { $or: [
+        return Notifications.find({ $or: [
           { _id: { $regex: filter } },
-          { title: { $regex: filter } },
+          { subject: { $regex: filter } },
           { content: { $regex: filter } },
-        ] } )
+        ] })
       }
     }
   })
 
-  Meteor.publish('posts.item', (id) => {
-    return Posts.find( { _id: id } )
+  Meteor.publish('notifications.item', (id) => {
+    return Notifications.find({ _id: id })
   })
 }

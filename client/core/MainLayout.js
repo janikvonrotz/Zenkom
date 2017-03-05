@@ -47,6 +47,10 @@ class MainLayout extends React.Component {
               primaryText={ i18n.button.profile } />
 
               <MenuItem
+              containerElement={ <Link to="/settings" /> }
+              primaryText={ i18n.vocabulary.settings } />
+
+              <MenuItem
               onTouchTap={ this.logout.bind(this) }
               primaryText={ i18n.button.logout } />
 
@@ -76,6 +80,11 @@ class MainLayout extends React.Component {
             primaryText={ i18n.vocabulary.routers }
             onTouchTap={ this.toggleDrawer.bind(this) }
             containerElement={ <Link to="/routers" /> } />
+
+            <MenuItem
+            primaryText={ i18n.vocabulary.notifications }
+            onTouchTap={ this.toggleDrawer.bind(this) }
+            containerElement={ <Link to="/notifications" /> } />
 
           </Drawer>
           { this.props.children }

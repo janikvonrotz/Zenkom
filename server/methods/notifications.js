@@ -1,25 +1,25 @@
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
-import { Routers } from '/imports/collections'
+import { Notifications } from '/imports/collections'
 
 export default () => {
   Meteor.methods({
-    'routers.insert'(object) {
+    'notifications.insert'(object) {
       object.updated_at = new Date()
       object.created_at = new Date()
-      return Routers.insert(object)
+      return Notifications.insert(object)
     },
 
-    'routers.update'(object) {
+    'notifications.update'(object) {
       object.updated_at = new Date()
       let { _id } = object
       delete object._id
-      Routers.update( _id, { $set: object } )
+      Notifications.update( _id, { $set: object } )
     },
 
-    'routers.remove'(id) {
+    'notifications.remove'(id) {
       check(id, String)
-      Routers.remove(id)
+      Notifications.remove(id)
     },
 
   })

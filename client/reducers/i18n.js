@@ -63,10 +63,15 @@ let phrases = {
       check_verification_email: 'Überprüfen Sie ihren Email Account nach der Verifikations Email.',
       email_is_verified: 'Ihre Email wurde verifiziert.',
       email_is_not_verified: 'Ihre Email konnte nicht verifiziert werden.',
+      page_not_found: 'Leider konnte die gewünschte Seite nicht gefunden werden.',
     },
     vocabulary: {
       router: 'Router',
       routers: 'Routers',
+      notification: 'Benachrichtigung',
+      notifications: 'Benachrichtigungen',
+      settings: 'Einstellungen',
+      unknown: 'Unbekannt',
     },
     message: {
       router_added: 'Router wurde hinzugefügt.',
@@ -82,6 +87,7 @@ let phrases = {
       passwords_not_match: 'Die Passwörter stimmen nicht überein.',
     },
     error: {
+      page_not_found: 'Seite konnte nicht gefunden werden',
       password_invalid: 'Ungültiges Passwort',
     }
   },
