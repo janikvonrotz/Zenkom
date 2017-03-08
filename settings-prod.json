@@ -1,0 +1,17 @@
+{
+  "private": {
+    "ldap": {
+      "url": "ldap://192.168.90.240",
+      "base": "dc=vbl,dc=ch",
+      "filter": "(userPrincipalName=%email%)",
+      "scope": "sub",
+      "searchUser": {
+        "DN": "CN=Fz vernetztest,OU=Test,OU=Services,OU=vblusers2,DC=vbl,DC=ch",
+        "Password": "ZeNk609Om."
+      }
+    }
+  },
+  "public": {
+
+  }
+}

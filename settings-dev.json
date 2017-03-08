@@ -1,0 +1,14 @@
+{
+  "private": {
+    "ldap": {
+      "url": "ldap://ldap.forumsys.com",
+      "base": "dc=example,dc=com",
+      "filter": "(mail=%email%)",
+      "scope": "sub",
+      "searchUser": {}
+    }
+  },
+  "public": {
+
+  }
+}
