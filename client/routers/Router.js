@@ -3,6 +3,7 @@ import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
   TextField, RaisedButton, SelectField, MenuItem } from 'material-ui'
 import { setHeaderTitle, updateRouter, insertRouter,
   removeRouter } from '../actions'
+import { Row, Col, BoxRow } from '../flexboxgrid'
 
 class Router extends React.Component {
 
@@ -126,155 +127,168 @@ class Router extends React.Component {
       <CardText>
         <form onSubmit={ this.mutate.bind(this) }>
 
-          <TextField
-          defaultValue={ router.vehicle_id }
-          type="text"
-          ref="vehicle_id"
-          floatingLabelText={ i18n.label.vehicle_id } />
-          <br />
+          <Row>
+            <Col xs="12" sm="6" md="6" lg="6">
+              <BoxRow>
 
-          <TextField
-          defaultValue={ router.dfi_name }
-          type="text"
-          ref="dfi_name"
-          floatingLabelText={ i18n.label.dfi_name }  />
-          <br />
+                <TextField
+                defaultValue={ router.vehicle_id }
+                type="text"
+                ref="vehicle_id"
+                floatingLabelText={ i18n.label.vehicle_id } />
+                <br />
 
-          <TextField
-          defaultValue={ router.router_version }
-          type="text"
-          ref="router_version"
-          floatingLabelText={ i18n.label.router_version }  />
-          <br />
+                <TextField
+                defaultValue={ router.dfi_name }
+                type="text"
+                ref="dfi_name"
+                floatingLabelText={ i18n.label.dfi_name }  />
+                <br />
 
-          <SelectField
-          floatingLabelText={ i18n.label.type }
-          value={ type }
-          required={ true }
-          onChange={ this.updateSelectField.bind(this, 'type') }>
-           <MenuItem value={ 'NB2541' } primaryText="NB2541" />
-           <MenuItem value={ 'NB2542' } primaryText="NB2542" />
-          </SelectField>
-          <br />
+                <TextField
+                defaultValue={ router.router_version }
+                type="text"
+                ref="router_version"
+                floatingLabelText={ i18n.label.router_version }  />
+                <br />
 
-          <TextField
-          defaultValue={ router.serial_number }
-          type="text"
-          ref="serial_number"
-          required={ true }
-          floatingLabelText={ i18n.label.serial_number }  />
-          <br />
+                <SelectField
+                floatingLabelText={ i18n.label.type }
+                value={ type }
+                required={ true }
+                onChange={ this.updateSelectField.bind(this, 'type') }>
+                 <MenuItem value={ 'NB2541' } primaryText="NB2541" />
+                 <MenuItem value={ 'NB2542' } primaryText="NB2542" />
+                </SelectField>
+                <br />
 
-          <TextField
-          defaultValue={ router.spos_id }
-          type="text"
-          ref="spos_id"
-          floatingLabelText={ i18n.label.spos_id }  />
-          <br />
+                <TextField
+                defaultValue={ router.serial_number }
+                type="text"
+                ref="serial_number"
+                required={ true }
+                floatingLabelText={ i18n.label.serial_number }  />
+                <br />
 
-          <SelectField
-          floatingLabelText={ i18n.label.status }
-          value={ status }
-          required={ true }
-          onChange={ this.updateSelectField.bind(this, 'status') }>
-           <MenuItem value={ 'In Betrieb' } primaryText="In Betrieb" />
-           <MenuItem value={ 'Defekt' } primaryText="Defekt" />
-          </SelectField>
-          <br />
+                <TextField
+                defaultValue={ router.spos_id }
+                type="text"
+                ref="spos_id"
+                floatingLabelText={ i18n.label.spos_id }  />
+                <br />
 
-          <TextField
-          defaultValue={ router.ip_router }
-          type="text"
-          ref="ip_router"
-          floatingLabelText={ i18n.label.ip_router }  />
-          <br />
+                <SelectField
+                floatingLabelText={ i18n.label.status }
+                value={ status }
+                required={ true }
+                onChange={ this.updateSelectField.bind(this, 'status') }>
+                 <MenuItem value={ 'In Betrieb' } primaryText="In Betrieb" />
+                 <MenuItem value={ 'Defekt' } primaryText="Defekt" />
+                </SelectField>
+                <br />
 
-          <TextField
-          defaultValue={ router.ip_cashbox }
-          type="text"
-          ref="ip_cashbox"
-          floatingLabelText={ i18n.label.ip_cashbox }  />
-          <br />
+                <TextField
+                defaultValue={ router.ip_router }
+                type="text"
+                ref="ip_router"
+                floatingLabelText={ i18n.label.ip_router }  />
+                <br />
 
-          <TextField
-          defaultValue={ router.sim1 }
-          type="text"
-          ref="sim1"
-          floatingLabelText={ i18n.label.sim1 }  />
-          <br />
+                <TextField
+                defaultValue={ router.ip_cashbox }
+                type="text"
+                ref="ip_cashbox"
+                floatingLabelText={ i18n.label.ip_cashbox }  />
+                <br />
 
-          <TextField
-          defaultValue={ router.sim2 }
-          type="text"
-          ref="sim2"
-          floatingLabelText={ i18n.label.sim2 }  />
-          <br />
+              </BoxRow>
+            </Col>
+            <Col xs="12" sm="6" md="6" lg="6">
+              <BoxRow>
 
-          <TextField
-          defaultValue={ router.sim_itt }
-          type="text"
-          ref="sim_itt"
-          required={ true }
-          floatingLabelText={ i18n.label.sim_itt }  />
-          <br />
+                <TextField
+                defaultValue={ router.sim1 }
+                type="text"
+                ref="sim1"
+                floatingLabelText={ i18n.label.sim1 }  />
+                <br />
 
-          <TextField
-          defaultValue={ router.phone1 }
-          type="text"
-          ref="phone1"
-          floatingLabelText={ i18n.label.phone1 }  />
-          <br />
+                <TextField
+                defaultValue={ router.sim2 }
+                type="text"
+                ref="sim2"
+                floatingLabelText={ i18n.label.sim2 }  />
+                <br />
 
-          <TextField
-          defaultValue={ router.phone2 }
-          type="text"
-          ref="phone2"
-          floatingLabelText={ i18n.label.phone2 }  />
-          <br />
+                <TextField
+                defaultValue={ router.sim_itt }
+                type="text"
+                ref="sim_itt"
+                required={ true }
+                floatingLabelText={ i18n.label.sim_itt }  />
+                <br />
 
-          <TextField
-          defaultValue={ router.phone_itt }
-          type="text"
-          ref="phone_itt"
-          floatingLabelText={ i18n.label.phone_itt }  />
-          <br />
+                <TextField
+                defaultValue={ router.phone1 }
+                type="text"
+                ref="phone1"
+                floatingLabelText={ i18n.label.phone1 }  />
+                <br />
 
-          <SelectField
-          floatingLabelText={ i18n.label.profile }
-          value={ profile }
-          required={ true }
-          onChange={ this.updateSelectField.bind(this, 'profile') }>
-           <MenuItem value={ '2GB' } primaryText="2GB" />
-           <MenuItem value={ '1GB' } primaryText="1GB" />
-          </SelectField>
-          <br />
+                <TextField
+                defaultValue={ router.phone2 }
+                type="text"
+                ref="phone2"
+                floatingLabelText={ i18n.label.phone2 }  />
+                <br />
 
-          <TextField
-          defaultValue={ router.notes }
-          type="text"
-          multiLine={ true }
-          ref="notes"
-          floatingLabelText={ i18n.label.notes }  />
-          <br />
+                <TextField
+                defaultValue={ router.phone_itt }
+                type="text"
+                ref="phone_itt"
+                floatingLabelText={ i18n.label.phone_itt }  />
+                <br />
 
-          <SelectField
-          floatingLabelText={ i18n.label.transport_company }
-          value={ transport_company }
-          required={ true }
-          onChange={ this.updateSelectField.bind(this, 'transport_company') }>
-           <MenuItem value={ 'vbl' } primaryText="vbl" />
-           <MenuItem value={ 'Rottal Auto AG' } primaryText="Rottal Auto AG" />
-          </SelectField>
-          <br />
+                <SelectField
+                floatingLabelText={ i18n.label.profile }
+                value={ profile }
+                required={ true }
+                onChange={ this.updateSelectField.bind(this, 'profile') }>
+                 <MenuItem value={ '2GB' } primaryText="2GB" />
+                 <MenuItem value={ '1GB' } primaryText="1GB" />
+                </SelectField>
+                <br />
+
+                <TextField
+                defaultValue={ router.notes }
+                type="text"
+                multiLine={ true }
+                ref="notes"
+                floatingLabelText={ i18n.label.notes }  />
+                <br />
+
+                <SelectField
+                floatingLabelText={ i18n.label.transport_company }
+                value={ transport_company }
+                required={ true }
+                onChange={ this.updateSelectField.bind(this, 'transport_company') }>
+                 <MenuItem value={ 'vbl' } primaryText="vbl" />
+                 <MenuItem value={ 'Rottal Auto AG' } primaryText="Rottal Auto AG" />
+                </SelectField>
+                <br />
+
+                <br />
+                <DatePicker
+                value={ installed_at }
+                floatingLabelText={ i18n.label.installed_at }
+                onChange={ this.updateSelectField.bind(this, 'installed_at') }
+                hintText={ i18n.label.installed_at } />
+
+              </BoxRow>
+            </Col>
+          </Row>
 
           <br />
-          <DatePicker
-          value={ installed_at }
-          floatingLabelText={ i18n.label.installed_at }
-          onChange={ this.updateSelectField.bind(this, 'installed_at') }
-          hintText={ i18n.label.installed_at } />
-          <br />
-
           <p>{ `${ i18n.label.updated_at }: ${ router.updated_at }` }</p>
           <p>{ `${ i18n.label.created_at }: ${ router.created_at }` }</p>
 
