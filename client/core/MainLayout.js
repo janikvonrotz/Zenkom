@@ -72,11 +72,6 @@ class MainLayout extends React.Component {
             containerElement={ <Link to="/"/> } />
 
             <MenuItem
-            primaryText="Post"
-            onTouchTap={ this.toggleDrawer.bind(this) }
-            containerElement={ <Link to="/posts" /> } />
-
-            <MenuItem
             primaryText={ i18n.vocabulary.routers }
             onTouchTap={ this.toggleDrawer.bind(this) }
             containerElement={ <Link to="/routers" /> } />

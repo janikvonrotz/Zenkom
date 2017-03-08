@@ -1,34 +1,8 @@
 import { Accounts } from 'meteor/accounts-base'
 import { Meteor } from 'meteor/meteor'
-import { Posts, Routers, Notifications } from '/imports/collections'
+import { Routers, Notifications } from '/imports/collections'
 
 let seeds = () => {
-
-  if(Posts.find({}).count() === 0){
-    let posts = [
-      {
-        title: 'A hundred reasons why Meteor is great!',
-        content: 'Lorem Ipsum\ndolor sit et amen',
-        createdAt: new Date(),
-      },
-      {
-        title: 'Why you should learn GraphQL with Apollo.',
-        content: 'Lorem Ipsum\ndolor sit et amen',
-        createdAt: new Date(),
-      },
-      {
-        title: 'React has a promising future.',
-        content: 'Lorem Ipsum\ndolor sit et amen',
-        createdAt: new Date(),
-      },
-    ]
-
-    console.info('Seed database with posts.')
-
-    posts.map((post) => {
-      Posts.insert(post)
-    })
-  }
 
   if(Routers.find({}).count() === 0){
     let routers = [

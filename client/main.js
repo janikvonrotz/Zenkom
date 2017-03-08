@@ -7,7 +7,6 @@ import thunk from 'redux-thunk'
 import { Router, Route, browserHistory } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { App, NotFound, MainLayout } from './core'
-import { PostSearch, Post } from './posts'
 import { Login, Register, EmailVerification, RecoverPassword,
   Profile } from './users'
 import { RouterSearch, Router as RouterComponent } from './routers'
@@ -24,9 +23,6 @@ Meteor.startup(() => {
       <Router history={ browserHistory }>
         <Route component={ MainLayout }>
           <Route path="/" component={ App } />
-          <Route path="/posts" component={ PostSearch } />
-          <Route path="/post/:id/edit" component={ Post } />
-          <Route path="/post/new" component={ Post } />
           <Route path="/routers" component={ RouterSearch } />
           <Route path="/router/:id/edit" component={ RouterComponent } />
           <Route path="/router/new" component={ RouterComponent } />
