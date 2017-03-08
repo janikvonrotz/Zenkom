@@ -6,18 +6,11 @@ export default () => {
     if (filter === '') {
       return Notifications.find({})
     } else {
-      let filterCase = filter.split(':')
-      if (filterCase[1]) {
-        let selector = {}
-        selector[filterCase[0]] = { $regex: filterCase[1] }
-        return Notifications.find(selector)
-      } else {
-        return Notifications.find({ $or: [
-          { _id: { $regex: filter } },
-          { subject: { $regex: filter } },
-          { content: { $regex: filter } },
-        ] })
-      }
+      return Notifications.find({ $or: [
+        { _id: { $regex: filter } },
+        { subject: { $regex: filter } },
+        { content: { $regex: filter } },
+      ] })
     }
   })
 
