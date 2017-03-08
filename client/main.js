@@ -11,6 +11,7 @@ import { PostSearch, Post } from './posts'
 import { Login, Register, EmailVerification, RecoverPassword,
   Profile } from './users'
 import { RouterSearch, Router as RouterComponent } from './routers'
+import { NotificationList } from './notifications'
 import { setUser } from './actions'
 import zenkomApp from './reducers'
 
@@ -29,6 +30,7 @@ Meteor.startup(() => {
           <Route path="/routers" component={ RouterSearch } />
           <Route path="/router/:id/edit" component={ RouterComponent } />
           <Route path="/router/new" component={ RouterComponent } />
+          <Route path="/notifications" component={ NotificationList } />
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
           <Route path="/profile" component={ Profile } />
@@ -48,9 +50,3 @@ Meteor.autorun(() => {
     store.dispatch(setUser(Meteor.user()))
   }
 })
-
-// <Route path="/posts" onEnter={requireAuthentication} component={PostList} />
-// <Route path="/login" component={Login} />
-// <Route path="/register" component={Register} />
-// <Route path="/profile" onEnter={requireAuthentication} component={Profile} />
-// <Route path="/change-password" component={ChangePassword} />

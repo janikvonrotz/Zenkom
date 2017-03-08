@@ -3,11 +3,9 @@ import users from './users'
 import routers from './routers'
 import notifications from './notifications'
 
-let methods = () => {
+export default () => {
   posts()
   users()
   routers()
   notifications()
 }
-
-export default methods

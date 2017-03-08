@@ -11,6 +11,11 @@ let schema = new SimpleSchema({
     type: String,
     label: 'Inhalt',
   },
+  link: {
+    type: String,
+    label: 'Link',
+    optional: true,
+  },
   type: {
     type: String,
     label: 'Typ',

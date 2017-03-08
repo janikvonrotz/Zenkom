@@ -1,9 +1,9 @@
 import posts from './posts'
 import routers from './routers'
+import notifications from './notifications'
 
-let publications = () => {
+export default () => {
   posts()
   routers()
+  notifications()
 }
-
-export default publications

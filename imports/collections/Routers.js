@@ -114,6 +114,10 @@ let schema = new SimpleSchema({
     type: Date,
     label: 'Versionsdatum',
   },
+  'history.$.user_id': {
+    type: String,
+    label: 'Author',
+  },
   'history.$.router': {
     type: Object,
     label: 'Router',
