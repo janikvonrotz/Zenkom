@@ -52,8 +52,10 @@ React component naming:
 
 ### imports
 
-* `collections/` Mongo collections and schemas.
-  * `[Modules.js]` Collection and schema definitions.
+* `collections/` Mongo collections.
+  * `[Modules.js]` Collection definitions.
+* `schemas/` Schemas.
+  * `[Module.js]` Schema definitions.
 * `helpers/` Helper functions for client and server.
 
 ### server

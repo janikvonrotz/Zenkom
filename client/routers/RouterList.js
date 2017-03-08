@@ -16,7 +16,7 @@ class RouterList extends React.Component {
     let { routers, loading, i18n } = this.props
     let headers = [
       i18n.label.id,
-      i18n.label.vehicle_id,
+      i18n.label.vehicle_number,
       i18n.label.dfi_name,
       i18n.label.router_version,
       i18n.label.type,
@@ -35,9 +35,9 @@ class RouterList extends React.Component {
         { routers.map((router) => {
           return <TableRow key={ router._id }>
             <TableRowColumn>{ router._id }</TableRowColumn>
-            <TableRowColumn>{ router.vehicle_id ?
+            <TableRowColumn>{ router.vehicle_number ?
               <Link to={ `/router/${router._id}/edit` }>
-                { router.vehicle_id }
+                { router.vehicle_number }
               </Link> : null }
             </TableRowColumn>
             <TableRowColumn>{ router.dfi_name ?

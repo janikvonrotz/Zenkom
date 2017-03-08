@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
-  TextField, RaisedButton, SelectField, MenuItem } from 'material-ui'
+  TextField, RaisedButton, SelectField, MenuItem, List, ListItem,
+  Subheader } from 'material-ui'
 import { setHeaderTitle, updateRouter, insertRouter,
   removeRouter } from '../actions'
 import { Row, Col, BoxRow } from '../flexboxgrid'
@@ -24,10 +25,10 @@ class Router extends React.Component {
 
     let { router = {}, dispatch } = this.props
     let { type, status, profile, transport_company, installed_at } = this.state
-    let { vehicle_id, dfi_name, router_version, serial_number, spos_id,
+    let { vehicle_number, dfi_name, router_version, serial_number, spos_id,
       ip_router, ip_cashbox, sim1, sim2, sim_itt, phone1, phone2,
       phone_itt, notes } = this.refs
-    router.vehicle_id = vehicle_id.getValue()
+    router.vehicle_number = vehicle_number.getValue()
     router.dfi_name = dfi_name.getValue()
     router.router_version = router_version.getValue()
     router.type = type
@@ -80,7 +81,7 @@ class Router extends React.Component {
       transport_company: router ? router.transport_company : '',
       installed_at: router ? router.installed_at : null,
     })
-    dispatch(setHeaderTitle(router ? `Router ${ router.vehicle_id || router.dfi_name }` : 'Untitled'))
+    dispatch(setHeaderTitle(router ? `Router ${ router.vehicle_number || router.dfi_name }` : 'Untitled'))
   }
 
   render() {
@@ -89,7 +90,7 @@ class Router extends React.Component {
 
     if (!router) {
       router = {
-        vehicle_id: '',
+        vehicle_number: '',
         dfi_name: '',
         router_version: '',
         type: '',
@@ -108,6 +109,7 @@ class Router extends React.Component {
         notes: '',
         transport_company: '',
         installed_at: null,
+        history: []
       }
     }
 
@@ -132,10 +134,10 @@ class Router extends React.Component {
               <BoxRow>
 
                 <TextField
-                defaultValue={ router.vehicle_id }
-                type="text"
-                ref="vehicle_id"
-                floatingLabelText={ i18n.label.vehicle_id } />
+                defaultValue={ router.vehicle_number }
+                type="number"
+                ref="vehicle_number"
+                floatingLabelText={ i18n.label.vehicle_number } />
                 <br />
 
                 <TextField
@@ -158,7 +160,7 @@ class Router extends React.Component {
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'type') }>
                  <MenuItem value={ 'NB2541' } primaryText="NB2541" />
-                 <MenuItem value={ 'NB2542' } primaryText="NB2542" />
+                 <MenuItem value={ 'NB2700-LU' } primaryText="NB2700-LU" />
                 </SelectField>
                 <br />
 
@@ -208,21 +210,21 @@ class Router extends React.Component {
 
                 <TextField
                 defaultValue={ router.sim1 }
-                type="text"
+                type="number"
                 ref="sim1"
                 floatingLabelText={ i18n.label.sim1 }  />
                 <br />
 
                 <TextField
                 defaultValue={ router.sim2 }
-                type="text"
+                type="number"
                 ref="sim2"
                 floatingLabelText={ i18n.label.sim2 }  />
                 <br />
 
                 <TextField
                 defaultValue={ router.sim_itt }
-                type="text"
+                type="number"
                 ref="sim_itt"
                 required={ true }
                 floatingLabelText={ i18n.label.sim_itt }  />
@@ -230,21 +232,21 @@ class Router extends React.Component {
 
                 <TextField
                 defaultValue={ router.phone1 }
-                type="text"
+                type="number"
                 ref="phone1"
                 floatingLabelText={ i18n.label.phone1 }  />
                 <br />
 
                 <TextField
                 defaultValue={ router.phone2 }
-                type="text"
+                type="number"
                 ref="phone2"
                 floatingLabelText={ i18n.label.phone2 }  />
                 <br />
 
                 <TextField
                 defaultValue={ router.phone_itt }
-                type="text"
+                type="number"
                 ref="phone_itt"
                 floatingLabelText={ i18n.label.phone_itt }  />
                 <br />
@@ -289,10 +291,6 @@ class Router extends React.Component {
           </Row>
 
           <br />
-          <p>{ `${ i18n.label.updated_at }: ${ router.updated_at }` }</p>
-          <p>{ `${ i18n.label.created_at }: ${ router.created_at }` }</p>
-
-          <br />
           <RaisedButton
           type="submit"
           label={ i18n.button.update }
@@ -304,7 +302,7 @@ class Router extends React.Component {
           secondary={ true } />
 
           <Dialog
-          title={ `${i18n.vocabulary.router} ${ router.vehicle_id || router.dfi_name } ${i18n.button.remove}` }
+          title={ `${i18n.vocabulary.router} ${ router.vehicle_number || router.dfi_name } ${i18n.button.remove}` }
           actions={ actions }
           modal={ true }
           open={ this.state.openRemoveDialog }>
@@ -312,6 +310,24 @@ class Router extends React.Component {
           </Dialog>
 
         </form>
+
+        <br />
+        <List>
+          <Subheader>{ i18n.label.history }</Subheader>
+          { router.history.map((version) => {
+            return <ListItem
+              key={ version._id }
+              primaryText={ version.date.toISOString() }
+              secondaryText={ `${ i18n.label.created_by }: ${ version.user }` } />
+          }) }
+        </List>
+
+        <br />
+        <small>{ `${ i18n.label.updated_at }: ${ router.updated_at ? router.updated_at.toISOString() : '-' }` }</small><br />
+        <small>{ `${ i18n.label.updated_by }: ${ router.updated_by ? router.updated_by : '-' }` }</small><br />
+        <small>{ `${ i18n.label.created_at }: ${ router.created_at ? router.created_at.toISOString() : '-' }` }</small><br />
+        <small>{ `${ i18n.label.created_by }: ${ router.created_by ? router.created_by : '-' }` }</small>
+
       </CardText>
     </Card>
   }

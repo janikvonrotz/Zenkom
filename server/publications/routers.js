@@ -9,7 +9,7 @@ export default () => {
       let filterNumber = Number(filter)
       return Routers.find({ $or: [
         { _id: { $regex: filter } },
-        { vehicle_id: { $eq: filterNumber } },
+        { vehicle_number: { $eq: filterNumber } },
         { dfi_name: { $regex: filter } },
       ] })
     }
