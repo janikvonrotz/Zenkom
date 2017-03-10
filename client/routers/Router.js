@@ -291,7 +291,8 @@ class Router extends React.Component {
           <Dialog
           title={ `${i18n.vocabulary.router} ${ router.vehicle_id || router.dfi_name } ${i18n.button.remove}` }
           actions={ actions }
-          modal={ true }
+          modal={ false }
+          onRequestClose={ this.toggleDialog.bind(this, 'openRemoveDialog') }
           open={ this.state.openRemoveDialog }>
             { i18n.question.confirm_delete_router }
           </Dialog>

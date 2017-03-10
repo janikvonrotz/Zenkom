@@ -58,7 +58,8 @@ class RouterVersion extends React.Component {
         <Dialog
         title={ `${ i18n.vocabulary.router } ${ (routerVersion.object.updated_at || routerVersion.object.created_at).toISOString() } ${i18n.button.restore}` }
         actions={ actions }
-        modal={ true }
+        modal={ false }
+        onRequestClose={ this.toggleDialog.bind(this, 'openRestoreDialog') }
         open={ this.state.openRestoreDialog }>
           { i18n.question.confirm_reste_router }
         </Dialog>
