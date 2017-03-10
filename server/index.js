@@ -3,5 +3,6 @@ import accounts from './accounts'
 import methods from './methods'
 import publications from './publications'
 import ldap from './ldap'
+import smtp from './smtp'
 
-export { seeds, accounts, methods, publications, ldap }
+export { seeds, accounts, methods, publications, ldap, smtp }

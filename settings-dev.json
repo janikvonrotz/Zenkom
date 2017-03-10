@@ -6,6 +6,9 @@
       "filter": "(mail={email})",
       "scope": "sub",
       "searchUser": {}
+    },
+    "mail": {
+      "url": ""
     }
   },
   "public": {

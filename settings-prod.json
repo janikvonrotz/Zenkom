@@ -9,6 +9,9 @@
         "DN": "CN=Fz vernetztest,OU=Test,OU=Services,OU=vblusers2,DC=vbl,DC=ch",
         "Password": "ZeNk609Om."
       }
+    },
+    "mail": {
+      "url": ""
     }
   },
   "public": {
