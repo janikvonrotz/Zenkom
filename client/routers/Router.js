@@ -301,13 +301,14 @@ class Router extends React.Component {
         <br />
         <List>
           <Subheader>{ i18n.label.history }</Subheader>
-          { router.history ? router.history.map((version) => {
+          { router.history.length != 0 ? router.history.map((version) => {
             return <ListItem
               key={ version._id }
               primaryText={ (version.object.updated_at || version.object.created_at).toISOString() }
               containerElement={ <Link to={ `/router/${router._id}/version/${version._id}` } /> }
               secondaryText={ `${ i18n.label.created_by }: ${ version.object.updated_by || version.object.created_by }` } />
-          }) : <p>{ i18n.hint.no_history }</p> }
+          }) : <ListItem
+            primaryText={ i18n.hint.no_history } /> }
         </List>
 
         <br />
