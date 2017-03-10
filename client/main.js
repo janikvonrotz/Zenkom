@@ -9,7 +9,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { App, NotFound, MainLayout } from './core'
 import { Login, Register, EmailVerification, RecoverPassword,
   Profile, Settings } from './users'
-import { RouterSearch, Router as RouterComponent } from './routers'
+import { RouterSearch, Router as RouterComponent,
+  RouterVersion } from './routers'
 import { NotificationList } from './notifications'
 import { setUser } from './actions'
 import zenkomApp from './reducers'
@@ -26,6 +27,7 @@ Meteor.startup(() => {
           <Route path="/routers" component={ RouterSearch } />
           <Route path="/router/:id/edit" component={ RouterComponent } />
           <Route path="/router/new" component={ RouterComponent } />
+          <Route path="/router/:id/version/:version" component={ RouterVersion } />
           <Route path="/notifications" component={ NotificationList } />
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
