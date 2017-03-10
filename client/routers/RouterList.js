@@ -14,13 +14,15 @@ class RouterList extends React.Component {
 
   render() {
     let { routers, loading, i18n } = this.props
+
     let headers = [
       i18n.label.id,
       i18n.label.vehicle_number,
       i18n.label.dfi_name,
       i18n.label.router_version,
       i18n.label.type,
-      i18n.label.serial_number,
+      i18n.label.ip_router,
+      i18n.label.ip_cashbox,
     ]
 
     return loading ? <CircularProgress /> : <Table>
@@ -35,9 +37,9 @@ class RouterList extends React.Component {
         { routers.map((router) => {
           return <TableRow key={ router._id }>
             <TableRowColumn>{ router._id }</TableRowColumn>
-            <TableRowColumn>{ router.vehicle_number ?
+            <TableRowColumn>{ router.vehicle.number ?
               <Link to={ `/router/${router._id}/edit` }>
-                { router.vehicle_number }
+                { router.vehicle.number }
               </Link> : null }
             </TableRowColumn>
             <TableRowColumn>{ router.dfi_name ?
@@ -47,7 +49,8 @@ class RouterList extends React.Component {
             </TableRowColumn>
             <TableRowColumn>{ router.router_version }</TableRowColumn>
             <TableRowColumn>{ router.type }</TableRowColumn>
-            <TableRowColumn>{ router.serial_number }</TableRowColumn>
+            <TableRowColumn>{ router.ip_router }</TableRowColumn>
+            <TableRowColumn>{ router.ip_cashbox }</TableRowColumn>
           </TableRow>
         }) }
       </TableBody>

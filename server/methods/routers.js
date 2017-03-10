@@ -3,12 +3,13 @@ import { check } from 'meteor/check'
 import { Routers } from '/imports/collections'
 import { RouterSchema } from '/imports/schemas'
 import { Random } from 'meteor/random'
+import { getFullname } from '/imports/helpers'
 
 export default () => {
   Meteor.methods({
     'routers.insert'(object) {
       object.created_at = new Date()
-      object.created_by = `${ Meteor.user().profile.firstname } ${ Meteor.user().profile.lastname }`
+      object.created_by = getFullname()
       object.history = []
       object.archived = false
       return Routers.insert(object)
@@ -16,22 +17,19 @@ export default () => {
 
     'routers.update'(object) {
 
-      // push a new version into history
+      // push a new version of last object
       let preObject = Routers.findOne(object._id)
       delete preObject.history
       object.history.push({
         _id: Random.id(),
-        date: preObject.updated_at || preObject.created_at,
-        user: preObject.updated_by || preObject.created_by,
         object: preObject,
       })
 
-      // save the current object
+      // save the new object
       object.updated_at = new Date()
-      object.updated_by = `${ Meteor.user().profile.firstname } ${ Meteor.user().profile.lastname }`
+      object.updated_by = getFullname()
       let { _id } = object
       delete object._id
-      RouterSchema.validate(object)
       Routers.upsert( _id, { $set: object } )
     },
 

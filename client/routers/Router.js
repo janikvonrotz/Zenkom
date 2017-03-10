@@ -5,12 +5,14 @@ import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
 import { setHeaderTitle, updateRouter, insertRouter,
   removeRouter } from '../actions'
 import { Row, Col, BoxRow } from '../flexboxgrid'
+import { Link } from 'react-router'
 
 class Router extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
+      vehicle_id: '',
       type: '',
       status: '',
       profile:'',
@@ -24,11 +26,12 @@ class Router extends React.Component {
     event.preventDefault()
 
     let { router = {}, dispatch } = this.props
-    let { type, status, profile, transport_company, installed_at } = this.state
-    let { vehicle_number, dfi_name, router_version, serial_number, spos_id,
-      ip_router, ip_cashbox, sim1, sim2, sim_itt, phone1, phone2,
-      phone_itt, notes } = this.refs
-    router.vehicle_number = vehicle_number.getValue()
+    let { vehicle_id, type, status, profile, transport_company,
+      installed_at } = this.state
+    let { dfi_name, router_version, serial_number, spos_id, ip_router,
+      ip_cashbox, sim1, sim2, sim_itt, phone1, phone2, phone_itt,
+      notes } = this.refs
+    router.vehicle_id = vehicle_id
     router.dfi_name = dfi_name.getValue()
     router.router_version = router_version.getValue()
     router.type = type
@@ -73,45 +76,22 @@ class Router extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    let { dispatch, router } = nextProps
+    let { dispatch, router={}, vehicle={}, i18n } = nextProps
     this.setState({
-      type: router ? router.type : '',
-      status: router ? router.status : '',
-      profile: router ? router.profile : '',
-      transport_company: router ? router.transport_company : '',
-      installed_at: router ? router.installed_at : null,
+      vehicle_id: router.vehicle_id || '',
+      type: router.type || '',
+      status: router.status || '',
+      profile: router.profile || '',
+      transport_company: router.transport_company || '',
+      installed_at: router.installed_at || null,
     })
-    dispatch(setHeaderTitle(router ? `Router ${ router.vehicle_number || router.dfi_name }` : 'Untitled'))
+    dispatch(setHeaderTitle(router ? `${ i18n.vocabulary.router } ${ vehicle.number || router.dfi_name }` : i18n.vocabulary.untitled ))
   }
 
   render() {
-    let { router, loading, i18n } = this.props
-    let { type, status, profile, transport_company, installed_at } = this.state
-
-    if (!router) {
-      router = {
-        vehicle_number: '',
-        dfi_name: '',
-        router_version: '',
-        type: '',
-        serial_number: '',
-        spos_id: '',
-        status: '',
-        ip_router: '',
-        ip_cashbox: '',
-        sim1: '',
-        sim2: '',
-        sim_itt: '',
-        phone1: '',
-        phone2: '',
-        phone_itt: '',
-        profile: '',
-        notes: '',
-        transport_company: '',
-        installed_at: null,
-        history: []
-      }
-    }
+    let { router={}, vehicles=[], loading, i18n } = this.props
+    let { vehicle_id, type, status, profile, transport_company,
+      installed_at } = this.state
 
     const actions = [
       <FlatButton
@@ -133,22 +113,29 @@ class Router extends React.Component {
             <Col xs="12" sm="6" md="6" lg="6">
               <BoxRow>
 
-                <TextField
-                defaultValue={ router.vehicle_number }
-                type="number"
-                ref="vehicle_number"
-                floatingLabelText={ i18n.label.vehicle_number } />
+                <SelectField
+                floatingLabelText={ i18n.label.vehicle_id }
+                value={ vehicle_id }
+                required={ true }
+                onChange={ this.updateSelectField.bind(this, 'vehicle_id') }>
+                  { vehicles.map((vehicle) => {
+                    return <MenuItem
+                      key={ vehicle._id }
+                      value={ vehicle._id }
+                      primaryText={ vehicle.number} />
+                  }) }
+                 </SelectField>
                 <br />
 
                 <TextField
-                defaultValue={ router.dfi_name }
+                defaultValue={ router.dfi_name || '' }
                 type="text"
                 ref="dfi_name"
                 floatingLabelText={ i18n.label.dfi_name }  />
                 <br />
 
                 <TextField
-                defaultValue={ router.router_version }
+                defaultValue={ router.router_version || '' }
                 type="text"
                 ref="router_version"
                 floatingLabelText={ i18n.label.router_version }  />
@@ -165,7 +152,7 @@ class Router extends React.Component {
                 <br />
 
                 <TextField
-                defaultValue={ router.serial_number }
+                defaultValue={ router.serial_number  || ''}
                 type="text"
                 ref="serial_number"
                 required={ true }
@@ -173,7 +160,7 @@ class Router extends React.Component {
                 <br />
 
                 <TextField
-                defaultValue={ router.spos_id }
+                defaultValue={ router.spos_id || '' }
                 type="text"
                 ref="spos_id"
                 floatingLabelText={ i18n.label.spos_id }  />
@@ -190,14 +177,14 @@ class Router extends React.Component {
                 <br />
 
                 <TextField
-                defaultValue={ router.ip_router }
+                defaultValue={ router.ip_router || '' }
                 type="text"
                 ref="ip_router"
                 floatingLabelText={ i18n.label.ip_router }  />
                 <br />
 
                 <TextField
-                defaultValue={ router.ip_cashbox }
+                defaultValue={ router.ip_cashbox || '' }
                 type="text"
                 ref="ip_cashbox"
                 floatingLabelText={ i18n.label.ip_cashbox }  />
@@ -209,21 +196,21 @@ class Router extends React.Component {
               <BoxRow>
 
                 <TextField
-                defaultValue={ router.sim1 }
+                defaultValue={ router.sim1 || '' }
                 type="number"
                 ref="sim1"
                 floatingLabelText={ i18n.label.sim1 }  />
                 <br />
 
                 <TextField
-                defaultValue={ router.sim2 }
+                defaultValue={ router.sim2 || '' }
                 type="number"
                 ref="sim2"
                 floatingLabelText={ i18n.label.sim2 }  />
                 <br />
 
                 <TextField
-                defaultValue={ router.sim_itt }
+                defaultValue={ router.sim_itt || '' }
                 type="number"
                 ref="sim_itt"
                 required={ true }
@@ -231,21 +218,21 @@ class Router extends React.Component {
                 <br />
 
                 <TextField
-                defaultValue={ router.phone1 }
+                defaultValue={ router.phone1 || '' }
                 type="number"
                 ref="phone1"
                 floatingLabelText={ i18n.label.phone1 }  />
                 <br />
 
                 <TextField
-                defaultValue={ router.phone2 }
+                defaultValue={ router.phone2 || '' }
                 type="number"
                 ref="phone2"
                 floatingLabelText={ i18n.label.phone2 }  />
                 <br />
 
                 <TextField
-                defaultValue={ router.phone_itt }
+                defaultValue={ router.phone_itt || '' }
                 type="number"
                 ref="phone_itt"
                 floatingLabelText={ i18n.label.phone_itt }  />
@@ -262,7 +249,7 @@ class Router extends React.Component {
                 <br />
 
                 <TextField
-                defaultValue={ router.notes }
+                defaultValue={ router.notes || '' }
                 type="text"
                 multiLine={ true }
                 ref="notes"
@@ -282,7 +269,7 @@ class Router extends React.Component {
                 <br />
                 <DatePicker
                 value={ installed_at }
-                floatingLabelText={ i18n.label.installed_at }
+                floatingLabelText={ i18n.label.installed_at || null }
                 onChange={ this.updateSelectField.bind(this, 'installed_at') }
                 hintText={ i18n.label.installed_at } />
 
@@ -302,7 +289,7 @@ class Router extends React.Component {
           secondary={ true } />
 
           <Dialog
-          title={ `${i18n.vocabulary.router} ${ router.vehicle_number || router.dfi_name } ${i18n.button.remove}` }
+          title={ `${i18n.vocabulary.router} ${ router.vehicle_id || router.dfi_name } ${i18n.button.remove}` }
           actions={ actions }
           modal={ true }
           open={ this.state.openRemoveDialog }>
@@ -314,12 +301,13 @@ class Router extends React.Component {
         <br />
         <List>
           <Subheader>{ i18n.label.history }</Subheader>
-          { router.history.map((version) => {
+          { router.history ? router.history.map((version) => {
             return <ListItem
               key={ version._id }
-              primaryText={ version.date.toISOString() }
-              secondaryText={ `${ i18n.label.created_by }: ${ version.user }` } />
-          }) }
+              primaryText={ (version.object.updated_at || version.object.created_at).toISOString() }
+              containerElement={ <Link to={ `/router/${router._id}/version/${version._id}` } /> }
+              secondaryText={ `${ i18n.label.created_by }: ${ version.object.updated_by || version.object.created_by }` } />
+          }) : <p>{ i18n.hint.no_history }</p> }
         </List>
 
         <br />

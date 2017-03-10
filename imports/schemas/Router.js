@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema'
 
 export default new SimpleSchema({
-  vehicle_number: {
+  vehicle_id: {
     type: String,
     label: 'Fahrzeugnummer',
     optional: true,
@@ -121,14 +121,6 @@ export default new SimpleSchema({
   'history.$._id': {
     type: String,
     label: 'Version ID',
-  },
-  'history.$.date': {
-    type: Date,
-    label: 'Versionsdatum',
-  },
-  'history.$.user': {
-    type: String,
-    label: 'Bearbeiter',
   },
   'history.$.object': {
     type: Object,
