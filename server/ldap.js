@@ -2,16 +2,17 @@ import ldap from 'ldapjs'
 import assert from 'assert'
 import { Accounts } from 'meteor/accounts-base'
 import Future from 'fibers/future'
+import { config } from '/imports/helpers'
 
 let ldapJs = () => {
 
   let ldapAuth = {
-    url: 'ldap://ldap.forumsys.com',
-    searchOu: 'dc=example,dc=com',
+    url: config.ldap.url,
+    searchOu: config.ldap.base,
     searchQuery: (email) => {
       return {
-        filter: `(mail=${email})`,
-        scope: 'sub'
+        filter: config.ldap.filter.replace('{email}', email),
+        scope: config.ldap.scope,
       }
     }
   }
