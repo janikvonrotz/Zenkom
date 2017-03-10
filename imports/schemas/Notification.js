@@ -26,4 +26,8 @@ export default new SimpleSchema({
     type: Date,
     label: 'Erstelldatum',
   },
+  created_by: {
+    type: String,
+    label: 'Erstellt von',
+  },
 })

@@ -20,6 +20,7 @@ let phrases = {
     },
     label: {
       id: 'ID',
+      vehicle_id: 'Fahrzeug',
       vehicle_number: 'Fahrzeugnummer',
       dfi_name: 'DFI Bezeichnung',
       router_version: 'Version',
@@ -66,6 +67,7 @@ let phrases = {
       email_is_verified: 'Ihre Email wurde verifiziert.',
       email_is_not_verified: 'Ihre Email konnte nicht verifiziert werden.',
       page_not_found: 'Leider konnte die gewünschte Seite nicht gefunden werden.',
+      no_history: 'Für diesen Eintrag existieren noch keine Versionen.',
     },
     vocabulary: {
       router: 'Router',
@@ -78,6 +80,7 @@ let phrases = {
       user: 'Benutzer',
       vehicles: 'Fahrzeuge',
       vehicle: 'Fahrzeug',
+      untitled: 'Ohne Titel',
     },
     message: {
       router_added: 'Router wurde hinzugefügt.',

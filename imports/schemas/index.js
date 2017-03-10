@@ -1,4 +1,5 @@
 import RouterSchema from './Router'
-import Notification from './Notification'
+import NotificationSchema from './Notification'
+import VehicleSchema from './Vehicle'
 
-export { RouterSchema, Notification }
+export { RouterSchema, NotificationSchema, VehicleSchema }

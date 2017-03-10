@@ -1,13 +1,20 @@
 import { Accounts } from 'meteor/accounts-base'
 import { Meteor } from 'meteor/meteor'
-import { Routers, Notifications } from '/imports/collections'
+import { Routers, Notifications, Vehicles } from '/imports/collections'
 
 let seeds = () => {
 
   if(Routers.find({}).count() === 0){
     let routers = [
       {
-        vehicle_number: 64,
+        vehicle: {
+          number: 64,
+          status: 'In Betrieb',
+          created_at: new Date(),
+          updated_at: new Date(),
+          created_by: 'Admin McAdmin',
+          updated_by: 'Admin McAdmin',
+        },
         dfi_name: '',
         router_version: '3.5.10.100',
         type: 'NB2541',
@@ -34,7 +41,14 @@ let seeds = () => {
         archived: false,
       },
       {
-        vehicle_number: 65,
+        vehicle: {
+          number: 65,
+          status: 'In Betrieb',
+          created_at: new Date(),
+          updated_at: new Date(),
+          created_by: 'Admin McAdmin',
+          updated_by: 'Admin McAdmin',
+        },
         dfi_name: '',
         router_version: '3.5.10.100',
         type: 'NB2700-LU',
@@ -62,9 +76,10 @@ let seeds = () => {
       },
     ]
 
-    console.info('Seed database with routers.')
+    console.info('Seed database with routers and vehicles.')
 
     routers.map((router) => {
+      router.vehicle_id = Vehicles.insert(router.vehicle)
       Routers.insert(router)
     })
   }
@@ -77,6 +92,7 @@ let seeds = () => {
         type: 'router_updated',
         receivers: [ 'all' ],
         created_at: new Date(),
+        created_by: 'Admin McAdmin',
       },
     ]
 

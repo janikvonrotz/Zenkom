@@ -81,3 +81,18 @@ Component -> Publication
 Action -> Method  
 `Update post` -> `posts.update`  
 `Remove post` -> `posts.remove`
+
+# Snippets
+
+```js
+db.routers.aggregate([
+   { $match: { _id: "Cvvp7PEZ6N9QTrdpW" } },
+   { $lookup: {
+       from: "vehicles",
+       localField: "vehicle_id",
+       foreignField: "_id",
+       as: "vehicle"
+     }
+   }
+])
+```
