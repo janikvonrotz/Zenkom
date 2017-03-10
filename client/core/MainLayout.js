@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { Notification, FlexboxGrid } from './index'
 import { logoutUser } from '../actions'
 import Helmet from 'react-helmet'
+import FeedbackForm from './FeedbackForm'
 
 class MainLayout extends React.Component {
 
@@ -93,6 +94,7 @@ class MainLayout extends React.Component {
 
           </Drawer>
           { this.props.children }
+          <FeedbackForm />
         </FlexboxGrid>
       </MuiThemeProvider>
     )
