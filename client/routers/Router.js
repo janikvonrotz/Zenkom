@@ -301,7 +301,7 @@ class Router extends React.Component {
         <br />
         <List>
           <Subheader>{ i18n.label.history }</Subheader>
-          { router.history.length != 0 ? router.history.map((version) => {
+          { (router.history && router.history.length != 0) ? router.history.map((version) => {
             return <ListItem
               key={ version._id }
               primaryText={ (version.object.updated_at || version.object.created_at).toISOString() }
