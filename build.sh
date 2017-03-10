@@ -1,8 +1,7 @@
 # chmod +x build.sh
 rm -rf .build
 forever stopall
-meteor build .build
-tar -zxf .build/Zenkom.tar.gz -C .build
+meteor build .build --directory
 cd .build/bundle/programs/server
 npm install --production
 cd ../..
