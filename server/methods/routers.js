@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
 import { Routers } from '/imports/collections'
-import { RouterSchema } from '/imports/schemas'
 import { Random } from 'meteor/random'
 import { getFullname } from '/imports/helpers'
 
@@ -25,12 +24,32 @@ export default () => {
         object: preObject,
       })
 
-      // save the new object
+      // save the current object
       object.updated_at = new Date()
       object.updated_by = getFullname()
       let { _id } = object
       delete object._id
-      Routers.upsert( _id, { $set: object } )
+      Routers.update( _id, { $set: object } )
+    },
+
+    'routers.restore'(id, versionId) {
+      check(id, String)
+      check(versionId, String)
+
+      // get version object and transfer history
+      let object = Routers.findOne(id)
+      let restoreObject = Object.assign({}, object.history.filter((version) => {
+        return version._id === versionId
+      })[0].object)
+      restoreObject.history = object.history
+
+      // push version of current object and save restore
+      delete object.history
+      restoreObject.history.push({
+        _id: Random.id(),
+        object: object,
+      })
+      Routers.update(id, { $set: restoreObject } )
     },
 
     'routers.remove'(id) {

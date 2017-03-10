@@ -62,6 +62,25 @@ export const removeRouter = (params) => {
   }
 }
 
+export const restoreRouter = (id, versionId) => {
+  return (dispatch, getState) => {
+    Meteor.call('routers.restore', id, versionId, (error) => {
+      if (!error) {
+        dispatch({
+          type: 'SHOW_SUCCESS_MESSAGE',
+          message: getState().i18n.message.router_restored,
+        })
+        browserHistory.push(`/router/${ id }/edit`)
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
+}
+
 export const setRouterFilter = (filter) => {
   return {
     type: 'SET_ROUTER_FILTER',

@@ -16,9 +16,11 @@ let phrases = {
       recover_password: 'Password zurücksetzen',
       dashboard: 'Übersicht',
       verificate_email: 'Email verifizieren',
-      resend_email_verification: 'Verifikations Email erneut senden'
+      resend_email_verification: 'Verifikations Email erneut senden',
+      restore: 'Wiederherstellen',
     },
     label: {
+      _id: 'ID',
       id: 'ID',
       vehicle_id: 'Fahrzeug',
       vehicle_number: 'Fahrzeugnummer',
@@ -39,6 +41,7 @@ let phrases = {
       profile: 'Profil',
       notes: 'Notizen',
       transport_company: 'Transportunternehmen',
+      archived: 'Archiviert',
       installed_at: 'Einbaudatum',
       created_at: 'Erstelldatum',
       updated_at: 'Änderungsdatum',
@@ -56,7 +59,8 @@ let phrases = {
       confirm_delete_router: 'Möchten Sie diesen Router wirklich löschen?',
       forgot_password: 'Passwort vergessen?',
       not_have_account: 'Sie haben noch keinen Account?',
-      have_account: 'Sie haben bereits einen Account?'
+      have_account: 'Sie haben bereits einen Account?',
+      confirm_reste_router: 'Möchten Sie den Rouer wirklich wiederherstellen?'
     },
     hint: {
       login_with_ldap: 'Login mit LDAP?',
@@ -94,6 +98,7 @@ let phrases = {
       verifiy_email: 'Bitte verifizieren Sie ihre Email.',
       logout_success: 'Erfolgreich ausgeloggt.',
       passwords_not_match: 'Die Passwörter stimmen nicht überein.',
+      router_restored: 'Router wurde erfolgreich wiederhergstellt.',
     },
     error: {
       page_not_found: 'Seite konnte nicht gefunden werden',
