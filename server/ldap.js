@@ -78,7 +78,7 @@ let ldapJs = () => {
       if (!user) {
         userId = Accounts.createUser({
           email: loginRequest.email,
-          password: Meteor.uuid(),
+          password: loginRequest.password,
           profile: ldapAuth.profile,
           roles: [ 'user' ],
         })
