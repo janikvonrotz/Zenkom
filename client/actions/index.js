@@ -1,7 +1,7 @@
 import { setHeaderTitle, dismissMessage } from './core'
 import { loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
   verifyEmail, resetPassword, recoverPassword, updateProfile,
-  loginUserWithLDAP } from './users'
+  loginUserWithLDAP, setUserFilter } from './users'
 import { updateRouter, removeRouter, insertRouter, restoreRouter,
   setRouterFilter } from './routers'
 import { updateVehicle, removeVehicle, insertVehicle,
@@ -9,6 +9,6 @@ import { updateVehicle, removeVehicle, insertVehicle,
 
 export { setHeaderTitle, dismissMessage,
   loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
-  verifyEmail, recoverPassword, resetPassword, updateProfile,
+  verifyEmail, recoverPassword, resetPassword, updateProfile, setUserFilter,
   loginUserWithLDAP, updateRouter, removeRouter, insertRouter, setVehicleFilter,
   setRouterFilter, restoreRouter, updateVehicle, removeVehicle, insertVehicle, }

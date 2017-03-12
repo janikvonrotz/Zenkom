@@ -203,3 +203,10 @@ export const updateProfile = (profile) => {
     })
   }
 }
+
+export const setUserFilter = (filter) => {
+  return {
+    type: 'SET_USER_FILTER',
+    filter
+  }
+}

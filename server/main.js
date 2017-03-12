@@ -1,11 +1,13 @@
 import { Meteor } from 'meteor/meteor'
 import { seeds, accounts, methods, publications, ldap, smtp } from './index'
+import { Users } from '/imports/collections'
 
-seeds()
+Users()
 accounts()
+ldap()
 methods()
 publications()
-ldap()
+seeds()
 
 Meteor.startup(() => {
   smtp()

@@ -34,7 +34,8 @@ let ldapJs = () => {
         dn.push(entry.objectName)
         return ldapAuth.profile = {
           firstname: entry.object.cn,
-          lastname: entry.object.sn
+          lastname: entry.object.sn,
+          name: `${entry.object.cn}`,
         }
       })
 
@@ -80,7 +81,6 @@ let ldapJs = () => {
           email: loginRequest.email,
           password: loginRequest.pass,
           profile: ldapAuth.profile,
-          roles: [ 'user' ],
         })
         Meteor.users.update(userId, { $set: { 'emails.0.verified': true } })
       } else {

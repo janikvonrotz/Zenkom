@@ -10,9 +10,8 @@ class Register extends React.Component {
     event.preventDefault()
 
     let { dispatch } = this.props
-    let { firstname, lastname, username, email, password } = this.refs
+    let { firstname, lastname, email, password } = this.refs
     let user = {
-      username: username.getValue(),
       email: email.getValue(),
       password: password.getValue(),
       profile:{
@@ -52,13 +51,6 @@ class Register extends React.Component {
             ref="lastname"
             required="true"
             floatingLabelText={ i18n.label.lastname } />
-            <br />
-
-            <TextField
-            type="username"
-            ref="username"
-            required="true"
-            floatingLabelText={ i18n.label.username } />
             <br />
 
             <TextField

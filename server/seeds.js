@@ -128,9 +128,10 @@ let seeds = () => {
           lastname: user.lastname,
           name: `${user.firstname} ${user.lastname}`
         },
-        roles: user.roles,
       })
       Meteor.users.update(userId, { $set: { 'emails.0.verified': true } })
+      Meteor.users.update(userId, { $set: { 'roles': user.roles } })
+
     })
   }
 }

@@ -1,10 +1,8 @@
 import { Meteor } from 'meteor/meteor'
 import { getFullname } from '/imports/helpers'
-import { Mongo } from 'meteor/mongo'
+import { Feedbacks } from '/imports/collections'
 
 export default () => {
-
-  let Feedbacks = new Mongo.Collection('feedbacks')
 
   Meteor.methods({
     'feedbacks.insert'(object) {

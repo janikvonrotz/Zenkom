@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 
 export default () => {
+    
   Meteor.methods({
     'users.send_email_verification'() {
       return Accounts.sendVerificationEmail(Meteor.userId())

@@ -57,6 +57,7 @@ let phrases = {
       repeat_password: 'Passwort wiederholen',
       number: 'Nummber',
       modification_until: 'Umbau bis',
+      role: 'Rolle',
     },
     question: {
       confirm_delete_router: 'Möchten Sie diesen Router wirklich löschen?',
