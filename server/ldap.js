@@ -78,7 +78,7 @@ let ldapJs = () => {
       if (!user) {
         userId = Accounts.createUser({
           email: loginRequest.email,
-          password: loginRequest.password,
+          password: loginRequest.pass,
           profile: ldapAuth.profile,
           roles: [ 'user' ],
         })
