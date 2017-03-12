@@ -10,7 +10,7 @@ export const insertRouter = (params) => {
             type: 'SHOW_SUCCESS_MESSAGE',
             message: getState().i18n.message.router_added,
           })
-          browserHistory.push(`/router/${result}/edit`)
+          browserHistory.push(`/routers`)
         } else {
           dispatch({
             type: 'SHOW_ERROR_MESSAGE',

@@ -8,8 +8,8 @@ import { setHeaderTitle } from '../actions'
 class RouterList extends React.Component {
 
   componentWillReceiveProps(){
-    let { dispatch } = this.props
-    dispatch(setHeaderTitle('Routers'))
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.vocabulary.routers))
   }
 
   render() {
@@ -66,37 +66,3 @@ class RouterList extends React.Component {
 }
 
 export default RouterList
-
-// <TableHeaderColumn>{ i18n.label.spos_id }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.status }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.ip_router }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.ip_cashbox }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.sim1 }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.sim2 }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.sim_itt }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.phone1 }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.phone2 }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.phone_itt }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.profile }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.notes }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.transport_company }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.installed_at }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.created_at }</TableHeaderColumn>
-// <TableHeaderColumn>{ i18n.label.updated_at }</TableHeaderColumn>
-
-// <TableRowColumn>{ router.spos_id }</TableRowColumn>
-// <TableRowColumn>{ router.status }</TableRowColumn>
-// <TableRowColumn>{ router.ip_router }</TableRowColumn>
-// <TableRowColumn>{ router.ip_cashbox }</TableRowColumn>
-// <TableRowColumn>{ router.sim1 }</TableRowColumn>
-// <TableRowColumn>{ router.sim2 }</TableRowColumn>
-// <TableRowColumn>{ router.sim_itt }</TableRowColumn>
-// <TableRowColumn>{ router.phone1 }</TableRowColumn>
-// <TableRowColumn>{ router.phoone2 }</TableRowColumn>
-// <TableRowColumn>{ router.phone_itt }</TableRowColumn>
-// <TableRowColumn>{ router.profile }</TableRowColumn>
-// <TableRowColumn>{ router.notes }</TableRowColumn>
-// <TableRowColumn>{ router.transport_company }</TableRowColumn>
-// <TableRowColumn>{ router.installed_at }</TableRowColumn>
-// <TableRowColumn>{ router.created_at }</TableRowColumn>
-// <TableRowColumn>{ router.updated_at }</TableRowColumn>

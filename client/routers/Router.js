@@ -85,11 +85,11 @@ class Router extends React.Component {
       transport_company: router.transport_company || '',
       installed_at: router.installed_at || null,
     })
-    dispatch(setHeaderTitle(router ? `${ i18n.vocabulary.router } ${ vehicle.number || router.dfi_name }` : i18n.vocabulary.untitled ))
+    dispatch(setHeaderTitle(router._id ? `${ i18n.vocabulary.router } ${ vehicle.number || router.dfi_name }` : i18n.vocabulary.untitled ))
   }
 
   render() {
-    let { router={}, vehicles=[], loading, i18n } = this.props
+    let { router={}, vehicle={}, vehicles=[], loading, i18n } = this.props
     let { vehicle_id, type, status, profile, transport_company,
       installed_at } = this.state
 
@@ -289,7 +289,7 @@ class Router extends React.Component {
           secondary={ true } />
 
           <Dialog
-          title={ `${i18n.vocabulary.router} ${ router.vehicle_id || router.dfi_name } ${i18n.button.remove}` }
+          title={ `${i18n.vocabulary.router} ${ vehicle.number || router.dfi_name } ${i18n.button.remove}` }
           actions={ actions }
           modal={ false }
           onRequestClose={ this.toggleDialog.bind(this, 'openRemoveDialog') }

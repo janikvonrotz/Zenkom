@@ -4,9 +4,11 @@ import { loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
   loginUserWithLDAP } from './users'
 import { updateRouter, removeRouter, insertRouter, restoreRouter,
   setRouterFilter } from './routers'
+import { updateVehicle, removeVehicle, insertVehicle,
+  setVehicleFilter } from './vehicles'
 
 export { setHeaderTitle, dismissMessage,
   loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
   verifyEmail, recoverPassword, resetPassword, updateProfile,
-  loginUserWithLDAP, updateRouter, removeRouter, insertRouter,
-  setRouterFilter, restoreRouter }
+  loginUserWithLDAP, updateRouter, removeRouter, insertRouter, setVehicleFilter,
+  setRouterFilter, restoreRouter, updateVehicle, removeVehicle, insertVehicle, }

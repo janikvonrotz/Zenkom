@@ -6,6 +6,7 @@ let phrases = {
       update: 'Speichern',
       commit: 'Neue Version',
       add_router: 'Router hinzufügen',
+      add_vehicle: 'Fahrzeug hinzufügen',
       search: 'Suche',
       cancel: 'Abrechen',
       login: 'Login',
@@ -54,13 +55,16 @@ let phrases = {
       firstname: 'Vorname',
       lastname: 'Nachname',
       repeat_password: 'Passwort wiederholen',
+      number: 'Nummber',
+      modification_until: 'Umbau bis',
     },
     question: {
       confirm_delete_router: 'Möchten Sie diesen Router wirklich löschen?',
       forgot_password: 'Passwort vergessen?',
       not_have_account: 'Sie haben noch keinen Account?',
       have_account: 'Sie haben bereits einen Account?',
-      confirm_reste_router: 'Möchten Sie den Rouer wirklich wiederherstellen?'
+      confirm_reste_router: 'Möchten Sie den Rouer wirklich wiederherstellen?',
+      confirm_delete_vehicle: 'Möchten Sie dieses Fahrzeug wirklich löschen?',
     },
     hint: {
       login_with_ldap: 'Login mit LDAP?',
@@ -90,6 +94,9 @@ let phrases = {
       router_added: 'Router wurde hinzugefügt.',
       router_updated: 'Router wurde gespeichert.',
       router_removed: 'Router wurde entfernt.',
+      vehicle_added: 'Fahrzeug wurde hinzugefügt.',
+      vehicle_updated: 'Fahrzeug wurde gespeichert.',
+      vehicle_removed: 'Fahrzeug wurde entfernt.',
       login_success: 'Erfolgreich eingeloggt.',
       profile_saved: 'Profil wurde gespeichert.',
       new_password_saved: 'Neues Passwort wurde gespeichert.',
@@ -103,6 +110,18 @@ let phrases = {
     error: {
       page_not_found: 'Seite konnte nicht gefunden werden',
       password_invalid: 'Ungültiges Passwort',
+    },
+    option: {
+      vehicle_rollout: 'Fahrzeug wird in Betrieb genommen',
+      vehicle_active: 'Fahrzeug in Betrieb',
+      vehicle_upgrade: 'Fahrzeug wird umgebaut',
+      vehicle_out_of_order: 'Fahrzeug ist ausser Betrieb',
+    },
+    role: {
+      user: 'Benutzer',
+      admin: 'Administrator',
+      tech: 'Techniker',
+      spec: 'Informatiker',
     }
   },
   en: {

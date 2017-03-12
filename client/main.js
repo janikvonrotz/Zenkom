@@ -11,6 +11,7 @@ import { Login, Register, EmailVerification, RecoverPassword,
   Profile, Settings } from './users'
 import { RouterSearch, Router as RouterComponent,
   RouterVersion } from './routers'
+import { Vehicle, VehicleSearch } from './vehicles'
 import { NotificationList } from './notifications'
 import { setUser } from './actions'
 import zenkomApp from './reducers'
@@ -28,6 +29,9 @@ Meteor.startup(() => {
           <Route path="/router/:id/edit" component={ RouterComponent } />
           <Route path="/router/new" component={ RouterComponent } />
           <Route path="/router/:id/version/:version" component={ RouterVersion } />
+          <Route path="/vehicles" component={ VehicleSearch } />
+          <Route path="/vehicle/:id/edit" component={ Vehicle } />
+          <Route path="/vehicle/new" component={ Vehicle } />
           <Route path="/notifications" component={ NotificationList } />
           <Route path="/login" component={ Login } />
           <Route path="/register" component={ Register } />
