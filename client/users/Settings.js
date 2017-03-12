@@ -27,29 +27,30 @@ class Profile extends React.Component {
   }
 
   render() {
-    let { user, i18n } = this.props
+    let { user, i18n, notificationOptions, channelOptions } = this.props
 
     return <Card>
       <CardText>
-      <List>
-         <ListItem
-           primaryText="When calls and notifications arrive"
-           secondaryText="Always interrupt"
-         />
+       <List>
+         <Subheader>{ i18n.vocabulary.notification_channels }</Subheader>
+         { channelOptions.map((option) => {
+           return <ListItem
+             key={ option }
+             value={ option }
+             rightToggle={<Toggle />}
+             primaryText={ i18n.option[option] } />
+         })}
        </List>
        <Divider />
        <List>
-         <Subheader>Priority Interruptions</Subheader>
-         <ListItem primaryText="Events and reminders" rightToggle={<Toggle />} />
-         <ListItem primaryText="Calls" rightToggle={<Toggle />} />
-         <ListItem primaryText="Messages" rightToggle={<Toggle />} />
-       </List>
-       <Divider />
-       <List>
-         <Subheader>Hangout Notifications</Subheader>
-         <ListItem primaryText="Notifications" leftCheckbox={<Checkbox />} />
-         <ListItem primaryText="Sounds" leftCheckbox={<Checkbox />} />
-         <ListItem primaryText="Video sounds" leftCheckbox={<Checkbox />} />
+         <Subheader>{ i18n.vocabulary.notifications }</Subheader>
+         { notificationOptions.map((option) => {
+           return <ListItem
+             key={ option }
+             value={ option }
+             leftCheckbox={ <Checkbox /> }
+             primaryText={ i18n.option[option] } />
+         })}
        </List>
       </CardText>
     </Card>
@@ -60,6 +61,8 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     i18n: state.i18n,
+    notificationOptions: state.serverNotificationOptions,
+    channelOptions: state.notificationChannelOptions,
   }
 }
 export default connect(mapStateToProps)(Profile)

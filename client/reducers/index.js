@@ -6,6 +6,8 @@ import i18n from './i18n'
 import routerFilter from './routerFilter'
 import vehicleFilter from './vehicleFilter'
 import vehicleStatusOptions from './vehicleStatusOptions'
+import serverNotificationOptions from './serverNotificationOptions'
+import notificationChannelOptions from './notificationChannelOptions'
 
 const zenkomApp = combineReducers({
   headerTitle,
@@ -15,6 +17,8 @@ const zenkomApp = combineReducers({
   routerFilter,
   vehicleFilter,
   vehicleStatusOptions,
+  serverNotificationOptions,
+  notificationChannelOptions,
 })
 
 export default zenkomApp

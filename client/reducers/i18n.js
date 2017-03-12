@@ -89,6 +89,9 @@ let phrases = {
       vehicles: 'Fahrzeuge',
       vehicle: 'Fahrzeug',
       untitled: 'Ohne Titel',
+      channel: 'Kanal',
+      channels: 'Kanäle',
+      notification_channels: 'Benachrichtigungskanäle'
     },
     message: {
       router_added: 'Router wurde hinzugefügt.',
@@ -112,10 +115,16 @@ let phrases = {
       password_invalid: 'Ungültiges Passwort',
     },
     option: {
+      vehicle_inserted: 'Fahrzeug hinzugefügt',
       vehicle_rollout: 'Fahrzeug wird in Betrieb genommen',
       vehicle_active: 'Fahrzeug in Betrieb',
       vehicle_upgrade: 'Fahrzeug wird umgebaut',
       vehicle_out_of_order: 'Fahrzeug ist ausser Betrieb',
+      browser_notification: 'Browser Benachrichtigung',
+      email_notification: 'Email Benachrichtigung',
+      router_updated: 'Router aktualisiert',
+      router_inserted: 'Router hinzugefügt',
+      router_broken: 'Router defekt',
     },
     role: {
       user: 'Benutzer',
