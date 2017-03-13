@@ -5,7 +5,7 @@
     "lint": "eslint .",
     "dev": "meteor --settings ./settings-dev.json",
     "prod": "export MONGO_URL='mongodb://zenkom:dp8e36APuASgSWum7uLz@ds121190.mlab.com:21190/zenkom'&& meteor --production --settings ./settings-prod.json",
-    "deploy-dev": "pm2 deploy ecosystem.json dev"
+    "deploy-dev": "pm2 deploy ecosystem.config.js dev"
   },
   "dependencies": {
     "babel-runtime": "^6.22.0",
