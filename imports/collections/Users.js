@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor'
 import { UserSchema } from '../schemas'
 
-export default () => {
-  Meteor.users.attachSchema(UserSchema)
-}
+let Users = new Mongo.Collection('_users')
+Users.attachSchema(UserSchema)
+Meteor.users.attachSchema(UserSchema)
+
+export default Users

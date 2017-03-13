@@ -2,6 +2,7 @@ import UserList from './UserList'
 import { connect } from 'react-redux'
 import { createContainer } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
+import { Users } from '/imports/collections'
 
 const mapStateToProps = (state) => {
   return {
@@ -13,7 +14,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(createContainer(({ filter }) => {
   let subscription = Meteor.subscribe('users.list', filter)
   return {
-    users: Meteor.users.find({}, { sort: { created_at: -1 } }).fetch(),
+    users: Users.find({}, { sort: { created_at: -1 } }).fetch(),
     loading: !subscription.ready(),
   }
 }, UserList))
