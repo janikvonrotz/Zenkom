@@ -16,7 +16,8 @@ class Register extends React.Component {
       password: password.getValue(),
       profile:{
         firstname: firstname.getValue(),
-        lastname: lastname.getValue()
+        lastname: lastname.getValue(),
+        name: `${ firstname.getValue() } ${ lastname.getValue() }`,
       },
     }
     dispatch(registerUser(user))
