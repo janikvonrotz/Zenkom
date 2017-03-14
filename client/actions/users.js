@@ -186,13 +186,31 @@ export const resetPassword = (password, repeatPassword, token) => {
   }
 }
 
-export const updateProfile = (profile) => {
+export const updateUserProfile = (profile) => {
   return (dispatch, getState) => {
     Meteor.call('users.update_profile', profile, (error) => {
       if (!error) {
         dispatch({
           type: 'SHOW_SUCCESS_MESSAGE',
           message: getState().i18n.message.profile_saved,
+        })
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
+}
+
+export const updateUserSettings = (params) => {
+  return (dispatch, getState) => {
+    Meteor.call('users.update_settings', params, (error) => {
+      if (!error) {
+        dispatch({
+          type: 'SHOW_SUCCESS_MESSAGE',
+          message: getState().i18n.message.settings_saved,
         })
       } else {
         dispatch({

@@ -14,6 +14,10 @@ let seeds = () => {
     user.profile = options.profile ? options.profile : { firstname: '', lastname: '', name: '' }
     user.roles = [ 'user' ]
     user.created_at = new Date()
+    user.settings = options.settings ? options.settings : {
+      notifications: [ '' ],
+      channels: [ '' ],
+    }
 
     if ((user.emails.length != -1) && (!user.emails[0].verified)) {
       Meteor.setTimeout(function() {

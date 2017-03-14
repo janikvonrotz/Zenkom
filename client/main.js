@@ -50,7 +50,7 @@ Meteor.startup(() => {
 })
 
 Meteor.autorun(() => {
-  if (Meteor.user()) {
+  if (Meteor.user() && Meteor.subscribe('users.current').ready()) {
     store.dispatch(setUser(Meteor.user()))
   }
 })

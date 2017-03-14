@@ -28,7 +28,8 @@ export default new SimpleSchema({
   services: {
     type: Object,
     optional: true,
-    blackbox: true
+    blackbox: true,
+    label: 'Dienste'
   },
   profile: {
     type: new SimpleSchema({
@@ -54,9 +55,28 @@ export default new SimpleSchema({
   'roles.$': {
     type: String,
   },
+  settings: {
+    type: Object,
+    label: 'Einstellungen',
+  },
+  'settings.notifications': {
+    type: Array,
+    label: 'Benachrichtigungen',
+  },
+  'settings.notifications.$': {
+    type: String,
+  },
+  'settings.channels': {
+    type: Array,
+    label: 'Benachrichtigungen',
+  },
+  'settings.channels.$': {
+    type: String,
+  },
   // in order to avoid an 'Exception in setInterval callback' from Meteor
   heartbeat: {
     type: Date,
-    optional: true
+    optional: true,
+    label: 'Herzschlag'
   }
 })

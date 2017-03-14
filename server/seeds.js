@@ -113,6 +113,10 @@ let seeds = () => {
         firstname: 'Janik',
         lastname: 'von Rotz',
         roles: [ 'admin' ],
+        settings: {
+          notifications: [ 'router_updated', 'router_broken' ],
+          channels: [ 'email_notification' ],
+        },
       },
     ]
 
@@ -128,6 +132,7 @@ let seeds = () => {
           lastname: user.lastname,
           name: `${user.firstname} ${user.lastname}`
         },
+        settings: user.settings
       })
       Meteor.users.update(userId, { $set: { 'emails.0.verified': true } })
       Meteor.users.update(userId, { $set: { 'roles': user.roles } })

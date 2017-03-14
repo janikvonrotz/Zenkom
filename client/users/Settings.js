@@ -1,20 +1,46 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { List, ListItem, Subheader, Divider, Toggle, Checkbox, Card,
-  CardText } from 'material-ui'
-import { setHeaderTitle, updateProfile } from '../actions'
+  CardText, RaisedButton, CircularProgress } from 'material-ui'
+import { setHeaderTitle, updateUserSettings } from '../actions'
 
 class Profile extends React.Component {
 
-  update(event) {
-    event.preventDefault()
-    let { dispatch } = this.props
-    let { firstname, lastname } = this.refs
-    let profile = {
-      firstname: firstname.getValue(),
-      lastname: lastname.getValue(),
+  update() {
+    let { dispatch, user, notificationOptions, channelOptions } = this.props
+    let { router_updated, router_inserted, router_broken, vehicle_inserted,
+      vehicle_upgrade, browser_notification, email_notification } = this.refs
+
+    router_updated = router_updated.isChecked()
+    router_inserted = router_inserted.isChecked()
+    router_broken = router_broken.isChecked()
+    vehicle_inserted = vehicle_inserted.isChecked()
+    vehicle_upgrade = vehicle_upgrade.isChecked()
+    let notifications = []
+    notificationOptions = { router_updated, router_inserted, router_broken,
+      vehicle_inserted,  vehicle_upgrade }
+    Object.keys(notificationOptions).map((key) => {
+      if (notificationOptions[key]) {
+        notifications.push(key)
+      }
+    })
+
+    browser_notification = browser_notification.isToggled()
+    email_notification = email_notification.isToggled()
+    let channels = []
+    channelOptions = { browser_notification, email_notification }
+    Object.keys(channelOptions).map((key) => {
+      if (channelOptions[key]) {
+        channels.push(key)
+      }
+    })
+
+    let settings = {
+      notifications: notifications,
+      channels: channels,
     }
-    dispatch(updateProfile(profile))
+
+    dispatch(updateUserSettings(settings))
   }
 
   componentDidMount(){
@@ -29,7 +55,7 @@ class Profile extends React.Component {
   render() {
     let { user, i18n, notificationOptions, channelOptions } = this.props
 
-    return <Card>
+    return !user ? <CircularProgress /> : <Card>
       <CardText>
        <List>
          <Subheader>{ i18n.vocabulary.notification_channels }</Subheader>
@@ -37,7 +63,9 @@ class Profile extends React.Component {
            return <ListItem
              key={ option }
              value={ option }
-             rightToggle={<Toggle />}
+             rightToggle={ <Toggle
+               defaultToggled={ user.settings.channels.indexOf(option) != -1 }
+               ref={ option } /> }
              primaryText={ i18n.option[option] } />
          })}
        </List>
@@ -48,10 +76,16 @@ class Profile extends React.Component {
            return <ListItem
              key={ option }
              value={ option }
-             leftCheckbox={ <Checkbox /> }
+             leftCheckbox={ <Checkbox
+               defaultChecked={ user.settings.notifications.indexOf(option) != -1 }
+               ref={ option } /> }
              primaryText={ i18n.option[option] } />
          })}
        </List>
+       <RaisedButton
+       label={ i18n.button.update }
+       primary={ true }
+       onTouchTap={ this.update.bind(this) } />
       </CardText>
     </Card>
   }

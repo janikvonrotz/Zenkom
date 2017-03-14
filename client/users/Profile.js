@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { TextField, RaisedButton, Card, CardText } from 'material-ui'
-import { setHeaderTitle, updateProfile } from '../actions'
+import { setHeaderTitle, updateUserProfile } from '../actions'
 
 class Profile extends React.Component {
 
@@ -13,15 +13,8 @@ class Profile extends React.Component {
       firstname: firstname.getValue(),
       lastname: lastname.getValue(),
     }
-    dispatch(updateProfile(profile))
+    dispatch(updateUserProfile(profile))
   }
-
-  // change(event) {
-  //   event.preventDefault()
-  //   let { dispatch } = this.props
-  //   let { oldPassword, newPassword, repeatPassword } = this.refs
-  //   changePassword(oldPassword.getValue(), newPassword.getValue(), repeatPassword.getValue(), dispatch)
-  // }
 
   componentDidMount(){
     let { dispatch, i18n } = this.props
@@ -73,40 +66,3 @@ const mapStateToProps = (state) => {
   }
 }
 export default connect(mapStateToProps)(Profile)
-
-// <TextField
-// defaultValue={ user.username }
-// type="text"
-// ref="username"
-// required="true"
-// floatingLabelText="Username" />
-// <br />
-//
-// <TextField
-// defaultValue={ user.emails[0].address }
-// type="email"
-// ref="email"
-// required="true"
-// floatingLabelText="Email" />
-// <br />
-//
-// <TextField
-// type="password"
-// ref="oldPassword"
-// required="true"
-// floatingLabelText="Old Password" />
-// <br />
-//
-// <TextField
-// type="password"
-// ref="newPassword"
-// required="true"
-// floatingLabelText="New Password" />
-// <br />
-//
-// <TextField
-// type="password"
-// ref="repeatPassword"
-// required="true"
-// floatingLabelText="Repeat Password" />
-// <br />

@@ -110,6 +110,7 @@ let phrases = {
       logout_success: 'Erfolgreich ausgeloggt.',
       passwords_not_match: 'Die Passwörter stimmen nicht überein.',
       router_restored: 'Router wurde erfolgreich wiederhergstellt.',
+      settings_saved: 'Einstellungen wurden gespeichert',
     },
     error: {
       page_not_found: 'Seite konnte nicht gefunden werden',

@@ -12,5 +12,9 @@ export default () => {
       profile.name = `${profile.firstname} ${profile.lastname}`
       Meteor.users.update( { _id: Meteor.userId() }, { $set: { profile: profile } } )
     },
+
+    'users.update_settings'(settings) {
+      Meteor.users.update( { _id: Meteor.userId() }, { $set: { settings: settings } } )
+    },
   })
 }

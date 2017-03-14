@@ -2,9 +2,14 @@ import { Meteor } from 'meteor/meteor'
 
 export default () => {
 
-  Meteor.publish('userData', function () {
+  Meteor.publish('users.current', function () {
     if (this.userId) {
-      return Meteor.users.find({ _id: this.userId })
+      return Meteor.users.find({ _id: this.userId }, { fields: {
+        profile: 1,
+        emails: 1,
+        roles: 1,
+        settings: 1,
+      } })
     } else {
       this.ready()
     }
