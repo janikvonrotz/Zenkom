@@ -136,7 +136,7 @@ let phrases = {
       spec: 'Informatiker',
     },
     text: {
-      about: 'Zenkom ist das Ergebnis der Bachelorarbeit von Janik von Rotz. Für Änderungsanträge und Rückmeldungen können Sie den Author kontakieren: http://janikvonrotz.ch/contact.'
+      about: 'Zenkom ist das Ergebnis der Bachelorarbeit von Janik von Rotz. Für Änderungsanträge und Rückmeldungen können Sie den Author kontaktieren: http://janikvonrotz.ch/contact.'
     }
   },
   en: {
