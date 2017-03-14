@@ -19,6 +19,7 @@ let phrases = {
       verificate_email: 'Email verifizieren',
       resend_email_verification: 'Verifikations Email erneut senden',
       restore: 'Wiederherstellen',
+      about: 'Über',
     },
     label: {
       _id: 'ID',
@@ -92,7 +93,7 @@ let phrases = {
       untitled: 'Ohne Titel',
       channel: 'Kanal',
       channels: 'Kanäle',
-      notification_channels: 'Benachrichtigungskanäle'
+      notification_channels: 'Benachrichtigungskanäle',
     },
     message: {
       router_added: 'Router wurde hinzugefügt.',
@@ -133,6 +134,9 @@ let phrases = {
       admin: 'Administrator',
       tech: 'Techniker',
       spec: 'Informatiker',
+    },
+    text: {
+      about: 'Zenkom ist das Ergebnis der Bachelorarbeit von Janik von Rotz. Für Änderungsanträge und Rückmeldungen können Sie den Author kontakieren: http://janikvonrotz.ch/contact.'
     }
   },
   en: {

@@ -92,6 +92,11 @@ class MainLayout extends React.Component {
             onTouchTap={ this.toggleDrawer.bind(this) }
             containerElement={ <Link to="/vehicles" /> } />
 
+            <MenuItem
+            primaryText={ i18n.button.about }
+            onTouchTap={ this.toggleDrawer.bind(this) }
+            containerElement={ <Link to="/about" /> } />
+
           </Drawer>
           { this.props.children }
           <FeedbackForm />

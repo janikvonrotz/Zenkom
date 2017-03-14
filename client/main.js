@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { Router, Route, browserHistory } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { App, NotFound, MainLayout } from './core'
+import { App, NotFound, MainLayout, About } from './core'
 import { Login, Register, EmailVerification, RecoverPassword,
   Profile, Settings, UserSearch } from './users'
 import { RouterSearch, Router as RouterComponent,
@@ -42,6 +42,7 @@ Meteor.startup(() => {
           <Route path="/email-verification/:token" component={ EmailVerification } />
           <Route path="/recover-password" component={ RecoverPassword } />
           <Route path="/recover-password/:token" component={ RecoverPassword } />
+          <Route path="/about" component={ About } />
           <Route path="*" component={ NotFound } />
         </Route>
       </Router>
