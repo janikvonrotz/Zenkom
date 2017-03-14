@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { objectAssign } from './index'
 
 let acl = {
   'routers.read': [ 'tech', 'spec', 'admin' ],
@@ -9,4 +10,4 @@ let acl = {
   'routers.get_statistic_url': [ 'tech', 'spec', 'admin' ],
 }
 
-export default Object.assign(Meteor.settings.private, Meteor.settings.public, { acl: acl })
+export default objectAssign(Meteor.settings.private, Meteor.settings.public, { acl: acl })

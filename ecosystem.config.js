@@ -20,9 +20,11 @@ module.exports = {
               'filter': '(mail={email})',
               'scope': 'sub',
               'searchUser': {}
-            }
+            },
+            'ravenServerDSN': 'https://079f53045f794b58938c5f086e2610a1:1c98746f48ae4bdfb15d7c8f231c62c8@sentry.io/147962'
           },
           'public': {
+            'ravenClientDSN': 'https://079f53045f794b58938c5f086e2610a1@sentry.io/147962'
           }
         }
       },
