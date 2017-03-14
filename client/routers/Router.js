@@ -118,11 +118,11 @@ class Router extends React.Component {
                 value={ vehicle_id }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'vehicle_id') }>
-                  { vehicles.map((vehicle) => {
+                  { vehicles.map((vehicleItem) => {
                     return <MenuItem
-                      key={ vehicle._id }
-                      value={ vehicle._id }
-                      primaryText={ vehicle.number} />
+                      key={ vehicleItem._id }
+                      value={ vehicleItem._id }
+                      primaryText={ vehicleItem.number} />
                   }) }
                  </SelectField>
                 <br />

@@ -4,13 +4,13 @@ import { browserHistory } from 'react-router'
 export const insertRouter = (params) => {
   return (dispatch, getState) => {
     if(params){
-      Meteor.call('routers.insert', params, (error, result) => {
+      Meteor.call('routers.insert', params, (error) => {
         if (!error) {
           dispatch({
             type: 'SHOW_SUCCESS_MESSAGE',
             message: getState().i18n.message.router_added,
           })
-          browserHistory.push(`/routers`)
+          browserHistory.push('/routers')
         } else {
           dispatch({
             type: 'SHOW_ERROR_MESSAGE',

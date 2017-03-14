@@ -5,7 +5,8 @@
     "lint": "eslint .",
     "dev": "meteor --settings ./settings-dev.json",
     "prod": "export MONGO_URL='mongodb://zenkom:dp8e36APuASgSWum7uLz@ds121190.mlab.com:21190/zenkom'&& meteor --production --settings ./settings-prod.json",
-    "deploy-dev": "pm2 deploy ecosystem.config.js dev"
+    "deploy-dev": "pm2 deploy ecosystem.config.js dev",
+    "backup": "mongoexport -h ds121190.mlab.com:21190 -d zenkom -c users -u zenkom -p dp8e36APuASgSWum7uLz -o ./backup/users.json"
   },
   "dependencies": {
     "babel-runtime": "^6.22.0",
