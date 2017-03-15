@@ -127,7 +127,11 @@ let phrases = {
       email_notification: 'Email Benachrichtigung',
       router_updated: 'Router aktualisiert',
       router_inserted: 'Router hinzugefügt',
-      router_broken: 'Router defekt',
+      router_broken: 'Router ist defekt',
+      router_rollout: 'Router wird in Betrieb genommen',
+      router_active: 'Router in Betrieb',
+      router_sent: 'Router wurde verschickt',
+      router_out_of_order: 'Router ist ausser Betrieb',
     },
     role: {
       user: 'Benutzer',

@@ -89,7 +89,8 @@ class Router extends React.Component {
   }
 
   render() {
-    let { router={}, vehicle={}, vehicles=[], loading, i18n } = this.props
+    let { router={}, vehicle={}, vehicles=[], loading, i18n,
+      statusOptions } = this.props
     let { vehicle_id, type, status, profile, transport_company,
       installed_at } = this.state
 
@@ -171,8 +172,12 @@ class Router extends React.Component {
                 value={ status }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'status') }>
-                 <MenuItem value={ 'In Betrieb' } primaryText="In Betrieb" />
-                 <MenuItem value={ 'Defekt' } primaryText="Defekt" />
+                  { statusOptions.map((option) => {
+                    return <MenuItem
+                      key={ option }
+                      value={ option }
+                      primaryText={ i18n.option[option] } />
+                  })}
                 </SelectField>
                 <br />
 

@@ -10,6 +10,7 @@ import serverNotificationOptions from './serverNotificationOptions'
 import notificationChannelOptions from './notificationChannelOptions'
 import userFilter from './userFilter'
 import userRoleOptions from './userRoleOptions'
+import routerStatusOptions from './routerStatusOptions'
 
 const zenkomApp = combineReducers({
   headerTitle,
@@ -23,6 +24,7 @@ const zenkomApp = combineReducers({
   notificationChannelOptions,
   userFilter,
   userRoleOptions,
+  routerStatusOptions,
 })
 
 export default zenkomApp
