@@ -94,6 +94,7 @@ let phrases = {
       channel: 'Kanal',
       channels: 'Kanäle',
       notification_channels: 'Benachrichtigungskanäle',
+      greeting: 'Guten Tag',
     },
     message: {
       router_added: 'Router wurde hinzugefügt.',
@@ -140,7 +141,8 @@ let phrases = {
       spec: 'Informatiker',
     },
     text: {
-      about: 'Zenkom ist das Ergebnis der Bachelorarbeit von Janik von Rotz. Für Änderungsanträge und Rückmeldungen können Sie den Author kontaktieren: http://janikvonrotz.ch/contact.'
+      about: 'Zenkom ist das Ergebnis der Bachelorarbeit von Janik von Rotz. Für Änderungsanträge und Rückmeldungen können Sie den Author kontaktieren: http://janikvonrotz.ch/contact.',
+      introduction: 'Willkommen bei der zentralen Kommunikationsplattform der vernetzten Fahrzeugsysteme.',
     }
   },
   en: {
