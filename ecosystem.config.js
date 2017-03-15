@@ -45,7 +45,6 @@ module.exports = {
       ref: 'origin/develop',
       repo: 'git@gitlab.com:janikvonrotz/Zenkom.git',
       path: '/home/login/Zenkom',
-      'post-setup': 'rm -rf ./bundle && npm install --production && meteor build . --directory && cd ./bundle/programs/server && npm install --production',
       'post-deploy': 'rm -rf ./bundle && npm install --production && meteor build . --directory && cd ./bundle/programs/server && npm install --production && cd ../../.. && pm2 startOrRestart ecosystem.config.js',
     }
   }
