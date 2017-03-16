@@ -6,8 +6,9 @@ import { updateRouter, removeRouter, insertRouter, restoreRouter,
   setRouterFilter } from './routers'
 import { updateVehicle, removeVehicle, insertVehicle,
   setVehicleFilter } from './vehicles'
+import { insertFeedback } from './feedbacks'
 
-export { setHeaderTitle, dismissMessage, updateUserSettings,
+export { setHeaderTitle, dismissMessage, updateUserSettings, insertFeedback,
   loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
   verifyEmail, recoverPassword, resetPassword, updateUserProfile, setUserFilter,
   loginUserWithLDAP, updateRouter, removeRouter, insertRouter, setVehicleFilter,

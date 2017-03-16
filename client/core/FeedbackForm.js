@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Dialog, RaisedButton, FlatButton, TextField } from 'material-ui'
-import { Meteor } from 'meteor/meteor'
+import { insertFeedback } from '../actions'
 
 class FeedbackForm extends React.Component {
 
@@ -18,27 +18,14 @@ class FeedbackForm extends React.Component {
 
   insert() {
     let { dispatch } = this.props
-    let { message, name } = this.refs
+    let { message } = this.refs
 
     let feedback = {
-      name: name.getValue(),
       message: message.getValue(),
       url: window.location.href,
     }
 
-    Meteor.call('feedbacks.insert', feedback, (error) => {
-      if (!error) {
-        dispatch({
-          type: 'SHOW_SUCCESS_MESSAGE',
-          message: 'Feedback wurde verschickt.',
-        })
-      } else {
-        dispatch({
-          type: 'SHOW_ERROR_MESSAGE',
-          error,
-        })
-      }
-    })
+    dispatch(insertFeedback(feedback))
 
     this.toggleDialog()
   }
@@ -70,12 +57,6 @@ class FeedbackForm extends React.Component {
       modal={ false }
       onRequestClose={ this.toggleDialog.bind(this) }
       open={ this.state.openFeedbackDialog } >
-
-        <TextField
-        type="text"
-        ref="name"
-        floatingLabelText={ 'Name' }  />
-        <br />
 
         <TextField
         type="text"

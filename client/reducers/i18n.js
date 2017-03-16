@@ -113,6 +113,7 @@ let phrases = {
       passwords_not_match: 'Die Passwörter stimmen nicht überein.',
       router_restored: 'Router wurde erfolgreich wiederhergstellt.',
       settings_saved: 'Einstellungen wurden gespeichert',
+      feedback_sent: 'Feedback wurde verschickt.',
     },
     error: {
       page_not_found: 'Seite konnte nicht gefunden werden',
