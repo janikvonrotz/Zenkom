@@ -44,6 +44,8 @@ Convert JSON
     Get-Content ./backup/RoutersImport.csv -First 38 | ConvertFrom-Csv | %{
         $_.created_at = @{'$date' = $_.created_at}
         $_.installed_at = @{'$date' = $_.installed_at}
+        $_ | Add-Member -MemberType NoteProperty -Name 'history' -Value @()   
+        $_.archived = $false           
         return $_
     } | %{
         $_ | ConvertTo-Json
