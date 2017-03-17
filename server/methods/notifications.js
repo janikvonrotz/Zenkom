@@ -21,6 +21,5 @@ export default () => {
       check(id, String)
       Notifications.remove(id)
     },
-
   })
 }

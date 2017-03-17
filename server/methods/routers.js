@@ -3,6 +3,7 @@ import { check } from 'meteor/check'
 import { Routers } from '/imports/collections'
 import { Random } from 'meteor/random'
 import { getFullname } from '/imports/helpers'
+import { dispatchNotification } from '../actions'
 
 export default () => {
   Meteor.methods({
@@ -15,7 +16,6 @@ export default () => {
     },
 
     'routers.update'(object) {
-
       // push a new version of last object
       let preObject = Routers.findOne(object._id)
       delete preObject.history
@@ -30,6 +30,17 @@ export default () => {
       let { _id } = object
       delete object._id
       Routers.update( _id, { $set: object } )
+
+      // dispatch notification
+      let notification = {
+        subject: 'Router wurde aktualisiert',
+        content: `${ getFullname() } hat einen Router aktualisiert.`,
+        link: `/router/${_id}/edit`,
+        type: 'router_updated',
+        created_at: new Date(),
+        created_by: getFullname()
+      }
+      dispatchNotification(notification)
     },
 
     'routers.restore'(id, versionId) {

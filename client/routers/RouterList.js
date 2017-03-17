@@ -17,6 +17,7 @@ class RouterList extends React.Component {
 
     let headers = [
       i18n.label.id,
+      i18n.label.hostname,
       i18n.label.vehicle_number,
       i18n.label.dfi_name,
       i18n.label.router_version,
@@ -37,16 +38,12 @@ class RouterList extends React.Component {
         { routers.map((router) => {
           return <TableRow key={ router._id }>
             <TableRowColumn>{ router._id }</TableRowColumn>
-            <TableRowColumn>{ router.vehicle.number ?
-              <Link to={ `/router/${router._id}/edit` }>
-                { router.vehicle.number }
-              </Link> : null }
-            </TableRowColumn>
-            <TableRowColumn>{ router.dfi_name ?
-              <Link to={ `/router/${router._id}/edit` }>
-                { router.dfi_name }
-              </Link> : null }
-            </TableRowColumn>
+            <TableRowColumn><Link
+              to={ `/router/${router._id}/edit` }>
+              { router.hostname }
+            </Link></TableRowColumn>
+            <TableRowColumn>{ router.vehicle.number }</TableRowColumn>
+            <TableRowColumn>{ router.dfi_name }</TableRowColumn>
             <TableRowColumn>{ router.router_version }</TableRowColumn>
             <TableRowColumn>{ router.type }</TableRowColumn>
             <TableRowColumn>{ router.ip_router }</TableRowColumn>

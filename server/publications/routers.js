@@ -19,6 +19,7 @@ export default () => {
       return [
         Routers.find({ $or: [
           { _id: { $regex: filter } },
+          { hostname: { $regex: filter } },
           { vehicle_id: { $in: vehicleIds } },
           { dfi_name: { $regex: filter } },
           { router_version: { $regex: filter } },

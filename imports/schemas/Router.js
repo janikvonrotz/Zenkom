@@ -1,6 +1,10 @@
 import SimpleSchema from 'simpl-schema'
 
 export default new SimpleSchema({
+  hostname: {
+    type: String,
+    label: 'Hostname',
+  },
   vehicle_id: {
     type: String,
     label: 'Fahrzeugnummer',
@@ -11,7 +15,7 @@ export default new SimpleSchema({
     label: 'DFI Bezeichnung',
     optional: true
   },
-  router_version: {
+  version: {
     type: String,
     label: 'Version',
     optional: true,

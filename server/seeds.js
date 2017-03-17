@@ -7,6 +7,7 @@ let seeds = () => {
   if(Routers.find({}).count() === 0){
     let routers = [
       {
+        hostname: 'netboxfz64',
         vehicle: {
           number: 64,
           status: 'vehicle_active',
@@ -41,6 +42,7 @@ let seeds = () => {
         archived: false,
       },
       {
+        hostname: 'netboxfz65',
         vehicle: {
           number: 65,
           status: 'vehicle_upgrade',

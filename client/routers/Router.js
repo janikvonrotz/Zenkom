@@ -28,9 +28,10 @@ class Router extends React.Component {
     let { router = {}, dispatch } = this.props
     let { vehicle_id, type, status, profile, transport_company,
       installed_at } = this.state
-    let { dfi_name, router_version, serial_number, spos_id, ip_router,
+    let { hostname, dfi_name, router_version, serial_number, spos_id, ip_router,
       ip_cashbox, sim1, sim2, sim_itt, phone1, phone2, phone_itt,
       notes } = this.refs
+    router.hostname = hostname.getValue()
     router.vehicle_id = vehicle_id
     router.dfi_name = dfi_name.getValue()
     router.router_version = router_version.getValue()
@@ -76,7 +77,7 @@ class Router extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    let { dispatch, router={}, vehicle={}, i18n } = nextProps
+    let { dispatch, router={}, i18n } = nextProps
     this.setState({
       vehicle_id: router.vehicle_id || '',
       type: router.type || '',
@@ -85,7 +86,7 @@ class Router extends React.Component {
       transport_company: router.transport_company || '',
       installed_at: router.installed_at || null,
     })
-    dispatch(setHeaderTitle(router._id ? `${ i18n.vocabulary.router } ${ vehicle.number || router.dfi_name }` : i18n.vocabulary.untitled ))
+    dispatch(setHeaderTitle(router._id ? `${ i18n.vocabulary.router } ${ router.hostname }` : i18n.vocabulary.untitled ))
   }
 
   render() {
@@ -113,6 +114,14 @@ class Router extends React.Component {
           <Row>
             <Col xs="12" sm="6" md="6" lg="6">
               <BoxRow>
+
+                <TextField
+                defaultValue={ router.hostname || '' }
+                type="text"
+                ref="hostname"
+                required={ true }
+                floatingLabelText={ i18n.label.hostname }  />
+                <br />
 
                 <SelectField
                 floatingLabelText={ i18n.label.vehicle_id }
@@ -306,7 +315,7 @@ class Router extends React.Component {
           secondary={ true } />
 
           <Dialog
-          title={ `${i18n.vocabulary.router} ${ vehicle.number || router.dfi_name } ${i18n.button.remove}` }
+          title={ `${i18n.vocabulary.router} ${ vehicle.hostname } ${i18n.button.remove}` }
           actions={ actions }
           modal={ false }
           onRequestClose={ this.toggleDialog.bind(this, 'openRemoveDialog') }

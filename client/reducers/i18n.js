@@ -24,6 +24,7 @@ let phrases = {
     label: {
       _id: 'ID',
       id: 'ID',
+      hostname: 'Hostname',
       vehicle_id: 'Fahrzeug',
       vehicle_number: 'Fahrzeugnummer',
       dfi_name: 'DFI Bezeichnung',
