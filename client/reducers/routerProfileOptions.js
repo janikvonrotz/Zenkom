@@ -1,14 +1,12 @@
 let options = [
-  'router_rollout',
-  'router_active',
-  'router_sent',
-  'router_out_of_order',
-  'router_broken'
+  '4GB',
+  '2GB',
+  '250MB',
 ]
 
 export default (state = options, action) => {
   switch (action.type) {
-    case 'SET_ROUTER_STATUS_OPTIONS':
+    case 'SET_ROUTER_PROFILE_OPTIONS':
       return action.filter
     default:
       return state

@@ -8,6 +8,9 @@ const mapStateToProps = (state) => {
   return {
     i18n: state.i18n,
     statusOptions: state.routerStatusOptions,
+    companyOptions: state.routerCompanyOptions,
+    profileOptions: state.routerProfileOptions,
+    typeOptions: state.routerTypeOptions,
   }
 }
 

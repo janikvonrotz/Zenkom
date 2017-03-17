@@ -90,7 +90,7 @@ class Router extends React.Component {
 
   render() {
     let { router={}, vehicle={}, vehicles=[], loading, i18n,
-      statusOptions } = this.props
+      statusOptions, companyOptions, profileOptions, typeOptions } = this.props
     let { vehicle_id, type, status, profile, transport_company,
       installed_at } = this.state
 
@@ -147,8 +147,12 @@ class Router extends React.Component {
                 value={ type }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'type') }>
-                 <MenuItem value={ 'NB2541' } primaryText="NB2541" />
-                 <MenuItem value={ 'NB2700-LU' } primaryText="NB2700-LU" />
+                  { typeOptions.map((option) => {
+                    return <MenuItem
+                      key={ option }
+                      value={ option }
+                      primaryText={ option } />
+                  })}
                 </SelectField>
                 <br />
 
@@ -248,8 +252,12 @@ class Router extends React.Component {
                 value={ profile }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'profile') }>
-                 <MenuItem value={ '2GB' } primaryText="2GB" />
-                 <MenuItem value={ '1GB' } primaryText="1GB" />
+                  { profileOptions.map((option) => {
+                    return <MenuItem
+                      key={ option }
+                      value={ option }
+                      primaryText={ option } />
+                  })}
                 </SelectField>
                 <br />
 
@@ -266,8 +274,12 @@ class Router extends React.Component {
                 value={ transport_company }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'transport_company') }>
-                 <MenuItem value={ 'vbl' } primaryText="vbl" />
-                 <MenuItem value={ 'Rottal Auto AG' } primaryText="Rottal Auto AG" />
+                  { companyOptions.map((option) => {
+                    return <MenuItem
+                      key={ option }
+                      value={ option }
+                      primaryText={ option } />
+                  })}
                 </SelectField>
                 <br />
 

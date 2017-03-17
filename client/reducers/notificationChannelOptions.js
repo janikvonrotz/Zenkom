@@ -1,4 +1,7 @@
-let options = [ 'browser_notification', 'email_notification' ]
+let options = [
+  'browser_notification',
+  'email_notification'
+]
 
 export default (state = options, action) => {
   switch (action.type) {

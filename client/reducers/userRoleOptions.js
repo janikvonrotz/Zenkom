@@ -1,4 +1,9 @@
-let options = [ 'user', 'admin', 'tech', 'spec' ]
+let options = [
+  'user',
+  'admin',
+  'tech',
+  'spec'
+]
 
 export default (state = options, action) => {
   switch (action.type) {
