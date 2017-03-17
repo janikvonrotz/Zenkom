@@ -12,7 +12,20 @@ export default () => {
       object.created_by = getFullname()
       object.history = []
       object.archived = false
-      return Routers.insert(object)
+      let routerId = Routers.insert(object)
+
+      // send notifications to subscribers
+      let notification = {
+        subject: `Router ${ object.hostname } wurde hinzugefügt`,
+        content: `${ object.created_by } hat den Router ${ object.hostname } hinzugefügt.`,
+        link: `/router/${ routerId }/edit`,
+        type: 'router_inserted',
+        created_at: new Date(),
+        created_by: object.created_by
+      }
+      dispatchNotification(notification)
+
+      return routerId
     },
 
     'routers.update'(object) {
@@ -32,16 +45,28 @@ export default () => {
       delete object._id
       Routers.update( _id, { $set: object } )
 
-      // dispatch notification
+      // send notifications to subscribers
       let notification = {
         subject: `Router ${ object.hostname } wurde aktualisiert`,
-        content: `${ getFullname() } hat den Router ${ object.hostname } aktualisiert.`,
-        link: `/router/${_id}/edit`,
+        content: `${ object.updated_by } hat den Router ${ object.hostname } aktualisiert.`,
+        link: `/router/${ _id }/edit`,
         type: 'router_updated',
         created_at: new Date(),
-        created_by: getFullname()
+        created_by: object.updated_by
       }
       dispatchNotification(notification)
+
+      if(object.status === 'router_broken') {
+        notification = {
+          subject: `Router ${ object.hostname } ist defekt`,
+          content: `${ object.updated_by } erteilte dem Router ${ object.hostname } den Status Defekt.`,
+          link: `/router/${ _id }/edit`,
+          type: 'router_broken',
+          created_at: new Date(),
+          created_by: object.updated_by
+        }
+        dispatchNotification(notification)
+      }
     },
 
     'routers.restore'(id, versionId) {

@@ -1,4 +1,5 @@
 export default {
+  locale: 'de',
   button: {
     remove: 'Löschen',
     update: 'Speichern',
@@ -147,6 +148,6 @@ export default {
   email: {
     received_notification: 'Sie haben eine neue Benachrichtigung erhalten:',
     affected_object: 'Das betroffene Objekt befindet sich hier:',
-    manage_notifications: 'Falls sie diese Benachrichtigung nicht mehr erhalten möchten, können Sie ihre Benachrichtigungseinstellungen hier machen:',
+    manage_notifications: 'Falls sie diese Benachrichtigung nicht mehr erhalten möchten, können Sie ihre Benachrichtigungseinstellungen hier festlegen:',
   },
 }

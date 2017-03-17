@@ -335,7 +335,7 @@ class Router extends React.Component {
           }).map((version) => {
             return <ListItem
               key={ version._id }
-              leftIcon={<ActionHistory />}
+              leftIcon={ <ActionHistory /> }
               primaryText={ (version.object.updated_at || version.object.created_at).toISOString() }
               containerElement={ <Link to={ `/router/${router._id}/version/${version._id}` } /> }
               secondaryText={ `${ i18n.label.created_by }: ${ version.object.updated_by || version.object.created_by }` } />

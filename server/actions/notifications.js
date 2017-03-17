@@ -29,20 +29,20 @@ export const dispatchNotification = (notification) => {
         to: user.emails[0].address,
         from: config.mail.notificationFrom,
         subject: notification.subject,
-        text: `
-${ i18n.vocabulary.greeting } ${ user.profile.name }
+        html: `
+<p>${ i18n.vocabulary.greeting } ${ user.profile.name }</p>
 
-${ i18n.email.received_notification }
+<p>${ i18n.email.received_notification }</p>
 
-"${ notification.content }"
+<q>${ notification.content }</q>
 
-${ i18n.email.affected_object }
+<p>${ i18n.email.affected_object }</p>
 
-${ process.env.ROOT_URL }${ notification.link }
+<p><a href="${ process.env.ROOT_URL }${ notification.link }">${ process.env.ROOT_URL }${ notification.link }</a></p>
 
-${ i18n.email.manage_notifications }
+<p>${ i18n.email.manage_notifications }</p>
 
-${ process.env.ROOT_URL }/settings
+<p><a href="${ process.env.ROOT_URL }/settings">${ process.env.ROOT_URL }/settings</a></p>
 `
       }
       Email.send(email)

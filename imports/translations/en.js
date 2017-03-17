@@ -1,4 +1,5 @@
 export default {
+  locale: 'en',
   button: {
     remove: 'Delete',
     update: 'Save',
