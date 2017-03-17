@@ -17,6 +17,7 @@ let seeds = () => {
     user.settings = options.settings ? options.settings : {
       notifications: [ '' ],
       channels: [ '' ],
+      language: 'de',
     }
 
     if ((user.emails.length != -1) && (!user.emails[0].verified)) {

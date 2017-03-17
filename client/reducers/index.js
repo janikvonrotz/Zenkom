@@ -14,6 +14,7 @@ import routerStatusOptions from './routerStatusOptions'
 import routerProfileOptions from './routerProfileOptions'
 import routerCompanyOptions from './routerCompanyOptions'
 import routerTypeOptions from './routerTypeOptions'
+import notificationFilter from './notificationFilter'
 
 const zenkomApp = combineReducers({
   headerTitle,
@@ -31,6 +32,7 @@ const zenkomApp = combineReducers({
   routerProfileOptions,
   routerCompanyOptions,
   routerTypeOptions,
+  notificationFilter
 })
 
 export default zenkomApp

@@ -1,6 +1,7 @@
 import React from 'react'
 import { List, ListItem, CircularProgress } from 'material-ui'
 import { setHeaderTitle } from '../actions'
+import { Link } from 'react-router'
 
 class PostList extends React.Component {
 
@@ -17,7 +18,7 @@ class PostList extends React.Component {
         return <ListItem
           key={ notification._id }
           primaryText={ notification.subject }
-          secondaryTextLines={ 2 }
+          containerElement={ <Link to={ notification.link } /> }
           secondaryText={ notification.content } />
       }) }
     </List>

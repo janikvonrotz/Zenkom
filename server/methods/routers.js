@@ -34,8 +34,8 @@ export default () => {
 
       // dispatch notification
       let notification = {
-        subject: 'Router wurde aktualisiert',
-        content: `${ getFullname() } hat einen Router aktualisiert.`,
+        subject: `Router ${ object.hostname } wurde aktualisiert`,
+        content: `${ getFullname() } hat den Router ${ object.hostname } aktualisiert.`,
         link: `/router/${_id}/edit`,
         type: 'router_updated',
         created_at: new Date(),

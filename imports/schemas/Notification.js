@@ -22,6 +22,9 @@ export default new SimpleSchema({
     type: Array,
     label: 'Empfänger',
   },
+  'receivers.$': {
+    type: String,
+  },
   created_at: {
     type: Date,
     label: 'Erstelldatum',

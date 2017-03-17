@@ -11,10 +11,8 @@
       }
     },
     "mail": {
-      "url": ""
+      "notificationFrom": "notifications@zenkom.bitsherpa.com"
     }
   },
-  "public": {
-
-  }
+  "public": {}
 }
