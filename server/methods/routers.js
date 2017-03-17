@@ -21,6 +21,7 @@ export default () => {
       delete preObject.history
       object.history.push({
         _id: Random.id(),
+        position: object.history.length,
         object: preObject,
       })
 
@@ -58,6 +59,7 @@ export default () => {
       delete object.history
       restoreObject.history.push({
         _id: Random.id(),
+        position: restoreObject.history.length,
         object: object,
       })
       Routers.update(id, { $set: restoreObject } )

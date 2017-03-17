@@ -126,6 +126,10 @@ export default new SimpleSchema({
     type: String,
     label: 'Version ID',
   },
+  'history.$.position': {
+    type: String,
+    label: 'Position',
+  },
   'history.$.object': {
     type: Object,
     label: 'Router',

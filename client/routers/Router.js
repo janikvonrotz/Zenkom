@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
   TextField, RaisedButton, SelectField, MenuItem, List, ListItem,
   Subheader } from 'material-ui'
+import { ActionHistory } from 'material-ui/svg-icons'
 import { setHeaderTitle, updateRouter, insertRouter,
   removeRouter } from '../actions'
 import { Row, Col, BoxRow } from '../flexboxgrid'
@@ -90,7 +91,7 @@ class Router extends React.Component {
   }
 
   render() {
-    let { router={}, vehicle={}, vehicles=[], loading, i18n,
+    let { router={}, vehicles=[], loading, i18n,
       statusOptions, companyOptions, profileOptions, typeOptions } = this.props
     let { vehicle_id, type, status, profile, transport_company,
       installed_at } = this.state
@@ -315,7 +316,7 @@ class Router extends React.Component {
           secondary={ true } />
 
           <Dialog
-          title={ `${i18n.vocabulary.router} ${ vehicle.hostname } ${i18n.button.remove}` }
+          title={ `${i18n.vocabulary.router} ${ router.hostname } ${i18n.button.remove}` }
           actions={ actions }
           modal={ false }
           onRequestClose={ this.toggleDialog.bind(this, 'openRemoveDialog') }
@@ -328,9 +329,13 @@ class Router extends React.Component {
         <br />
         <List>
           <Subheader>{ i18n.label.history }</Subheader>
-          { (router.history && router.history.length != 0) ? router.history.map((version) => {
+          { (router.history && router.history.length != 0) ?
+          router.history.sort((a, b) => {
+            return b.position - a.position
+          }).map((version) => {
             return <ListItem
               key={ version._id }
+              leftIcon={<ActionHistory />}
               primaryText={ (version.object.updated_at || version.object.created_at).toISOString() }
               containerElement={ <Link to={ `/router/${router._id}/version/${version._id}` } /> }
               secondaryText={ `${ i18n.label.created_by }: ${ version.object.updated_by || version.object.created_by }` } />
