@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, CardText, CircularProgress, RaisedButton, Dialog,
   FlatButton, } from 'material-ui'
 import { setHeaderTitle, restoreRouter } from '../actions'
+import JsDiff from 'diff'
 
 class RouterVersion extends React.Component {
 
@@ -30,6 +31,31 @@ class RouterVersion extends React.Component {
 
   render() {
     let { routerVersion, loading, i18n } = this.props
+
+    let one = `
+beep boop
+beep boop
+`
+    let other = `
+beep boob blah
+beep boop
+`
+    let color = ''
+    let span = null
+
+    let diff = JsDiff.diffChars(one, other)
+    // let display = document.getElementById('display')
+    let fragment = document.createDocumentFragment()
+
+    diff.forEach(function(part){
+      color = part.added ? 'green' : part.removed ? 'red' : 'grey'
+      span = document.createElement('span')
+      span.style.color = color
+      span.appendChild(document.createTextNode(part.value))
+      fragment.appendChild(span)
+    })
+
+    console.log(fragment)
 
     const actions = [
       <FlatButton
