@@ -2,7 +2,7 @@ import React from 'react'
 import { CircularProgress } from 'material-ui'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow,
   TableRowColumn, TableFooter } from '../datatable'
-import { setHeaderTitle } from '../actions'
+import { setHeaderTitle, updateUserRole } from '../actions'
 
 class UserList extends React.Component {
 
@@ -16,13 +16,14 @@ class UserList extends React.Component {
     dispatch(setHeaderTitle(i18n.vocabulary.users))
   }
 
-  update(field, event, index, value){
+  update(field, id, event){
+    let { dispatch } = this.props
+    let role = event.target.value
+
+    dispatch(updateUserRole(id, role))
+
     let state = {}
-    if(index instanceof Date) {
-        state[field] = index
-    } else {
-        state[field] = value || event.target.value
-    }
+    state[field] = role
     this.setState(state)
   }
 
@@ -53,7 +54,7 @@ class UserList extends React.Component {
             <TableRowColumn>{ user.emails[0].address }</TableRowColumn>
             <TableRowColumn><select
               value={ this.state[`role.${user._id}`] || '' }
-              onChange={ this.update.bind(this, `role.${user._id}` || '') }>
+              onChange={ this.update.bind(this, `role.${user._id}` || '', user._id) }>
               { roleOptions.map((option) => {
                 return <option
                   key={ option }

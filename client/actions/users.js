@@ -228,3 +228,21 @@ export const setUserFilter = (filter) => {
     filter
   }
 }
+
+export const updateUserRole = (id, role) => {
+  return (dispatch, getState) => {
+    Meteor.call('users.update_role', id, role, (error) => {
+      if (!error) {
+        dispatch({
+          type: 'SHOW_SUCCESS_MESSAGE',
+          message: getState().i18n.message.role_saved,
+        })
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
+}

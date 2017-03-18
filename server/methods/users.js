@@ -16,5 +16,9 @@ export default () => {
     'users.update_settings'(settings) {
       Meteor.users.update( { _id: Meteor.userId() }, { $set: { settings: settings } } )
     },
+
+    'users.update_role'(id, role) {
+      Meteor.users.update( { _id: id }, { $set: { roles: [ role ] } } )
+    },
   })
 }
