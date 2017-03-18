@@ -66,6 +66,10 @@ export default new SimpleSchema({
   'settings.notifications.$': {
     type: String,
   },
+  'settings.language': {
+    type: String,
+    label: 'Sprache',
+  },
   'settings.channels': {
     type: Array,
     label: 'Benachrichtigungen',

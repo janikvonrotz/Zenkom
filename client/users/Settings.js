@@ -7,7 +7,7 @@ import { setHeaderTitle, updateUserSettings } from '../actions'
 class Profile extends React.Component {
 
   update() {
-    let { dispatch, notificationOptions, channelOptions } = this.props
+    let { dispatch, notificationOptions, channelOptions, user } = this.props
     let { router_updated, router_inserted, router_broken, vehicle_inserted,
       vehicle_upgrade, browser_notification, email_notification } = this.refs
 
@@ -38,6 +38,7 @@ class Profile extends React.Component {
     let settings = {
       notifications: notifications,
       channels: channels,
+      language: user.settings.language
     }
 
     dispatch(updateUserSettings(settings))

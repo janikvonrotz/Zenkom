@@ -118,6 +118,7 @@ let seeds = () => {
         settings: {
           notifications: [ 'router_updated', 'router_broken' ],
           channels: [ 'email_notification' ],
+          language: 'de',
         },
       },
     ]

@@ -46,18 +46,20 @@ export default () => {
       Routers.update( _id, { $set: object } )
 
       // send notifications to subscribers
-      let notification = {
-        subject: `Router ${ object.hostname } wurde aktualisiert`,
-        content: `${ object.updated_by } hat den Router ${ object.hostname } aktualisiert.`,
-        link: `/router/${ _id }/edit`,
-        type: 'router_updated',
-        created_at: new Date(),
-        created_by: object.updated_by
+      if(object.status != 'router_broken') {
+        let notification = {
+          subject: `Router ${ object.hostname } wurde aktualisiert`,
+          content: `${ object.updated_by } hat den Router ${ object.hostname } aktualisiert.`,
+          link: `/router/${ _id }/edit`,
+          type: 'router_updated',
+          created_at: new Date(),
+          created_by: object.updated_by
+        }
+        dispatchNotification(notification)
       }
-      dispatchNotification(notification)
 
       if(object.status === 'router_broken') {
-        notification = {
+        let notification = {
           subject: `Router ${ object.hostname } ist defekt`,
           content: `${ object.updated_by } erteilte dem Router ${ object.hostname } den Status Defekt.`,
           link: `/router/${ _id }/edit`,
@@ -88,6 +90,17 @@ export default () => {
         object: object,
       })
       Routers.update(id, { $set: restoreObject } )
+
+      // send notifications to subscribers
+      let notification = {
+        subject: `Router ${ object.hostname } wurde wiederhergestellt`,
+        content: `${ object.updated_by } hat den Router ${ object.hostname } wiederhergestellt.`,
+        link: `/router/${ id }/edit`,
+        type: 'router_updated',
+        created_at: new Date(),
+        created_by: object.updated_by
+      }
+      dispatchNotification(notification)
     },
 
     'routers.remove'(id) {
