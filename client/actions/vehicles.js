@@ -64,7 +64,7 @@ export const removeVehicle = (params) => {
 
 export const setVehicleFilter = (filter) => {
   return {
-    type: 'SET_ROUTER_FILTER',
+    type: 'SET_VEHICLE_FILTER',
     filter
   }
 }

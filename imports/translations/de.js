@@ -56,7 +56,7 @@ export default {
     firstname: 'Vorname',
     lastname: 'Nachname',
     repeat_password: 'Passwort wiederholen',
-    number: 'Nummber',
+    number: 'Nummer',
     modification_until: 'Umbau bis',
     role: 'Rolle',
   },
