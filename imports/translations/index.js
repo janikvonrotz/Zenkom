@@ -1,9 +1,3 @@
-import de from './de'
-import en from './en'
+import i18n from './i18n'
 
-const i18n = {
-  de: de,
-  en: en,
-}
-
-export default { i18n, de, en }
+export { i18n }

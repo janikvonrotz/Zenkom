@@ -1,16 +1,9 @@
-import translations from '/imports/translations'
+import { i18n } from '/imports/translations'
 
-// bug #28
-let { i18n } = translations
-let phrases = {
-  de: i18n.de,
-  en: i18n.en,
-}
-
-export default (state = phrases.de, action) => {
+export default (state = i18n.de, action) => {
   switch (action.type) {
     case 'SWITCH_LANGUAGE':
-      return phrases[action.language]
+      return i18n[action.language]
     default:
       return state
   }
