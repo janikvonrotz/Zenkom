@@ -7,6 +7,7 @@ import { setHeaderTitle, updateRouter, insertRouter,
   removeRouter } from '../actions'
 import { Row, Col, BoxRow } from '../flexboxgrid'
 import { Link } from 'react-router'
+import { formatDate } from '/imports/helpers'
 
 class Router extends React.Component {
 
@@ -336,7 +337,7 @@ class Router extends React.Component {
             return <ListItem
               key={ version._id }
               leftIcon={ <ActionHistory /> }
-              primaryText={ (version.object.updated_at || version.object.created_at).toISOString() }
+              primaryText={ formatDate(i18n.locale, version.object.updated_at || version.object.created_at) }
               containerElement={ <Link to={ `/router/${router._id}/version/${version._id}` } /> }
               secondaryText={ `${ i18n.label.created_by }: ${ version.object.updated_by || version.object.created_by }` } />
           }) : <ListItem
@@ -344,9 +345,9 @@ class Router extends React.Component {
         </List>
 
         <br />
-        <small>{ `${ i18n.label.updated_at }: ${ router.updated_at ? router.updated_at.toISOString() : '-' }` }</small><br />
+        <small>{ `${ i18n.label.updated_at }: ${ router.updated_at ? formatDate(i18n.locale, router.updated_at) : '-' }` }</small><br />
         <small>{ `${ i18n.label.updated_by }: ${ router.updated_by ? router.updated_by : '-' }` }</small><br />
-        <small>{ `${ i18n.label.created_at }: ${ router.created_at ? router.created_at.toISOString() : '-' }` }</small><br />
+        <small>{ `${ i18n.label.created_at }: ${ router.created_at ? formatDate(i18n.locale, router.created_at) : '-' }` }</small><br />
         <small>{ `${ i18n.label.created_by }: ${ router.created_by ? router.created_by : '-' }` }</small>
 
       </CardText>
