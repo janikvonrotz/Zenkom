@@ -294,7 +294,6 @@ class Router extends React.Component {
                 </SelectField>
                 <br />
 
-                <br />
                 <DatePicker
                 value={ installed_at }
                 floatingLabelText={ i18n.label.installed_at || null }
