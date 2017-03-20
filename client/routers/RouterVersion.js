@@ -3,6 +3,7 @@ import { Card, CardText, CircularProgress, RaisedButton, Dialog,
   FlatButton, } from 'material-ui'
 import { setHeaderTitle, restoreRouter } from '../actions'
 import JsDiff from 'diff'
+import { formatDate } from '/imports/helpers'
 
 class RouterVersion extends React.Component {
 
@@ -26,36 +27,11 @@ class RouterVersion extends React.Component {
 
   componentWillReceiveProps(nextProps){
     let { dispatch, routerVersion, i18n } = nextProps
-    dispatch(setHeaderTitle(routerVersion ? `${ i18n.vocabulary.router } ${ (routerVersion.object.updated_at || routerVersion.object.created_at).toISOString() }` : i18n.vocabulary.untitled ))
+    dispatch(setHeaderTitle(routerVersion ? `${ i18n.vocabulary.router } ${ formatDate(i18n.locale, routerVersion.object.updated_at || routerVersion.object.created_at) }` : i18n.vocabulary.untitled ))
   }
 
   render() {
-    let { routerVersion, loading, i18n } = this.props
-
-    let one = `
-beep boop
-beep boop
-`
-    let other = `
-beep boob blah
-beep boop
-`
-    let color = ''
-    let span = null
-
-    let diff = JsDiff.diffChars(one, other)
-    // let display = document.getElementById('display')
-    let fragment = document.createDocumentFragment()
-
-    diff.forEach(function(part){
-      color = part.added ? 'green' : part.removed ? 'red' : 'grey'
-      span = document.createElement('span')
-      span.style.color = color
-      span.appendChild(document.createTextNode(part.value))
-      fragment.appendChild(span)
-    })
-
-    console.log(fragment)
+    let { routerVersion, loading, i18n, router } = this.props
 
     const actions = [
       <FlatButton
@@ -73,7 +49,33 @@ beep boop
       <CardText>
 
         { Object.keys(routerVersion.object).map((label) => {
-          return <p key={ label }>{ `${ i18n.label[label] }: ${ routerVersion.object[label] }` }</p>
+
+          // compare current and versioned router property value
+          let routerVersionValue = routerVersion.object[label]
+          let routerValue = router[label]
+          let diffContent = []
+
+          routerVersionValue = (routerVersionValue instanceof Date) ? formatDate(i18n.locale, routerVersionValue) : String(routerVersionValue)
+          routerValue = (routerValue instanceof Date) ? formatDate(i18n.locale, routerValue) : String(routerValue)
+
+          let diff = JsDiff.diffLines(String(routerVersionValue), String(routerValue))
+          diff.forEach((part) => {
+            diffContent.push(part)
+          })
+
+          return <p key={ label }>{ `${ i18n.label[label] }: ` }
+            { diffContent.map((part) => {
+              if(part.added) {
+                return <span key={ part.value } style={ { color: 'green' } }>{ part.value }</span>
+              }
+              if(part.removed) {
+                return <span key={ part.value } style={ { color: 'red' } }>{ part.value } </span>
+              }
+              if(!(part.removed && part.added)) {
+                return <span key={ part.value }>{ part.value }</span>
+              }
+            }) }
+          </p>
         }) }
 
         <RaisedButton

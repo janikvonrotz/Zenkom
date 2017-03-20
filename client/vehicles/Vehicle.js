@@ -3,6 +3,7 @@ import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
   TextField, RaisedButton, SelectField, MenuItem } from 'material-ui'
 import { setHeaderTitle, updateVehicle, insertVehicle,
 removeVehicle } from '../actions'
+import { formatDate } from '/imports/helpers'
 
 class Vehicle extends React.Component {
 
@@ -132,9 +133,9 @@ class Vehicle extends React.Component {
         </form>
 
         <br />
-        <small>{ `${ i18n.label.updated_at }: ${ vehicle.updated_at ? vehicle.updated_at.toISOString() : '-' }` }</small><br />
+        <small>{ `${ i18n.label.updated_at }: ${ vehicle.updated_at ? formatDate(i18n.locale, vehicle.updated_at) : '-' }` }</small><br />
         <small>{ `${ i18n.label.updated_by }: ${ vehicle.updated_by ? vehicle.updated_by : '-' }` }</small><br />
-        <small>{ `${ i18n.label.created_at }: ${ vehicle.created_at ? vehicle.created_at.toISOString() : '-' }` }</small><br />
+        <small>{ `${ i18n.label.created_at }: ${ vehicle.created_at ? formatDate(i18n.locale, vehicle.created_at) : '-' }` }</small><br />
         <small>{ `${ i18n.label.created_by }: ${ vehicle.created_by ? vehicle.created_by : '-' }` }</small>
 
       </CardText>
