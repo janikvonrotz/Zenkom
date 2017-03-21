@@ -18,3 +18,10 @@ export const switchLanguage = (language) => {
     language
   }
 }
+
+export const setListLimit = (limit) => {
+  return {
+    type: 'SET_LIST_LIMIT',
+    limit
+  }
+}

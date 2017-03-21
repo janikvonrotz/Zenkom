@@ -19,6 +19,8 @@ export default {
     resend_email_verification: 'Verifikations Email erneut senden',
     restore: 'Wiederherstellen',
     about: 'Über',
+    load_more: 'Weitere laden',
+    show_all: 'Alle anzeigen',
   },
   label: {
     _id: 'ID',

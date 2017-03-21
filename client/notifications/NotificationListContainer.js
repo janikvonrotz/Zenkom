@@ -8,10 +8,11 @@ const mapStateToProps = (state) => {
   return {
     i18n: state.i18n,
     filter: state.notificationFilter,
+    limit: state.listLimit
   }
 }
-export default connect(mapStateToProps)(createContainer(({ filter }) => {
-  let subscription = Meteor.subscribe('notifications.list', filter)
+export default connect(mapStateToProps)(createContainer(({ filter, limit }) => {
+  let subscription = Meteor.subscribe('notifications.list', filter, limit)
   return {
     notifications: Notifications.find({}, { sort: { created_at: -1 } }).fetch(),
     loading: !subscription.ready(),
