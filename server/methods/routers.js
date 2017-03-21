@@ -2,12 +2,21 @@ import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
 import { Routers } from '/imports/collections'
 import { Random } from 'meteor/random'
-import { getFullname } from '/imports/helpers'
+import { getFullname, isAllowed } from '/imports/helpers'
 import { dispatchNotification } from '../actions'
+import { i18n } from '/imports/translations'
 
 export default () => {
   Meteor.methods({
     'routers.insert'(object) {
+
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if(!isAllowed('routers.insert', roles)){
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.message.insufficent_rights_for_method)
+      }
+
+      // insert object
       object.created_at = new Date()
       object.created_by = getFullname()
       object.history = []
@@ -29,6 +38,13 @@ export default () => {
     },
 
     'routers.update'(object) {
+
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if(!isAllowed('routers.update', roles)){
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
       // push a new version of last object
       let preObject = Routers.findOne(object._id)
       delete preObject.history
