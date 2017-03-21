@@ -9,7 +9,8 @@
     },
     "mail": {
       "notificationFrom": "notifications@zenkom.bitsherpa.com"
-    }
+    },
+    "disableAccessContol": true
   },
   "public": {}
 }

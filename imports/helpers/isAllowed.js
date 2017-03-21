@@ -6,5 +6,6 @@ export default (action, roles) => {
   roles.map((role) => {
     allowed = allowedRoles.indexOf(role) != -1 ? true : false
   })
+  allowed = config.disableAccessContol ? true : allowed
   return allowed
 }
