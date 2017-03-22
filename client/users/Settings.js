@@ -44,6 +44,17 @@ class Profile extends React.Component {
     dispatch(updateUserSettings(settings))
   }
 
+  toggle(option) {
+    let { browser_notification } = this.refs
+    browser_notification = browser_notification.isToggled()
+
+    // request desktop notification permission
+    if(option === 'browser_notification' && !browser_notification){
+      if (Notification.permission != 'granted')
+        Notification.requestPermission()
+    }
+  }
+
   componentDidMount(){
     let { dispatch, i18n } = this.props
     dispatch(setHeaderTitle(i18n.vocabulary.settings))
@@ -66,6 +77,7 @@ class Profile extends React.Component {
              value={ option }
              rightToggle={ <Toggle
                defaultToggled={ user.settings.channels.indexOf(option) != -1 }
+               onTouchTap={ this.toggle.bind(this, option) }
                ref={ option } /> }
              primaryText={ i18n.option[option] } />
          })}

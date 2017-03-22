@@ -11,6 +11,7 @@ export default () => {
 
     // update options
     if(limit && limit != 'all'){
+      options.sort = { created_at: -1 }
       options.limit = limit
     }
 
@@ -26,11 +27,16 @@ export default () => {
         ] }
       ] }
     }
-    
+
     return Notifications.find(selector, options)
   })
 
-  Meteor.publish('notifications.item', (id) => {
-    return Notifications.find({ _id: id })
+  Meteor.publish('notifications.item_latest', () => {
+
+    // return notifications sent within the last 3 seconds
+    return Notifications.find(
+      { created_at: { $gt: (new Date((new Date())-1000*3)) } },
+      { sort: { created_at: -1 }, limit: 1 }
+    )
   })
 }
