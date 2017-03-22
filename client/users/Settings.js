@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { List, ListItem, Subheader, Divider, Toggle, Checkbox, Card,
+import { List, ListItem, Subheader, Divider, Checkbox, Card,
   CardText, RaisedButton, CircularProgress } from 'material-ui'
 import { setHeaderTitle, updateUserSettings } from '../actions'
 
@@ -25,8 +25,8 @@ class Profile extends React.Component {
       }
     })
 
-    browser_notification = browser_notification.isToggled()
-    email_notification = email_notification.isToggled()
+    browser_notification = browser_notification.isChecked()
+    email_notification = email_notification.isChecked()
     let channels = []
     channelOptions = { browser_notification, email_notification }
     Object.keys(channelOptions).map((key) => {
@@ -44,12 +44,12 @@ class Profile extends React.Component {
     dispatch(updateUserSettings(settings))
   }
 
-  toggle(option) {
+  check(option) {
     let { browser_notification } = this.refs
-    browser_notification = browser_notification.isToggled()
+    browser_notification = browser_notification.isChecked()
 
     // request desktop notification permission
-    if(option === 'browser_notification' && !browser_notification){
+    if(option === 'browser_notification' && browser_notification){
       if (Notification.permission != 'granted')
         Notification.requestPermission()
     }
@@ -75,9 +75,9 @@ class Profile extends React.Component {
            return <ListItem
              key={ option }
              value={ option }
-             rightToggle={ <Toggle
-               defaultToggled={ user.settings.channels.indexOf(option) != -1 }
-               onTouchTap={ this.toggle.bind(this, option) }
+             leftCheckbox={ <Checkbox
+               defaultChecked={ user.settings.channels.indexOf(option) != -1 }
+               onCheck={ this.check.bind(this, option) }
                ref={ option } /> }
              primaryText={ i18n.option[option] } />
          })}
