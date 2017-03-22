@@ -99,6 +99,18 @@ db.routers.aggregate([
 
 # MongoDB Export and Import
 
+## users
+
+Export JSON
+
+  mongoexport -h ds121190.mlab.com:21190 -d zenkom -c users -u zenkom -p dp8e36APuASgSWum7uLz -o ./backup/UsersExport.json
+
+## feedbacks
+
+Export JSON
+
+  mongoexport -h ds121190.mlab.com:21190 -d zenkom -c feedbacks -u zenkom -p dp8e36APuASgSWum7uLz -o ./backup/FeedbacksExport.json
+
 ## vehicles
 
 Export CSV
@@ -117,6 +129,8 @@ Convert JSON
 
     Get-Content ./backup/VehiclesImport.csv -First 38 | ConvertFrom-Csv | %{
         $_.created_at = @{'$date' = $_.created_at}
+        $_.archived = $false
+        $_.number = [int]$_.number
         return $_
     } | %{
         $_ | ConvertTo-Json

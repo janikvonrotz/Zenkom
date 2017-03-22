@@ -8,7 +8,7 @@ export default () => {
     } else {
       return Vehicles.find({ $or: [
         { _id: { $regex: filter } },
-        { number: { $regex: filter } },
+        { number: { $eq: Number(filter) } },
         { status: { $regex: filter } },
       ] })
     }

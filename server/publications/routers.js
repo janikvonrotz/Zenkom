@@ -11,7 +11,7 @@ export default () => {
     } else {
 
       // filter vehicles
-      let vehicleIds = Vehicles.find({ number: { $regex: filter } }).map((vehicle) => {
+      let vehicleIds = Vehicles.find({ number: { $eq: Number(filter) } }).map((vehicle) => {
         return vehicle._id
       })
 
