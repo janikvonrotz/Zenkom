@@ -162,7 +162,7 @@ Convert JSON
         $_ | Add-Member -MemberType NoteProperty -Name 'history' -Value @()   
         $_.archived = $false
         $object = $_
-        $_.psobject.properties | where{ $_.value -eq 0 } | %{ $object.($_.name) = "" }
+        $_.psobject.properties | where{ ($_.value -eq 0) -and ($_.name -ne "archived") } | %{ $object.($_.name) = "" }
         return $object
     } | %{
         $_ | ConvertTo-Json
