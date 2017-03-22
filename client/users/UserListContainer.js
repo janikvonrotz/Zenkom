@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(createContainer(({ filter }) => {
   let subscription = Meteor.subscribe('users.list', filter)
   return {
-    users: Users.find({}, { sort: { created_at: -1 } }).fetch(),
+    users: Users.find({}, { sort: { 'profile.name': 1 } }).fetch(),
     loading: !subscription.ready(),
   }
 }, UserList))
