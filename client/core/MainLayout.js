@@ -5,10 +5,12 @@ import { AppBar, Drawer, MenuItem, IconMenu, IconButton,
 import { Link } from 'react-router'
 import { NavigationMoreVert } from 'material-ui/svg-icons'
 import { connect } from 'react-redux'
-import { Notification, FlexboxGrid } from './index'
+import { Notification, FlexboxGrid, FeedbackForm } from './index'
 import { logoutUser } from '../actions'
 import Helmet from 'react-helmet'
-import FeedbackForm from './FeedbackForm'
+import { HardwareRouter, MapsDirectionsBus, ActionDashboard, ActionSettings,
+  CommunicationMessage, SocialPeople, ActionInfo, ActionPermIdentity,
+  ActionExitToApp, } from 'material-ui/svg-icons'
 
 class MainLayout extends React.Component {
 
@@ -44,14 +46,17 @@ class MainLayout extends React.Component {
             anchorOrigin={ { horizontal: 'right', vertical: 'top' } } >
 
               <MenuItem
+              leftIcon={ <ActionPermIdentity /> }
               containerElement={ <Link to="/profile" /> }
               primaryText={ i18n.button.profile } />
 
               <MenuItem
+              leftIcon={ <ActionSettings /> }
               containerElement={ <Link to="/settings" /> }
               primaryText={ i18n.vocabulary.settings } />
 
               <MenuItem
+              leftIcon={ <ActionExitToApp /> }
               onTouchTap={ this.logout.bind(this) }
               primaryText={ i18n.button.logout } />
 
@@ -65,36 +70,42 @@ class MainLayout extends React.Component {
           open={ this.state.drawerOpen }
           docked={ false }
           onRequestChange={ (drawerOpen) => this.setState({ drawerOpen }) }
-          width={ 200 }>
+          width={ 240 }>
 
             <MenuItem
             primaryText={ i18n.button.dashboard }
             onTouchTap={ this.toggleDrawer.bind(this) }
+            leftIcon={ <ActionDashboard /> }
             containerElement={ <Link to="/"/> } />
 
             <MenuItem
             primaryText={ i18n.vocabulary.routers }
             onTouchTap={ this.toggleDrawer.bind(this) }
+            leftIcon={ <HardwareRouter /> }
             containerElement={ <Link to="/routers" /> } />
 
             <MenuItem
             primaryText={ i18n.vocabulary.vehicles }
             onTouchTap={ this.toggleDrawer.bind(this) }
+            leftIcon={ <MapsDirectionsBus /> }
             containerElement={ <Link to="/vehicles" /> } />
 
             <MenuItem
             primaryText={ i18n.vocabulary.notifications }
             onTouchTap={ this.toggleDrawer.bind(this) }
+            leftIcon={ <CommunicationMessage /> }
             containerElement={ <Link to="/notifications" /> } />
 
             <MenuItem
             primaryText={ i18n.vocabulary.users }
             onTouchTap={ this.toggleDrawer.bind(this) }
+            leftIcon={ <SocialPeople /> }
             containerElement={ <Link to="/users" /> } />
 
             <MenuItem
             primaryText={ i18n.button.about }
             onTouchTap={ this.toggleDrawer.bind(this) }
+            leftIcon={ <ActionInfo /> }
             containerElement={ <Link to="/about" /> } />
 
           </Drawer>
