@@ -5,19 +5,19 @@ export default () => {
   Meteor.publish('routers.with_vehicles', (filter) => {
     if (filter === '') {
       return [
-        Routers.find({}),
-        Vehicles.find({}),
+        Routers.find({ archived: { $eq: false } }),
+        Vehicles.find({ archived: { $eq: false } }),
       ]
     } else {
 
       // filter vehicles
-      let vehicleIds = Vehicles.find({ number: { $eq: Number(filter) } }).map((vehicle) => {
+      let vehicleIds = Vehicles.find({ number: { $eq: Number(filter) }, archived: { $eq: false } }).map((vehicle) => {
         return vehicle._id
       })
 
       // publish routers and vehicles
       return [
-        Routers.find({ $or: [
+        Routers.find({ archived: { $eq: false }, $or: [
           { _id: { $regex: filter } },
           { hostname: { $regex: filter } },
           { vehicle_id: { $in: vehicleIds } },
@@ -27,7 +27,7 @@ export default () => {
           { ip_router: { $regex: filter } },
           { ip_cashbox: { $regex: filter } },
         ] }),
-        Vehicles.find({}, {
+        Vehicles.find({ archived: { $eq: false } }, {
           fields: {
             _id: 1,
             number: 1,
@@ -37,29 +37,19 @@ export default () => {
     }
   })
 
-  Meteor.publish('routers.list', (filter) => {
-    if (filter === '') {
-      return Routers.find({})
-    } else {
-      return Routers.find({ $or: [
-        { _id: { $regex: filter } },
-      ] })
-    }
-  })
-
   Meteor.publish('routers.item_with_vehicles', (id) => {
     return [
-      Vehicles.find({}, {
+      Vehicles.find({ archived: { $eq: false } }, {
         fields: {
           _id: 1,
           number: 1,
         }
       }),
-      Routers.find({ _id: id }),
+      Routers.find({ _id: id, archived: { $eq: false } }),
     ]
   })
 
   Meteor.publish('routers.item', (id) => {
-    return Routers.find({ _id: id })
+    return Routers.find({ _id: id, archived: { $eq: false } })
   })
 }

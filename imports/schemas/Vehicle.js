@@ -32,4 +32,8 @@ export default new SimpleSchema({
     label: 'Bearbeit von',
     optional: true,
   },
+  archived: {
+    type: Boolean,
+    label: 'Archiviert',
+  },
 })

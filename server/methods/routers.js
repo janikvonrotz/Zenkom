@@ -120,8 +120,14 @@ export default () => {
     },
 
     'routers.remove'(id) {
-      check(id, String)
-      Routers.remove(id)
+      // define object as archived
+      let object = Routers.findOne(id)
+      object.updated_at = new Date()
+      object.updated_by = getFullname()
+      object.archived = true
+      let { _id } = object
+      delete object._id
+      Routers.update( _id, { $set: object } )
     },
 
     'routers.get_statistic_url'(id) {

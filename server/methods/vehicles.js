@@ -9,6 +9,7 @@ export default () => {
     'vehicles.insert'(object) {
       object.created_at = new Date()
       object.created_by = getFullname()
+      object.archived = false
       let vehicleId = Vehicles.insert(object)
 
       // send notifications to subscribers
@@ -48,7 +49,15 @@ export default () => {
 
     'vehicles.remove'(id) {
       check(id, String)
-      Vehicles.remove(id)
+
+      // define object as archived
+      let object = Vehicles.findOne(id)
+      object.updated_at = new Date()
+      object.updated_by = getFullname()
+      object.archived = true
+      let { _id } = object
+      delete object._id
+      Vehicles.update( _id, { $set: object } )
     },
 
   })

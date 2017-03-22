@@ -308,7 +308,7 @@ class Router extends React.Component {
           <RaisedButton
           type="submit"
           label={ i18n.button.update }
-          primary={ true } />
+          primary={ true } />{ ' ' }
 
           <RaisedButton
           onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
