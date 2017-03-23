@@ -12,6 +12,10 @@ class PostList extends React.Component {
     dispatch(setHeaderTitle(i18n.vocabulary.notifications))
   }
 
+  shouldComponentUpdate(nextProps){
+    return !nextProps.loading
+  }
+
   render() {
     let { notifications, loading, i18n } = this.props
 
