@@ -144,7 +144,7 @@ Import JSON
 
 Export CSV
 
-    mongoexport -h ds121190.mlab.com:21190 -d zenkom -c routers -u zenkom -p dp8e36APuASgSWum7uLz -o ./backup/RoutersExport.csv --type=csv -f '_id,vehicle_id,dfi_name,router_version,type,serial_number,spos_id,status,ip_router,ip_cashbox,sim1,sim2,sim_itt,phone1,phone2,phone_itt,profile,notes,transport_company,installed_at,created_at,created_by,updated_at,updated_by,archived'
+    mongoexport -h ds121190.mlab.com:21190 -d zenkom -c routers -u zenkom -p dp8e36APuASgSWum7uLz -o ./backup/RoutersExport.csv --type=csv -f '_id,vehicle_id,dfi_name,version,type,serial_number,spos_id,status,ip_router,ip_cashbox,sim1,sim2,sim_itt,phone1,phone2,phone_itt,profile,notes,transport_company,installed_at,created_at,created_by,updated_at,updated_by,archived'
 
 Import CSV
 

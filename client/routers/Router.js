@@ -30,13 +30,13 @@ class Router extends React.Component {
     let { router = {}, dispatch } = this.props
     let { vehicle_id, type, status, profile, transport_company,
       installed_at } = this.state
-    let { hostname, dfi_name, router_version, serial_number, spos_id, ip_router,
+    let { hostname, dfi_name, version, serial_number, spos_id, ip_router,
       ip_cashbox, sim1, sim2, sim_itt, phone1, phone2, phone_itt,
       notes } = this.refs
     router.hostname = hostname.getValue()
     router.vehicle_id = vehicle_id
     router.dfi_name = dfi_name.getValue()
-    router.router_version = router_version.getValue()
+    router.version = version.getValue()
     router.type = type
     router.serial_number = serial_number.getValue()
     router.spos_id = spos_id.getValue()
@@ -147,10 +147,10 @@ class Router extends React.Component {
                 <br />
 
                 <TextField
-                defaultValue={ router.router_version || '' }
+                defaultValue={ router.version || '' }
                 type="text"
-                ref="router_version"
-                floatingLabelText={ i18n.label.router_version }  />
+                ref="version"
+                floatingLabelText={ i18n.label.version }  />
                 <br />
 
                 <SelectField

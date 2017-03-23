@@ -29,7 +29,7 @@ export default {
     vehicle_id: 'Fahrzeug',
     vehicle_number: 'Fahrzeugnummer',
     dfi_name: 'DFI Bezeichnung',
-    router_version: 'Version',
+    version: 'Version',
     type: 'Typ',
     serial_number: 'Seriennummer',
     spos_id: 'SPOS Nummer',
