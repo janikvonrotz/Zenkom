@@ -1,4 +1,3 @@
-import { Random } from 'meteor/random'
 import { objectAssign } from '/imports/helpers'
 
 export const setHeaderTitle = (title) => {

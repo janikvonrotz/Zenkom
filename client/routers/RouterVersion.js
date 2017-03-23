@@ -32,6 +32,32 @@ class RouterVersion extends React.Component {
 
   render() {
     let { routerVersion, loading, i18n, router } = this.props
+    let keys = [
+      'hostname',
+      'vehicle_id',
+      'dfi_name',
+      'version',
+      'type',
+      'serial_number',
+      'spos_id',
+      'status',
+      'ip_router',
+      'ip_cashbox',
+      'sim1',
+      'sim2',
+      'sim_itt',
+      'phone1',
+      'phone2',
+      'phone_itt',
+      'profile',
+      'notes',
+      'transport_company',
+      'installed_at',
+      'updated_at',
+      'updated_by',
+      'created_at',
+      'created_by',
+    ]
 
     const actions = [
       <FlatButton
@@ -48,7 +74,7 @@ class RouterVersion extends React.Component {
     return loading ? <CircularProgress /> : <Card>
       <CardText>
 
-        { Object.keys(routerVersion.object).map((label) => {
+        { keys.map((label) => {
 
           // compare current and versioned router property value
           let routerVersionValue = routerVersion.object[label]

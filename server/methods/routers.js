@@ -96,16 +96,26 @@ export default () => {
       let restoreObject = Object.assign({}, object.history.filter((version) => {
         return version._id === versionId
       })[0].object)
+      let restoreObjectKeys = Object.keys(restoreObject)
       restoreObject.history = object.history
 
       // push version of current object and save restore
       delete object.history
+      let objectKeys = Object.keys(object)
       restoreObject.history.push({
         _id: Random.id(),
         position: restoreObject.history.length,
         object: object,
       })
-      Routers.update(id, { $set: restoreObject } )
+
+      // get keys to remove and update object
+      let removeKeys = {}
+      objectKeys.concat(restoreObjectKeys).map((key) => {
+        if(restoreObjectKeys.indexOf(key) == -1){
+          removeKeys[key] = ''
+        }
+      })
+      Routers.update(id, { $set: restoreObject, $unset: removeKeys } )
 
       // send notifications to subscribers
       let notification = {
