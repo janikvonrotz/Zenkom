@@ -2,7 +2,7 @@ import React from 'react'
 import { CircularProgress } from 'material-ui'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow,
   TableRowColumn, TableFooter } from '../datatable'
-import { setHeaderTitle, updateUserRole } from '../actions'
+import { setHeaderTitle, updateUserRole, setListSort } from '../actions'
 
 class UserList extends React.Component {
 
@@ -16,6 +16,10 @@ class UserList extends React.Component {
     dispatch(setHeaderTitle(i18n.vocabulary.users))
   }
 
+  shouldComponentUpdate(nextProps){
+    return !nextProps.loading
+  }
+
   update(field, id, event){
     let { dispatch } = this.props
     let role = event.target.value
@@ -27,22 +31,31 @@ class UserList extends React.Component {
     this.setState(state)
   }
 
+  updateSort(sort) {
+    let { dispatch } = this.props
+    dispatch(setListSort(sort))
+  }
+
   render() {
     let { users, loading, i18n, roleOptions } = this.props
     let headers = [
-      i18n.label.id,
-      i18n.label.firstname,
-      i18n.label.lastname,
-      i18n.label.email,
-      i18n.label.role,
+      '_id',
+      'firstname',
+      'lastname',
+      'email',
+      'role',
     ]
 
     return loading ? <CircularProgress /> : <Table>
       <TableHeader>
         <TableRow>
-          { headers.map((header) => {
-            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
-          }) }
+        { headers.map((header) => {
+          return <TableHeaderColumn
+          onClick={ this.updateSort.bind(this, header)}
+          key={ header }>
+            { i18n.label[header] }
+          </TableHeaderColumn>
+        }) }
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -67,9 +80,13 @@ class UserList extends React.Component {
       </TableBody>
       <TableFooter>
         <TableRow>
-          { headers.map((header) => {
-            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
-          }) }
+        { headers.map((header) => {
+          return <TableHeaderColumn
+          onClick={ this.updateSort.bind(this, header)}
+          key={ header }>
+            { i18n.label[header] }
+          </TableHeaderColumn>
+        }) }
         </TableRow>
       </TableFooter>
     </Table>

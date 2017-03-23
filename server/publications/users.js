@@ -15,15 +15,21 @@ export default () => {
     }
   })
 
-  Meteor.publish('users.list', function (filter) {
-    self = this
-    let fields = {
+  Meteor.publish('users.list', function (filter, sort) {
+    let self = this
+
+    // set selector and options
+    let options = { fields: {
       profile: 1,
       emails: 1,
       roles: 1,
+    } }
+    if (sort) {
+      options.sort = sort
     }
+
     if (filter === '') {
-      let handle = Meteor.users.find({}, { fields: fields }).observeChanges({
+      let handle = Meteor.users.find({}, options).observeChanges({
         added: (id, object) => {
           self.added('_users', id, object)
         },
@@ -44,7 +50,7 @@ export default () => {
         { 'profile.name': { $regex: filter } },
         { 'emails.0.address': { $regex: filter } },
         { 'roles.0': { $regex: filter } },
-      ] }, { fields: fields }).observeChanges({
+      ] }, options).observeChanges({
         added: (id, object) => {
           self.added('_users', id, object)
         },
