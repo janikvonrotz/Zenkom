@@ -2,8 +2,15 @@ import { Meteor } from 'meteor/meteor'
 import { Vehicles } from '/imports/collections'
 
 export default () => {
-  Meteor.publish('vehicles.list', (filter) => {
+  Meteor.publish('vehicles.list', (filter, sort) => {
+
+    // set selector and options
     let selector = {}
+    let options = {}
+    if (sort) {
+      options.sort = sort
+    }
+
     if (filter === '') {
       selector = { archived: { $eq: false } }
     } else {
@@ -13,7 +20,7 @@ export default () => {
         { status: { $regex: filter } },
       ] }
     }
-    return Vehicles.find(selector)
+    return Vehicles.find(selector, options)
   })
 
   Meteor.publish('vehicles.item', (id) => {

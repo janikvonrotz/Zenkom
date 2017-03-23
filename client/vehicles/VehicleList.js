@@ -3,7 +3,7 @@ import { CircularProgress } from 'material-ui'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow,
   TableRowColumn, TableFooter } from '../datatable'
 import { Link } from 'react-router'
-import { setHeaderTitle } from '../actions'
+import { setHeaderTitle, setListSort } from '../actions'
 
 class VehicleList extends React.Component {
 
@@ -12,20 +12,34 @@ class VehicleList extends React.Component {
     dispatch(setHeaderTitle(i18n.vocabulary.vehicles))
   }
 
+  componentDidMount(){
+    let { dispatch } = this.props
+    dispatch(setListSort(null))
+  }
+
+  updateSort(sort) {
+    let { dispatch } = this.props
+    dispatch(setListSort(sort))
+  }
+
   render() {
     let { vehicles, loading, i18n } = this.props
 
     let headers = [
-      i18n.label.id,
-      i18n.label.number,
-      i18n.label.status,
+      '_id',
+      'number',
+      'status'
     ]
 
     return loading ? <CircularProgress /> : <Table>
       <TableHeader>
         <TableRow>
           { headers.map((header) => {
-            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
+            return <TableHeaderColumn
+            onClick={ this.updateSort.bind(this, header)}
+            key={ header }>
+              { i18n.label[header] }
+            </TableHeaderColumn>
           }) }
         </TableRow>
       </TableHeader>
@@ -42,9 +56,13 @@ class VehicleList extends React.Component {
       </TableBody>
       <TableFooter>
         <TableRow>
-          { headers.map((header) => {
-            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
-          }) }
+        { headers.map((header) => {
+          return <TableHeaderColumn
+          onClick={ this.updateSort.bind(this, header)}
+          key={ header }>
+            { i18n.label[header] }
+          </TableHeaderColumn>
+        }) }
         </TableRow>
       </TableFooter>
     </Table>
