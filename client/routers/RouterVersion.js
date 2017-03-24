@@ -110,7 +110,7 @@ class RouterVersion extends React.Component {
         secondary={ true } />
 
         <Dialog
-        title={ `${ i18n.vocabulary.router } ${ (routerVersion.object.updated_at || routerVersion.object.created_at).toISOString() } ${i18n.button.restore}` }
+        title={ `${ i18n.vocabulary.router } ${ formatDate(i18n.locale, routerVersion.object.updated_at || routerVersion.object.created_at) } ${i18n.button.restore}` }
         actions={ actions }
         modal={ false }
         onRequestClose={ this.toggleDialog.bind(this, 'openRestoreDialog') }
