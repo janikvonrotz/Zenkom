@@ -24,7 +24,7 @@ module.exports = {
             'mail': {
               'notificationFrom': 'notifications@zenkom.bitsherpa.com'
             },
-            'disableAccessContol': true,
+            'disableAccessContol': false,
           },
           'public': {}
         }
