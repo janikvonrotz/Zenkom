@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { isAllowed } from '/imports/helpers'
 
 export default () => {
 
@@ -31,43 +32,52 @@ export default () => {
       options.limit = limit
     }
 
-    if (filter === '') {
-      let handle = Meteor.users.find({}, options).observeChanges({
-        added: (id, object) => {
-          self.added('_users', id, object)
-        },
-        changed: (id, object) => {
-          self.changed('_users', id, object)
-        },
-        removed: (id) => {
-          self.removed('_users', id)
-        }
-      })
-      self.ready()
-      self.onStop(() => {
-        handle.stop()
-      })
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('users.read', roles)) {
+
+      if (filter === '') {
+        let handle = Meteor.users.find({}, options).observeChanges({
+          added: (id, object) => {
+            self.added('_users', id, object)
+          },
+          changed: (id, object) => {
+            self.changed('_users', id, object)
+          },
+          removed: (id) => {
+            self.removed('_users', id)
+          }
+        })
+        self.ready()
+        self.onStop(() => {
+          handle.stop()
+        })
+      } else {
+        let handle = Meteor.users.find({ $or: [
+          { _id: { $regex: filter } },
+          { 'profile.name': { $regex: filter } },
+          { 'emails.0.address': { $regex: filter } },
+          { 'roles.0': { $regex: filter } },
+        ] }, options).observeChanges({
+          added: (id, object) => {
+            self.added('_users', id, object)
+          },
+          changed: (id, object) => {
+            self.changed('_users', id, object)
+          },
+          removed: (id) => {
+            self.removed('_users', id)
+          }
+        })
+        self.ready()
+        self.onStop(() => {
+          handle.stop()
+        })
+      }
     } else {
-      let handle = Meteor.users.find({ $or: [
-        { _id: { $regex: filter } },
-        { 'profile.name': { $regex: filter } },
-        { 'emails.0.address': { $regex: filter } },
-        { 'roles.0': { $regex: filter } },
-      ] }, options).observeChanges({
-        added: (id, object) => {
-          self.added('_users', id, object)
-        },
-        changed: (id, object) => {
-          self.changed('_users', id, object)
-        },
-        removed: (id) => {
-          self.removed('_users', id)
-        }
-      })
-      self.ready()
-      self.onStop(() => {
-        handle.stop()
-      })
+      this.stop()
+      return
     }
   })
 }

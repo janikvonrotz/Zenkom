@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor'
 import { Vehicles } from '/imports/collections'
+import { isAllowed } from '/imports/helpers'
 
 export default () => {
-  Meteor.publish('vehicles.list', (filter, sort, limit) => {
+  Meteor.publish('vehicles.list', function(filter, sort, limit) {
 
     // set selector and options
     let selector = {}
@@ -23,10 +24,28 @@ export default () => {
         { status: { $regex: filter } },
       ] }
     }
-    return Vehicles.find(selector, options)
+
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('vehicles.read', roles)) {
+      return Vehicles.find(selector, options)
+    } else {
+      this.stop()
+      return
+    }
   })
 
-  Meteor.publish('vehicles.item', (id) => {
-    return Vehicles.find({ _id: id, archived: { $eq: false } })
+  Meteor.publish('vehicles.item', function(id) {
+
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('vehicles.read', roles)) {
+      return Vehicles.find({ _id: id, archived: { $eq: false } })
+    } else {
+      this.stop()
+      return
+    }
   })
 }

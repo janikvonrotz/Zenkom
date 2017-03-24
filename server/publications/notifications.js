@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { Notifications } from '/imports/collections'
+import { isAllowed } from '/imports/helpers'
 
 export default () => {
   Meteor.publish('notifications.list', function(filter, limit) {
@@ -28,15 +29,31 @@ export default () => {
       ] }
     }
 
-    return Notifications.find(selector, options)
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('notifications.read', roles)) {
+      return Notifications.find(selector, options)
+    } else {
+      this.stop()
+      return
+    }
   })
 
-  Meteor.publish('notifications.item_latest', () => {
+  Meteor.publish('notifications.item_latest', function() {
 
     // return notifications sent within the last 3 seconds
-    return Notifications.find(
-      { created_at: { $gt: (new Date((new Date())-1000*3)) } },
-      { sort: { created_at: -1 }, limit: 1 }
-    )
+    let selector = { created_at: { $gt: (new Date((new Date())-1000*3)) } }
+    let options = { sort: { created_at: -1 }, limit: 1 }
+
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('notifications.read', roles)) {
+      return Notifications.find(selector, options)
+    } else {
+      this.stop()
+      return
+    }
   })
 }

@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor'
 import { Routers, Vehicles } from '/imports/collections'
+import { isAllowed } from '/imports/helpers'
 
 export default () => {
-  Meteor.publish('routers.with_vehicles', (filter, sort, limit) => {
+  Meteor.publish('routers.with_vehicles', function(filter, sort, limit) {
     let routerSelector = {}, vehicleSelector = {}
     let routerOptions = {}, vehicleOptions = {}
     if (sort) {
@@ -47,25 +48,56 @@ export default () => {
         }
       }
     }
-    return [
-      Routers.find(routerSelector, routerOptions),
-      Vehicles.find(vehicleSelector, vehicleOptions),
-    ]
+
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('routers.read', roles)) {
+      return [
+        Routers.find(routerSelector, routerOptions),
+        Vehicles.find(vehicleSelector, vehicleOptions),
+      ]
+    } else {
+      this.stop()
+      return
+    }
   })
 
-  Meteor.publish('routers.item_with_vehicles', (id) => {
-    return [
-      Vehicles.find({ archived: { $eq: false } }, {
-        fields: {
-          _id: 1,
-          number: 1,
-        }
-      }),
-      Routers.find({ _id: id, archived: { $eq: false } }),
-    ]
+  Meteor.publish('routers.item_with_vehicles', function(id) {
+
+    let routerSelector = { _id: id, archived: { $eq: false } }
+    let vehicleSelector = { archived: { $eq: false } }
+    let vehicleOptions = {
+      fields: {
+        _id: 1,
+        number: 1,
+      }
+    }
+
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('routers.read', roles)) {
+      return [
+        Vehicles.find(vehicleSelector, vehicleOptions),
+        Routers.find(routerSelector),
+      ]
+    } else {
+      this.stop()
+      return
+    }
   })
 
-  Meteor.publish('routers.item', (id) => {
-    return Routers.find({ _id: id, archived: { $eq: false } })
+  Meteor.publish('routers.item', function(id) {
+
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('routers.read', roles)) {
+      return Routers.find({ _id: id, archived: { $eq: false } })
+    } else {
+      this.stop()
+      return
+    }
   })
 }
