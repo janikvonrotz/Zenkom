@@ -11,6 +11,7 @@ import Helmet from 'react-helmet'
 import { HardwareRouter, MapsDirectionsBus, ActionDashboard, ActionSettings,
   CommunicationMessage, SocialPeople, ActionInfo, ActionPermIdentity,
   ActionExitToApp, } from 'material-ui/svg-icons'
+import { isAllowed } from '/imports/helpers'
 
 class MainLayout extends React.Component {
 
@@ -45,15 +46,19 @@ class MainLayout extends React.Component {
             targetOrigin={ { horizontal: 'right', vertical: 'top' } }
             anchorOrigin={ { horizontal: 'right', vertical: 'top' } } >
 
+              { isAllowed('users.update_profile', user ? user.roles : null) ?
               <MenuItem
               leftIcon={ <ActionPermIdentity /> }
               containerElement={ <Link to="/profile" /> }
               primaryText={ i18n.button.profile } />
+              : null }
 
+              { isAllowed('users.update_settings', user ? user.roles : null) ?
               <MenuItem
               leftIcon={ <ActionSettings /> }
               containerElement={ <Link to="/settings" /> }
               primaryText={ i18n.vocabulary.settings } />
+              : null }
 
               <MenuItem
               leftIcon={ <ActionExitToApp /> }
@@ -78,29 +83,37 @@ class MainLayout extends React.Component {
             leftIcon={ <ActionDashboard /> }
             containerElement={ <Link to="/"/> } />
 
+            { isAllowed('routers.read', user ? user.roles : null) ?
             <MenuItem
             primaryText={ i18n.vocabulary.routers }
             onTouchTap={ this.toggleDrawer.bind(this) }
             leftIcon={ <HardwareRouter /> }
             containerElement={ <Link to="/routers" /> } />
+            : null }
 
+            { isAllowed('vehicles.read', user ? user.roles : null) ?
             <MenuItem
             primaryText={ i18n.vocabulary.vehicles }
             onTouchTap={ this.toggleDrawer.bind(this) }
             leftIcon={ <MapsDirectionsBus /> }
             containerElement={ <Link to="/vehicles" /> } />
+            : null }
 
+            { isAllowed('notifications.read', user ? user.roles : null) ?
             <MenuItem
             primaryText={ i18n.vocabulary.notifications }
             onTouchTap={ this.toggleDrawer.bind(this) }
             leftIcon={ <CommunicationMessage /> }
             containerElement={ <Link to="/notifications" /> } />
+            : null }
 
+            { isAllowed('users.read', user ? user.roles : null) ?
             <MenuItem
             primaryText={ i18n.vocabulary.users }
             onTouchTap={ this.toggleDrawer.bind(this) }
             leftIcon={ <SocialPeople /> }
             containerElement={ <Link to="/users" /> } />
+            : null }
 
             <MenuItem
             primaryText={ i18n.button.about }
