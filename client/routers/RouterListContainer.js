@@ -26,7 +26,7 @@ export default connect(mapStateToProps)(createContainer(({ filter, sort }) => {
   })
 
   // sort by foregin key
-  if(sort &&  Object.keys(sort)[0] === 'vehicle_number'){
+  if (sort &&  Object.keys(sort)[0] === 'vehicle_number') {
     let sortKey = Object.keys(sort)[0].split('_').join('.')
     routers.sort((a, b) => {
       return ((getValue(a, sortKey) - getValue(b, sortKey))*sort['vehicle_number'])

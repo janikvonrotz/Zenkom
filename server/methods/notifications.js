@@ -11,7 +11,7 @@ export default () => {
 
       // check permissions
       let roles = Meteor.userId() ? Meteor.user().roles : null
-      if(!isAllowed('notifications.insert', roles)){
+      if (!isAllowed('notifications.insert', roles)) {
         throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
       }
 
@@ -25,7 +25,7 @@ export default () => {
 
       // check permissions
       let roles = Meteor.userId() ? Meteor.user().roles : null
-      if(!isAllowed('notifications.remove', roles)){
+      if (!isAllowed('notifications.remove', roles)) {
         throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
       }
 

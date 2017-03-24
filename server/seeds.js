@@ -4,7 +4,7 @@ import { Routers, Notifications, Vehicles } from '/imports/collections'
 
 let seeds = () => {
 
-  if(Routers.find({}).count() === 0){
+  if (Routers.find({}).count() === 0) {
     let routers = [
       {
         hostname: 'netboxfz64',
@@ -89,7 +89,7 @@ let seeds = () => {
     })
   }
 
-  if(Notifications.find({}).count() === 0){
+  if (Notifications.find({}).count() === 0) {
     let notifications = [
       {
         subject: 'Router 64 wurde aktualisiert',

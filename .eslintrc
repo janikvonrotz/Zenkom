@@ -25,7 +25,7 @@
     "array-bracket-spacing": ["error", "always"], // Force spacing between array brackets
     "quotes": ["error", "single"], // Force single quotes
     "brace-style": ["error"], // Spacing for common braces
-    // "keyword-spacing": ["error"],
+    "keyword-spacing": ["error", { "before": true }],
 
     //
     //Possible Errors

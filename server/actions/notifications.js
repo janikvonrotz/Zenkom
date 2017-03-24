@@ -24,7 +24,7 @@ export const dispatchNotification = (notification) => {
 
   // send notification emails
   users.map((user) => {
-    if(user.settings.channels.indexOf('email_notification') != -1) {
+    if (user.settings.channels.indexOf('email_notification') != -1) {
       let email = {
         to: user.emails[0].address,
         from: config.mail.notificationFrom,

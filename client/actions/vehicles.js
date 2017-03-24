@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 
 export const insertVehicle = (params) => {
   return (dispatch, getState) => {
-    if(params){
+    if (params) {
       Meteor.call('vehicles.insert', params, (error) => {
         if (!error) {
           dispatch({

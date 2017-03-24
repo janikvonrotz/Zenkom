@@ -10,7 +10,7 @@ export default () => {
     let selector = {}
 
     // update options
-    if(limit && limit != 'all'){
+    if (limit && limit != 'all') {
       options.sort = { created_at: -1 }
       options.limit = limit
     }

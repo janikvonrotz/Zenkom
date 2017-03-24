@@ -32,8 +32,8 @@ export const setListSort = (sortKey) => {
     let sort = null
     let { listSort } = getState()
 
-    if(sortKey) {
-      if(listSort && sortKey && (Object.keys(listSort)[0] === sortKey)) {
+    if (sortKey) {
+      if (listSort && sortKey && (Object.keys(listSort)[0] === sortKey)) {
         listSort[sortKey] = -(listSort[sortKey])
         sort = listSort
       } else {

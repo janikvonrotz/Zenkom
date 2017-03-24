@@ -91,13 +91,13 @@ class RouterVersion extends React.Component {
 
           return <p key={ label }>{ `${ i18n.label[label] }: ` }
             { diffContent.map((part) => {
-              if(part.added) {
+              if (part.added) {
                 return <span key={ part.value } style={ { color: 'green' } }>{ part.value }</span>
               }
-              if(part.removed) {
+              if (part.removed) {
                 return <span key={ part.value } style={ { color: 'red' } }>{ part.value } </span>
               }
-              if(!(part.removed && part.added)) {
+              if (!(part.removed && part.added)) {
                 return <span key={ part.value }>{ part.value }</span>
               }
             }) }

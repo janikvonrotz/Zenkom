@@ -16,7 +16,7 @@ export default () => {
 
       // check permissions
       let roles = Meteor.userId() ? Meteor.user().roles : null
-      if(!isAllowed('users.update_profile', roles)){
+      if (!isAllowed('users.update_profile', roles)) {
         throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
       }
 
@@ -29,7 +29,7 @@ export default () => {
 
       // check permissions
       let roles = Meteor.userId() ? Meteor.user().roles : null
-      if(!isAllowed('users.update_settings', roles)){
+      if (!isAllowed('users.update_settings', roles)) {
         throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
       }
 
@@ -42,7 +42,7 @@ export default () => {
 
       // check permissions
       let roles = Meteor.userId() ? Meteor.user().roles : null
-      if(!isAllowed('users.update_role', roles)){
+      if (!isAllowed('users.update_role', roles)) {
         throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
       }
 

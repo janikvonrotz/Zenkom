@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   render() {
-    let{ i18n, user } = this.props
+    let { i18n, user } = this.props
 
     return <Card>
       <CardMedia>

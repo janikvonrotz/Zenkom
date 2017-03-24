@@ -49,9 +49,10 @@ class Profile extends React.Component {
     browser_notification = browser_notification.isChecked()
 
     // request desktop notification permission
-    if(option === 'browser_notification' && browser_notification){
-      if (Notification.permission != 'granted')
+    if (option === 'browser_notification' && browser_notification) {
+      if (Notification.permission != 'granted') {
         Notification.requestPermission()
+      }
     }
   }
 

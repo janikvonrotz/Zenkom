@@ -64,7 +64,7 @@ class Router extends React.Component {
 
   updateSelectField(field, event, index, value){
     let state = {}
-    if(index instanceof Date) {
+    if (index instanceof Date) {
         state[field] = index
     } else {
         state[field] = value
