@@ -14,8 +14,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(createContainer(() => {
   let subscription = Meteor.subscribe('notifications.item_latest')
   return {
-    // return notifications sent within the last 3 seconds
-    desktopNotification: Notifications.findOne({ created_at: { $gt: (new Date((new Date())-1000*3)) } }),
+    desktopNotification: Notifications.find({}, { sort: { created_at: -1 }, limit: 1 }).fetch()[0],
     loading: !subscription.ready(),
   }
 }, Notification))

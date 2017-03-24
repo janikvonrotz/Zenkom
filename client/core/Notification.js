@@ -27,6 +27,8 @@ class NotificationComponent extends React.Component {
       send = true
     }
 
+    console.info('DESKTOP_NOTIFICATION', desktopNotification, send)
+
     // display desktop notification
     if (send && nextProps.desktopNotification && user && user.settings.channels.indexOf('browser_notification') != -1) {
 

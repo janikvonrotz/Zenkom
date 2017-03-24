@@ -41,9 +41,7 @@ export default () => {
   })
 
   Meteor.publish('notifications.item_latest', function() {
-
-    // return notifications sent within the last 3 seconds
-    let selector = { created_at: { $gt: (new Date((new Date())-1000*3)) } }
+    let selector = {}
     let options = { sort: { created_at: -1 }, limit: 1 }
 
     // check permissions
