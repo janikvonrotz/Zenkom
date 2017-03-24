@@ -2,13 +2,16 @@ import { Meteor } from 'meteor/meteor'
 import { Vehicles } from '/imports/collections'
 
 export default () => {
-  Meteor.publish('vehicles.list', (filter, sort) => {
+  Meteor.publish('vehicles.list', (filter, sort, limit) => {
 
     // set selector and options
     let selector = {}
     let options = {}
     if (sort) {
       options.sort = sort
+    }
+    if (limit && limit != 'all') {
+      options.limit = limit
     }
 
     if (filter === '') {

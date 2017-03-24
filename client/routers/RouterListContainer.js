@@ -10,13 +10,14 @@ const mapStateToProps = (state) => {
     filter: state.routerFilter,
     i18n: state.i18n,
     sort: state.listSort,
+    limit: state.listLimit,
   }
 }
-export default connect(mapStateToProps)(createContainer(({ filter, sort }) => {
+export default connect(mapStateToProps)(createContainer(({ filter, sort, limit }) => {
   sort = sort || { created_at: -1 }
 
   // merge vehicles and routers
-  let subscription = Meteor.subscribe('routers.with_vehicles', filter, sort)
+  let subscription = Meteor.subscribe('routers.with_vehicles', filter, sort, limit)
   let vehicles = Vehicles.find({}).fetch()
   let routers = Routers.find({}, { sort: sort }).map((router) => {
     router.vehicle = vehicles.filter((vehicle) => {
@@ -25,7 +26,7 @@ export default connect(mapStateToProps)(createContainer(({ filter, sort }) => {
     return router
   })
 
-  // sort by foregin key
+  // sort by foreign key
   if (sort &&  Object.keys(sort)[0] === 'vehicle_number') {
     let sortKey = Object.keys(sort)[0].split('_').join('.')
     routers.sort((a, b) => {

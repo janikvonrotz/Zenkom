@@ -2,9 +2,16 @@ import React from 'react'
 import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { RouterList } from './index'
 import { connect } from 'react-redux'
-import { insertRouter, setRouterFilter } from '../actions'
+import { insertRouter, setRouterFilter, resetListLimit, increaseListLimit,
+  setListLimit } from '../actions'
 
 class RouterSearch extends React.Component {
+
+  componentDidMount(){
+    let { dispatch } = this.props
+    dispatch(resetListLimit())
+    dispatch(setRouterFilter(''))
+  }
 
   insert(){
     let { dispatch } = this.props
@@ -15,6 +22,16 @@ class RouterSearch extends React.Component {
     let { dispatch } = this.props
     let { filter } = this.refs
     dispatch(setRouterFilter(filter.getValue()))
+  }
+
+  increaseLimit(){
+    let { dispatch } = this.props
+    dispatch(increaseListLimit())
+  }
+
+  setLimit(limit){
+    let { dispatch } = this.props
+    dispatch(setListLimit(limit))
   }
 
   render() {
@@ -39,6 +56,12 @@ class RouterSearch extends React.Component {
         <br /><br />
 
         <RouterList />
+
+        <RaisedButton
+        onTouchTap={ this.increaseLimit.bind(this) }
+        label={ i18n.button.load_more }
+        primary={ true } />
+        <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
 
       </CardText>
     </Card>

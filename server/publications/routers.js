@@ -2,11 +2,14 @@ import { Meteor } from 'meteor/meteor'
 import { Routers, Vehicles } from '/imports/collections'
 
 export default () => {
-  Meteor.publish('routers.with_vehicles', (filter, sort) => {
+  Meteor.publish('routers.with_vehicles', (filter, sort, limit) => {
     let routerSelector = {}, vehicleSelector = {}
     let routerOptions = {}, vehicleOptions = {}
     if (sort) {
       routerOptions.sort = sort
+    }
+    if (limit && limit != 'all') {
+      routerOptions.limit = limit
     }
 
     if (filter === '') {

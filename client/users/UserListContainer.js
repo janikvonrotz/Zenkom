@@ -10,9 +10,10 @@ const mapStateToProps = (state) => {
     i18n: state.i18n,
     roleOptions: state.userRoleOptions,
     sort: state.listSort,
+    limit: state.listLimit,
   }
 }
-export default connect(mapStateToProps)(createContainer(({ filter, sort }) => {
+export default connect(mapStateToProps)(createContainer(({ filter, sort, limit }) => {
 
   // map sort key to specific field path
   sort = sort || { 'name': 1 }
@@ -28,7 +29,7 @@ export default connect(mapStateToProps)(createContainer(({ filter, sort }) => {
   sort = {}
   sort[mapKey[sortKey] || sortKey] = sortValue
 
-  let subscription = Meteor.subscribe('users.list', filter, sort)
+  let subscription = Meteor.subscribe('users.list', filter, sort, limit)
   return {
     users: Users.find({}, { sort: sort }).fetch(),
     loading: !subscription.ready(),

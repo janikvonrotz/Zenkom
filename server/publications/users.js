@@ -15,7 +15,7 @@ export default () => {
     }
   })
 
-  Meteor.publish('users.list', function (filter, sort) {
+  Meteor.publish('users.list', function (filter, sort, limit) {
     let self = this
 
     // set selector and options
@@ -26,6 +26,9 @@ export default () => {
     } }
     if (sort) {
       options.sort = sort
+    }
+    if (limit && limit != 'all') {
+      options.limit = limit
     }
 
     if (filter === '') {

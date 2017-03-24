@@ -2,9 +2,16 @@ import React from 'react'
 import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { VehicleList } from './index'
 import { connect } from 'react-redux'
-import { insertVehicle, setVehicleFilter } from '../actions'
+import { insertVehicle, setVehicleFilter, resetListLimit, increaseListLimit,
+  setListLimit } from '../actions'
 
 class VehicleSearch extends React.Component {
+
+  componentDidMount(){
+    let { dispatch } = this.props
+    dispatch(resetListLimit())
+    dispatch(setVehicleFilter(''))
+  }
 
   insert(){
     let { dispatch } = this.props
@@ -15,6 +22,16 @@ class VehicleSearch extends React.Component {
     let { dispatch } = this.props
     let { filter } = this.refs
     dispatch(setVehicleFilter(filter.getValue()))
+  }
+
+  increaseLimit(){
+    let { dispatch } = this.props
+    dispatch(increaseListLimit())
+  }
+
+  setLimit(limit){
+    let { dispatch } = this.props
+    dispatch(setListLimit(limit))
   }
 
   render() {
@@ -39,6 +56,12 @@ class VehicleSearch extends React.Component {
         <br /><br />
 
         <VehicleList />
+
+        <RaisedButton
+        onTouchTap={ this.increaseLimit.bind(this) }
+        label={ i18n.button.load_more }
+        primary={ true } />
+        <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
 
       </CardText>
     </Card>

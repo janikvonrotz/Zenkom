@@ -27,6 +27,22 @@ export const setListLimit = (limit) => {
   }
 }
 
+export const resetListLimit = () => {
+  return {
+    type: 'RESET_LIST_LIMIT'
+  }
+}
+
+export const increaseListLimit = () => {
+  return (dispatch, getState) => {
+    let limit = getState().listLimit
+    dispatch({
+      type: 'INCREASE_LIST_LIMIT',
+      limit
+    })
+  }
+}
+
 export const setListSort = (sortKey) => {
   return (dispatch, getState) => {
     let sort = null

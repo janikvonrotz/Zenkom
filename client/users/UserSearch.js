@@ -1,15 +1,32 @@
 import React from 'react'
-import { Card, CardText, TextField } from 'material-ui'
+import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { UserList } from './index'
 import { connect } from 'react-redux'
-import { setUserFilter } from '../actions'
+import { setUserFilter, resetListLimit, increaseListLimit,
+  setListLimit } from '../actions'
 
 class UserSearch extends React.Component {
+
+  componentDidMount(){
+    let { dispatch } = this.props
+    dispatch(resetListLimit())
+    dispatch(setUserFilter(''))
+  }
 
   updateFilter(){
     let { dispatch } = this.props
     let { filter } = this.refs
     dispatch(setUserFilter(filter.getValue()))
+  }
+
+  increaseLimit(){
+    let { dispatch } = this.props
+    dispatch(increaseListLimit())
+  }
+
+  setLimit(limit){
+    let { dispatch } = this.props
+    dispatch(setListLimit(limit))
   }
 
   render() {
@@ -27,6 +44,12 @@ class UserSearch extends React.Component {
         <br /><br />
 
         <UserList />
+
+        <RaisedButton
+        onTouchTap={ this.increaseLimit.bind(this) }
+        label={ i18n.button.load_more }
+        primary={ true } />
+        <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
 
       </CardText>
     </Card>

@@ -9,12 +9,13 @@ const mapStateToProps = (state) => {
     filter: state.vehicleFilter,
     i18n: state.i18n,
     sort: state.listSort,
+    limit: state.listLimit
   }
 }
-export default connect(mapStateToProps)(createContainer(({ filter, sort }) => {
+export default connect(mapStateToProps)(createContainer(({ filter, sort, limit }) => {
   sort = sort || { number: -1 }
 
-  let subscription = Meteor.subscribe('vehicles.list', filter, sort)
+  let subscription = Meteor.subscribe('vehicles.list', filter, sort, limit)
   return {
     vehicles: Vehicles.find({}, { sort: sort }).fetch(),
     loading: !subscription.ready(),

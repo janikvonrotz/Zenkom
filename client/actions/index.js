@@ -1,5 +1,5 @@
 import { setHeaderTitle, dismissMessage, setListLimit,
-  setListSort } from './core'
+  setListSort, increaseListLimit, resetListLimit } from './core'
 import { loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
   verifyEmail, resetPassword, recoverPassword, updateUserProfile,
   loginUserWithLDAP, setUserFilter, updateUserSettings,
@@ -16,4 +16,5 @@ export { setHeaderTitle, dismissMessage, updateUserSettings, insertFeedback,
   verifyEmail, recoverPassword, resetPassword, updateUserProfile, setUserFilter,
   loginUserWithLDAP, updateRouter, removeRouter, insertRouter, setVehicleFilter,
   setRouterFilter, restoreRouter, updateVehicle, removeVehicle, insertVehicle,
-  setNotificationFilter, updateUserRole, setListLimit, setListSort }
+  setNotificationFilter, updateUserRole, setListLimit, setListSort,
+  increaseListLimit, resetListLimit }
