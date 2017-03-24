@@ -9,11 +9,12 @@ import { i18n } from '/imports/translations'
 export default () => {
   Meteor.methods({
     'routers.insert'(object) {
+      check(object, Object)
 
       // check permissions
       let roles = Meteor.userId() ? Meteor.user().roles : null
       if(!isAllowed('routers.insert', roles)){
-        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.message.insufficent_rights_for_method)
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
       }
 
       // insert object
@@ -38,6 +39,7 @@ export default () => {
     },
 
     'routers.update'(object) {
+      check(object, Object)
 
       // check permissions
       let roles = Meteor.userId() ? Meteor.user().roles : null
@@ -91,6 +93,12 @@ export default () => {
       check(id, String)
       check(versionId, String)
 
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if(!isAllowed('routers.restore', roles)){
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
       // get version object and transfer history
       let object = Routers.findOne(id)
       let restoreObject = Object.assign({}, object.history.filter((version) => {
@@ -130,6 +138,14 @@ export default () => {
     },
 
     'routers.remove'(id) {
+      check(id, String)
+
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if(!isAllowed('routers.remove', roles)){
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
       // define object as archived
       let object = Routers.findOne(id)
       object.updated_at = new Date()
@@ -142,6 +158,13 @@ export default () => {
 
     'routers.get_statistic_url'(id) {
       check(id, String)
+
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if(!isAllowed('routers.read', roles)){
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
       return 'https://raw.githubusercontent.com/monitoringartist/zabbix-docker-monitoring/master/doc/zabbix-docker-container-cpu-graph.png'
     }
 

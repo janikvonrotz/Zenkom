@@ -117,7 +117,7 @@ export default {
     settings_saved: 'Einstellungen wurden gespeichert.',
     feedback_sent: 'Feedback wurde verschickt.',
     role_saved: 'Die Rolle wurde gespeichert.',
-    insufficent_rights_for_method: 'Ihre Berechtigungen reichen leider nicht um diese Aktion auszuführen.',
+    insufficent_rights_for_method: 'Ihre Berechtigungen sind für diese Aktion nicht ausreichend.',
   },
   error: {
     page_not_found: 'Seite konnte nicht gefunden werden',
