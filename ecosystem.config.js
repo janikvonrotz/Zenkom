@@ -24,9 +24,10 @@ module.exports = {
             'mail': {
               'notificationFrom': 'notifications@zenkom.bitsherpa.com'
             },
-            'disableAccessContol': false,
           },
-          'public': {}
+          'public': {
+            'disableAccessContol': false,
+          }
         }
       },
       env_prod: {

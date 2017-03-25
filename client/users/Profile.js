@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { TextField, RaisedButton, Card, CardText } from 'material-ui'
 import { setHeaderTitle, updateUserProfile } from '../actions'
+import { isAllowed } from '/imports/helpers'
 
 class Profile extends React.Component {
 
@@ -48,10 +49,12 @@ class Profile extends React.Component {
           floatingLabelText={ i18n.label.lastname } />
           <br />
 
+          { isAllowed('users.update_profile', user ? user.roles : null) ?
           <RaisedButton
           label={ i18n.button.update }
           primary={ true }
           type="submit" />
+          : null }
 
         </form>
       </CardText> : null }
