@@ -8,6 +8,7 @@ import { setHeaderTitle, updateRouter, insertRouter,
 import { Row, Col, BoxRow } from '../flexboxgrid'
 import { Link } from 'react-router'
 import { formatDate } from '/imports/helpers'
+import { isAllowed } from '/imports/helpers'
 
 class Router extends React.Component {
 
@@ -92,8 +93,8 @@ class Router extends React.Component {
   }
 
   render() {
-    let { router={}, vehicles=[], loading, i18n,
-      statusOptions, companyOptions, profileOptions, typeOptions } = this.props
+    let { router={}, vehicles=[], loading, i18n, user, statusOptions,
+      companyOptions, profileOptions, typeOptions } = this.props
     let { vehicle_id, type, status, profile, transport_company,
       installed_at } = this.state
 
@@ -299,21 +300,26 @@ class Router extends React.Component {
                 floatingLabelText={ i18n.label.installed_at || null }
                 onChange={ this.updateSelectField.bind(this, 'installed_at') }
                 hintText={ i18n.label.installed_at } />
+                <br />
 
               </BoxRow>
             </Col>
           </Row>
 
-          <br />
+          { isAllowed('routers.update', user ? user.roles : null) ?
           <RaisedButton
           type="submit"
+          style={{ marginRight: 10 }}
           label={ i18n.button.update }
-          primary={ true } />{ ' ' }
+          primary={ true } />
+          : null }
 
+          { isAllowed('routers.remove', user ? user.roles : null) ?
           <RaisedButton
           onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
           label={ i18n.button.remove }
           secondary={ true } />
+          : null }
 
           <Dialog
           title={ `${i18n.vocabulary.router} ${ router.hostname } ${i18n.button.remove}` }

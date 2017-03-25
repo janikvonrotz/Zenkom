@@ -5,7 +5,8 @@ import { AppBar, Drawer, MenuItem, IconMenu, IconButton,
 import { Link } from 'react-router'
 import { NavigationMoreVert } from 'material-ui/svg-icons'
 import { connect } from 'react-redux'
-import { Notification, FlexboxGrid, FeedbackForm } from './index'
+import { FlexboxGrid, FeedbackForm } from './index'
+import { Notification } from '../notifications'
 import { logoutUser } from '../actions'
 import Helmet from 'react-helmet'
 import { HardwareRouter, MapsDirectionsBus, ActionDashboard, ActionSettings,
@@ -123,7 +124,11 @@ class MainLayout extends React.Component {
 
           </Drawer>
           { this.props.children }
+
+          { isAllowed('feedbacks.insert', user ? user.roles : null) ?
           <FeedbackForm />
+          : null }
+          
         </FlexboxGrid>
       </MuiThemeProvider>
     )

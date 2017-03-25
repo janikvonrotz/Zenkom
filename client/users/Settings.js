@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { List, ListItem, Subheader, Divider, Checkbox, Card,
   CardText, RaisedButton, CircularProgress } from 'material-ui'
 import { setHeaderTitle, updateUserSettings } from '../actions'
+import { isAllowed } from '/imports/helpers'
 
 class Profile extends React.Component {
 
@@ -96,10 +97,13 @@ class Profile extends React.Component {
              primaryText={ i18n.option[option] } />
          })}
        </List>
+
+       { isAllowed('users.update_settings', user ? user.roles : null) ?
        <RaisedButton
        label={ i18n.button.update }
        primary={ true }
        onTouchTap={ this.update.bind(this) } />
+       : null }
       </CardText>
     </Card>
   }

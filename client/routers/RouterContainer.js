@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor'
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user,
     i18n: state.i18n,
     statusOptions: state.routerStatusOptions,
     companyOptions: state.routerCompanyOptions,

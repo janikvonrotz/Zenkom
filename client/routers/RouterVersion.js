@@ -4,6 +4,7 @@ import { Card, CardText, CircularProgress, RaisedButton, Dialog,
 import { setHeaderTitle, restoreRouter } from '../actions'
 import JsDiff from 'diff'
 import { formatDate } from '/imports/helpers'
+import { isAllowed } from '/imports/helpers'
 
 class RouterVersion extends React.Component {
 
@@ -31,7 +32,7 @@ class RouterVersion extends React.Component {
   }
 
   render() {
-    let { routerVersion, loading, i18n, router } = this.props
+    let { routerVersion, loading, i18n, router, user } = this.props
     let keys = [
       'hostname',
       'vehicle_id',
@@ -104,10 +105,12 @@ class RouterVersion extends React.Component {
           </p>
         }) }
 
+        { isAllowed('routers.restore', user ? user.roles : null) ?
         <RaisedButton
         onTouchTap={ this.toggleDialog.bind(this, 'openRestoreDialog') }
         label={ i18n.button.restore }
         secondary={ true } />
+        : null }
 
         <Dialog
         title={ `${ i18n.vocabulary.router } ${ formatDate(i18n.locale, routerVersion.object.updated_at || routerVersion.object.created_at) } ${i18n.button.restore}` }

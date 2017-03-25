@@ -4,6 +4,7 @@ import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
 import { setHeaderTitle, updateVehicle, insertVehicle,
 removeVehicle } from '../actions'
 import { formatDate } from '/imports/helpers'
+import { isAllowed } from '/imports/helpers'
 
 class Vehicle extends React.Component {
 
@@ -60,7 +61,7 @@ class Vehicle extends React.Component {
   }
 
   render() {
-    let { vehicle={}, loading, i18n, statusOptions } = this.props
+    let { vehicle={}, loading, i18n, statusOptions, user } = this.props
     let { status, modification_until } = this.state
 
     const actions = [
@@ -108,18 +109,23 @@ class Vehicle extends React.Component {
             floatingLabelText={ i18n.label.modification_until || null }
             onChange={ this.updateSelectField.bind(this, 'modification_until') }
             hintText={ i18n.label.modification_until } />
-            <br />
           </span> : null }
+          <br />
 
+          { isAllowed('vehicles.update', user ? user.roles : null) ?
           <RaisedButton
           type="submit"
+          style={{ marginRight: 10 }}
           label={ i18n.button.update }
-          primary={ true } />{ ' ' }
+          primary={ true } />
+          : null }
 
+          { isAllowed('vehicles.remove', user ? user.roles : null) ?
           <RaisedButton
           onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
           label={ i18n.button.remove }
           secondary={ true } />
+          : null }
 
           <Dialog
           title={ `${i18n.vocabulary.vehicle} ${ vehicle.number } ${i18n.button.remove}` }
