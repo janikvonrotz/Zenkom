@@ -41,7 +41,8 @@ export default () => {
   })
 
   Meteor.publish('notifications.item_latest', function() {
-    let selector = {}
+    let { userId } = this
+    let selector = { receivers: { $in: [ userId ] } }
     let options = { sort: { created_at: -1 }, limit: 1 }
 
     // check permissions
