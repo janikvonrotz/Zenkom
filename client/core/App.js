@@ -12,7 +12,7 @@ class App extends React.Component {
     dispatch(resetListLimit())
     this.componentWillReceiveProps()
   }
-  
+
   componentWillReceiveProps(){
     let { dispatch, i18n } = this.props
     dispatch(setHeaderTitle(i18n.button.dashboard))
