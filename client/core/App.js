@@ -2,6 +2,8 @@ import React from 'react'
 import { Card, CardText, CardMedia } from 'material-ui'
 import { setHeaderTitle } from '../actions'
 import { connect } from 'react-redux'
+import { NotificationList } from '../notifications'
+import { isAllowed } from '/imports/helpers'
 
 class App extends React.Component {
 
@@ -22,7 +24,13 @@ class App extends React.Component {
       </CardMedia>
       <CardText>
         { user ? <p>{ `${ i18n.vocabulary.greeting } ${ user.profile.name }` }</p> : null }
+
         <p>{ i18n.text.introduction }</p>
+
+        { !user ? <p>{ i18n.text.contact_administrator }</p> : null }
+
+        { user && isAllowed('notifications.read', user.roles) ? <NotificationList /> : null }
+
       </CardText>
     </Card>
   }

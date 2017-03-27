@@ -27,8 +27,11 @@ class NotificationComponent extends React.Component {
       send = true
     }
 
+    // check if user is loggend in and has desktop notificiations enabled
+    let userWithDesktopNotificiation = (user && user.settings && user.settings.channels.indexOf('browser_notification') != -1)
+
     // display desktop notification
-    if (send && nextProps.desktopNotification && user && user.settings.channels.indexOf('browser_notification') != -1) {
+    if (send && nextProps.desktopNotification && userWithDesktopNotificiation) {
 
       if (Notification.permission !== 'granted'){
         Notification.requestPermission()
