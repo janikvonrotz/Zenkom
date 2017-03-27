@@ -38,7 +38,7 @@ class MainLayout extends React.Component {
       />
       <Notification />
       <AppBar
-      title={ `Zenkom - ${title}` }
+      title={ title }
       iconElementRight={ user ? <IconMenu
         iconButtonElement={ <IconButton><NavigationMoreVert /></IconButton> }
         targetOrigin={ { horizontal: 'right', vertical: 'top' } }
@@ -67,6 +67,7 @@ class MainLayout extends React.Component {
         containerElement={ <Link to="/login" /> }
         label={ i18n.button.login } />
       }
+      iconElementLeft={ <img src={ '/logo.png' }/> }
       onLeftIconButtonTouchTap={ this.toggleDrawer.bind(this) } />
 
       <Drawer

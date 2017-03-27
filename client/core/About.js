@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Card, CardText } from 'material-ui'
+import { Card, CardText, CardTitle } from 'material-ui'
 import { setHeaderTitle } from '../actions'
 
 class NotFound extends React.Component {
@@ -17,6 +17,7 @@ class NotFound extends React.Component {
     let { i18n } = this.props
 
     return <Card>
+      <CardTitle title="Zenkom" />
       <CardText>
         { i18n.text.about }
       </CardText>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardText, CardMedia } from 'material-ui'
+import { Card, CardText } from 'material-ui'
 import { setHeaderTitle, resetListLimit } from '../actions'
 import { connect } from 'react-redux'
 import { NotificationList } from '../notifications'
@@ -22,9 +22,6 @@ class App extends React.Component {
     let { i18n, user } = this.props
 
     return <Card>
-      <CardMedia>
-        <img style={{ minWidth: '50px', width: 'none' }} src="/logo2.png" />
-      </CardMedia>
       <CardText>
         { user ? <p>{ `${ i18n.vocabulary.greeting } ${ user.profile.name }` }</p> : null }
 
