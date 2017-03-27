@@ -1,16 +1,10 @@
 import React from 'react'
 import { List, ListItem, CircularProgress } from 'material-ui'
-import { setHeaderTitle } from '../actions'
 import { Link } from 'react-router'
 import { HardwareRouter, MapsDirectionsBus } from 'material-ui/svg-icons'
 import { fromNow } from '/imports/helpers'
 
 class PostList extends React.Component {
-
-  componentWillReceiveProps(){
-    let { dispatch, i18n } = this.props
-    dispatch(setHeaderTitle(i18n.vocabulary.notifications))
-  }
 
   shouldComponentUpdate(nextProps){
     return !nextProps.loading

@@ -3,14 +3,15 @@ import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { NotificationList } from './index'
 import { connect } from 'react-redux'
 import { setNotificationFilter, setListLimit, increaseListLimit,
-  resetListLimit } from '../actions'
+  resetListLimit, setHeaderTitle } from '../actions'
 
 class NotificationSearch extends React.Component {
 
   componentDidMount(){
-    let { dispatch } = this.props
+    let { dispatch, i18n } = this.props
     dispatch(resetListLimit())
     dispatch(setNotificationFilter(''))
+    dispatch(setHeaderTitle(i18n.vocabulary.notifications))
   }
 
   updateFilter(){
