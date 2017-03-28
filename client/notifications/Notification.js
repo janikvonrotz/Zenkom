@@ -38,7 +38,7 @@ class NotificationComponent extends React.Component {
       }
 
       let browserNotification = new Notification(nextProps.desktopNotification.subject, {
-        icon: '/logo.png',
+        icon: '/logo2.png',
         body: nextProps.desktopNotification.content,
       })
 
