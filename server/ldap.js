@@ -28,8 +28,8 @@ let ldapJs = () => {
     let dn = []
     let future = new Future()
 
-    // use different auth method for vbl domain
-    if (ldapAuth.searchOu === 'dc=vbl,dc=ch') {
+    // use different auth method if search user is provided
+    if (ldapAuth.searchUser) {
 
       ldapAuth.client.bind(ldapAuth.searchUser.dn, ldapAuth.searchUser.password, (searchBindError) => {
         assert.ifError(searchBindError)
@@ -74,6 +74,7 @@ let ldapJs = () => {
       })
       return future.wait()
 
+    // without search user
     } else {
 
       ldapAuth.client.search(ldapAuth.searchOu, ldapAuth.searchQuery(options.email), (error, result) => {
