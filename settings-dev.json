@@ -12,6 +12,6 @@
     }
   },
   "public": {
-    "disableAccessContol": false
+    "disableAccessContol": true
   }
 }

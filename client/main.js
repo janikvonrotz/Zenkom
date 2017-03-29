@@ -16,6 +16,7 @@ import { Vehicle, VehicleSearch } from './vehicles'
 import { NotificationSearch } from './notifications'
 import { setUser } from './actions'
 import zenkomApp from './reducers'
+import { DfiSearch, Dfi } from './dfis'
 
 let store = createStore(zenkomApp, applyMiddleware(thunk))
 injectTapEventPlugin()
@@ -34,6 +35,9 @@ Meteor.startup(() => {
             <Route path="/vehicles" component={ VehicleSearch } />
             <Route path="/vehicle/:id/edit" component={ Vehicle } />
             <Route path="/vehicle/new" component={ Vehicle } />
+            <Route path="/dfis" component={ DfiSearch } />
+            <Route path="/dfi/:id/edit" component={ Dfi } />
+            <Route path="/dfi/new" component={ Dfi } />
             <Route path="/notifications" component={ NotificationSearch } />
             <Route path="/users" component={ UserSearch } />
             <Route path="/login" component={ Login } />

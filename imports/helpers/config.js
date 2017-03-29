@@ -15,6 +15,12 @@ let acl = {
   'vehicles.update': [ 'admin', 'spec', 'tech' ],
   'vehicles.remove': [ 'admin', 'spec', 'tech' ],
 
+  // dfis permissions
+  'dfis.read': [ 'admin', 'spec', 'tech', 'user' ],
+  'dfis.insert': [ 'admin', 'spec', 'tech' ],
+  'dfis.update': [ 'admin', 'spec', 'tech' ],
+  'dfis.remove': [ 'admin', 'spec', 'tech' ],
+
   // users permissions
   // 'users.read': [ 'admin', 'spec' ],
   // 'users.update_role': [ 'admin', 'spec' ],

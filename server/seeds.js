@@ -1,6 +1,6 @@
 import { Accounts } from 'meteor/accounts-base'
 import { Meteor } from 'meteor/meteor'
-import { Routers, Notifications, Vehicles } from '/imports/collections'
+import { Routers, Notifications, Vehicles, Dfis } from '/imports/collections'
 
 let seeds = () => {
 
@@ -142,6 +142,36 @@ let seeds = () => {
       Meteor.users.update(userId, { $set: { 'emails.0.verified': true } })
       Meteor.users.update(userId, { $set: { 'roles': user.roles } })
 
+    })
+  }
+
+  if (Dfis.find({}).count() === 0) {
+
+    let dfis = [
+      {
+        description: 'Pilatusplatz Obernau',
+        type: 'Standard',
+        row_type: '4',
+        location: 'Luzern',
+        notes: 'This is a test entry',
+        created_at: new Date(),
+        created_by: 'Janik von Rot',
+        archived: false,
+      },
+      {
+        description: 'Weinbergli Luzern',
+        type: 'Standard',
+        row_type: '8',
+        location: 'Luzern',
+        notes: 'This is a test entry',
+        created_at: new Date(),
+        created_by: 'Janik von Rot',
+        archived: false,
+      },
+    ]
+
+    dfis.map((dfi) => {
+      Dfis.insert(dfi)
     })
   }
 }

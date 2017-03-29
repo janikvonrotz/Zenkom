@@ -10,7 +10,7 @@ import { logoutUser } from '../actions'
 import Helmet from 'react-helmet'
 import { HardwareRouter, MapsDirectionsBus, ActionDashboard, ActionSettings,
   CommunicationMessage, SocialPeople, ActionInfo, ActionPermIdentity,
-  ActionExitToApp, } from 'material-ui/svg-icons'
+  ActionExitToApp, HardwareDeveloperBoard } from 'material-ui/svg-icons'
 import { isAllowed } from '/imports/helpers'
 
 class MainLayout extends React.Component {
@@ -96,6 +96,14 @@ class MainLayout extends React.Component {
         onTouchTap={ this.toggleDrawer.bind(this) }
         leftIcon={ <MapsDirectionsBus /> }
         containerElement={ <Link to="/vehicles" /> } />
+        : null }
+
+        { isAllowed('dfis.read', user ? user.roles : null) ?
+        <MenuItem
+        primaryText={ i18n.vocabulary.dfis }
+        onTouchTap={ this.toggleDrawer.bind(this) }
+        leftIcon={ <HardwareDeveloperBoard /> }
+        containerElement={ <Link to="/dfis" /> } />
         : null }
 
         { isAllowed('notifications.read', user ? user.roles : null) ?

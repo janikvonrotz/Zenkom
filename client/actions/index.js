@@ -10,11 +10,14 @@ import { updateVehicle, removeVehicle, insertVehicle,
   setVehicleFilter } from './vehicles'
 import { insertFeedback } from './feedbacks'
 import { setNotificationFilter } from './notifications'
+import { updateDfi, removeDfi, insertDfi,
+  setDfiFilter } from './dfis'
 
 export { setHeaderTitle, dismissMessage, updateUserSettings, insertFeedback,
   loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
   verifyEmail, recoverPassword, resetPassword, updateUserProfile, setUserFilter,
   loginUserWithLDAP, updateRouter, removeRouter, insertRouter, setVehicleFilter,
   setRouterFilter, restoreRouter, updateVehicle, removeVehicle, insertVehicle,
-  setNotificationFilter, updateUserRole, setListLimit, setListSort,
-  increaseListLimit, resetListLimit, setRouterStatisticUrl }
+  setNotificationFilter, updateUserRole, setListLimit, setListSort, removeDfi,
+  increaseListLimit, resetListLimit, setRouterStatisticUrl, updateDfi,
+  insertDfi, setDfiFilter }

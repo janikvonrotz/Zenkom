@@ -3,6 +3,7 @@ import routers from './routers'
 import notifications from './notifications'
 import vehicles from './vehicles'
 import feedbacks from './feedbacks'
+import dfis from './dfis'
 
 export default () => {
   users()
@@ -10,4 +11,5 @@ export default () => {
   vehicles()
   notifications()
   feedbacks()
+  dfis()
 }
