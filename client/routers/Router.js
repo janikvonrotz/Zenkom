@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
   TextField, RaisedButton, SelectField, MenuItem, List, ListItem,
-  Subheader } from 'material-ui'
+  Subheader, CardMedia } from 'material-ui'
 import { ActionHistory } from 'material-ui/svg-icons'
-import { setHeaderTitle, updateRouter, insertRouter,
+import { setHeaderTitle, updateRouter, insertRouter, setRouterStatisticUrl,
   removeRouter } from '../actions'
 import { Row, Col, BoxRow } from '../flexboxgrid'
 import { Link } from 'react-router'
@@ -90,11 +90,12 @@ class Router extends React.Component {
       installed_at: router.installed_at || null,
     })
     dispatch(setHeaderTitle(router._id ? `${ i18n.vocabulary.router } ${ router.hostname }` : i18n.vocabulary.untitled ))
+    dispatch(setRouterStatisticUrl(router._id, router.hostname))
   }
 
   render() {
     let { router={}, vehicles=[], loading, i18n, user, statusOptions,
-      companyOptions, profileOptions, typeOptions } = this.props
+      companyOptions, profileOptions, typeOptions, statistic } = this.props
     let { vehicle_id, type, status, profile, transport_company,
       installed_at } = this.state
 
@@ -111,6 +112,9 @@ class Router extends React.Component {
     ]
 
     return loading ? <CircularProgress /> : <Card>
+      <CardMedia>
+        { statistic ? <img src={ statistic.url } /> : null }
+      </CardMedia>
       <CardText>
         <form onSubmit={ this.mutate.bind(this) }>
 

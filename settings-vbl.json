@@ -12,6 +12,12 @@
     },
     "mail": {
       "notificationFrom": "notifications@zenkom.bitsherpa.com"
+    },
+    "zabbix": {
+      "url": "http://192.168.15.180/",
+      "api_url": "http://www.oev-live.ch/zabbix/api_jsonrpc.php",
+      "user": "zabbix",
+      "password": "v60B05l"
     }
   },
   "public": {

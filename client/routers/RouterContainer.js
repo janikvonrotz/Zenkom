@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
     companyOptions: state.routerCompanyOptions,
     profileOptions: state.routerProfileOptions,
     typeOptions: state.routerTypeOptions,
+    statistic: state.routerStatistic,
   }
 }
 
