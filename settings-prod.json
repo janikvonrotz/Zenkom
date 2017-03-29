@@ -6,8 +6,8 @@
       "filter": "(userPrincipalName={email})",
       "scope": "sub",
       "searchUser": {
-        "DN": "CN=Fz vernetztest,OU=Test,OU=Services,OU=vblusers2,DC=vbl,DC=ch",
-        "Password": "ZeNk609Om."
+        "dn": "CN=Fz vernetztest,OU=Test,OU=Services,OU=vblusers2,DC=vbl,DC=ch",
+        "password": "ZeNk609Om."
       }
     },
     "mail": {

@@ -64,7 +64,7 @@ class MainLayout extends React.Component {
           primaryText={ i18n.button.logout } />
 
         </IconMenu> : <FlatButton
-        containerElement={ <Link to="/login" /> }
+        containerElement={ <Link to="/login?ldap=true" /> }
         label={ i18n.button.login } />
       }
       iconElementLeft={ <img src={ '/logo.png' }/> }

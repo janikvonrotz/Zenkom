@@ -75,7 +75,7 @@ export const logoutUser = () => {
           type: 'SET_USER',
           user: null
         })
-        browserHistory.push('/login')
+        browserHistory.push('/login?ldap=true')
       } else {
         dispatch({
           type: 'SHOW_ERROR_MESSAGE',
