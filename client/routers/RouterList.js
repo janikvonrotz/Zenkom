@@ -60,7 +60,7 @@ class RouterList extends React.Component {
               to={ `/router/${router._id}/edit` }>
               { router.hostname }
             </Link></TableRowColumn>
-            <TableRowColumn>{ router.vehicle ? router.vehicle.number : i18n.error.number_removed }</TableRowColumn>
+            <TableRowColumn>{ router.vehicle ? router.vehicle.number : null }</TableRowColumn>
             <TableRowColumn>{ router.dfi_name }</TableRowColumn>
             <TableRowColumn>{ router.version }</TableRowColumn>
             <TableRowColumn>{ router.type }</TableRowColumn>

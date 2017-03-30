@@ -3,8 +3,10 @@ import { Card, CardText, CircularProgress, FlatButton, Dialog,
   TextField, RaisedButton, SelectField, MenuItem } from 'material-ui'
 import { setHeaderTitle, updateDfi, insertDfi,
 removeDfi } from '../actions'
+import { Row, Col, BoxRow } from '../flexboxgrid'
 import { formatDate } from '/imports/helpers'
 import { isAllowed } from '/imports/helpers'
+import { RouterLink } from '../routers'
 
 class Dfi extends React.Component {
 
@@ -83,56 +85,69 @@ class Dfi extends React.Component {
       <CardText>
         <form onSubmit={ this.mutate.bind(this) }>
 
-          <TextField
-          defaultValue={ dfi.description || '' }
-          type="text"
-          ref="description"
-          required={ true }
-          floatingLabelText={ i18n.label.description }  />
-          <br />
+          <Row>
+            <Col xs="12" sm="6" md="6" lg="6">
+              <BoxRow>
 
-          <SelectField
-          floatingLabelText={ i18n.label.type }
-          value={ type }
-          required={ true }
-          onChange={ this.updateSelectField.bind(this, 'type') }>
-            { typeOptions.map((option) => {
-              return <MenuItem
-                key={ option }
-                value={ option }
-                primaryText={ option } />
-            })}
-          </SelectField>
-          <br />
+                <TextField
+                defaultValue={ dfi.description || '' }
+                type="text"
+                ref="description"
+                required={ true }
+                floatingLabelText={ i18n.label.description }  />
+                <br />
 
-          <SelectField
-          floatingLabelText={ i18n.label.row_type }
-          value={ row_type }
-          required={ true }
-          onChange={ this.updateSelectField.bind(this, 'row_type') }>
-            { rowTypeOptions.map((option) => {
-              return <MenuItem
-                key={ option }
-                value={ option }
-                primaryText={ option } />
-            })}
-          </SelectField>
-          <br />
+                <SelectField
+                floatingLabelText={ i18n.label.type }
+                value={ type }
+                required={ true }
+                onChange={ this.updateSelectField.bind(this, 'type') }>
+                  { typeOptions.map((option) => {
+                    return <MenuItem
+                      key={ option }
+                      value={ option }
+                      primaryText={ option } />
+                  })}
+                </SelectField>
+                <br />
 
-          <TextField
-          defaultValue={ dfi.location || '' }
-          type="text"
-          ref="location"
-          floatingLabelText={ i18n.label.location }  />
-          <br />
+                <SelectField
+                floatingLabelText={ i18n.label.row_type }
+                value={ row_type }
+                required={ true }
+                onChange={ this.updateSelectField.bind(this, 'row_type') }>
+                  { rowTypeOptions.map((option) => {
+                    return <MenuItem
+                      key={ option }
+                      value={ option }
+                      primaryText={ option } />
+                  })}
+                </SelectField>
+                <br />
 
-          <TextField
-          defaultValue={ dfi.notes || '' }
-          type="text"
-          ref="notes"
-          multiLine={ true }
-          floatingLabelText={ i18n.label.notes }  />
-          <br />
+                <TextField
+                defaultValue={ dfi.location || '' }
+                type="text"
+                ref="location"
+                floatingLabelText={ i18n.label.location }  />
+                <br />
+
+                <TextField
+                defaultValue={ dfi.notes || '' }
+                type="text"
+                ref="notes"
+                multiLine={ true }
+                floatingLabelText={ i18n.label.notes }  />
+                <br />
+
+              </BoxRow>
+            </Col>
+            <Col xs="12" sm="6" md="6" lg="6">
+              <BoxRow>
+                { dfi._id ? <RouterLink dfiId={ dfi._id } /> : null }
+              </BoxRow>
+            </Col>
+          </Row>
 
           { isAllowed('dfis.update', user ? user.roles : null) ?
           <RaisedButton

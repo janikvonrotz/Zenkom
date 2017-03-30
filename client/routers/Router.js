@@ -94,10 +94,13 @@ class Router extends React.Component {
   }
 
   render() {
-    let { router={}, vehicles=[], loading, i18n, user, statusOptions,
+    let { router={}, vehicles=[], loading, i18n, user, statusOptions, location,
       companyOptions, profileOptions, typeOptions, statistic } = this.props
-    let { vehicle_id, type, status, profile, transport_company,
+    let { vehicle_id, dfi_id, type, status, profile, transport_company,
       installed_at } = this.state
+
+    // read params
+    let { dfiId, vehicleId } = location.query
 
     const actions = [
       <FlatButton
@@ -113,7 +116,7 @@ class Router extends React.Component {
 
     return loading ? <CircularProgress /> : <Card>
       <CardMedia>
-        { statistic ? <img src={ statistic.url } /> : null }
+        { statistic ? <img style={{ maxWidth: 600, minWidth: 100 }} src={ statistic.url } /> : null }
       </CardMedia>
       <CardText>
         <form onSubmit={ this.mutate.bind(this) }>
@@ -132,14 +135,14 @@ class Router extends React.Component {
 
                 <SelectField
                 floatingLabelText={ i18n.label.vehicle_id }
-                value={ vehicle_id }
+                value={ vehicle_id || vehicleId }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'vehicle_id') }>
                   { vehicles.map((vehicleItem) => {
                     return <MenuItem
                       key={ vehicleItem._id }
                       value={ vehicleItem._id }
-                      primaryText={ vehicleItem.number} />
+                      primaryText={ vehicleItem.number } />
                   }) }
                  </SelectField>
                 <br />

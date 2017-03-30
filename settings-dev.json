@@ -4,8 +4,7 @@
       "url": "ldap://ldap.forumsys.com",
       "base": "dc=example,dc=com",
       "filter": "(mail={email})",
-      "scope": "sub",
-      "searchUser": {}
+      "scope": "sub"
     },
     "mail": {
       "notificationFrom": "notifications@zenkom.bitsherpa.com"

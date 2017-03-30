@@ -5,6 +5,8 @@ import { setHeaderTitle, updateVehicle, insertVehicle,
 removeVehicle } from '../actions'
 import { formatDate } from '/imports/helpers'
 import { isAllowed } from '/imports/helpers'
+import { Row, Col, BoxRow } from '../flexboxgrid'
+import { RouterLink } from '../routers'
 
 class Vehicle extends React.Component {
 
@@ -80,37 +82,50 @@ class Vehicle extends React.Component {
       <CardText>
         <form onSubmit={ this.mutate.bind(this) }>
 
-          <TextField
-          defaultValue={ vehicle.number || '' }
-          type="text"
-          ref="number"
-          required={ true }
-          floatingLabelText={ i18n.label.number }  />
-          <br />
+          <Row>
+            <Col xs="12" sm="6" md="6" lg="6">
+              <BoxRow>
 
-          <SelectField
-          floatingLabelText={ i18n.label.status }
-          value={ status }
-          required={ true }
-          autoWidth={ true }
-          onChange={ this.updateSelectField.bind(this, 'status') }>
-            { statusOptions.map((option) => {
-              return <MenuItem
-                key={ option }
-                value={ option }
-                primaryText={ i18n.option[option] } />
-            })}
-          </SelectField>
-          <br />
+                <TextField
+                defaultValue={ vehicle.number || '' }
+                type="text"
+                ref="number"
+                required={ true }
+                floatingLabelText={ i18n.label.number }  />
+                <br />
 
-          { status === 'vehicle_upgrade' ? <span>
-            <DatePicker
-            value={ modification_until }
-            floatingLabelText={ i18n.label.modification_until || null }
-            onChange={ this.updateSelectField.bind(this, 'modification_until') }
-            hintText={ i18n.label.modification_until } />
-          </span> : null }
-          <br />
+                <SelectField
+                floatingLabelText={ i18n.label.status }
+                value={ status }
+                required={ true }
+                autoWidth={ true }
+                onChange={ this.updateSelectField.bind(this, 'status') }>
+                  { statusOptions.map((option) => {
+                    return <MenuItem
+                      key={ option }
+                      value={ option }
+                      primaryText={ i18n.option[option] } />
+                  })}
+                </SelectField>
+                <br />
+
+                { status === 'vehicle_upgrade' ? <span>
+                  <DatePicker
+                  value={ modification_until }
+                  floatingLabelText={ i18n.label.modification_until || null }
+                  onChange={ this.updateSelectField.bind(this, 'modification_until') }
+                  hintText={ i18n.label.modification_until } />
+                </span> : null }
+                <br />
+
+              </BoxRow>
+            </Col>
+            <Col xs="12" sm="6" md="6" lg="6">
+              <BoxRow>
+                { vehicle._id ? <RouterLink vehicleId={ vehicle._id } /> : null }
+              </BoxRow>
+            </Col>
+          </Row>
 
           { isAllowed('vehicles.update', user ? user.roles : null) ?
           <RaisedButton

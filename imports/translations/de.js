@@ -22,6 +22,7 @@ export default {
     about: 'Über',
     load_more: 'Weitere laden',
     show_all: 'Alle anzeigen',
+    show_router: 'Router anzeigen'
   },
   label: {
     _id: 'ID',
@@ -133,7 +134,6 @@ export default {
     page_not_found: 'Seite konnte nicht gefunden werden',
     password_invalid: 'Ungültiges Passwort',
     insufficent_rights: 'Fehlende Berechtigung',
-    number_removed: '-',
   },
   option: {
     vehicle_inserted: 'Fahrzeug hinzugefügt',

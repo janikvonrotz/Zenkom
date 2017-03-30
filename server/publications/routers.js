@@ -3,6 +3,20 @@ import { Routers, Vehicles } from '/imports/collections'
 import { isAllowed } from '/imports/helpers'
 
 export default () => {
+
+  Meteor.publish('routers.list', function(selector = {}) {
+
+    // check permissions
+    let user = Meteor.users.findOne(this.userId)
+    let roles = user ? user.roles : null
+    if (isAllowed('routers.read', roles)) {
+      return Routers.find(selector)
+    } else {
+      this.stop()
+      return
+    }
+  })
+
   Meteor.publish('routers.with_vehicles', function(filter, sort, limit) {
     let routerSelector = {}, vehicleSelector = {}
     let routerOptions = {}, vehicleOptions = {}
