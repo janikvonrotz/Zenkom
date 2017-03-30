@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { Routers, Vehicles } from '/imports/collections'
+import { Routers, Vehicles, Dfis } from '/imports/collections'
 import { isAllowed } from '/imports/helpers'
 
 export default () => {
@@ -17,9 +17,9 @@ export default () => {
     }
   })
 
-  Meteor.publish('routers.with_vehicles', function(filter, sort, limit) {
-    let routerSelector = {}, vehicleSelector = {}
-    let routerOptions = {}, vehicleOptions = {}
+  Meteor.publish('routers.with_vehicles_dfis', function(filter, sort, limit) {
+    let routerSelector = {}, vehicleSelector = {}, dfiSelector = {}
+    let routerOptions = {}, vehicleOptions = {}, dfiOptions = {}
     if (sort) {
       routerOptions.sort = sort
     }
@@ -37,17 +37,30 @@ export default () => {
           number: 1,
         }
       }
+
+      dfiSelector = { archived: { $eq: false } }
+      dfiOptions = {
+        fields: {
+          _id: 1,
+          description: 1,
+        }
+      }
     } else {
 
       // filter vehicles
       let vehicleIds = Vehicles.find({ number: { $eq: Number(filter) }, archived: { $eq: false } }).map((vehicle) => {
         return vehicle._id
       })
+      // filter dfis
+      let dfiIds = Dfis.find({ description: { $eq: filter }, archived: { $eq: false } }).map((dfi) => {
+        return dfi._id
+      })
+
       routerSelector = { archived: { $eq: false }, $or: [
         { _id: { $regex: filter } },
         { hostname: { $regex: filter } },
         { vehicle_id: { $in: vehicleIds } },
-        { dfi_name: { $regex: filter } },
+        { dfi_id: { $in: dfiIds } },
         { version: { $regex: filter } },
         { type: { $regex: filter } },
         { ip_router: { $regex: filter } },
@@ -61,6 +74,14 @@ export default () => {
           number: 1,
         }
       }
+
+      dfiSelector = { archived: { $eq: false } }
+      dfiOptions = {
+        fields: {
+          _id: 1,
+          description: 1,
+        }
+      }
     }
 
     // check permissions
@@ -70,6 +91,7 @@ export default () => {
       return [
         Routers.find(routerSelector, routerOptions),
         Vehicles.find(vehicleSelector, vehicleOptions),
+        Dfis.find(dfiSelector, dfiOptions),
       ]
     } else {
       this.stop()
@@ -77,7 +99,7 @@ export default () => {
     }
   })
 
-  Meteor.publish('routers.item_with_vehicles', function(id) {
+  Meteor.publish('routers.item_with_vehicles_dfi', function(id) {
 
     let routerSelector = { _id: id, archived: { $eq: false } }
     let vehicleSelector = { archived: { $eq: false } }
@@ -85,6 +107,13 @@ export default () => {
       fields: {
         _id: 1,
         number: 1,
+      }
+    }
+    let dfiSelector = { archived: { $eq: false } }
+    let dfiOptions = {
+      fields: {
+        _id: 1,
+        description: 1,
       }
     }
 
@@ -95,6 +124,7 @@ export default () => {
       return [
         Vehicles.find(vehicleSelector, vehicleOptions),
         Routers.find(routerSelector),
+        Dfis.find(dfiSelector, dfiOptions),
       ]
     } else {
       this.stop()

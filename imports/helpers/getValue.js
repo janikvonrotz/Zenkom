@@ -3,7 +3,7 @@ export default (object, path) => {
   let  pathLength = subPath.length
 
   for (let index = 0; index < pathLength; index++) {
-    object = object[subPath[index]]
+    object = object[subPath[index]] || ''
   }
   return object
 }

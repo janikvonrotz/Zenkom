@@ -30,7 +30,7 @@ export default {
     hostname: 'Hostname',
     vehicle_id: 'Fahrzeug',
     vehicle_number: 'Fahrzeugnummer',
-    dfi_name: 'DFI Bezeichnung',
+    dfi_description: 'DFI Bezeichnung',
     version: 'Version',
     type: 'Typ',
     serial_number: 'Seriennummer',
