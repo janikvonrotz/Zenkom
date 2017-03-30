@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
+import { Card, CardText, CircularProgress, FlatButton, Dialog,
   TextField, RaisedButton, SelectField, MenuItem } from 'material-ui'
 import { setHeaderTitle, updateDfi, insertDfi,
 removeDfi } from '../actions'
@@ -12,6 +12,8 @@ class Dfi extends React.Component {
     super(props)
     this.state = {
       openRemoveDialog: false,
+      type: '',
+      row_type: '',
     }
   }
 
@@ -19,8 +21,14 @@ class Dfi extends React.Component {
     event.preventDefault()
 
     let { dfi = {}, dispatch } = this.props
-    let { description } = this.refs
+    let { type, row_type } = this.state
+    let { description, location, notes } = this.refs
+
     dfi.description = description.getValue()
+    dfi.location = location.getValue()
+    dfi.notes = notes.getValue()
+    dfi.type = type
+    dfi.row_type = row_type
 
     dfi._id ? dispatch(updateDfi(dfi)) : dispatch(insertDfi(dfi))
   }
@@ -48,11 +56,16 @@ class Dfi extends React.Component {
 
   componentWillReceiveProps(nextProps){
     let { dispatch, dfi={}, i18n } = nextProps
+    this.setState({
+      type: dfi.type || '',
+      row_type: dfi.row_type || '',
+    })
     dispatch(setHeaderTitle(dfi._id ? `${ i18n.vocabulary.dfi } ${ dfi.description }` : i18n.vocabulary.untitled ))
   }
 
   render() {
-    let { dfi={}, loading, i18n, user } = this.props
+    let { type, row_type } = this.state
+    let { dfi={}, loading, i18n, user, typeOptions, rowTypeOptions } = this.props
 
     const actions = [
       <FlatButton
@@ -76,6 +89,49 @@ class Dfi extends React.Component {
           ref="description"
           required={ true }
           floatingLabelText={ i18n.label.description }  />
+          <br />
+
+          <SelectField
+          floatingLabelText={ i18n.label.type }
+          value={ type }
+          required={ true }
+          onChange={ this.updateSelectField.bind(this, 'type') }>
+            { typeOptions.map((option) => {
+              return <MenuItem
+                key={ option }
+                value={ option }
+                primaryText={ option } />
+            })}
+          </SelectField>
+          <br />
+
+          <SelectField
+          floatingLabelText={ i18n.label.row_type }
+          value={ row_type }
+          required={ true }
+          onChange={ this.updateSelectField.bind(this, 'row_type') }>
+            { rowTypeOptions.map((option) => {
+              return <MenuItem
+                key={ option }
+                value={ option }
+                primaryText={ option } />
+            })}
+          </SelectField>
+          <br />
+
+          <TextField
+          defaultValue={ dfi.location || '' }
+          type="text"
+          ref="location"
+          floatingLabelText={ i18n.label.location }  />
+          <br />
+
+          <TextField
+          defaultValue={ dfi.notes || '' }
+          type="text"
+          ref="notes"
+          multiLine={ true }
+          floatingLabelText={ i18n.label.notes }  />
           <br />
 
           { isAllowed('dfis.update', user ? user.roles : null) ?

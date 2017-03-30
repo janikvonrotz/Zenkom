@@ -73,7 +73,7 @@ export default {
     have_account: 'Sie haben bereits einen Account?',
     confirm_reste_router: 'Möchten Sie den Rouer wirklich wiederherstellen?',
     confirm_delete_vehicle: 'Möchten Sie dieses Fahrzeug wirklich löschen?',
-    confirm_delete_dif: 'Möchten Sie diesen DFI wirklich löschen?',
+    confirm_delete_dfi: 'Möchten Sie diesen DFI wirklich löschen?',
   },
   hint: {
     login_with_ldap: 'Login mit LDAP?',

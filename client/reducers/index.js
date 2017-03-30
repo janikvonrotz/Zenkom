@@ -19,6 +19,8 @@ import listLimit from './listLimit'
 import listSort from './listSort'
 import routerStatistic from './routerStatistic'
 import dfiFilter from './dfiFilter'
+import dfiTypeOptions from './dfiTypeOptions'
+import dfiRowTypeOptions from './dfiRowTypeOptions'
 
 const zenkomApp = combineReducers({
   headerTitle,
@@ -41,6 +43,8 @@ const zenkomApp = combineReducers({
   listSort,
   routerStatistic,
   dfiFilter,
+  dfiRowTypeOptions,
+  dfiTypeOptions,
 })
 
 export default zenkomApp
