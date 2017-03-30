@@ -10,28 +10,22 @@ class Profile extends React.Component {
   update() {
     let { dispatch, notificationOptions, channelOptions, user } = this.props
     let { router_updated, router_inserted, router_broken, vehicle_inserted,
-      vehicle_upgrade, browser_notification, email_notification } = this.refs
+      vehicle_upgrade, browser_notification, email_notification,
+      dfi_inserted } = this.refs
 
-    router_updated = router_updated.isChecked()
-    router_inserted = router_inserted.isChecked()
-    router_broken = router_broken.isChecked()
-    vehicle_inserted = vehicle_inserted.isChecked()
-    vehicle_upgrade = vehicle_upgrade.isChecked()
     let notifications = []
     notificationOptions = { router_updated, router_inserted, router_broken,
-      vehicle_inserted,  vehicle_upgrade }
+      vehicle_inserted,  vehicle_upgrade, dfi_inserted }
     Object.keys(notificationOptions).map((key) => {
-      if (notificationOptions[key]) {
+      if (notificationOptions[key].isChecked()) {
         notifications.push(key)
       }
     })
 
-    browser_notification = browser_notification.isChecked()
-    email_notification = email_notification.isChecked()
     let channels = []
     channelOptions = { browser_notification, email_notification }
     Object.keys(channelOptions).map((key) => {
-      if (channelOptions[key]) {
+      if (channelOptions[key].isChecked()) {
         channels.push(key)
       }
     })

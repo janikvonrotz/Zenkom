@@ -150,6 +150,7 @@ export default {
     router_active: 'Router in Betrieb',
     router_sent: 'Router wurde verschickt',
     router_out_of_order: 'Router ist ausser Betrieb',
+    dfi_inserted: 'DFI hinzugefügt',
   },
   role: {
     user: 'Benutzer',
@@ -161,6 +162,7 @@ export default {
     about: 'Zenkom ist die zentrale Kommunikationsplattform der vernetzten Fahrzeugsystem und ist das Ergebnis der Bachelorarbeit von Janik von Rotz. Für Änderungsanträge und Rückmeldungen können Sie den Autor kontaktieren: http://janikvonrotz.ch/contact.',
     introduction: 'Willkommen bei der zentralen Kommunikationsplattform der vernetzten Fahrzeugsysteme.',
     contact_administrator: 'Um Zugriffsberechtigungen im System zu erhalten, kontaktieren Sie den Zenkom Administrator.',
+    check_out_settings: 'Leider haben Sie noch keine Benachrichtigungen erhalten, bitte überprüfen Sie Ihre Benachrichtigungseinstellungen in den ',
   },
   email: {
     received_notification: 'Sie haben eine neue Benachrichtigung erhalten:',

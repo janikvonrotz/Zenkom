@@ -29,7 +29,8 @@ class App extends React.Component {
 
         { !user ? <p>{ i18n.text.contact_administrator }</p> : null }
 
-        { user && isAllowed('notifications.read', user.roles) ? <NotificationList /> : null }
+        { user && isAllowed('notifications.read', user.roles) ? <NotificationList />
+         : <p>{ i18n.text.contact_administrator }</p> }
 
       </CardText>
     </Card>

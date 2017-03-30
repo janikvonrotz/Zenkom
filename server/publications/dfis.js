@@ -21,7 +21,7 @@ export default () => {
       selector = { archived: { $eq: false }, $or: [
         { _id: { $regex: filter } },
         { description: { $regex: filter } },
-        { row: { $regex: filter } },
+        { type: { $regex: filter } },
         { row_type: { $regex: filter } },
         { location: { $regex: filter } },
       ] }
