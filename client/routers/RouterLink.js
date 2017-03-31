@@ -11,16 +11,16 @@ class RouterLink extends React.Component {
       <CardTitle title={ i18n.vocabulary.router } />
       <CardText>
         { router ? <div>
-          { dfiId ? <p>Der Router { router.hostname } wurde mit diesem DFI verlinkt.</p> : null }
-          { vehicleId ? <p>Der Router { router.hostname } wurde mit diesem Fahrzeug verlinkt.</p> : null }
+          { dfiId ? <p>{ i18n.hint.router_linked_with_dfi.replace('{ hostname }', router.hostname) }</p> : null }
+          { vehicleId ? <p>{ i18n.hint.router_linked_with_vehicle.replace('{ hostname }', router.hostname) }</p> : null }
           <Link to={ `/router/${ router._id }/edit` }>
             <RaisedButton
             label={ i18n.button.show_router }
             primary={ true } />
           </Link>
         </div> : <div>
-        { dfiId ? <p>Es wurde noch kein Router mit diesem DFI verlinkt.</p>: null }
-        { vehicleId ? <p>Es wurde noch kein Router mit diesem Fahrzeug verlinkt.</p> : null }
+        { dfiId ? <p>{ i18n.error.no_router_linked_with_dfi }</p>: null }
+        { vehicleId ? <p>{ i18n.error.no_router_linked_with_vehicle }</p> : null }
           <Link to={ `/router/new?${ dfiId ? 'dfiId' : vehicleId ? 'vehicleId' : null }=${ dfiId || vehicleId }` }>
             <RaisedButton
             label={ i18n.button.add_router }

@@ -89,6 +89,8 @@ export default {
     email_is_not_verified: 'Ihre Email konnte nicht verifiziert werden.',
     page_not_found: 'Leider konnte die gewünschte Seite nicht gefunden werden.',
     no_history: 'Für diesen Eintrag existieren noch keine Versionen.',
+    router_linked_with_dfi: 'Der Router { hostname } wurde mit diesem DFI verlinkt.',
+    router_linked_with_vehicle: 'Der Router { hostname } wurde mit diesem Fahrzeug verlinkt.',
   },
   vocabulary: {
     router: 'Router',
@@ -137,6 +139,8 @@ export default {
     page_not_found: 'Seite konnte nicht gefunden werden',
     password_invalid: 'Ungültiges Passwort',
     insufficent_rights: 'Fehlende Berechtigung',
+    no_router_linked_with_vehicle: 'Es wurde noch kein Router mit diesem Fahrzeug verlinkt.',
+    no_router_linked_with_dfi: 'Es wurde noch kein Router mit diesem DFI verlinkt.',
   },
   option: {
     vehicle_inserted: 'Fahrzeug hinzugefügt',
