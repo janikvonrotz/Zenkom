@@ -39,7 +39,6 @@ class UserList extends React.Component {
   render() {
     let { users, loading, i18n, roleOptions } = this.props
     let headers = [
-      '_id',
       'firstname',
       'lastname',
       'email',
@@ -63,7 +62,6 @@ class UserList extends React.Component {
         <TableBody>
           { users.map((user) => {
             return <TableRow key={ user._id }>
-              <TableRowColumn>{ user._id }</TableRowColumn>
               <TableRowColumn>{ user.profile.firstname }</TableRowColumn>
               <TableRowColumn>{ user.profile.lastname }</TableRowColumn>
               <TableRowColumn>{ user.emails[0].address }</TableRowColumn>

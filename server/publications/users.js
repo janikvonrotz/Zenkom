@@ -55,7 +55,6 @@ export default () => {
         })
       } else {
         let handle = Meteor.users.find({ $or: [
-          { _id: { $regex: filter } },
           { 'profile.name': { $regex: filter } },
           { 'emails.0.address': { $regex: filter } },
           { 'roles.0': { $regex: filter } },
