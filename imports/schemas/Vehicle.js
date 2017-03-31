@@ -5,6 +5,10 @@ export default new SimpleSchema({
     type: Number,
     label: 'Fahrzeugnummer',
   },
+  type: {
+    type: String,
+    label: 'Typ',
+  },
   status: {
     type: String,
     label: 'Status',
@@ -12,6 +16,11 @@ export default new SimpleSchema({
   modification_until: {
     type: Date,
     label: 'Umbau bis',
+    optional: true,
+  },
+  rollout_until: {
+    type: Date,
+    label: 'Inbetriebnahme bis',
     optional: true,
   },
   created_at: {

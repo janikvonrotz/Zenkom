@@ -14,7 +14,9 @@ class Vehicle extends React.Component {
     super(props)
     this.state = {
       status: '',
+      type: '',
       modification_until: '',
+      rollout_until: '',
       openRemoveDialog: false,
     }
   }
@@ -23,10 +25,12 @@ class Vehicle extends React.Component {
     event.preventDefault()
 
     let { vehicle = {}, dispatch } = this.props
-    let { status, modification_until } = this.state
+    let { status, modification_until, type, rollout_until } = this.state
     let { number } = this.refs
     vehicle.number = number.getValue()
     vehicle.status = status
+    vehicle.type = type
+    vehicle.rollout_until = status === 'vehicle_rollout' ? rollout_until : null
     vehicle.modification_until = status === 'vehicle_upgrade' ? modification_until : null
 
     vehicle._id ? dispatch(updateVehicle(vehicle)) : dispatch(insertVehicle(vehicle))
@@ -57,26 +61,17 @@ class Vehicle extends React.Component {
     let { dispatch, vehicle={}, i18n } = nextProps
     this.setState({
       status: vehicle.status || '',
+      type: vehicle.type || '',
+      rollout_until: vehicle.rollout_until || null,
       modification_until: vehicle.modification_until || null,
     })
     dispatch(setHeaderTitle(vehicle._id ? `${ i18n.vocabulary.vehicle } ${ vehicle.number }` : i18n.vocabulary.untitled ))
   }
 
   render() {
-    let { vehicle={}, loading, i18n, statusOptions, user } = this.props
-    let { status, modification_until } = this.state
-
-    const actions = [
-      <FlatButton
-      label={ i18n.button.cancel }
-      primary={ true }
-      onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
-      />,
-      <FlatButton
-      onTouchTap={ this.remove.bind(this) }
-      label={ i18n.button.remove }
-      secondary={ true } />,
-    ]
+    let { vehicle={}, loading, i18n, statusOptions, user,
+      typeOptions } = this.props
+    let { status, modification_until, rollout_until, type } = this.state
 
     return loading ? <CircularProgress /> : <Card>
       <CardText>
@@ -92,6 +87,21 @@ class Vehicle extends React.Component {
                 ref="number"
                 required={ true }
                 floatingLabelText={ i18n.label.number }  />
+                <br />
+
+                <SelectField
+                floatingLabelText={ i18n.label.type }
+                value={ type }
+                required={ true }
+                autoWidth={ true }
+                onChange={ this.updateSelectField.bind(this, 'type') }>
+                  { typeOptions.map((option) => {
+                    return <MenuItem
+                      key={ option }
+                      value={ option }
+                      primaryText={ option } />
+                  })}
+                </SelectField>
                 <br />
 
                 <SelectField
@@ -115,8 +125,17 @@ class Vehicle extends React.Component {
                   floatingLabelText={ i18n.label.modification_until || null }
                   onChange={ this.updateSelectField.bind(this, 'modification_until') }
                   hintText={ i18n.label.modification_until } />
+                  <br />
                 </span> : null }
-                <br />
+
+                { status === 'vehicle_rollout' ? <span>
+                  <DatePicker
+                  value={ rollout_until }
+                  floatingLabelText={ i18n.label.rollout_until || null }
+                  onChange={ this.updateSelectField.bind(this, 'rollout_until') }
+                  hintText={ i18n.label.rollout_until } />
+                  <br />
+                </span> : null }
 
               </BoxRow>
             </Col>
@@ -144,7 +163,17 @@ class Vehicle extends React.Component {
 
           <Dialog
           title={ `${i18n.vocabulary.vehicle} ${ vehicle.number } ${i18n.button.remove}` }
-          actions={ actions }
+          actions={ [
+            <FlatButton
+            label={ i18n.button.cancel }
+            primary={ true }
+            onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
+            />,
+            <FlatButton
+            onTouchTap={ this.remove.bind(this) }
+            label={ i18n.button.remove }
+            secondary={ true } />,
+          ] }
           modal={ false }
           onRequestClose={ this.toggleDialog.bind(this, 'openRemoveDialog') }
           open={ this.state.openRemoveDialog }>

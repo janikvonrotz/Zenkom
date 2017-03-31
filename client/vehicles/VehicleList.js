@@ -31,7 +31,8 @@ class VehicleList extends React.Component {
 
     let headers = [
       'number',
-      'status'
+      'status',
+      'type'
     ]
 
     return <div>
@@ -55,6 +56,7 @@ class VehicleList extends React.Component {
                 { vehicle.number }
               </Link></TableRowColumn>
               <TableRowColumn>{ i18n.option[vehicle.status] }</TableRowColumn>
+              <TableRowColumn>{ vehicle.type }</TableRowColumn>
             </TableRow>
           }) }
         </TableBody>

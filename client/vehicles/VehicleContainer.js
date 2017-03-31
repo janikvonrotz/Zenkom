@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
     i18n: state.i18n,
     user: state.user,
     statusOptions: state.vehicleStatusOptions,
+    typeOptions: state.vehicleTypeOptions,
   }
 }
 

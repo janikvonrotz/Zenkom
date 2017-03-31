@@ -65,6 +65,7 @@ export default {
     repeat_password: 'Passwort wiederholen',
     number: 'Nummer',
     modification_until: 'Umbau bis',
+    rollout_until: 'Inbetriebnahme bis',
     role: 'Rolle',
     description: 'Bezeichnung',
     row_type: 'Zeilentyp',

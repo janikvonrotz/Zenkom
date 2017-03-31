@@ -11,6 +11,7 @@ let seeds = () => {
         vehicle: {
           number: 64,
           status: 'vehicle_active',
+          type: 'Trolley',
           created_at: new Date(),
           updated_at: new Date(),
           created_by: 'Janik von Rot',
@@ -44,6 +45,7 @@ let seeds = () => {
         vehicle: {
           number: 65,
           status: 'vehicle_upgrade',
+          type: 'Trolley',
           modification_until: new Date(2018,1,1),
           created_at: new Date(),
           updated_at: new Date(),
