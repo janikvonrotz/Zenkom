@@ -4,6 +4,7 @@ import { DfiList } from './index'
 import { connect } from 'react-redux'
 import { insertDfi, setDfiFilter, resetListLimit, increaseListLimit,
   setListLimit } from '../actions'
+import { isAllowed } from '/imports/helpers'
 
 class DfiSearch extends React.Component {
 
@@ -35,7 +36,7 @@ class DfiSearch extends React.Component {
   }
 
   render() {
-    let { i18n } = this.props
+    let { i18n, user } = this.props
 
     return <Card>
       <CardText>
@@ -48,10 +49,12 @@ class DfiSearch extends React.Component {
 
         <br /><br />
 
+        { isAllowed('dfis.insert', user ? user.roles : null) ?
         <RaisedButton
         onTouchTap={ this.insert.bind(this) }
         label={ i18n.button.add_dfi }
         primary={ true } />
+        : null }
 
         <br /><br />
 
@@ -71,6 +74,7 @@ class DfiSearch extends React.Component {
 const mapStateToProps = (state) => {
   return {
     i18n: state.i18n,
+    user: state.user,
   }
 }
 export default connect(mapStateToProps)(DfiSearch)

@@ -7,6 +7,7 @@ import { Meteor } from 'meteor/meteor'
 const mapStateToProps = (state) => {
   return {
     i18n: state.i18n,
+    user: state.user,
   }
 }
 

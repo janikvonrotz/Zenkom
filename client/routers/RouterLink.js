@@ -1,13 +1,15 @@
 import React from 'react'
 import { RaisedButton, CardTitle, CardText } from 'material-ui'
 import { Link } from 'react-router'
+import { isAllowed } from '/imports/helpers'
 
 class RouterLink extends React.Component {
 
   render() {
-    let { router, i18n, dfiId, vehicleId } = this.props
+    let { router, i18n, dfiId, vehicleId, user } = this.props
 
-    return <div>
+    return isAllowed('routers.read', user ? user.roles : null) ?
+    <div>
       <CardTitle title={ i18n.vocabulary.router } />
       <CardText>
         { router ? <div>
@@ -29,6 +31,7 @@ class RouterLink extends React.Component {
         </div> }
       </CardText>
     </div>
+    : <div />
   }
 }
 
