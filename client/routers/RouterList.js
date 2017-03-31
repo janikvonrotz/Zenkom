@@ -34,7 +34,6 @@ class RouterList extends React.Component {
       'hostname',
       'vehicle_number',
       'dfi_description',
-      'version',
       'type',
       'ip_router',
       'ip_cashbox',
@@ -62,7 +61,6 @@ class RouterList extends React.Component {
             </Link></TableRowColumn>
             <TableRowColumn>{ router.vehicle ? router.vehicle.number : null }</TableRowColumn>
             <TableRowColumn>{ router.dfi ? router.dfi.description : null }</TableRowColumn>
-            <TableRowColumn>{ router.version }</TableRowColumn>
             <TableRowColumn>{ router.type }</TableRowColumn>
             <TableRowColumn>{ router.ip_router }</TableRowColumn>
             <TableRowColumn>{ router.ip_cashbox }</TableRowColumn>

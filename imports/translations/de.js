@@ -22,13 +22,16 @@ export default {
     about: 'Über',
     load_more: 'Weitere laden',
     show_all: 'Alle anzeigen',
-    show_router: 'Router anzeigen'
+    show_router: 'Router anzeigen',
+    show_dfi: 'DFI anzeigen',
+    show_vehicle: 'Fahrzeug anzeigen',
   },
   label: {
     _id: 'ID',
     id: 'ID',
     hostname: 'Hostname',
     vehicle_id: 'Fahrzeug',
+    dfi_id: 'DFI',
     vehicle_number: 'Fahrzeugnummer',
     dfi_description: 'DFI Bezeichnung',
     version: 'Version',

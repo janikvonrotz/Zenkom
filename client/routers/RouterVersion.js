@@ -36,7 +36,7 @@ class RouterVersion extends React.Component {
     let keys = [
       'hostname',
       'vehicle_id',
-      'dfi_name',
+      'dfi_id',
       'version',
       'type',
       'serial_number',

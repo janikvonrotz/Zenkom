@@ -52,7 +52,7 @@ export default () => {
         return vehicle._id
       })
       // filter dfis
-      let dfiIds = Dfis.find({ description: { $eq: filter }, archived: { $eq: false } }).map((dfi) => {
+      let dfiIds = Dfis.find({ description: { $regex: filter }, archived: { $eq: false } }).map((dfi) => {
         return dfi._id
       })
 
@@ -61,7 +61,6 @@ export default () => {
         { hostname: { $regex: filter } },
         { vehicle_id: { $in: vehicleIds } },
         { dfi_id: { $in: dfiIds } },
-        { version: { $regex: filter } },
         { type: { $regex: filter } },
         { ip_router: { $regex: filter } },
         { ip_cashbox: { $regex: filter } },

@@ -34,10 +34,16 @@ export default connect(mapStateToProps)(createContainer(({ filter, sort, limit }
   if (sort && ([ 'vehicle_number', 'dfi_description' ].indexOf(Object.keys(sort)[0]) != -1)) {
     let sortForeignKey = Object.keys(sort)[0]
     let sortKey = Object.keys(sort)[0].split('_').join('.')
-    console.log(sort, sortForeignKey, sortKey)
     routers.sort((a, b) => {
-      console.log(a, b)
-      return ((getValue(a, sortKey) - getValue(b, sortKey))*sort[sortForeignKey])
+      let aValue = getValue(a, sortKey)
+      let bValue = getValue(b, sortKey)
+
+      // different sort for number and string
+      if (typeof aValue === 'number' ) {
+        return ((aValue - bValue)*sort[sortForeignKey])
+      } else {
+        return ((aValue < bValue)*sort[sortForeignKey])
+      }
     })
   }
 

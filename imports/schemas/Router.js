@@ -10,11 +10,6 @@ export default new SimpleSchema({
     label: 'Fahrzeug',
     optional: true,
   },
-  dfi_name: {
-    type: String,
-    label: 'DFI Bezeichnung',
-    optional: true
-  },
   dfi_id: {
     type: String,
     label: 'DFI',
