@@ -63,7 +63,8 @@ Export JSON
 
 Convert JSON
 
-    Get-Content ./backup/DfisImport.csv -First 38 | ConvertFrom-Csv | %{
+    Get-Content ./backup/DfisImport.csv -First 69 | ConvertFrom-Csv | %{
+        Write-Host $_.description
         $_.created_at = @{'$date' = $_.created_at}
         $_.archived = $false
         return $_

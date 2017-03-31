@@ -19,7 +19,6 @@ export default () => {
       selector = { archived: { $eq: false } }
     } else {
       selector = { archived: { $eq: false }, $or: [
-        { _id: { $regex: filter } },
         { description: { $regex: filter } },
         { type: { $regex: filter } },
         { row_type: { $regex: filter } },

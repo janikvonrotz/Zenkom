@@ -30,7 +30,6 @@ class VehicleList extends React.Component {
     let { vehicles, loading, i18n } = this.props
 
     let headers = [
-      '_id',
       'number',
       'status'
     ]
@@ -52,7 +51,6 @@ class VehicleList extends React.Component {
         <TableBody>
           { vehicles.map((vehicle) => {
             return <TableRow key={ vehicle._id }>
-              <TableRowColumn>{ vehicle._id }</TableRowColumn>
               <TableRowColumn><Link to={ `/vehicle/${vehicle._id}/edit` }>
                 { vehicle.number }
               </Link></TableRowColumn>

@@ -57,7 +57,6 @@ export default () => {
       })
 
       routerSelector = { archived: { $eq: false }, $or: [
-        { _id: { $regex: filter } },
         { hostname: { $regex: filter } },
         { vehicle_id: { $in: vehicleIds } },
         { dfi_id: { $in: dfiIds } },

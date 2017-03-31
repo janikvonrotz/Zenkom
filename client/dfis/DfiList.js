@@ -26,7 +26,6 @@ class DfiList extends React.Component {
     let { dfis, loading, i18n } = this.props
 
     let headers = [
-      '_id',
       'description',
       'type',
       'row_type',
@@ -50,7 +49,6 @@ class DfiList extends React.Component {
         <TableBody>
           { dfis.map((dfi) => {
             return <TableRow key={ dfi._id }>
-              <TableRowColumn>{ dfi._id }</TableRowColumn>
               <TableRowColumn><Link to={ `/dfi/${dfi._id}/edit` }>
                 { dfi.description }
               </Link></TableRowColumn>
