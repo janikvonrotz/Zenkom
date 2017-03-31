@@ -35,9 +35,33 @@ class VehicleList extends React.Component {
       'status'
     ]
 
-    return loading ? <CircularProgress /> : <Table>
-      <TableHeader>
-        <TableRow>
+    return <div>
+      { loading ? <CircularProgress /> : null }
+      <Table>
+        <TableHeader>
+          <TableRow>
+            { headers.map((header) => {
+              return <TableHeaderColumn
+              onClick={ this.updateSort.bind(this, header)}
+              key={ header }>
+                { i18n.label[header] }
+              </TableHeaderColumn>
+            }) }
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          { vehicles.map((vehicle) => {
+            return <TableRow key={ vehicle._id }>
+              <TableRowColumn>{ vehicle._id }</TableRowColumn>
+              <TableRowColumn><Link to={ `/vehicle/${vehicle._id}/edit` }>
+                { vehicle.number }
+              </Link></TableRowColumn>
+              <TableRowColumn>{ i18n.option[vehicle.status] }</TableRowColumn>
+            </TableRow>
+          }) }
+        </TableBody>
+        <TableFooter>
+          <TableRow>
           { headers.map((header) => {
             return <TableHeaderColumn
             onClick={ this.updateSort.bind(this, header)}
@@ -45,31 +69,10 @@ class VehicleList extends React.Component {
               { i18n.label[header] }
             </TableHeaderColumn>
           }) }
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        { vehicles.map((vehicle) => {
-          return <TableRow key={ vehicle._id }>
-            <TableRowColumn>{ vehicle._id }</TableRowColumn>
-            <TableRowColumn><Link to={ `/vehicle/${vehicle._id}/edit` }>
-              { vehicle.number }
-            </Link></TableRowColumn>
-            <TableRowColumn>{ i18n.option[vehicle.status] }</TableRowColumn>
           </TableRow>
-        }) }
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-        { headers.map((header) => {
-          return <TableHeaderColumn
-          onClick={ this.updateSort.bind(this, header)}
-          key={ header }>
-            { i18n.label[header] }
-          </TableHeaderColumn>
-        }) }
-        </TableRow>
-      </TableFooter>
-    </Table>
+        </TableFooter>
+      </Table>
+    </div>
   }
 }
 
