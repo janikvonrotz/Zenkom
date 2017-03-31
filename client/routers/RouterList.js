@@ -36,6 +36,9 @@ class RouterList extends React.Component {
       'type',
       'ip_router',
       'ip_cashbox',
+      'sim1',
+      'sim2',
+      'sim_itt',
     ]
 
     return <div>
@@ -64,6 +67,9 @@ class RouterList extends React.Component {
               <TableRowColumn>{ router.type }</TableRowColumn>
               <TableRowColumn>{ router.ip_router }</TableRowColumn>
               <TableRowColumn>{ router.ip_cashbox }</TableRowColumn>
+              <TableRowColumn>{ router.sim1 }</TableRowColumn>
+              <TableRowColumn>{ router.sim2 }</TableRowColumn>
+              <TableRowColumn>{ router.sim_itt }</TableRowColumn>
             </TableRow>
           }) }
         </TableBody>

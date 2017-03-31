@@ -63,6 +63,9 @@ export default () => {
         { type: { $regex: filter } },
         { ip_router: { $regex: filter } },
         { ip_cashbox: { $regex: filter } },
+        { sim1: { $regex: filter } },
+        { sim2: { $regex: filter } },
+        { sim_itt: { $regex: filter } },
       ] }
 
       vehicleSelector = { archived: { $eq: false } }
