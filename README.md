@@ -47,6 +47,34 @@ Import JSON
 
     mongoimport -h ds121190.mlab.com:21190 -d zenkom -c vehicles -u zenkom -p dp8e36APuASgSWum7uLz --file ./backup/VehiclesImport.json
 
+## dfis
+
+Export CSV
+
+    mongoexport -h ds121190.mlab.com:21190 -d zenkom -c dfis -u zenkom -p dp8e36APuASgSWum7uLz -o ./backup/DfisExport.csv --type=csv -f '_id,description,type,row_type,location,notes,created_at,created_by,updated_at,updated_by,archived'
+
+Import CSV
+
+    mongoimport -h ds121190.mlab.com:21190 -d zenkom -c dfis -u zenkom -p dp8e36APuASgSWum7uLz --file ./backup/DfisImport.csv --type=csv --headerline
+
+Export JSON
+
+    mongoexport -h ds121190.mlab.com:21190 -d zenkom -c dfis -u zenkom -p dp8e36APuASgSWum7uLz -o ./backup/DfisExport.json
+
+Convert JSON
+
+    Get-Content ./backup/DfisImport.csv -First 38 | ConvertFrom-Csv | %{
+        $_.created_at = @{'$date' = $_.created_at}
+        $_.archived = $false
+        return $_
+    } | %{
+        $_ | ConvertTo-Json
+    } | Out-File ./backup/DfisImport.json -Encoding UTF8
+
+Import JSON
+
+    mongoimport -h ds121190.mlab.com:21190 -d zenkom -c dfis -u zenkom -p dp8e36APuASgSWum7uLz --file ./backup/DfisImport.json
+
 ## routers
 
 Export CSV
@@ -63,7 +91,8 @@ Export JSON
 
 Convert JSON
 
-    Get-Content ./backup/RoutersImport.csv -First 38 | ConvertFrom-Csv | %{
+    Get-Content ./backup/RoutersImport.csv -First 106 | ConvertFrom-Csv | %{
+        Write-Host $_.hostname
         $_.created_at = @{'$date' = $_.created_at}
         $_.installed_at = @{'$date' = $_.installed_at}
         $_ | Add-Member -MemberType NoteProperty -Name 'history' -Value @()   
