@@ -7,15 +7,11 @@ import { fromNow } from '/imports/helpers'
 
 class PostList extends React.Component {
 
-  shouldComponentUpdate(nextProps){
-    return !nextProps.loading
-  }
-
   render() {
     let { notifications, loading, i18n } = this.props
 
     return <div>
-      {loading ? <CircularProgress /> : null }
+      { loading ? <CircularProgress /> : null }
       { notifications.length != 0 ?
       <List>
         { notifications.map((notification) => {

@@ -27,7 +27,7 @@ class App extends React.Component {
 
         <p>{ i18n.text.introduction }</p>
 
-        { user && user.roles.includes('user') ? <p>{ i18n.text.contact_administrator }</p> : null }
+        { user && user.roles && user.roles.includes('user') ? <p>{ i18n.text.contact_administrator }</p> : null }
 
         { user && isAllowed('notifications.read', user.roles) ? <NotificationList /> : null }
 

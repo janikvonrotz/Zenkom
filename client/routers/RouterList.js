@@ -12,10 +12,6 @@ class RouterList extends React.Component {
     dispatch(setHeaderTitle(i18n.vocabulary.routers))
   }
 
-  shouldComponentUpdate(nextProps){
-    return !nextProps.loading
-  }
-
   componentDidMount(){
     let { dispatch } = this.props
     dispatch(setListSort(null))

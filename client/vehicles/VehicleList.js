@@ -12,10 +12,6 @@ class VehicleList extends React.Component {
     dispatch(setHeaderTitle(i18n.vocabulary.vehicles))
   }
 
-  shouldComponentUpdate(nextProps){
-    return !nextProps.loading
-  }
-
   componentDidMount(){
     let { dispatch } = this.props
     dispatch(setListSort(null))

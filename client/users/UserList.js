@@ -16,10 +16,6 @@ class UserList extends React.Component {
     dispatch(setHeaderTitle(i18n.vocabulary.users))
   }
 
-  shouldComponentUpdate(nextProps){
-    return !nextProps.loading
-  }
-
   update(field, id, event){
     let { dispatch } = this.props
     let role = event.target.value
