@@ -59,7 +59,7 @@ export const setListSort = (sortKey) => {
     }
 
     // clone sort object, otherwhise redux won't update subscribing components
-    sort = objectAssign(sort)
+    sort = sort ? objectAssign(sort) : sort
     dispatch({
       type: 'SET_LIST_SORT',
       sort
