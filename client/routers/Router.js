@@ -87,8 +87,8 @@ class Router extends React.Component {
     let { dfiId, vehicleId } = location.query
 
     this.setState({
-      vehicle_id: router.vehicle_id ||  vehicleId || '',
-      dfi_id: router.dfi_id || dfiId || '',
+      vehicle_id: router.vehicle_id ||  vehicleId || null,
+      dfi_id: router.dfi_id || dfiId || null,
       type: router.type || '',
       status: router.status || '',
       profile: router.profile || '',
@@ -129,7 +129,7 @@ class Router extends React.Component {
                 value={ vehicle_id }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'vehicle_id') }>
-                  { vehicles.map((vehicleItem) => {
+                  { [ { _id: null, number: i18n.option.none } ].concat(vehicles).map((vehicleItem) => {
                     return <MenuItem
                       key={ vehicleItem._id }
                       value={ vehicleItem._id }
@@ -143,7 +143,7 @@ class Router extends React.Component {
                 value={ dfi_id }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'dfi_id') }>
-                  { dfis.map((dfi) => {
+                  { [ { _id: null, description: i18n.option.none } ].concat(dfis).map((dfi) => {
                     return <MenuItem
                       key={ dfi._id }
                       value={ dfi._id }

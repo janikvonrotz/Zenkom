@@ -159,6 +159,7 @@ export default {
     router_sent: 'Router wurde verschickt',
     router_out_of_order: 'Router ist ausser Betrieb',
     dfi_inserted: 'DFI hinzugefügt',
+    none: '',
   },
   role: {
     user: 'Benutzer',
