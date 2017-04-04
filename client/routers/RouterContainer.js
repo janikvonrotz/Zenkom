@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(createContainer(({ params }) => {
   let subscription = Meteor.subscribe('routers.item_with_vehicles_dfi', params.id)
   let router = Routers.findOne(params.id) || {}
-  let vehicles = Vehicles.find({}, { sort: { number: -1 } }).fetch()
+  let vehicles = Vehicles.find({}, { sort: { number: 1 } }).fetch()
   let dfis = Dfis.find({}, { sort: { description: 1 } }).fetch()
 
   return {
