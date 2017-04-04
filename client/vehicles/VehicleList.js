@@ -3,7 +3,7 @@ import { CircularProgress } from 'material-ui'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow,
   TableRowColumn, TableFooter } from '../datatable'
 import { Link } from 'react-router'
-import { setHeaderTitle } from '../actions'
+import { setHeaderTitle, setListSort } from '../actions'
 
 class VehicleList extends React.Component {
 
@@ -12,42 +12,63 @@ class VehicleList extends React.Component {
     dispatch(setHeaderTitle(i18n.vocabulary.vehicles))
   }
 
+  componentDidMount(){
+    let { dispatch } = this.props
+    dispatch(setListSort(null))
+  }
+
+  updateSort(sort) {
+    let { dispatch } = this.props
+    dispatch(setListSort(sort))
+  }
+
   render() {
     let { vehicles, loading, i18n } = this.props
 
     let headers = [
-      i18n.label.id,
-      i18n.label.number,
-      i18n.label.status,
+      'number',
+      'status',
+      'type'
     ]
 
-    return loading ? <CircularProgress /> : <Table>
-      <TableHeader>
-        <TableRow>
-          { headers.map((header) => {
-            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
-          }) }
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        { vehicles.map((vehicle) => {
-          return <TableRow key={ vehicle._id }>
-            <TableRowColumn>{ vehicle._id }</TableRowColumn>
-            <TableRowColumn><Link to={ `/vehicle/${vehicle._id}/edit` }>
-              { vehicle.number }
-            </Link></TableRowColumn>
-            <TableRowColumn>{ i18n.option[vehicle.status] }</TableRowColumn>
+    return <div>
+      { loading ? <CircularProgress /> : null }
+      <Table>
+        <TableHeader>
+          <TableRow>
+            { headers.map((header) => {
+              return <TableHeaderColumn
+              onClick={ this.updateSort.bind(this, header)}
+              key={ header }>
+                { i18n.label[header] }
+              </TableHeaderColumn>
+            }) }
           </TableRow>
-        }) }
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          { headers.map((header) => {
-            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
+        </TableHeader>
+        <TableBody>
+          { vehicles.map((vehicle) => {
+            return <TableRow key={ vehicle._id }>
+              <TableRowColumn><Link to={ `/vehicle/${vehicle._id}/edit` }>
+                { vehicle.number }
+              </Link></TableRowColumn>
+              <TableRowColumn>{ i18n.option[vehicle.status] }</TableRowColumn>
+              <TableRowColumn>{ vehicle.type }</TableRowColumn>
+            </TableRow>
           }) }
-        </TableRow>
-      </TableFooter>
-    </Table>
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+          { headers.map((header) => {
+            return <TableHeaderColumn
+            onClick={ this.updateSort.bind(this, header)}
+            key={ header }>
+              { i18n.label[header] }
+            </TableHeaderColumn>
+          }) }
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </div>
   }
 }
 

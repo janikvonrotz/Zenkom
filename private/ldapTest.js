@@ -7,7 +7,7 @@ let client = ldap.createClient({
 // http://stackoverflow.com/questions/13255389/ldapjs-authentification-user-login-setup
 
 let options = {
-  filter: '(userPrincipalName=tester@vbl.ch)',
+  filter: '(userPrincipalName=vernetztest@vbl.ch)',
   scope: 'sub'
 }
 
@@ -26,7 +26,7 @@ client.bind(searchUser.DN, searchUser.Password, function(err) {
     response.on('searchEntry', function(entry) {
       console.info('entry: ' + entry.dn)
 
-      client.bind(entry.dn, 'Password1234', function(bindError) {
+      client.bind(entry.dn, 'ZeNk609Om.', function(bindError) {
         assert.ifError(bindError)
         console.info('Login Success!')
       })

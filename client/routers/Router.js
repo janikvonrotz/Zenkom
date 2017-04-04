@@ -1,13 +1,14 @@
 import React from 'react'
 import { Card, CardText, CircularProgress, FlatButton, Dialog, DatePicker,
   TextField, RaisedButton, SelectField, MenuItem, List, ListItem,
-  Subheader } from 'material-ui'
+  Subheader, CardMedia } from 'material-ui'
 import { ActionHistory } from 'material-ui/svg-icons'
-import { setHeaderTitle, updateRouter, insertRouter,
+import { setHeaderTitle, updateRouter, insertRouter, setRouterStatisticUrl,
   removeRouter } from '../actions'
 import { Row, Col, BoxRow } from '../flexboxgrid'
 import { Link } from 'react-router'
 import { formatDate } from '/imports/helpers'
+import { isAllowed } from '/imports/helpers'
 
 class Router extends React.Component {
 
@@ -15,6 +16,7 @@ class Router extends React.Component {
     super(props)
     this.state = {
       vehicle_id: '',
+      dfi_id: '',
       type: '',
       status: '',
       profile:'',
@@ -28,15 +30,15 @@ class Router extends React.Component {
     event.preventDefault()
 
     let { router = {}, dispatch } = this.props
-    let { vehicle_id, type, status, profile, transport_company,
+    let { vehicle_id, dfi_id, type, status, profile, transport_company,
       installed_at } = this.state
-    let { hostname, dfi_name, router_version, serial_number, spos_id, ip_router,
+    let { hostname, version, serial_number, spos_id, ip_router,
       ip_cashbox, sim1, sim2, sim_itt, phone1, phone2, phone_itt,
       notes } = this.refs
     router.hostname = hostname.getValue()
     router.vehicle_id = vehicle_id
-    router.dfi_name = dfi_name.getValue()
-    router.router_version = router_version.getValue()
+    router.dfi_id = dfi_id
+    router.version = version.getValue()
     router.type = type
     router.serial_number = serial_number.getValue()
     router.spos_id = spos_id.getValue()
@@ -64,7 +66,7 @@ class Router extends React.Component {
 
   updateSelectField(field, event, index, value){
     let state = {}
-    if(index instanceof Date) {
+    if (index instanceof Date) {
         state[field] = index
     } else {
         state[field] = value
@@ -79,9 +81,14 @@ class Router extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    let { dispatch, router={}, i18n } = nextProps
+    let { dispatch, router={}, i18n, location } = nextProps
+
+    // read params
+    let { dfiId, vehicleId } = location.query
+
     this.setState({
-      vehicle_id: router.vehicle_id || '',
+      vehicle_id: router.vehicle_id ||  vehicleId || null,
+      dfi_id: router.dfi_id || dfiId || null,
       type: router.type || '',
       status: router.status || '',
       profile: router.profile || '',
@@ -89,27 +96,19 @@ class Router extends React.Component {
       installed_at: router.installed_at || null,
     })
     dispatch(setHeaderTitle(router._id ? `${ i18n.vocabulary.router } ${ router.hostname }` : i18n.vocabulary.untitled ))
+    dispatch(setRouterStatisticUrl(router._id, router.hostname))
   }
 
   render() {
-    let { router={}, vehicles=[], loading, i18n,
-      statusOptions, companyOptions, profileOptions, typeOptions } = this.props
-    let { vehicle_id, type, status, profile, transport_company,
+    let { router={}, vehicles=[], dfis=[], loading, i18n, user, statusOptions,
+      companyOptions, profileOptions, typeOptions, statistic } = this.props
+    let { vehicle_id, dfi_id, type, status, profile, transport_company,
       installed_at } = this.state
 
-    const actions = [
-      <FlatButton
-      label={ i18n.button.cancel }
-      primary={ true }
-      onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
-      />,
-      <FlatButton
-      onTouchTap={ this.remove.bind(this) }
-      label={ i18n.button.remove }
-      secondary={ true } />,
-    ]
-
     return loading ? <CircularProgress /> : <Card>
+      <CardMedia>
+        { statistic ? <img style={{ maxWidth: 600, minWidth: 100 }} src={ statistic.url } /> : null }
+      </CardMedia>
       <CardText>
         <form onSubmit={ this.mutate.bind(this) }>
 
@@ -130,27 +129,34 @@ class Router extends React.Component {
                 value={ vehicle_id }
                 required={ true }
                 onChange={ this.updateSelectField.bind(this, 'vehicle_id') }>
-                  { vehicles.map((vehicleItem) => {
+                  { [ { _id: null, number: i18n.option.none } ].concat(vehicles).map((vehicleItem) => {
                     return <MenuItem
                       key={ vehicleItem._id }
                       value={ vehicleItem._id }
-                      primaryText={ vehicleItem.number} />
+                      primaryText={ vehicleItem.number } />
                   }) }
                  </SelectField>
-                <br />
+                 { vehicle_id ? <Link to={ `/vehicle/${ vehicle_id }/edit` }><p>{ i18n.button.show_vehicle }</p></Link> : <br /> }
+
+                <SelectField
+                floatingLabelText={ i18n.label.dfi_id }
+                value={ dfi_id }
+                required={ true }
+                onChange={ this.updateSelectField.bind(this, 'dfi_id') }>
+                  { [ { _id: null, description: i18n.option.none } ].concat(dfis).map((dfi) => {
+                    return <MenuItem
+                      key={ dfi._id }
+                      value={ dfi._id }
+                      primaryText={ dfi.description } />
+                  }) }
+                </SelectField>
+                { dfi_id ? <Link to={ `/dfi/${ dfi_id }/edit` }><p>{ i18n.button.show_dfi }</p></Link> : <br /> }
 
                 <TextField
-                defaultValue={ router.dfi_name || '' }
+                defaultValue={ router.version || '' }
                 type="text"
-                ref="dfi_name"
-                floatingLabelText={ i18n.label.dfi_name }  />
-                <br />
-
-                <TextField
-                defaultValue={ router.router_version || '' }
-                type="text"
-                ref="router_version"
-                floatingLabelText={ i18n.label.router_version }  />
+                ref="version"
+                floatingLabelText={ i18n.label.version }  />
                 <br />
 
                 <SelectField
@@ -299,25 +305,40 @@ class Router extends React.Component {
                 floatingLabelText={ i18n.label.installed_at || null }
                 onChange={ this.updateSelectField.bind(this, 'installed_at') }
                 hintText={ i18n.label.installed_at } />
+                <br />
 
               </BoxRow>
             </Col>
           </Row>
 
-          <br />
+          { isAllowed('routers.update', user ? user.roles : null) ?
           <RaisedButton
           type="submit"
+          style={{ marginRight: 10 }}
           label={ i18n.button.update }
-          primary={ true } />{ ' ' }
+          primary={ true } />
+          : null }
 
+          { isAllowed('routers.remove', user ? user.roles : null) ?
           <RaisedButton
           onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
           label={ i18n.button.remove }
           secondary={ true } />
+          : null }
 
           <Dialog
           title={ `${i18n.vocabulary.router} ${ router.hostname } ${i18n.button.remove}` }
-          actions={ actions }
+          actions={ [
+            <FlatButton
+            label={ i18n.button.cancel }
+            primary={ true }
+            onTouchTap={ this.toggleDialog.bind(this, 'openRemoveDialog') }
+            />,
+            <FlatButton
+            onTouchTap={ this.remove.bind(this) }
+            label={ i18n.button.remove }
+            secondary={ true } />,
+          ] }
           modal={ false }
           onRequestClose={ this.toggleDialog.bind(this, 'openRemoveDialog') }
           open={ this.state.openRemoveDialog }>

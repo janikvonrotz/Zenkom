@@ -2,9 +2,17 @@ import React from 'react'
 import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { NotificationList } from './index'
 import { connect } from 'react-redux'
-import { setNotificationFilter, setListLimit } from '../actions'
+import { setNotificationFilter, setListLimit, increaseListLimit,
+  resetListLimit, setHeaderTitle } from '../actions'
 
 class NotificationSearch extends React.Component {
+
+  componentDidMount(){
+    let { dispatch, i18n } = this.props
+    dispatch(resetListLimit())
+    dispatch(setNotificationFilter(''))
+    dispatch(setHeaderTitle(i18n.vocabulary.notifications))
+  }
 
   updateFilter(){
     let { dispatch } = this.props
@@ -12,16 +20,14 @@ class NotificationSearch extends React.Component {
     dispatch(setNotificationFilter(filter.getValue()))
   }
 
-  updateLimit(limitValue){
-    let { dispatch, limit } = this.props
-    limit = limit != 'all' ? limitValue || (limit + 10) : limit
-    dispatch(setListLimit(limit))
+  increaseLimit(){
+    let { dispatch } = this.props
+    dispatch(increaseListLimit())
   }
 
-  componentDidMount(){
+  setLimit(limit){
     let { dispatch } = this.props
-    dispatch(setListLimit(10))
-    dispatch(setNotificationFilter(''))
+    dispatch(setListLimit(limit))
   }
 
   render() {
@@ -41,10 +47,10 @@ class NotificationSearch extends React.Component {
         <NotificationList />
 
         <RaisedButton
-        onTouchTap={ this.updateLimit.bind(this, null) }
+        onTouchTap={ this.increaseLimit.bind(this) }
         label={ i18n.button.load_more }
         primary={ true } />
-        <p onTouchTap={ this.updateLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
+        <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
 
       </CardText>
     </Card>

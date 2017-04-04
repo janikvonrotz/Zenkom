@@ -14,7 +14,8 @@ let ldapJs = () => {
         filter: config.ldap.filter.replace('{email}', email),
         scope: config.ldap.scope,
       }
-    }
+    },
+    searchUser: config.ldap.searchUser,
   }
 
   ldapAuth.checkAccount = (options) => {
@@ -27,44 +28,94 @@ let ldapJs = () => {
     let dn = []
     let future = new Future()
 
-    ldapAuth.client.search(ldapAuth.searchOu, ldapAuth.searchQuery(options.email), (error, result) => {
-      assert.ifError(error)
+    // use different auth method if search user is provided
+    if (ldapAuth.searchUser) {
 
-      result.on('searchEntry', (entry) => {
-        dn.push(entry.objectName)
-        return ldapAuth.profile = {
-          firstname: entry.object.cn,
-          lastname: entry.object.sn,
-          name: `${entry.object.cn}`,
-        }
+      ldapAuth.client.bind(ldapAuth.searchUser.dn, ldapAuth.searchUser.password, (searchBindError) => {
+        assert.ifError(searchBindError)
+
+        ldapAuth.client.search(ldapAuth.searchOu, ldapAuth.searchQuery(options.email), (searchError, result) => {
+          assert.ifError(searchError)
+
+          result.on('searchEntry', (entry) => {
+            dn.push(entry.objectName)
+            return ldapAuth.profile = {
+              firstname: entry.object.givenName,
+              lastname: entry.object.sn,
+              name: `${entry.object.displayName}`,
+            }
+          })
+
+          result.on('error', () => {
+            throw new Meteor.Error(500, 'LDAP server error')
+          })
+
+          return result.on('end', () => {
+
+            if (dn.length === 0) {
+              future['return'](false)
+              return false
+            }
+
+            return ldapAuth.client.bind(dn[0], options.pass, (bindError) => {
+
+              if (bindError) {
+                future['return'](false)
+                return false
+              }
+
+              return ldapAuth.client.unbind((unbindError) => {
+                assert.ifError(unbindError)
+                return future['return'](!unbindError)
+              })
+            })
+          })
+        })
       })
+      return future.wait()
 
-      result.on('error', () => {
-        throw new Meteor.Error(500, 'LDAP server error')
-      })
+    // without search user
+    } else {
 
-      return result.on('end', () => {
+      ldapAuth.client.search(ldapAuth.searchOu, ldapAuth.searchQuery(options.email), (error, result) => {
+        assert.ifError(error)
 
-        if (dn.length === 0) {
-          future['return'](false)
-          return false
-        }
+        result.on('searchEntry', (entry) => {
+          dn.push(entry.objectName)
+          return ldapAuth.profile = {
+            firstname: entry.object.cn,
+            lastname: entry.object.sn,
+            name: `${entry.object.cn}`,
+          }
+        })
 
-        return ldapAuth.client.bind(dn[0], options.pass, (bindError) => {
+        result.on('error', () => {
+          throw new Meteor.Error(500, 'LDAP server error')
+        })
 
-          if (bindError) {
+        return result.on('end', () => {
+
+          if (dn.length === 0) {
             future['return'](false)
             return false
           }
 
-          return ldapAuth.client.unbind((unbindError) => {
-            assert.ifError(unbindError)
-            return future['return'](!unbindError)
+          return ldapAuth.client.bind(dn[0], options.pass, (bindError) => {
+
+            if (bindError) {
+              future['return'](false)
+              return false
+            }
+
+            return ldapAuth.client.unbind((unbindError) => {
+              assert.ifError(unbindError)
+              return future['return'](!unbindError)
+            })
           })
         })
       })
-    })
-    return future.wait()
+      return future.wait()
+    }
   }
 
   Accounts.registerLoginHandler('ldap', (loginRequest) => {

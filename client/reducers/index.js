@@ -16,6 +16,12 @@ import routerCompanyOptions from './routerCompanyOptions'
 import routerTypeOptions from './routerTypeOptions'
 import notificationFilter from './notificationFilter'
 import listLimit from './listLimit'
+import listSort from './listSort'
+import routerStatistic from './routerStatistic'
+import dfiFilter from './dfiFilter'
+import dfiTypeOptions from './dfiTypeOptions'
+import dfiRowTypeOptions from './dfiRowTypeOptions'
+import vehicleTypeOptions from './vehicleTypeOptions'
 
 const zenkomApp = combineReducers({
   headerTitle,
@@ -35,6 +41,12 @@ const zenkomApp = combineReducers({
   routerTypeOptions,
   notificationFilter,
   listLimit,
+  listSort,
+  routerStatistic,
+  dfiFilter,
+  dfiRowTypeOptions,
+  dfiTypeOptions,
+  vehicleTypeOptions,
 })
 
 export default zenkomApp

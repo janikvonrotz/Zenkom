@@ -1,0 +1,26 @@
+{
+  "private": {
+    "ldap": {
+      "url": "ldap://192.168.90.240",
+      "base": "dc=vbl,dc=ch",
+      "filter": "(userPrincipalName={email})",
+      "scope": "sub",
+      "searchUser": {
+        "dn": "CN=Fz vernetztest,OU=Test,OU=Services,OU=vblusers2,DC=vbl,DC=ch",
+        "password": "ZeNk609Om."
+      }
+    },
+    "mail": {
+      "notificationFrom": "notifications@zenkom.bitsherpa.com"
+    },
+    "zabbix": {
+      "url": "http://192.168.15.180/",
+      "api_url": "http://www.oev-live.ch/zabbix/api_jsonrpc.php",
+      "user": "zabbix",
+      "password": "v60B05l"
+    }
+  },
+  "public": {
+    "disableAccessContol": false
+  }
+}

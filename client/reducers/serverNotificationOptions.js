@@ -3,7 +3,8 @@ let options = [
   'router_inserted',
   'router_broken',
   'vehicle_inserted',
-  'vehicle_upgrade'
+  'vehicle_upgrade',
+  'dfi_inserted'
 ]
 
 export default (state = options, action) => {

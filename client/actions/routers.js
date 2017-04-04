@@ -3,7 +3,7 @@ import { browserHistory } from 'react-router'
 
 export const insertRouter = (params) => {
   return (dispatch, getState) => {
-    if(params){
+    if (params){
       Meteor.call('routers.insert', params, (error) => {
         if (!error) {
           dispatch({
@@ -85,5 +85,34 @@ export const setRouterFilter = (filter) => {
   return {
     type: 'SET_ROUTER_FILTER',
     filter
+  }
+}
+
+export const setRouterStatisticUrl = (id, hostname) => {
+  return (dispatch, getState) => {
+    let { routerStatistic } = getState()
+
+    // only get new statistic if state is not set yet or id has changed
+    if ((routerStatistic === null && id && hostname) ||
+      (routerStatistic && routerStatistic.id != id)) {
+
+      Meteor.call('routers.get_statistic_url', hostname, (error, response) => {
+        if (!error) {
+          let statistic = {
+            id: id,
+            url: response
+          }
+          dispatch({
+            type: 'SET_ROUTER_STATISTIC',
+            statistic
+          })
+        } else {
+          dispatch({
+            type: 'SHOW_ERROR_MESSAGE',
+            error,
+          })
+        }
+      })
+    }
   }
 }

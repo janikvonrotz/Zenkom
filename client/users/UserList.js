@@ -2,7 +2,7 @@ import React from 'react'
 import { CircularProgress } from 'material-ui'
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow,
   TableRowColumn, TableFooter } from '../datatable'
-import { setHeaderTitle, updateUserRole } from '../actions'
+import { setHeaderTitle, updateUserRole, setListSort } from '../actions'
 
 class UserList extends React.Component {
 
@@ -27,52 +27,66 @@ class UserList extends React.Component {
     this.setState(state)
   }
 
+  updateSort(sort) {
+    let { dispatch } = this.props
+    dispatch(setListSort(sort))
+  }
+
   render() {
     let { users, loading, i18n, roleOptions } = this.props
     let headers = [
-      i18n.label.id,
-      i18n.label.firstname,
-      i18n.label.lastname,
-      i18n.label.email,
-      i18n.label.role,
+      'firstname',
+      'lastname',
+      'email',
+      'role',
     ]
 
-    return loading ? <CircularProgress /> : <Table>
-      <TableHeader>
-        <TableRow>
+    return <div>
+      { loading ? <CircularProgress /> : null }
+      <Table>
+        <TableHeader>
+          <TableRow>
           { headers.map((header) => {
-            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
+            return <TableHeaderColumn
+            onClick={ this.updateSort.bind(this, header)}
+            key={ header }>
+              { i18n.label[header] }
+            </TableHeaderColumn>
           }) }
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        { users.map((user) => {
-          return <TableRow key={ user._id }>
-            <TableRowColumn>{ user._id }</TableRowColumn>
-            <TableRowColumn>{ user.profile.firstname }</TableRowColumn>
-            <TableRowColumn>{ user.profile.lastname }</TableRowColumn>
-            <TableRowColumn>{ user.emails[0].address }</TableRowColumn>
-            <TableRowColumn><select
-              value={ this.state[`role.${user._id}`] || '' }
-              onChange={ this.update.bind(this, `role.${user._id}` || '', user._id) }>
-              { roleOptions.map((option) => {
-                return <option
-                  key={ option }
-                  value={ option }>
-                    { i18n.role[option] }
-                  </option>
-              }) }</select></TableRowColumn>
           </TableRow>
-        }) }
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          { headers.map((header) => {
-            return <TableHeaderColumn key={ header }>{ header }</TableHeaderColumn>
+        </TableHeader>
+        <TableBody>
+          { users.map((user) => {
+            return <TableRow key={ user._id }>
+              <TableRowColumn>{ user.profile.firstname }</TableRowColumn>
+              <TableRowColumn>{ user.profile.lastname }</TableRowColumn>
+              <TableRowColumn>{ user.emails[0].address }</TableRowColumn>
+              <TableRowColumn><select
+                value={ this.state[`role.${user._id}`] || '' }
+                onChange={ this.update.bind(this, `role.${user._id}` || '', user._id) }>
+                { roleOptions.map((option) => {
+                  return <option
+                    key={ option }
+                    value={ option }>
+                      { i18n.role[option] }
+                    </option>
+                }) }</select></TableRowColumn>
+            </TableRow>
           }) }
-        </TableRow>
-      </TableFooter>
-    </Table>
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+          { headers.map((header) => {
+            return <TableHeaderColumn
+            onClick={ this.updateSort.bind(this, header)}
+            key={ header }>
+              { i18n.label[header] }
+            </TableHeaderColumn>
+          }) }
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </div>
   }
 }
 

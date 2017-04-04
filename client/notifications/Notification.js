@@ -20,22 +20,25 @@ class NotificationComponent extends React.Component {
 
     // only send desktop notification if _id changed or it is receiving new props for the first time
     let send = false
-    if(!desktopNotification && !!nextProps.desktopNotification){
+    if (!desktopNotification && !!nextProps.desktopNotification) {
       send = true
     }
-    if(desktopNotification && nextProps.desktopNotification && (desktopNotification._id != nextProps.desktopNotification._id)){
+    if (desktopNotification && nextProps.desktopNotification && (desktopNotification._id != nextProps.desktopNotification._id)) {
       send = true
     }
 
+    // check if user is loggend in and has desktop notificiations enabled
+    let userWithDesktopNotificiation = (user && user.settings && user.settings.channels.indexOf('browser_notification') != -1)
+
     // display desktop notification
-    if (send && nextProps.desktopNotification && user && user.settings.channels.indexOf('browser_notification') != -1){
+    if (send && nextProps.desktopNotification && userWithDesktopNotificiation) {
 
       if (Notification.permission !== 'granted'){
         Notification.requestPermission()
       }
 
       let browserNotification = new Notification(nextProps.desktopNotification.subject, {
-        icon: '/logo.png',
+        icon: '/logo2.png',
         body: nextProps.desktopNotification.content,
       })
 

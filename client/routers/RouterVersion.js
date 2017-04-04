@@ -4,6 +4,7 @@ import { Card, CardText, CircularProgress, RaisedButton, Dialog,
 import { setHeaderTitle, restoreRouter } from '../actions'
 import JsDiff from 'diff'
 import { formatDate } from '/imports/helpers'
+import { isAllowed } from '/imports/helpers'
 
 class RouterVersion extends React.Component {
 
@@ -31,7 +32,33 @@ class RouterVersion extends React.Component {
   }
 
   render() {
-    let { routerVersion, loading, i18n, router } = this.props
+    let { routerVersion, loading, i18n, router, user } = this.props
+    let keys = [
+      'hostname',
+      'vehicle_id',
+      'dfi_id',
+      'version',
+      'type',
+      'serial_number',
+      'spos_id',
+      'status',
+      'ip_router',
+      'ip_cashbox',
+      'sim1',
+      'sim2',
+      'sim_itt',
+      'phone1',
+      'phone2',
+      'phone_itt',
+      'profile',
+      'notes',
+      'transport_company',
+      'installed_at',
+      'updated_at',
+      'updated_by',
+      'created_at',
+      'created_by',
+    ]
 
     const actions = [
       <FlatButton
@@ -48,7 +75,7 @@ class RouterVersion extends React.Component {
     return loading ? <CircularProgress /> : <Card>
       <CardText>
 
-        { Object.keys(routerVersion.object).map((label) => {
+        { keys.map((label) => {
 
           // compare current and versioned router property value
           let routerVersionValue = routerVersion.object[label]
@@ -65,26 +92,28 @@ class RouterVersion extends React.Component {
 
           return <p key={ label }>{ `${ i18n.label[label] }: ` }
             { diffContent.map((part) => {
-              if(part.added) {
+              if (part.added) {
                 return <span key={ part.value } style={ { color: 'green' } }>{ part.value }</span>
               }
-              if(part.removed) {
+              if (part.removed) {
                 return <span key={ part.value } style={ { color: 'red' } }>{ part.value } </span>
               }
-              if(!(part.removed && part.added)) {
+              if (!(part.removed && part.added)) {
                 return <span key={ part.value }>{ part.value }</span>
               }
             }) }
           </p>
         }) }
 
+        { isAllowed('routers.restore', user ? user.roles : null) ?
         <RaisedButton
         onTouchTap={ this.toggleDialog.bind(this, 'openRestoreDialog') }
         label={ i18n.button.restore }
         secondary={ true } />
+        : null }
 
         <Dialog
-        title={ `${ i18n.vocabulary.router } ${ (routerVersion.object.updated_at || routerVersion.object.created_at).toISOString() } ${i18n.button.restore}` }
+        title={ `${ i18n.vocabulary.router } ${ formatDate(i18n.locale, routerVersion.object.updated_at || routerVersion.object.created_at) } ${i18n.button.restore}` }
         actions={ actions }
         modal={ false }
         onRequestClose={ this.toggleDialog.bind(this, 'openRestoreDialog') }

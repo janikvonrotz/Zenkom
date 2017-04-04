@@ -19,14 +19,14 @@ module.exports = {
               'base': 'dc=example,dc=com',
               'filter': '(mail={email})',
               'scope': 'sub',
-              'searchUser': {}
             },
             'mail': {
-              'notificationFrom': 'notifications@zenkom.bitsherpa.com'
+              'notificationFrom': 'notifications@zenkom.bitsherpa.com',
             },
-            'disableAccessContol': true,
           },
-          'public': {}
+          'public': {
+            'disableAccessContol': false,
+          }
         }
       },
       env_prod: {

@@ -15,14 +15,25 @@ let acl = {
   'vehicles.update': [ 'admin', 'spec', 'tech' ],
   'vehicles.remove': [ 'admin', 'spec', 'tech' ],
 
+  // dfis permissions
+  'dfis.read': [ 'admin', 'spec', 'tech', 'user' ],
+  'dfis.insert': [ 'admin', 'spec', 'tech' ],
+  'dfis.update': [ 'admin', 'spec', 'tech' ],
+  'dfis.remove': [ 'admin', 'spec', 'tech' ],
+
   // users permissions
-  'users.update_role': [ 'admin', 'spec' ],
+  // 'users.read': [ 'admin', 'spec' ],
+  // 'users.update_role': [ 'admin', 'spec' ],
+  'users.read': [ 'admin', 'spec', 'tech', 'user' ],
+  'users.update_role': [ 'admin', 'spec', 'tech', 'user' ],
   'users.update_settings': [ 'admin', 'spec', 'tech' ],
   'users.update_profile': [ 'admin', 'spec', 'tech', 'user' ],
 
   // notification permissions
   'notifications.read': [ 'admin', 'spec', 'tech' ],
   'notifications.receive': [ 'admin', 'spec', 'tech' ],
+  'notifications.insert': [ 'admin', 'spec', 'tech' ],
+  'notifications.remove': [ 'admin', 'spec', 'tech' ],
 
   // feedbacks permissions
   'feedbacks.insert': [ 'admin', 'spec', 'tech', 'user' ],
