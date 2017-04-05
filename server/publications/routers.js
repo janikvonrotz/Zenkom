@@ -60,6 +60,7 @@ export default () => {
         { hostname: { $regex: filter } },
         { vehicle_id: { $in: vehicleIds } },
         { dfi_id: { $in: dfiIds } },
+        { status: { $regex: filter } },
         { type: { $regex: filter } },
         { ip_router: { $regex: filter } },
         { ip_cashbox: { $regex: filter } },
