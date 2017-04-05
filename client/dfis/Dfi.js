@@ -149,6 +149,8 @@ class Dfi extends React.Component {
             </Col>
           </Row>
 
+          <br />
+
           { isAllowed('dfis.update', user ? user.roles : null) ?
           <RaisedButton
           type="submit"

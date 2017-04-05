@@ -10,8 +10,8 @@ class RouterLink extends React.Component {
 
     return isAllowed('routers.read', user ? user.roles : null) ?
     <div>
-      <CardTitle title={ i18n.vocabulary.router } />
-      <CardText>
+      <CardTitle style={{ paddingBottom: 0 }} title={ i18n.vocabulary.router } />
+      <CardText style={{ paddingTop: 0 }}>
         { router ? <div>
           { dfiId ? <p>{ i18n.hint.router_linked_with_dfi.replace('{ hostname }', router.hostname) }</p> : null }
           { vehicleId ? <p>{ i18n.hint.router_linked_with_vehicle.replace('{ hostname }', router.hostname) }</p> : null }

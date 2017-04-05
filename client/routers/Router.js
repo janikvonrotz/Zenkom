@@ -311,6 +311,8 @@ class Router extends React.Component {
             </Col>
           </Row>
 
+          <br />
+
           { isAllowed('routers.update', user ? user.roles : null) ?
           <RaisedButton
           type="submit"

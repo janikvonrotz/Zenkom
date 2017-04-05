@@ -146,6 +146,8 @@ class Vehicle extends React.Component {
             </Col>
           </Row>
 
+          <br />
+
           { isAllowed('vehicles.update', user ? user.roles : null) ?
           <RaisedButton
           type="submit"
