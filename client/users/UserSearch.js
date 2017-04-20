@@ -4,8 +4,14 @@ import { UserList } from './index'
 import { connect } from 'react-redux'
 import { setUserFilter, resetListLimit, increaseListLimit,
   setListLimit } from '../actions'
+import { debounce } from 'lodash'
 
 class UserSearch extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.updateFilter = debounce(this.updateFilter, 500)
+  }
 
   componentDidMount(){
     let { dispatch } = this.props

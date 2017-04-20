@@ -5,8 +5,14 @@ import { connect } from 'react-redux'
 import { insertRouter, setRouterFilter, resetListLimit, increaseListLimit,
   setListLimit } from '../actions'
 import { isAllowed } from '/imports/helpers'
+import { debounce } from 'lodash'
 
 class RouterSearch extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.updateFilter = debounce(this.updateFilter, 500)
+  }
 
   componentDidMount(){
     let { dispatch } = this.props

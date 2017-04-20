@@ -4,8 +4,14 @@ import { NotificationList } from './index'
 import { connect } from 'react-redux'
 import { setNotificationFilter, setListLimit, increaseListLimit,
   resetListLimit, setHeaderTitle } from '../actions'
+import { debounce } from 'lodash'
 
 class NotificationSearch extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.updateFilter = debounce(this.updateFilter, 500)
+  }
 
   componentDidMount(){
     let { dispatch, i18n } = this.props
