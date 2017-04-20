@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { setUserFilter, resetListLimit, increaseListLimit,
   setListLimit } from '../actions'
 import { debounce } from 'lodash'
+import { NavigationExpandMore } from 'material-ui/svg-icons'
 
 class UserSearch extends React.Component {
 
@@ -54,6 +55,7 @@ class UserSearch extends React.Component {
         <RaisedButton
         onTouchTap={ this.increaseLimit.bind(this) }
         label={ i18n.button.load_more }
+        icon={ <NavigationExpandMore /> }
         primary={ true } />
         <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
 

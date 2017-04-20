@@ -25,6 +25,7 @@ export default {
     show_router: 'Router anzeigen',
     show_dfi: 'DFI anzeigen',
     show_vehicle: 'Fahrzeug anzeigen',
+    download_csv: 'CSV herunterladen'
   },
   label: {
     _id: 'ID',

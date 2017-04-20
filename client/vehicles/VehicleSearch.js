@@ -6,6 +6,7 @@ import { insertVehicle, setVehicleFilter, resetListLimit, increaseListLimit,
   setListLimit } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { debounce } from 'lodash'
+import { ContentAdd, NavigationExpandMore } from 'material-ui/svg-icons'
 
 class VehicleSearch extends React.Component {
 
@@ -59,6 +60,7 @@ class VehicleSearch extends React.Component {
         <RaisedButton
         onTouchTap={ this.insert.bind(this) }
         label={ i18n.button.add_vehicle }
+        icon={ <ContentAdd /> }
         primary={true} />
         : null }
 
@@ -69,6 +71,7 @@ class VehicleSearch extends React.Component {
         <RaisedButton
         onTouchTap={ this.increaseLimit.bind(this) }
         label={ i18n.button.load_more }
+        icon={ <NavigationExpandMore /> }
         primary={ true } />
         <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
 

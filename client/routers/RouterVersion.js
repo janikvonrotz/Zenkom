@@ -5,6 +5,7 @@ import { setHeaderTitle, restoreRouter } from '../actions'
 import JsDiff from 'diff'
 import { formatDate } from '/imports/helpers'
 import { isAllowed } from '/imports/helpers'
+import { ActionRestore } from 'material-ui/svg-icons'
 
 class RouterVersion extends React.Component {
 
@@ -109,6 +110,7 @@ class RouterVersion extends React.Component {
         <RaisedButton
         onTouchTap={ this.toggleDialog.bind(this, 'openRestoreDialog') }
         label={ i18n.button.restore }
+        icon={ <ActionRestore /> }
         secondary={ true } />
         : null }
 

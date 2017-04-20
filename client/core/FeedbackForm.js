@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Dialog, RaisedButton, FlatButton, TextField } from 'material-ui'
 import { insertFeedback } from '../actions'
+import { CommunicationMessage } from 'material-ui/svg-icons'
 
 class FeedbackForm extends React.Component {
 
@@ -31,29 +32,28 @@ class FeedbackForm extends React.Component {
   }
 
   render() {
-    let actions = [
-      <FlatButton
-        label="Abrechen"
-        primary={ false }
-        onTouchTap={ this.toggleDialog.bind(this) }
-      />,
-      <FlatButton
-        label="Senden"
-        primary={ true }
-        onTouchTap={ this.insert.bind(this) }
-      />,
-    ]
-
     return <div style={{ float: 'right' }}>
 
       <RaisedButton
       label="Feedback"
       primary={ true }
+      icon={ <CommunicationMessage /> }
       onTouchTap={ this.toggleDialog.bind(this) } />
 
       <Dialog
       title="Feedback"
-      actions={ actions }
+      actions={ [
+        <FlatButton
+          label="Abrechen"
+          primary={ false }
+          onTouchTap={ this.toggleDialog.bind(this) }
+        />,
+        <FlatButton
+          label="Senden"
+          primary={ true }
+          onTouchTap={ this.insert.bind(this) }
+        />,
+      ] }
       modal={ false }
       onRequestClose={ this.toggleDialog.bind(this) }
       open={ this.state.openFeedbackDialog } >

@@ -2,6 +2,7 @@ import React from 'react'
 import { RaisedButton, CardTitle, CardText } from 'material-ui'
 import { Link } from 'react-router'
 import { isAllowed } from '/imports/helpers'
+import { HardwareRouter, ContentAdd } from 'material-ui/svg-icons'
 
 class RouterLink extends React.Component {
 
@@ -18,6 +19,7 @@ class RouterLink extends React.Component {
           <Link to={ `/router/${ router._id }/edit` }>
             <RaisedButton
             label={ i18n.button.show_router }
+            icon={ <HardwareRouter /> }
             primary={ true } />
           </Link>
         </div> : <div>
@@ -25,7 +27,7 @@ class RouterLink extends React.Component {
         { vehicleId ? <p>{ i18n.error.no_router_linked_with_vehicle }</p> : null }
           <Link to={ `/router/new?${ dfiId ? 'dfiId' : vehicleId ? 'vehicleId' : null }=${ dfiId || vehicleId }` }>
             <RaisedButton
-            label={ i18n.button.add_router }
+            icon={ <ContentAdd /> }
             primary={ true } />
           </Link>
         </div> }
