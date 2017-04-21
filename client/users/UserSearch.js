@@ -37,7 +37,7 @@ class UserSearch extends React.Component {
   }
 
   render() {
-    let { i18n } = this.props
+    let { i18n, limit } = this.props
 
     return <Card>
       <CardText>
@@ -52,12 +52,12 @@ class UserSearch extends React.Component {
 
         <UserList />
 
-        <RaisedButton
+        { limit != 'all' ? <RaisedButton
         onTouchTap={ this.increaseLimit.bind(this) }
         label={ i18n.button.load_more }
         icon={ <NavigationExpandMore /> }
-        primary={ true } />
-        <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
+        primary={ true } /> : null }
+        { limit != 'all' ? <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p> : null }
 
       </CardText>
     </Card>
@@ -67,6 +67,7 @@ class UserSearch extends React.Component {
 const mapStateToProps = (state) => {
   return {
     i18n: state.i18n,
+    limit: state.listLimit,
   }
 }
 export default connect(mapStateToProps)(UserSearch)
