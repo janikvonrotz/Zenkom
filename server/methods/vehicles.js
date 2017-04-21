@@ -83,5 +83,15 @@ export default () => {
       Vehicles.update( _id, { $set: object } )
     },
 
+    'vehicles.export'() {
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if (!isAllowed('vehicles.export', roles)) {
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
+      return Vehicles.find({}).fetch()
+    },
+
   })
 }

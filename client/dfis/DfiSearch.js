@@ -6,7 +6,8 @@ import { insertDfi, setDfiFilter, resetListLimit, increaseListLimit,
   setListLimit, exportDfis } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { debounce } from 'lodash'
-import { ContentAdd, NavigationExpandMore, FileFileDownload } from 'material-ui/svg-icons'
+import { ContentAdd, NavigationExpandMore,
+  FileFileDownload } from 'material-ui/svg-icons'
 
 class DfiSearch extends React.Component {
 

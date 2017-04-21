@@ -75,7 +75,7 @@ export const exportDfis = () => {
     Meteor.call('dfis.export', (error, result) => {
       if (!error) {
         if (result.length != -1) {
-          downloadCSV(result, 'export_dfis', getState())
+          downloadCSV(result, 'dfis_export', getState())
           dispatch({
             type: 'SHOW_SUCCESS_MESSAGE',
             message: getState().i18n.message.dfis_exported,

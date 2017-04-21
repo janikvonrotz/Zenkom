@@ -138,6 +138,7 @@ export default {
     insufficent_rights_for_method: 'Ihre Berechtigungen sind für diese Aktion nicht ausreichend.',
     dfis_exported: 'DFIs exportiert.',
     routers_exported: 'Router exportiert.',
+    vehicles_exported: 'Fahrzeuge exportiert',
     nothing_to_export: 'Es sind keine Daten zum Exportieren vorhanden.'
   },
   error: {

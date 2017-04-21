@@ -3,10 +3,11 @@ import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { VehicleList } from './index'
 import { connect } from 'react-redux'
 import { insertVehicle, setVehicleFilter, resetListLimit, increaseListLimit,
-  setListLimit } from '../actions'
+  setListLimit, exportVehicles } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { debounce } from 'lodash'
-import { ContentAdd, NavigationExpandMore } from 'material-ui/svg-icons'
+import { ContentAdd, NavigationExpandMore,
+  FileFileDownload } from 'material-ui/svg-icons'
 
 class VehicleSearch extends React.Component {
 
@@ -42,6 +43,11 @@ class VehicleSearch extends React.Component {
     dispatch(setListLimit(limit))
   }
 
+  export(){
+    let { dispatch } = this.props
+    dispatch(exportVehicles())
+  }
+
   render() {
     let { i18n, user,  limit } = this.props
 
@@ -74,6 +80,14 @@ class VehicleSearch extends React.Component {
         icon={ <NavigationExpandMore /> }
         primary={ true } /> : null }
         { limit != 'all' ? <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p> : null }
+
+        { isAllowed('vehicles.export', user ? user.roles : null) ?
+        <RaisedButton
+        onTouchTap={ this.export.bind(this) }
+        label={ i18n.button.download_csv }
+        icon={ <FileFileDownload /> }
+        secondary={ true } />
+        : null }
 
       </CardText>
     </Card>

@@ -6,7 +6,8 @@ import { insertRouter, setRouterFilter, resetListLimit, increaseListLimit,
   setListLimit, exportRouters } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { debounce } from 'lodash'
-import { ContentAdd, NavigationExpandMore, FileFileDownload } from 'material-ui/svg-icons'
+import { ContentAdd, NavigationExpandMore,
+  FileFileDownload } from 'material-ui/svg-icons'
 
 class RouterSearch extends React.Component {
 

@@ -123,7 +123,7 @@ export const exportRouters = () => {
     Meteor.call('routers.export', (error, result) => {
       if (!error) {
         if (result.length != -1) {
-          downloadCSV(result, 'export_routers', getState())
+          downloadCSV(result, 'routers_export', getState())
           dispatch({
             type: 'SHOW_SUCCESS_MESSAGE',
             message: getState().i18n.message.routers_exported,
