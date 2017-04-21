@@ -68,6 +68,7 @@ export default {
     modification_until: 'Umbau bis',
     rollout_until: 'Inbetriebnahme bis',
     role: 'Rolle',
+    roles: 'Rollen',
     description: 'Bezeichnung',
     row_type: 'Zeilentyp',
     location: 'Standort',
@@ -112,6 +113,9 @@ export default {
     greeting: 'Guten Tag',
     dfi: 'DFI',
     dfis: 'DFIs',
+    language: 'Sprache',
+    verified: 'Verifiziert',
+    name: 'Name',
   },
   message: {
     router_added: 'Router wurde hinzugefügt.',
@@ -139,6 +143,7 @@ export default {
     dfis_exported: 'DFIs exportiert.',
     routers_exported: 'Router exportiert.',
     vehicles_exported: 'Fahrzeuge exportiert',
+    users_exported: 'Benutzer exportiert',
     nothing_to_export: 'Es sind keine Daten zum Exportieren vorhanden.'
   },
   error: {

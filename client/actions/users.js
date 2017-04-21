@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Accounts } from 'meteor/accounts-base'
 import { browserHistory } from 'react-router'
+import { downloadCSV } from '/imports/helpers'
 
 export const setUser = (user) => {
   return {
@@ -237,6 +238,32 @@ export const updateUserRole = (id, role) => {
           type: 'SHOW_SUCCESS_MESSAGE',
           message: getState().i18n.message.role_saved,
         })
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
+  }
+}
+
+export const exportUsers = () => {
+  return (dispatch, getState) => {
+    Meteor.call('users.export', (error, result) => {
+      if (!error) {
+        if (result.length != -1) {
+          downloadCSV(result, 'users_export', getState())
+          dispatch({
+            type: 'SHOW_SUCCESS_MESSAGE',
+            message: getState().i18n.message.users_exported,
+          })
+        } else {
+          dispatch({
+            type: 'SHOW_ERROR_MESSAGE',
+            message: getState().i18n.message.nothing_to_export,
+          })
+        }
       } else {
         dispatch({
           type: 'SHOW_ERROR_MESSAGE',

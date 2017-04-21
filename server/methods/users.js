@@ -48,5 +48,28 @@ export default () => {
 
       Meteor.users.update( { _id: id }, { $set: { roles: [ role ] } } )
     },
+
+    'users.export'() {
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if (!isAllowed('users.export', roles)) {
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
+      return Meteor.users.find({}).fetch().map((user) => {
+        return {
+          _id: user._id,
+          email: user.emails[0].address,
+          verified: user.emails[0].verified,
+          created_at: user.created_at,
+          firstname: user.profile.firstname,
+          lastname: user.profile.lastname,
+          name: user.profile.name,
+          roles: user.roles.join(', '),
+          notifications: user.settings.notifications.join(', '),
+          channels: user.settings.channels.join(', '),
+        }
+      })
+    },
   })
 }

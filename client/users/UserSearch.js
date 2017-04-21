@@ -2,10 +2,11 @@ import React from 'react'
 import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { UserList } from './index'
 import { connect } from 'react-redux'
-import { setUserFilter, resetListLimit, increaseListLimit,
+import { setUserFilter, resetListLimit, increaseListLimit, exportUsers,
   setListLimit } from '../actions'
 import { debounce } from 'lodash'
-import { NavigationExpandMore } from 'material-ui/svg-icons'
+import { isAllowed } from '/imports/helpers'
+import { NavigationExpandMore, FileFileDownload } from 'material-ui/svg-icons'
 
 class UserSearch extends React.Component {
 
@@ -36,8 +37,13 @@ class UserSearch extends React.Component {
     dispatch(setListLimit(limit))
   }
 
+  export(){
+    let { dispatch } = this.props
+    dispatch(exportUsers())
+  }
+
   render() {
-    let { i18n, limit } = this.props
+    let { i18n, limit, user } = this.props
 
     return <Card>
       <CardText>
@@ -59,6 +65,14 @@ class UserSearch extends React.Component {
         primary={ true } /> : null }
         { limit != 'all' ? <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p> : null }
 
+        { isAllowed('users.export', user ? user.roles : null) ?
+        <RaisedButton
+        onTouchTap={ this.export.bind(this) }
+        label={ i18n.button.download_csv }
+        icon={ <FileFileDownload /> }
+        secondary={ true } />
+        : null }
+
       </CardText>
     </Card>
   }
@@ -66,6 +80,7 @@ class UserSearch extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user,
     i18n: state.i18n,
     limit: state.listLimit,
   }

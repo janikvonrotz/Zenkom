@@ -4,7 +4,7 @@ export default (data, filename, state) => {
 
   // add headers
   let csvContent = keys.map((key) => {
-    return `"${ state.i18n.label[key] }"`
+    return `"${ state.i18n.label[key] || state.i18n.vocabulary[key] }"`
   }).join(',') + '\n'
 
   // add rows

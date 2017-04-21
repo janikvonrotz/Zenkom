@@ -2,7 +2,7 @@ import { setHeaderTitle, dismissMessage, setListLimit,
   setListSort, increaseListLimit, resetListLimit } from './core'
 import { loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
   verifyEmail, resetPassword, recoverPassword, updateUserProfile,
-  loginUserWithLDAP, setUserFilter, updateUserSettings,
+  loginUserWithLDAP, setUserFilter, updateUserSettings, exportUsers,
   updateUserRole } from './users'
 import { updateRouter, removeRouter, insertRouter, restoreRouter,
   setRouterFilter, setRouterStatisticUrl, exportRouters } from './routers'
@@ -20,4 +20,5 @@ export { setHeaderTitle, dismissMessage, updateUserSettings, insertFeedback,
   setRouterFilter, restoreRouter, updateVehicle, removeVehicle, insertVehicle,
   setNotificationFilter, updateUserRole, setListLimit, setListSort, removeDfi,
   increaseListLimit, resetListLimit, setRouterStatisticUrl, updateDfi,
-  insertDfi, setDfiFilter, exportDfis, exportRouters, exportVehicles }
+  insertDfi, setDfiFilter, exportDfis, exportRouters, exportVehicles,
+  exportUsers }
