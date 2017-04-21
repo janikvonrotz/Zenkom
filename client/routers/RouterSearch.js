@@ -3,10 +3,10 @@ import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { RouterList } from './index'
 import { connect } from 'react-redux'
 import { insertRouter, setRouterFilter, resetListLimit, increaseListLimit,
-  setListLimit } from '../actions'
+  setListLimit, exportRouters } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { debounce } from 'lodash'
-import { ContentAdd, NavigationExpandMore } from 'material-ui/svg-icons'
+import { ContentAdd, NavigationExpandMore, FileFileDownload } from 'material-ui/svg-icons'
 
 class RouterSearch extends React.Component {
 
@@ -42,6 +42,11 @@ class RouterSearch extends React.Component {
     dispatch(setListLimit(limit))
   }
 
+  export(){
+    let { dispatch } = this.props
+    dispatch(exportRouters())
+  }
+
   render() {
     let { i18n, user, limit } = this.props
 
@@ -74,6 +79,14 @@ class RouterSearch extends React.Component {
         icon={ <NavigationExpandMore /> }
         primary={ true } /> : null }
         { limit != 'all' ? <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p> : null }
+
+        { isAllowed('routers.export', user ? user.roles : null) ?
+        <RaisedButton
+        onTouchTap={ this.export.bind(this) }
+        label={ i18n.button.download_csv }
+        icon={ <FileFileDownload /> }
+        secondary={ true } />
+        : null }
 
       </CardText>
     </Card>

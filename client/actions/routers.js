@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { browserHistory } from 'react-router'
+import { downloadCSV } from '/imports/helpers'
 
 export const insertRouter = (params) => {
   return (dispatch, getState) => {
@@ -114,5 +115,31 @@ export const setRouterStatisticUrl = (id, hostname) => {
         }
       })
     }
+  }
+}
+
+export const exportRouters = () => {
+  return (dispatch, getState) => {
+    Meteor.call('routers.export', (error, result) => {
+      if (!error) {
+        if (result.length != -1) {
+          downloadCSV(result, 'export_routers', getState())
+          dispatch({
+            type: 'SHOW_SUCCESS_MESSAGE',
+            message: getState().i18n.message.routers_exported,
+          })
+        } else {
+          dispatch({
+            type: 'SHOW_ERROR_MESSAGE',
+            message: getState().i18n.message.nothing_to_export,
+          })
+        }
+      } else {
+        dispatch({
+          type: 'SHOW_ERROR_MESSAGE',
+          error,
+        })
+      }
+    })
   }
 }

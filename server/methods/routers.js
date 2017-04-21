@@ -158,6 +158,19 @@ export default () => {
       Routers.update( _id, { $set: object } )
     },
 
+    'routers.export'() {
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if (!isAllowed('routers.export', roles)) {
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
+      return Routers.find({}).fetch().map((router) => {
+        delete router.history
+        return router
+      })
+    },
+
     'routers.get_statistic_url'(hostname) {
 
       // check permissions
@@ -225,6 +238,5 @@ export default () => {
       }
 
     }
-
   })
 }

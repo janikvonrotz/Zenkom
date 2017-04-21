@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { browserHistory } from 'react-router'
+import { downloadCSV } from '/imports/helpers'
 
 export const insertDfi = (params) => {
   return (dispatch, getState) => {
@@ -74,29 +75,7 @@ export const exportDfis = () => {
     Meteor.call('dfis.export', (error, result) => {
       if (!error) {
         if (result.length != -1) {
-
-          // setup csv
-          let keys = Object.keys(result[0])
-
-          // add headers
-          let csvContent = keys.map((key) => {
-            return `"${ getState().i18n.label[key] }"`
-          }).join(',') + '\n'
-
-          // add rows
-          result.map((object) => {
-            csvContent += keys.map((key) => {
-              return `"${object[key]}"`
-            }).join(',') + '\n'
-          })
-
-          // export file
-          let link = document.createElement('a')
-          link.setAttribute('href', 'data:text/csv;charset=utf-8,\uFEFF' + encodeURI(csvContent))
-          link.setAttribute('download', 'export_dfis.csv')
-          document.body.appendChild(link)
-          link.click()
-
+          downloadCSV(result, 'export_dfis', getState())
           dispatch({
             type: 'SHOW_SUCCESS_MESSAGE',
             message: getState().i18n.message.dfis_exported,
