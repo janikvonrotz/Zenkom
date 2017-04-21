@@ -159,16 +159,7 @@ let seeds = () => {
   }
 
   if (Notifications.find({}).count() === 0) {
-    let notifications = [
-      {
-        subject: 'Router 64 wurde aktualisiert',
-        content: 'Heinz Keller hat bei Router 64 folgende Änderungen gemacht: ...',
-        type: 'router_updated',
-        receivers: [ 'all' ],
-        created_at: new Date(),
-        created_by: 'Janik von Rotz',
-      },
-    ]
+    let notifications = []
 
     console.info('Seed database with notifications.')
 

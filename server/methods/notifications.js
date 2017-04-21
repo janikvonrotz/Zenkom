@@ -31,5 +31,18 @@ export default () => {
 
       Notifications.remove(id)
     },
+
+    'notifications.export'() {
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if (!isAllowed('notifications.export', roles)) {
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
+      return Notifications.find({}).fetch().map((notification) => {
+        notification.receivers = notification.receivers.join(', ')
+        return notification
+      })
+    },
   })
 }

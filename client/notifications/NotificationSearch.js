@@ -3,9 +3,10 @@ import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { NotificationList } from './index'
 import { connect } from 'react-redux'
 import { setNotificationFilter, setListLimit, increaseListLimit,
-  resetListLimit, setHeaderTitle } from '../actions'
+  resetListLimit, setHeaderTitle, exportNotifications } from '../actions'
 import { debounce } from 'lodash'
-import { NavigationExpandMore } from 'material-ui/svg-icons'
+import { isAllowed } from '/imports/helpers'
+import { NavigationExpandMore, FileFileDownload } from 'material-ui/svg-icons'
 
 class NotificationSearch extends React.Component {
 
@@ -37,8 +38,13 @@ class NotificationSearch extends React.Component {
     dispatch(setListLimit(limit))
   }
 
+  export(){
+    let { dispatch } = this.props
+    dispatch(exportNotifications())
+  }
+
   render() {
-    let { i18n, limit } = this.props
+    let { i18n, limit, user } = this.props
 
     return <Card>
       <CardText>
@@ -60,6 +66,14 @@ class NotificationSearch extends React.Component {
         primary={ true } /> : null }
         { limit != 'all' ? <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p> : null }
 
+        { isAllowed('vehicles.export', user ? user.roles : null) ?
+        <RaisedButton
+        onTouchTap={ this.export.bind(this) }
+        label={ i18n.button.download_csv }
+        icon={ <FileFileDownload /> }
+        secondary={ true } />
+        : null }
+
       </CardText>
     </Card>
   }
@@ -67,6 +81,7 @@ class NotificationSearch extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user,
     i18n: state.i18n,
     limit: state.listLimit,
   }

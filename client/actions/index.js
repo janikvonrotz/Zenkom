@@ -9,7 +9,7 @@ import { updateRouter, removeRouter, insertRouter, restoreRouter,
 import { updateVehicle, removeVehicle, insertVehicle,
   setVehicleFilter, exportVehicles } from './vehicles'
 import { insertFeedback } from './feedbacks'
-import { setNotificationFilter } from './notifications'
+import { setNotificationFilter, exportNotifications } from './notifications'
 import { updateDfi, removeDfi, insertDfi,
   setDfiFilter, exportDfis } from './dfis'
 
@@ -21,4 +21,4 @@ export { setHeaderTitle, dismissMessage, updateUserSettings, insertFeedback,
   setNotificationFilter, updateUserRole, setListLimit, setListSort, removeDfi,
   increaseListLimit, resetListLimit, setRouterStatisticUrl, updateDfi,
   insertDfi, setDfiFilter, exportDfis, exportRouters, exportVehicles,
-  exportUsers }
+  exportUsers, exportNotifications }

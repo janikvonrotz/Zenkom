@@ -72,6 +72,10 @@ export default {
     description: 'Bezeichnung',
     row_type: 'Zeilentyp',
     location: 'Standort',
+    receivers: 'Empfänger',
+    subject: 'Betreff',
+    content: 'Inhalt',
+    link: 'Link',
   },
   question: {
     confirm_delete_router: 'Möchten Sie diesen Router wirklich löschen?',
@@ -144,7 +148,8 @@ export default {
     routers_exported: 'Router exportiert.',
     vehicles_exported: 'Fahrzeuge exportiert',
     users_exported: 'Benutzer exportiert',
-    nothing_to_export: 'Es sind keine Daten zum Exportieren vorhanden.'
+    notifications_exported: 'Benachrichtigungen exportiert',
+    nothing_to_export: 'Es sind keine Daten zum Exportieren vorhanden.',
   },
   error: {
     page_not_found: 'Seite konnte nicht gefunden werden',
