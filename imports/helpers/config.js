@@ -8,19 +8,21 @@ let acl = {
   'routers.update': [ 'admin', 'spec', 'tech' ],
   'routers.remove': [ 'admin', 'spec' ],
   'routers.restore': [ 'admin' , 'spec' ],
+  'routers.export': [ 'admin', 'spec' ],
 
   // vehicles permissions
   'vehicles.read': [ 'admin', 'spec', 'tech', 'user' ],
   'vehicles.insert': [ 'admin', 'spec', 'tech' ],
   'vehicles.update': [ 'admin', 'spec', 'tech' ],
   'vehicles.remove': [ 'admin', 'spec', 'tech' ],
+  'vehicles.export': [ 'admin', 'spec' ],
 
   // dfis permissions
   'dfis.read': [ 'admin', 'spec', 'tech', 'user' ],
   'dfis.insert': [ 'admin', 'spec', 'tech' ],
   'dfis.update': [ 'admin', 'spec', 'tech' ],
   'dfis.remove': [ 'admin', 'spec', 'tech' ],
-  'dfis.export': [ 'admin', 'spec', 'tech' ],
+  'dfis.export': [ 'admin', 'spec' ],
 
   // users permissions
   // 'users.read': [ 'admin', 'spec' ],
@@ -29,12 +31,14 @@ let acl = {
   'users.update_role': [ 'admin', 'spec', 'tech', 'user' ],
   'users.update_settings': [ 'admin', 'spec', 'tech' ],
   'users.update_profile': [ 'admin', 'spec', 'tech', 'user' ],
+  'users.export': [ 'admin', 'spec' ],
 
   // notification permissions
   'notifications.read': [ 'admin', 'spec', 'tech' ],
   'notifications.receive': [ 'admin', 'spec', 'tech' ],
   'notifications.insert': [ 'admin', 'spec', 'tech' ],
   'notifications.remove': [ 'admin', 'spec', 'tech' ],
+  'notifications.export': [ 'admin', 'spec' ],
 
   // feedbacks permissions
   'feedbacks.insert': [ 'admin', 'spec', 'tech', 'user' ],
