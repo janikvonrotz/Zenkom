@@ -70,5 +70,14 @@ export default () => {
       Dfis.update( _id, { $set: object } )
     },
 
+    'dfis.export'() {
+      // check permissions
+      let roles = Meteor.userId() ? Meteor.user().roles : null
+      if (!isAllowed('dfis.export', roles)) {
+        throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
+      }
+
+      return Dfis.find({}).fetch()
+    },
   })
 }

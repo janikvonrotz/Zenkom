@@ -136,6 +136,8 @@ export default {
     feedback_sent: 'Feedback wurde verschickt.',
     role_saved: 'Die Rolle wurde gespeichert.',
     insufficent_rights_for_method: 'Ihre Berechtigungen sind für diese Aktion nicht ausreichend.',
+    dfis_exported: 'Dfis exportiert.',
+    nothing_to_export: 'Es sind keine Daten zum Exportieren vorhanden.'
   },
   error: {
     page_not_found: 'Seite konnte nicht gefunden werden',

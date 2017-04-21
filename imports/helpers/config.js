@@ -20,6 +20,7 @@ let acl = {
   'dfis.insert': [ 'admin', 'spec', 'tech' ],
   'dfis.update': [ 'admin', 'spec', 'tech' ],
   'dfis.remove': [ 'admin', 'spec', 'tech' ],
+  'dfis.export': [ 'admin', 'spec', 'tech' ],
 
   // users permissions
   // 'users.read': [ 'admin', 'spec' ],

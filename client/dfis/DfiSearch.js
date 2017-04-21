@@ -3,7 +3,7 @@ import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { DfiList } from './index'
 import { connect } from 'react-redux'
 import { insertDfi, setDfiFilter, resetListLimit, increaseListLimit,
-  setListLimit } from '../actions'
+  setListLimit, exportDfis } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { debounce } from 'lodash'
 import { ContentAdd, NavigationExpandMore, FileFileDownload } from 'material-ui/svg-icons'
@@ -42,6 +42,11 @@ class DfiSearch extends React.Component {
     dispatch(setListLimit(limit))
   }
 
+  export(){
+    let { dispatch } = this.props
+    dispatch(exportDfis())
+  }
+
   render() {
     let { i18n, user } = this.props
 
@@ -76,7 +81,7 @@ class DfiSearch extends React.Component {
         <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
 
         <RaisedButton
-        onTouchTap={ this.increaseLimit.bind(this) }
+        onTouchTap={ this.export.bind(this) }
         label={ i18n.button.download_csv }
         icon={ <FileFileDownload /> }
         secondary={ true } />
