@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { browserHistory } from 'react-router'
 import { downloadCSV } from '/imports/helpers'
+import { objectAssign } from '/imports/helpers'
 
 export const insertRouter = (params) => {
   return (dispatch, getState) => {
@@ -83,9 +84,16 @@ export const restoreRouter = (id, versionId) => {
 }
 
 export const setRouterFilter = (filter) => {
+  filter = filter ? objectAssign(filter) : filter
   return {
     type: 'SET_ROUTER_FILTER',
     filter
+  }
+}
+
+export const resetRouterFilter = () => {
+  return {
+    type: 'RESET_ROUTER_FILTER'
   }
 }
 

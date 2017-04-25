@@ -25,7 +25,8 @@ export default {
     show_router: 'Router anzeigen',
     show_dfi: 'DFI anzeigen',
     show_vehicle: 'Fahrzeug anzeigen',
-    download_csv: 'CSV herunterladen'
+    download_csv: 'CSV herunterladen',
+    filter_list: 'Liste filtern',
   },
   label: {
     _id: 'ID',
@@ -175,6 +176,8 @@ export default {
     router_out_of_order: 'Router ist ausser Betrieb',
     dfi_inserted: 'DFI hinzugefügt',
     none: '',
+    router_in_dfi: 'Router ist in DFI',
+    router_in_vehicle: 'Router ist in Fahrzeug',
   },
   role: {
     user: 'Benutzer',

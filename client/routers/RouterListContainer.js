@@ -15,7 +15,7 @@ const mapStateToProps = (state) => {
 }
 export default connect(mapStateToProps)(createContainer(({ filter, sort, limit }) => {
   sort = sort || { created_at: -1 }
-
+  
   // merge vehicles and dfis with routers
   let subscription = Meteor.subscribe('routers.with_vehicles_dfis', filter, sort, limit)
   let vehicles = Vehicles.find({}).fetch()

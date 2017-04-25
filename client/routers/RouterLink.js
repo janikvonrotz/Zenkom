@@ -28,6 +28,7 @@ class RouterLink extends React.Component {
           <Link to={ `/router/new?${ dfiId ? 'dfiId' : vehicleId ? 'vehicleId' : null }=${ dfiId || vehicleId }` }>
             <RaisedButton
             icon={ <ContentAdd /> }
+            label={ i18n.button.add_router }
             primary={ true } />
           </Link>
         </div> }
