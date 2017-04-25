@@ -22,6 +22,7 @@ import dfiFilter from './dfiFilter'
 import dfiTypeOptions from './dfiTypeOptions'
 import dfiRowTypeOptions from './dfiRowTypeOptions'
 import vehicleTypeOptions from './vehicleTypeOptions'
+import routerListLimit from './routerListLimit'
 
 const zenkomApp = combineReducers({
   headerTitle,
@@ -47,6 +48,7 @@ const zenkomApp = combineReducers({
   dfiRowTypeOptions,
   dfiTypeOptions,
   vehicleTypeOptions,
+  routerListLimit,
 })
 
 export default zenkomApp

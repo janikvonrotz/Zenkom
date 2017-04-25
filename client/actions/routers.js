@@ -151,3 +151,26 @@ export const exportRouters = () => {
     })
   }
 }
+
+export const setRouterListLimit = (limit) => {
+  return {
+    type: 'SET_ROUTER_LIST_LIMIT',
+    limit
+  }
+}
+
+export const resetRouterListLimit = () => {
+  return {
+    type: 'RESET_ROUTER_LIST_LIMIT'
+  }
+}
+
+export const increaseRouterListLimit = () => {
+  return (dispatch, getState) => {
+    let limit = getState().routerListLimit
+    dispatch({
+      type: 'INCREASE_ROUTER_LIST_LIMIT',
+      limit
+    })
+  }
+}

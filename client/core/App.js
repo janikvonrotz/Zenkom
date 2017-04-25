@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, CardText } from 'material-ui'
-import { setHeaderTitle, resetListLimit } from '../actions'
+import { setHeaderTitle, setListLimit, resetRouterListLimit, resetRouterFilter } from '../actions'
+import { RouterSearch } from '../routers'
 import { connect } from 'react-redux'
 import { NotificationList } from '../notifications'
 import { isAllowed } from '/imports/helpers'
@@ -9,7 +10,9 @@ class App extends React.Component {
 
   componentDidMount(){
     let { dispatch } = this.props
-    dispatch(resetListLimit())
+    dispatch(setListLimit(3))
+    dispatch(resetRouterListLimit())
+    dispatch(resetRouterFilter())
     this.componentWillReceiveProps()
   }
 
@@ -30,6 +33,8 @@ class App extends React.Component {
         { user && user.roles && user.roles.includes('user') ? <p>{ i18n.text.contact_administrator }</p> : null }
 
         { user && isAllowed('notifications.read', user.roles) ? <NotificationList /> : null }
+
+        { isAllowed('routers.read', user ? user.roles : null) ? <RouterSearch /> : null }
 
       </CardText>
     </Card>

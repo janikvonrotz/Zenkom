@@ -6,7 +6,8 @@ import { loginUser, logoutUser, setUser, registerUser, sendEmailVerification,
   updateUserRole } from './users'
 import { updateRouter, removeRouter, insertRouter, restoreRouter,
   setRouterFilter, setRouterStatisticUrl, exportRouters,
-  resetRouterFilter } from './routers'
+  increaseRouterListLimit, resetRouterFilter, setRouterListLimit,
+  resetRouterListLimit } from './routers'
 import { updateVehicle, removeVehicle, insertVehicle,
   setVehicleFilter, exportVehicles } from './vehicles'
 import { insertFeedback } from './feedbacks'
@@ -22,4 +23,5 @@ export { setHeaderTitle, dismissMessage, updateUserSettings, insertFeedback,
   setNotificationFilter, updateUserRole, setListLimit, setListSort, removeDfi,
   increaseListLimit, resetListLimit, setRouterStatisticUrl, updateDfi,
   insertDfi, setDfiFilter, exportDfis, exportRouters, exportVehicles,
-  exportUsers, exportNotifications, resetRouterFilter }
+  exportUsers, exportNotifications, resetRouterFilter, increaseRouterListLimit,
+  setRouterListLimit, resetRouterListLimit }

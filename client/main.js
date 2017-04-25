@@ -10,7 +10,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import { App, NotFound, MainLayout, About, muiTheme } from './core'
 import { Login, Register, EmailVerification, RecoverPassword,
   Profile, Settings, UserSearch } from './users'
-import { RouterSearch, Router as RouterComponent,
+import { RouterPage, Router as RouterComponent,
   RouterVersion } from './routers'
 import { Vehicle, VehicleSearch } from './vehicles'
 import { NotificationSearch } from './notifications'
@@ -28,7 +28,7 @@ Meteor.startup(() => {
         <Router history={ browserHistory }>
           <Route component={ MainLayout }>
             <Route path="/" component={ App } />
-            <Route path="/routers" component={ RouterSearch } />
+            <Route path="/routers" component={ RouterPage } />
             <Route path="/router/:id/edit" component={ RouterComponent } />
             <Route path="/router/new" component={ RouterComponent } />
             <Route path="/router/:id/version/:version" component={ RouterVersion } />
