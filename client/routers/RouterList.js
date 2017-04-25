@@ -23,9 +23,7 @@ class RouterList extends React.Component {
   }
 
   render() {
-    let { routers, loading, i18n } = this.props
-
-    let headers = [
+    let { routers, loading, i18n, headers = [
       'hostname',
       'vehicle_number',
       'dfi_description',
@@ -36,7 +34,40 @@ class RouterList extends React.Component {
       'sim1',
       'sim2',
       'sim_itt',
-    ]
+    ] } = this.props
+
+    const tableRowContent = {
+      hostname: (router) => {
+        return <Link to={ `/router/${router._id}/edit` }>{ router.hostname }</Link>
+      },
+      vehicle_number: (router) => {
+        return router.vehicle ? router.vehicle.number : null
+      },
+      dfi_description: (router) => {
+        return router.dfi ? router.dfi.description : null
+      },
+      status: (router) => {
+        return i18n.option[router.status]
+      },
+      type: (router) => {
+        return router.type
+      },
+      ip_router: (router) => {
+        return router.ip_router
+      },
+      ip_cashbox: (router) => {
+        return router.ip_cashbox
+      },
+      sim1: (router) => {
+        return router.sim1
+      },
+      sim2: (router) => {
+        return router.sim2
+      },
+      sim_itt: (router) => {
+        return router.sim_itt
+      },
+    }
 
     return <div>
       { loading ? <CircularProgress /> : null }
@@ -55,19 +86,9 @@ class RouterList extends React.Component {
         <TableBody>
           { routers.map((router) => {
             return <TableRow key={ router._id }>
-              <TableRowColumn><Link
-                to={ `/router/${router._id}/edit` }>
-                { router.hostname }
-              </Link></TableRowColumn>
-              <TableRowColumn>{ router.vehicle ? router.vehicle.number : null }</TableRowColumn>
-              <TableRowColumn>{ router.dfi ? router.dfi.description : null }</TableRowColumn>
-              <TableRowColumn>{ i18n.option[router.status] }</TableRowColumn>
-              <TableRowColumn>{ router.type }</TableRowColumn>
-              <TableRowColumn>{ router.ip_router }</TableRowColumn>
-              <TableRowColumn>{ router.ip_cashbox }</TableRowColumn>
-              <TableRowColumn>{ router.sim1 }</TableRowColumn>
-              <TableRowColumn>{ router.sim2 }</TableRowColumn>
-              <TableRowColumn>{ router.sim_itt }</TableRowColumn>
+              { headers.map((header) => {
+                return <TableRowColumn key={ `${ router._id }_${ header }` }>{ tableRowContent[header](router) }</TableRowColumn>
+              }) }
             </TableRow>
           }) }
         </TableBody>
