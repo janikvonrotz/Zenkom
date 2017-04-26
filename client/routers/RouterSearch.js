@@ -57,7 +57,7 @@ class RouterSearch extends React.Component {
   }
 
   render() {
-    let { i18n, user, limit, statusOptions } = this.props
+    let { i18n, user, limit, statusOptions, headers } = this.props
     let { openFilterMenu, filter } = this.state
 
     return <div>
@@ -107,7 +107,7 @@ class RouterSearch extends React.Component {
         { i18n.option[filter.keyFilter.label] }
       </Chip> : null }
 
-      <RouterList />
+      <RouterList headers={ headers } />
 
       { limit != 'all' ? <RaisedButton
       onTouchTap={ this.increaseLimit.bind(this) }

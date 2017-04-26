@@ -49,8 +49,14 @@ class RouterList extends React.Component {
       status: (router) => {
         return i18n.option[router.status]
       },
+      version: (router) => {
+        return router.version
+      },
       type: (router) => {
         return router.type
+      },
+      serial_number: (router) => {
+        return router.serial_number
       },
       ip_router: (router) => {
         return router.ip_router
@@ -70,7 +76,7 @@ class RouterList extends React.Component {
     }
 
     return <div>
-      { loading ? <CircularProgress /> : null }
+      { loading ? <CircularProgress /> : <div style={{ width: 40, height: 40 }} /> }
       <Table>
         <TableHeader>
           <TableRow>

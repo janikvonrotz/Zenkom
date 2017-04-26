@@ -42,7 +42,7 @@ class UserList extends React.Component {
     ]
 
     return <div>
-      { loading ? <CircularProgress /> : null }
+      { loading ? <CircularProgress /> : <div style={{ width: 40, height: 40 }} /> }
       <Table>
         <TableHeader>
           <TableRow>

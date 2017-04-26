@@ -11,7 +11,7 @@ class PostList extends React.Component {
     let { notifications, loading, i18n } = this.props
 
     return <div>
-      { loading ? <CircularProgress /> : null }
+      { loading ? <CircularProgress /> : <div style={{ width: 40, height: 40 }} /> }
       { notifications.length != 0 ?
       <List>
         { notifications.map((notification) => {

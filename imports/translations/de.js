@@ -147,9 +147,9 @@ export default {
     insufficent_rights_for_method: 'Ihre Berechtigungen sind für diese Aktion nicht ausreichend.',
     dfis_exported: 'DFIs exportiert.',
     routers_exported: 'Router exportiert.',
-    vehicles_exported: 'Fahrzeuge exportiert',
-    users_exported: 'Benutzer exportiert',
-    notifications_exported: 'Benachrichtigungen exportiert',
+    vehicles_exported: 'Fahrzeuge exportiert.',
+    users_exported: 'Benutzer exportiert.',
+    notifications_exported: 'Benachrichtigungen exportiert.',
     nothing_to_export: 'Es sind keine Daten zum Exportieren vorhanden.',
   },
   error: {

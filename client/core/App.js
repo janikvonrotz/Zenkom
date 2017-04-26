@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardText } from 'material-ui'
-import { setHeaderTitle, setListLimit, resetRouterListLimit, resetRouterFilter } from '../actions'
+import { setHeaderTitle, setListLimit, setRouterListLimit, resetRouterFilter } from '../actions'
 import { RouterSearch } from '../routers'
 import { connect } from 'react-redux'
 import { NotificationList } from '../notifications'
@@ -11,7 +11,7 @@ class App extends React.Component {
   componentDidMount(){
     let { dispatch } = this.props
     dispatch(setListLimit(3))
-    dispatch(resetRouterListLimit())
+    dispatch(setRouterListLimit('all'))
     dispatch(resetRouterFilter())
     this.componentWillReceiveProps()
   }
@@ -34,7 +34,18 @@ class App extends React.Component {
 
         { user && isAllowed('notifications.read', user.roles) ? <NotificationList /> : null }
 
-        { isAllowed('routers.read', user ? user.roles : null) ? <RouterSearch /> : null }
+        { isAllowed('routers.read', user ? user.roles : null) ? <RouterSearch headers={[
+          'hostname',
+          'vehicle_number',
+          'dfi_description',
+          'version',
+          'type',
+          'serial_number',
+          'ip_router',
+          'ip_cashbox',
+          'sim1',
+          'sim2',
+        ]} /> : null }
 
       </CardText>
     </Card>
