@@ -106,7 +106,7 @@ class Router extends React.Component {
       installed_at } = this.state
 
     return loading ? <CircularProgress /> : <Card>
-      <CardMedia>
+      <CardMedia style={{ textAlign: 'center' }}>
         { statistic ? <img style={{ maxWidth: 600, minWidth: 100 }} src={ statistic.url } /> : null }
       </CardMedia>
       <CardText>
@@ -239,7 +239,7 @@ class Router extends React.Component {
                 defaultValue={ router.sim_itt || '' }
                 type="number"
                 ref="sim_itt"
-                required={ true }
+                required={ vehicle_id ? true : false }
                 floatingLabelText={ i18n.label.sim_itt }  />
                 <br />
 
@@ -261,6 +261,7 @@ class Router extends React.Component {
                 defaultValue={ router.phone_itt || '' }
                 type="number"
                 ref="phone_itt"
+                required={ vehicle_id ? true : false }
                 floatingLabelText={ i18n.label.phone_itt }  />
                 <br />
 

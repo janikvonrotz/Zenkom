@@ -60,6 +60,7 @@ export default new SimpleSchema({
   sim_itt: {
     type: String,
     label: 'SIM ITT',
+    optional: true,
   },
   phone1: {
     type: String,
