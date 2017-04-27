@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField, RaisedButton, IconButton, IconMenu, Chip,
+import { TextField, RaisedButton, Menu, Chip, Popover,
   MenuItem } from 'material-ui'
 import { RouterList } from './index'
 import { connect } from 'react-redux'
@@ -50,15 +50,16 @@ class RouterSearch extends React.Component {
     dispatch(setRouterListLimit(limit))
   }
 
-  toggleMenu() {
+  toggleMenu(event) {
     this.setState({
-      openFilterMenu: !this.state.openFilterMenu
+      openFilterMenu: !this.state.openFilterMenu,
+      anchorEl: event.currentTarget,
     })
   }
 
   render() {
     let { i18n, user, limit, statusOptions, headers } = this.props
-    let { openFilterMenu, filter } = this.state
+    let { openFilterMenu, filter, anchorEl } = this.state
 
     return <div>
 
@@ -69,29 +70,36 @@ class RouterSearch extends React.Component {
 
       <br /><br />
 
-      <IconMenu
-      iconButtonElement={ <IconButton style={{ display: 'none' }} /> }
-      onChange={ this.updateFilter.bind(this, 'keyFilter') }
-      onRequestChange={ this.toggleMenu.bind(this) }
-      open={ openFilterMenu } >
+      <Popover
+      open={ openFilterMenu }
+      anchorEl={ anchorEl }
+      anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+      targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+      onRequestClose={ this.toggleMenu.bind(this) }>
+        <Menu
+        onChange={ this.updateFilter.bind(this, 'keyFilter') }>
 
-        <MenuItem
-        key={ 'router_in_dfi' }
-        value={ { key: 'dfi_id', value: true, label: 'router_in_dfi' } }
-        primaryText={ i18n.option.router_in_dfi } />
+          <MenuItem
+          key={ 'router_in_dfi' }
+          value={ { key: 'dfi_id', value: true, label: 'router_in_dfi' } }
+          onTouchTap={ this.toggleMenu.bind(this) }
+          primaryText={ i18n.option.router_in_dfi } />
 
-        <MenuItem
-        key={ 'router_in_vehicle' }
-        value={ { key: 'vehicle_id', value: true, label: 'router_in_vehicle' } }
-        primaryText={ i18n.option.router_in_vehicle } />
+          <MenuItem
+          key={ 'router_in_vehicle' }
+          value={ { key: 'vehicle_id', value: true, label: 'router_in_vehicle' } }
+          onTouchTap={ this.toggleMenu.bind(this) }
+          primaryText={ i18n.option.router_in_vehicle } />
 
-        { statusOptions.map((option) => {
-          return <MenuItem
-            key={ option }
-            value={ { key: 'status', value: option, label: option } }
-            primaryText={ i18n.option[option] } />
-        }) }
-      </IconMenu>
+          { statusOptions.map((option) => {
+            return <MenuItem
+              key={ option }
+              value={ { key: 'status', value: option, label: option } }
+              onTouchTap={ this.toggleMenu.bind(this) }
+              primaryText={ i18n.option[option] } />
+          }) }
+        </Menu>
+      </Popover>
 
       { isAllowed('routers.read', user ? user.roles : null) ?
       <RaisedButton
