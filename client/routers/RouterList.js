@@ -38,13 +38,13 @@ class RouterList extends React.Component {
 
     const tableRowContent = {
       hostname: (router) => {
-        return <Link to={ `/router/${router._id}/edit` }>{ router.hostname }</Link>
+        return <Link to={ `/router/${ router._id }/edit` }>{ router.hostname }</Link>
       },
       vehicle_number: (router) => {
-        return router.vehicle ? router.vehicle.number : null
+        return router.vehicle ? <Link to={ `/vehicle/${ router.vehicle_id }/edit` }>{ router.vehicle.number }</Link> : null
       },
       dfi_description: (router) => {
-        return router.dfi ? router.dfi.description : null
+        return router.dfi ? <Link to={ `/dfi/${ router.dfi_id }/edit` }>{ router.dfi.description }</Link> : null
       },
       status: (router) => {
         return i18n.option[router.status]
