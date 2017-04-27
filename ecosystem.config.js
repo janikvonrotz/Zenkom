@@ -8,7 +8,7 @@ module.exports = {
       name: 'Zenkom',
       script: './bundle/main.js',
       env: {
-        NODE_ENV: 'dev',
+        NODE_ENV: 'production',
         MONGO_URL: 'mongodb://zenkom:dp8e36APuASgSWum7uLz@ds121190.mlab.com:21190/zenkom',
         ROOT_URL: 'https://zenkom.bitsherpa.com',
         PORT: 3000,
