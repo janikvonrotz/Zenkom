@@ -3,7 +3,8 @@ import { TextField, RaisedButton, Menu, Chip, Popover,
   MenuItem } from 'material-ui'
 import { RouterList } from './index'
 import { connect } from 'react-redux'
-import { setRouterFilter, increaseRouterListLimit, setRouterListLimit } from '../actions'
+import { setRouterFilter, increaseRouterListLimit,
+  setRouterListLimit } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { debounce } from 'lodash'
 import { NavigationExpandMore, ContentFilterList } from 'material-ui/svg-icons'
@@ -20,18 +21,12 @@ class RouterSearch extends React.Component {
 
   updateFilter(key, event, value){
     let { dispatch, filter } = this.props
-    if (key === 'keyFilter'){
-      filter[key] = value
-    }
-    if (key === 'search'){
-      filter[key] = value
-    }
+    filter[key] = value
     dispatch(setRouterFilter(filter))
   }
 
   removeFilter(key){
-    let { dispatch } = this.props
-    let { filter } = this.state
+    let { dispatch, filter } = this.props
     delete filter[key]
     dispatch(setRouterFilter(filter))
   }
@@ -94,7 +89,9 @@ class RouterSearch extends React.Component {
               value={ { key: 'status', value: option, label: option } }
               onTouchTap={ this.toggleMenu.bind(this) }
               primaryText={ i18n.option[option] } />
-          }) }
+            })
+          }
+
         </Menu>
       </Popover>
 
@@ -109,7 +106,7 @@ class RouterSearch extends React.Component {
       { filter && filter.keyFilter && filter.keyFilter.value ? <Chip
       style={ { marginTop: 5 } }
       onRequestDelete={ this.removeFilter.bind(this, 'keyFilter') } >
-        { i18n.option[filter.keyFilter.label] }
+        { i18n.option[filter.keyFilter.label] || filter.keyFilter.label }
       </Chip> : null }
 
       <RouterList headers={ headers } />
