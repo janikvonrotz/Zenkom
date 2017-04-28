@@ -14,21 +14,18 @@ class RouterSearch extends React.Component {
     super(props)
     this.state = {
       openFilterMenu: false,
-      filter: {},
     }
     this.updateFilter = debounce(this.updateFilter, 500)
   }
 
   updateFilter(key, event, value){
-    let { dispatch } = this.props
-    let { filter } = this.state
+    let { dispatch, filter } = this.props
     if (key === 'keyFilter'){
       filter[key] = value
     }
     if (key === 'search'){
       filter[key] = value
     }
-    this.setState({ filter })
     dispatch(setRouterFilter(filter))
   }
 
@@ -36,7 +33,6 @@ class RouterSearch extends React.Component {
     let { dispatch } = this.props
     let { filter } = this.state
     delete filter[key]
-    this.setState({ filter })
     dispatch(setRouterFilter(filter))
   }
 
@@ -58,13 +54,14 @@ class RouterSearch extends React.Component {
   }
 
   render() {
-    let { i18n, user, limit, statusOptions, headers } = this.props
-    let { openFilterMenu, filter, anchorEl } = this.state
+    let { i18n, user, limit, statusOptions, headers, filter } = this.props
+    let { openFilterMenu, anchorEl } = this.state
 
     return <div>
 
       <TextField
       style={{ float: 'right' }}
+      defaultValue={ filter.search || '' }
       floatingLabelText={ i18n.button.search }
       onChange={this.updateFilter.bind(this, 'search')} />
 
@@ -132,6 +129,7 @@ const mapStateToProps = (state) => {
   return {
     i18n: state.i18n,
     user: state.user,
+    filter: state.routerFilter,
     limit: state.routerListLimit,
     statusOptions: state.routerStatusOptions,
   }

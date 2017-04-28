@@ -19,7 +19,6 @@ class DfiSearch extends React.Component {
   componentDidMount(){
     let { dispatch } = this.props
     dispatch(resetListLimit())
-    dispatch(setDfiFilter(''))
   }
 
   insert(){
@@ -49,12 +48,13 @@ class DfiSearch extends React.Component {
   }
 
   render() {
-    let { i18n, user, limit } = this.props
+    let { i18n, user, limit, filter } = this.props
 
     return <Card>
       <CardText>
 
         <TextField
+        defaultValue={ filter }
         style={{ float: 'right' }}
         floatingLabelText={ i18n.button.search }
         ref="filter"
@@ -99,6 +99,7 @@ const mapStateToProps = (state) => {
     i18n: state.i18n,
     user: state.user,
     limit: state.listLimit,
+    filter: state.dfiFilter,
   }
 }
 export default connect(mapStateToProps)(DfiSearch)

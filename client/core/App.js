@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardText } from 'material-ui'
-import { setHeaderTitle, setListLimit, setRouterListLimit, resetRouterFilter } from '../actions'
+import { setHeaderTitle, setListLimit, setRouterListLimit } from '../actions'
 import { RouterSearch } from '../routers'
 import { connect } from 'react-redux'
 import { NotificationList } from '../notifications'
@@ -12,7 +12,6 @@ class App extends React.Component {
     let { dispatch } = this.props
     dispatch(setListLimit(3))
     dispatch(setRouterListLimit('all'))
-    dispatch(resetRouterFilter())
     this.componentWillReceiveProps()
   }
 

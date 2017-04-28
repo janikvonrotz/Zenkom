@@ -18,7 +18,6 @@ class UserSearch extends React.Component {
   componentDidMount(){
     let { dispatch } = this.props
     dispatch(resetListLimit())
-    dispatch(setUserFilter(''))
   }
 
   updateFilter(){
@@ -43,12 +42,13 @@ class UserSearch extends React.Component {
   }
 
   render() {
-    let { i18n, limit, user } = this.props
+    let { i18n, limit, user, filter } = this.props
 
     return <Card>
       <CardText>
 
         <TextField
+        defaultValue={ filter }
         style={{ float: 'right' }}
         floatingLabelText={ i18n.button.search }
         ref="filter"
@@ -83,6 +83,7 @@ const mapStateToProps = (state) => {
     user: state.user,
     i18n: state.i18n,
     limit: state.listLimit,
+    filter: state.userFilter,
   }
 }
 export default connect(mapStateToProps)(UserSearch)
