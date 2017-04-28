@@ -8,13 +8,6 @@
     },
     "mail": {
       "notificationFrom": "notifications@zenkom.bitsherpa.com"
-    },
-    "zabbix": {
-      "url": "http://192.168.15.180",
-      "api_url": "http://www.oev-live.ch/zabbix/api_jsonrpc.php",
-      "user": "zabbix",
-      "password": "v60B05l",
-      "chart_url": "chart.php?period=3600&itemids%5B0%5D={ itemid }&type=0&updateProfile=1&profileIdx=web.item.graph&profileIdx2=169130&width=600"
     }
   },
   "public": {

@@ -3,6 +3,11 @@ import { config } from '/imports/helpers'
 
 export const getStatisticUrl = (hostname) => {
 
+  // check if config is available
+  if (!config.zabbix) {
+    return null
+  }
+  
   // get auth token
   let result = HTTP.call('POST',
     config.zabbix.api_url,
