@@ -3,10 +3,8 @@ import { check } from 'meteor/check'
 import { Routers } from '/imports/collections'
 import { Random } from 'meteor/random'
 import { getFullname, isAllowed } from '/imports/helpers'
-import { dispatchNotification } from '../actions'
+import { dispatchNotification, getStatisticUrl } from '../actions'
 import { i18n } from '/imports/translations'
-import { HTTP } from 'meteor/http'
-import { config } from '/imports/helpers'
 
 export default () => {
   Meteor.methods({
@@ -179,64 +177,7 @@ export default () => {
         throw new Meteor.Error(i18n.de.error.insufficent_rights, i18n.de.message.insufficent_rights_for_method)
       }
 
-      return '/zabbix.jpg'
-
-      console.log('config', config.zabbix)
-
-      let result = HTTP.call('POST',
-        'http://www.oev-live.ch/zabbix/api_jsonrpc.php',
-        {
-          data: {
-            "jsonrpc": "2.0",
-            "method": "user.login",
-            "params": {
-                "user": "zabbix",
-                "password": "v60B05l"
-            },
-            "id": 1,
-            "auth": null
-          }
-        }
-      )
-
-      let authToken = result.data.result
-      console.log(authToken)
-
-      result = HTTP.call('POST',
-        'http://www.oev-live.ch/zabbix/api_jsonrpc.php',
-        {
-          data: {
-            "jsonrpc": "2.0",
-            "method": "host.get",
-            "params": {
-                "output": [
-                    "hostid",
-                    "host"
-                ],
-                "selectInterfaces": [
-                    "interfaceid",
-                    "ip"
-                ],
-                "filter": {
-                    "host": [
-                        hostname
-                    ]
-                }
-            },
-            "id": 2,
-            "auth": authToken
-          }
-        }
-      )
-
-      if (result.data.result[0]) {
-        let hostId = result.data.result[0].hostid
-        console.log(hostId)
-        return `http://192.168.15.180/chart.php?period=3600&itemids%5B0%5D=${hostId}`
-      } else {
-        return ''
-      }
-
+      return getStatisticUrl(hostname)
     }
   })
 }

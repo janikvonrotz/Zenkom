@@ -41,9 +41,9 @@ let seeds = () => {
         archived: false,
       },
       {
-        hostname: 'netboxfz65',
+        hostname: 'netboxfz067',
         vehicle: {
-          number: 65,
+          number: 67,
           status: 'vehicle_upgrade',
           type: 'Trolley',
           modification_until: new Date(2018,1,1),

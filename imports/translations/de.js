@@ -158,6 +158,7 @@ export default {
     insufficent_rights: 'Fehlende Berechtigung',
     no_router_linked_with_vehicle: 'Es wurde noch kein Router mit diesem Fahrzeug verlinkt.',
     no_router_linked_with_dfi: 'Es wurde noch kein Router mit diesem DFI verlinkt.',
+    no_router_statistic_found: 'Für diesen Router kann keine Statistik angezeigt werden.'
   },
   option: {
     vehicle_inserted: 'Fahrzeug hinzugefügt',

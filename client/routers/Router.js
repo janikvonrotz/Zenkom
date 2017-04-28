@@ -107,9 +107,14 @@ class Router extends React.Component {
 
     return loading ? <CircularProgress /> : <Card>
       <CardMedia style={{ textAlign: 'center' }}>
-        { statistic ? <img style={{ maxWidth: 600, minWidth: 100 }} src={ statistic.url } /> : null }
+        { statistic && statistic.url ?
+          <img style={{ maxWidth: 600, minWidth: 100 }} src={ statistic.url } />
+          : null }
       </CardMedia>
       <CardText>
+        { !statistic || !statistic.url ?
+          <p style={{ textAlign: 'center' }}>{ i18n.error.no_router_statistic_found }</p>
+           : null }
         <form onSubmit={ this.mutate.bind(this) }>
 
           <Row>
