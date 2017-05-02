@@ -7,7 +7,8 @@ import { setRouterFilter, increaseRouterListLimit,
   setRouterListLimit } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { debounce } from 'lodash'
-import { NavigationExpandMore, ContentFilterList } from 'material-ui/svg-icons'
+import { NavigationExpandMore, ContentFilterList, 
+  NavigationArrowDropRight } from 'material-ui/svg-icons'
 
 class RouterSearch extends React.Component {
 
@@ -21,6 +22,12 @@ class RouterSearch extends React.Component {
 
   updateFilter(key, event, value){
     let { dispatch, filter } = this.props
+    
+    // toggle filter menu
+    key === 'keyFilter' ? this.setState({
+      openFilterMenu: !this.state.openFilterMenu,
+    }) : null
+
     filter[key] = value
     dispatch(setRouterFilter(filter))
   }
@@ -49,7 +56,8 @@ class RouterSearch extends React.Component {
   }
 
   render() {
-    let { i18n, user, limit, statusOptions, headers, filter } = this.props
+    let { i18n, user, limit, statusOptions, headers, filter, 
+      companyOptions } = this.props
     let { openFilterMenu, anchorEl } = this.state
 
     return <div>
@@ -74,23 +82,36 @@ class RouterSearch extends React.Component {
           <MenuItem
           key={ 'router_in_dfi' }
           value={ { key: 'dfi_id', value: true, label: 'router_in_dfi' } }
-          onTouchTap={ this.toggleMenu.bind(this) }
           primaryText={ i18n.option.router_in_dfi } />
 
           <MenuItem
           key={ 'router_in_vehicle' }
           value={ { key: 'vehicle_id', value: true, label: 'router_in_vehicle' } }
-          onTouchTap={ this.toggleMenu.bind(this) }
           primaryText={ i18n.option.router_in_vehicle } />
 
-          { statusOptions.map((option) => {
+          <MenuItem
+          rightIcon={ <NavigationArrowDropRight /> }
+          primaryText={ i18n.label.status }
+          menuItems={ statusOptions.map((option) => {
             return <MenuItem
               key={ option }
-              value={ { key: 'status', value: option, label: option } }
-              onTouchTap={ this.toggleMenu.bind(this) }
+              onTouchTap={ (event) => this.updateFilter('keyFilter', 
+                event, { key: 'status', value: option, label: option }) }
               primaryText={ i18n.option[option] } />
             })
-          }
+          }/>
+
+          <MenuItem
+          rightIcon={ <NavigationArrowDropRight /> }
+          primaryText={ i18n.label.transport_company }
+          menuItems={ companyOptions.map((option) => {
+            return <MenuItem
+              key={ option }
+              onTouchTap={ (event) => this.updateFilter('keyFilter', 
+                event, { key: 'transport_company', value: option, label: option }) }
+              primaryText={ option } />
+            })
+          }/>
 
         </Menu>
       </Popover>
@@ -116,7 +137,10 @@ class RouterSearch extends React.Component {
       label={ i18n.button.load_more }
       icon={ <NavigationExpandMore /> }
       primary={ true } /> : null }
-      { limit != 'all' ? <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p> : null }
+
+      { limit != 'all' ? 
+      <p onTouchTap={ this.setLimit.bind(this, 'all') }>{ i18n.button.show_all }</p>
+      : null }
 
     </div>
   }
@@ -129,6 +153,7 @@ const mapStateToProps = (state) => {
     filter: state.routerFilter,
     limit: state.routerListLimit,
     statusOptions: state.routerStatusOptions,
+    companyOptions: state.routerCompanyOptions,
   }
 }
 export default connect(mapStateToProps)(RouterSearch)

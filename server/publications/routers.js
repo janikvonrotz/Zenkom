@@ -104,6 +104,9 @@ export default () => {
         status: ({ value }) => {
           return { $eq: value }
         },
+        transport_company: ({ value }) => {
+          return { $eq: value }
+        },
       }
 
       // apply the filter to selector
