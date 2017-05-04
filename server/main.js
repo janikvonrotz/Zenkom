@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor'
-import { seeds, accounts, methods, publications, ldap } from './index'
+import { seeds, accounts, ldap } from './actions'
+import methods from './methods'
+import publications from './publications'
 
 accounts()
 ldap()
