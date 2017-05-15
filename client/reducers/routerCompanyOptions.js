@@ -5,8 +5,6 @@ let options = [
   'Engadin Bus',
   'Rottal Auto AG',
   'DFI vbl',
-  'Anzeiger Bahnhof Luzern',
-  'Andere',
 ]
 
 export default (state = options, action) => {
