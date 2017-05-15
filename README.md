@@ -34,7 +34,7 @@ Export JSON
 
 Convert JSON
 
-    Get-Content ./backup/VehiclesImport.csv -First 38 | ConvertFrom-Csv | %{
+    Get-Content ./backup/VehiclesImport.csv -First 252 | ConvertFrom-Csv | %{
         $_.created_at = @{'$date' = $_.created_at}
         $_.archived = $false
         $_.number = [int]$_.number
@@ -92,7 +92,7 @@ Export JSON
 
 Convert JSON
 
-    Get-Content ./backup/RoutersImport.csv -First 106 | ConvertFrom-Csv | %{
+    Get-Content ./backup/RoutersImport.csv -First 321 | ConvertFrom-Csv | %{
         Write-Host $_.hostname
         $_.created_at = @{'$date' = $_.created_at}
         $_.installed_at = @{'$date' = $_.installed_at}
