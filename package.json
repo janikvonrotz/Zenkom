@@ -1,6 +1,7 @@
 {
   "name": "zenkom",
   "private": true,
+  "version": "1.0.0",
   "scripts": {
     "lint": "eslint .",
     "dev": "export MAIL_URL='smtp://localhost:1025' export ROOT_URL='http://localhost:3000' && meteor --settings ./settings-dev.json",
