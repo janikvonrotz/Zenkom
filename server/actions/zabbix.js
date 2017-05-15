@@ -78,7 +78,7 @@ export const getStatisticUrl = (hostname) => {
 
     if (result.data.result[0]) {
       let itemId = result.data.result[0].itemid
-      let url = `${ config.zabbix.url }/${ config.zabbix.chart_url}`.replace('{ itemid }', itemId)
+      let url = `${ config.zabbix.url }/${ config.zabbix.chart_url }`.replace('{ itemid }', itemId)
       return url
     } else {
       return null
