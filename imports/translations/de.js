@@ -191,6 +191,7 @@ export default {
     introduction: 'Willkommen bei der zentralen Kommunikationsplattform der vernetzten Fahrzeugsysteme.',
     contact_administrator: 'Um Zugriffsberechtigungen im System zu erhalten, kontaktieren Sie den Zenkom Administrator.',
     check_out_settings: 'Leider haben Sie noch keine Benachrichtigungen erhalten, bitte überprüfen Sie Ihre Benachrichtigungseinstellungen in den ',
+    please_login: 'Sie sind nocht eingeloggt, klicken Sie auf Login oben rechts.',
   },
   email: {
     received_notification: 'Sie haben eine neue Benachrichtigung erhalten:',
