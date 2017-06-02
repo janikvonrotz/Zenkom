@@ -2,7 +2,19 @@
 
 Zentrale Kommunikationsplattform der vernetzten Fahrzeugsysteme.
 
-issues: https://gitlab.com/janikvonrotz/Zenkom/issues
+Issues: [https://gitlab.com/janikvonrotz/Zenkom/issues](https://gitlab.com/janikvonrotz/Zenkom/issues)
+
+## Installation
+
+To run this project install [Meteor](https://www.meteor.com/install).
+
+Install project dependecies and run the development environment.
+
+    meteor npm install
+    meteor npm run dev
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
 
 # MongoDB Export and Import
 
@@ -108,7 +120,3 @@ Convert JSON
 Import JSON
 
     mongoimport -h ds121190.mlab.com:21190 -d zenkom -c routers -u zenkom -p dp8e36APuASgSWum7uLz --file ./backup/RoutersImport.json
-
-# Resources
-
-http://codepen.io/zavoloklom/pen/IGkDz
