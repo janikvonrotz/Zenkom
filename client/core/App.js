@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardText } from 'material-ui'
-import { setHeaderTitle, setListLimit, setRouterListLimit, resetRouterFilter } from '../actions'
+import { setHeaderTitle, setListLimit, setRouterListLimit } from '../actions'
 import { RouterSearch } from '../routers'
 import { connect } from 'react-redux'
 import { NotificationList } from '../notifications'
@@ -12,7 +12,6 @@ class App extends React.Component {
     let { dispatch } = this.props
     dispatch(setListLimit(3))
     dispatch(setRouterListLimit('all'))
-    dispatch(resetRouterFilter())
     this.componentWillReceiveProps()
   }
 
@@ -29,6 +28,8 @@ class App extends React.Component {
         { user ? <p>{ `${ i18n.vocabulary.greeting } ${ user.profile.name }` }</p> : null }
 
         <p>{ i18n.text.introduction }</p>
+
+        { !user ? <p>{ i18n.text.please_login }</p> : null }
 
         { user && user.roles && user.roles.includes('user') ? <p>{ i18n.text.contact_administrator }</p> : null }
 

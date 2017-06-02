@@ -2,7 +2,18 @@
 
 Zentrale Kommunikationsplattform der vernetzten Fahrzeugsysteme.
 
-issues: https://gitlab.com/janikvonrotz/Zenkom/issues
+Issues: [https://gitlab.com/janikvonrotz/Zenkom/issues](https://gitlab.com/janikvonrotz/Zenkom/issues)
+
+## Installation
+
+To run this project install [Meteor](https://www.meteor.com/install).
+
+Install project dependecies and run the development environment.
+
+    meteor npm install
+    meteor npm run dev
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 # MongoDB Export and Import
 
@@ -34,7 +45,7 @@ Export JSON
 
 Convert JSON
 
-    Get-Content ./backup/VehiclesImport.csv -First 38 | ConvertFrom-Csv | %{
+    Get-Content ./backup/VehiclesImport.csv -First 252 | ConvertFrom-Csv | %{
         $_.created_at = @{'$date' = $_.created_at}
         $_.archived = $false
         $_.number = [int]$_.number
@@ -92,7 +103,7 @@ Export JSON
 
 Convert JSON
 
-    Get-Content ./backup/RoutersImport.csv -First 106 | ConvertFrom-Csv | %{
+    Get-Content ./backup/RoutersImport.csv -First 321 | ConvertFrom-Csv | %{
         Write-Host $_.hostname
         $_.created_at = @{'$date' = $_.created_at}
         $_.installed_at = @{'$date' = $_.installed_at}
@@ -108,7 +119,3 @@ Convert JSON
 Import JSON
 
     mongoimport -h ds121190.mlab.com:21190 -d zenkom -c routers -u zenkom -p dp8e36APuASgSWum7uLz --file ./backup/RoutersImport.json
-
-# Resources
-
-http://codepen.io/zavoloklom/pen/IGkDz

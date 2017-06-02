@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardText, RaisedButton } from 'material-ui'
 import { RouterSearch } from './index'
 import { connect } from 'react-redux'
-import { insertRouter, resetRouterListLimit, exportRouters, resetRouterFilter } from '../actions'
+import { insertRouter, resetRouterListLimit, exportRouters } from '../actions'
 import { isAllowed } from '/imports/helpers'
 import { ContentAdd, FileFileDownload } from 'material-ui/svg-icons'
 
@@ -11,7 +11,6 @@ class RouterPage extends React.Component {
   componentDidMount(){
     let { dispatch } = this.props
     dispatch(resetRouterListLimit())
-    dispatch(resetRouterFilter())
   }
 
   insert(){

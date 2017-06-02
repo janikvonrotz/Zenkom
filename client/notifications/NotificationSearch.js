@@ -3,7 +3,7 @@ import { Card, CardText, TextField, RaisedButton } from 'material-ui'
 import { NotificationList } from './index'
 import { connect } from 'react-redux'
 import { setNotificationFilter, setListLimit, increaseListLimit,
-  resetListLimit, setHeaderTitle, exportNotifications } from '../actions'
+  resetListLimit, exportNotifications } from '../actions'
 import { debounce } from 'lodash'
 import { isAllowed } from '/imports/helpers'
 import { NavigationExpandMore, FileFileDownload } from 'material-ui/svg-icons'
@@ -16,10 +16,8 @@ class NotificationSearch extends React.Component {
   }
 
   componentDidMount(){
-    let { dispatch, i18n } = this.props
+    let { dispatch } = this.props
     dispatch(resetListLimit())
-    dispatch(setNotificationFilter(''))
-    dispatch(setHeaderTitle(i18n.vocabulary.notifications))
   }
 
   updateFilter(){
@@ -44,12 +42,13 @@ class NotificationSearch extends React.Component {
   }
 
   render() {
-    let { i18n, limit, user } = this.props
+    let { i18n, limit, user, filter } = this.props
 
     return <Card>
       <CardText>
 
         <TextField
+        defaultValue={ filter }
         style={{ float: 'right' }}
         floatingLabelText={ i18n.button.search }
         ref="filter"
@@ -84,6 +83,7 @@ const mapStateToProps = (state) => {
     user: state.user,
     i18n: state.i18n,
     limit: state.listLimit,
+    filter: state.notificationFilter,
   }
 }
 export default connect(mapStateToProps)(NotificationSearch)

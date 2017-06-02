@@ -4,8 +4,14 @@ import { Link } from 'react-router'
 import { HardwareRouter, MapsDirectionsBus,
   HardwareDeveloperBoard } from 'material-ui/svg-icons'
 import { fromNow } from '/imports/helpers'
+import { setHeaderTitle } from '../actions'
 
 class PostList extends React.Component {
+
+  componentWillReceiveProps(){
+    let { dispatch, i18n } = this.props
+    dispatch(setHeaderTitle(i18n.vocabulary.notifications))
+  }
 
   render() {
     let { notifications, loading, i18n } = this.props
