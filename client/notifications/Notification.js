@@ -5,10 +5,10 @@ import { dismissMessage } from '../actions'
 
 const Alert = {
   error: (message) => {
-    notie.alert(3, message, 2.5)
+    notie.alert({ type: 'error', text: message, time: 2.5 })
   },
   success: (message) => {
-    notie.alert(1, message, 2.5)
+    notie.alert({ type: 'success', text: message, time: 2.5 })
   }
 }
 
