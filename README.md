@@ -23,3 +23,7 @@ Install project dependecies and run the development environment.
     meteor npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Screenshot
+
+![](/public/screenshot.png)
