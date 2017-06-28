@@ -1,5 +1,11 @@
+# default exclusion
 node_modules
 npm-debug*
 .DS_Store
 bundle
 backup
+
+# config files
+ecosystem.config.js
+settings-vbl.json
+settings-dev.json

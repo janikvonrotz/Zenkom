@@ -6,10 +6,8 @@
     "lint": "eslint .",
     "mail-dev": "maildev --incoming-user user --incoming-pass pw123",
     "dev": "export MAIL_URL='smtp://user:pw123@localhost:1025' export ROOT_URL='http://localhost:3000' && meteor --settings ./settings-dev.json",
-    "vbl": "export MAIL_URL='smtp://user:pw123@localhost:1025' export ROOT_URL='http://localhost:3000' && meteor --settings ./settings-vbl.json",
-    "staging-dev": "export MAIL_URL='smtp://user:pw123@localhost:1025' export ROOT_URL='https://zenkom.bitsherpa.com' && export MONGO_URL='mongodb://zenkom:dp8e36APuASgSWum7uLz@ds121190.mlab.com:21190/zenkom'&& meteor --settings ./settings-dev.json",
+    "staging-dev": "export MAIL_URL='smtp://user:pw123@localhost:1025' export ROOT_URL='https://example.com' && export MONGO_URL='mongodb://zenkom:password@ds121190.mlab.com:password/zenkom'&& meteor --settings ./settings-dev.json",
     "deploy-dev": "pm2 deploy ecosystem.config.js dev",
-    "backup": "mongoexport -h ds121190.mlab.com:21190 -d zenkom -c users -u zenkom -p dp8e36APuASgSWum7uLz -o ./backup/UsersExport.json",
     "update-packages": "node wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save"
   },
   "dependencies": {

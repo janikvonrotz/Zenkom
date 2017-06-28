@@ -9,8 +9,8 @@ module.exports = {
       script: './bundle/main.js',
       env: {
         NODE_ENV: 'production',
-        MONGO_URL: 'mongodb://zenkom:dp8e36APuASgSWum7uLz@ds121190.mlab.com:21190/zenkom',
-        ROOT_URL: 'https://zenkom.bitsherpa.com',
+        MONGO_URL: 'mongodb://zenkom:password@ds121190.mlab.com:21190/zenkom',
+        ROOT_URL: 'https://example.com',
         PORT: 3000,
         METEOR_SETTINGS: {
           'private': {
@@ -21,7 +21,7 @@ module.exports = {
               'scope': 'sub',
             },
             'mail': {
-              'notificationFrom': 'notifications@zenkom.bitsherpa.com',
+              'notificationFrom': 'notifications@example.com',
             },
           },
           'public': {
@@ -41,10 +41,10 @@ module.exports = {
   deploy: {
     dev: {
       user: 'login',
-      host: 'janikvonrotz.ch',
-      key: '/keybase/private/janikvonrotz/ssh/id_rsa',
+      host: 'example.com',
+      key: '/keybase/private/username/ssh/id_rsa',
       ref: 'origin/develop',
-      repo: 'git@gitlab.com:janikvonrotz/Zenkom.git',
+      repo: 'git@gitlab.com:username/Zenkom.git',
       path: '/home/login/Zenkom',
       'post-deploy': 'rm -rf ./bundle && npm install --production && meteor build . --directory && cd ./bundle/programs/server && npm install --production && cd ../../.. && pm2 startOrRestart ecosystem.config.js',
     }
