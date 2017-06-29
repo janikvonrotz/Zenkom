@@ -1,6 +1,7 @@
 # Zenkom
 
-Zentrale Kommunikationsplattform der vernetzten Fahrzeugsysteme.
+Meteor app to manage configurations of bus fleet communication systems and enhance user collaboration for a public transport company.
+This app was part of my bachelor’s degree project.
 
 Blog posts:
 
@@ -23,6 +24,16 @@ Install project dependecies and run the development environment.
     meteor npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Features
+
+* Control user rights with the most simple access control
+* Intuitive Meteor project folder structure
+* Desktop and mail notification system
+* Custom LDAP login auth handler
+* Multilanguage support
+* PM2 deploy ready
+* Redux integrated
 
 ## Screenshot
 
