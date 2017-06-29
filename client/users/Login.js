@@ -31,7 +31,6 @@ class Login extends React.Component {
       <CardText>
         <form onSubmit={ this.login.bind(this) }>
           <TextField
-          defaultValue="einstein@ldap.forumsys.com"
           type="email"
           ref="email"
           required="true"
@@ -39,7 +38,6 @@ class Login extends React.Component {
           <br />
 
           <TextField
-          defaultValue="password"
           type="password"
           ref="password"
           required="true"
