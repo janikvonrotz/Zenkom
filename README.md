@@ -18,12 +18,17 @@ Issue board: [https://gitlab.com/janikvonrotz/Zenkom/issues](https://gitlab.com/
 
 To run this project install [Meteor](https://www.meteor.com/install).
 
-Install project dependecies and run the development environment.
+Install project dependecies.
 
     meteor npm install
+
+Copy the `_settings-dev.json` template, name it `settings-dev.json` and update the settings.
+
+Run the development environment.
+
     meteor npm run dev
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser and login with `einstein@ldap.forumsys.com:password`.
 
 ## Features
 

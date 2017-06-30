@@ -7,10 +7,10 @@
       "scope": "sub"
     },
     "mail": {
-      "notificationFrom": "notifications@zenkom.bitsherpa.com"
+      "notificationFrom": "noreply@example.com"
     },
     "zabbix": {
-      "url": "http://192.168.1.1",
+      "url": "http://zabbix.com",
       "api_url": "http://zabbix.com/zabbix/api_jsonrpc.php",
       "user": "zabbix",
       "password": "zabbix",
