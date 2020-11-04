@@ -1,0 +1,32 @@
+#!/bin/zsh
+set -euo pipefail
+
+function install() {
+    meteor npm install
+}
+
+function start() {
+    npm run dev
+}
+
+function stop() {
+    docker-compose stop
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    dump)
+        . ./scripts/mongo-dump
+        ;;
+    restore)
+        ./scripts/mongo-restore
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|dump|restore}"
+        exit 1
+esac

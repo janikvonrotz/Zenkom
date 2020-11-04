@@ -3,7 +3,8 @@ node_modules
 npm-debug*
 .DS_Store
 bundle
-backup
+.dump
+.env
 
 # config files
 ecosystem.config.js
